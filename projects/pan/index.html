@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Главная</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20220923212354">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<nav class=" header__container header__nav">
+				<a href="#">
+					<img src="img/svgicons/logo.svg" alt="Логотип ПАН партнер">
+				</a>
+				<ul class="header__list">
+					<li class="header__list-item --dropdown">
+						<a class="--dropdown__link" href="#">Пункт 1</a>
+						<ul class="header__list-dropdown">
+							<li>
+								<a href="#">
+									<img src="img/svgicons/sofa.svg" alt="Иконка в виде небольшого диванчика">
+									<div class="dropdown__item">
+										<span>Меню 1</span>
+										<p>Покупайте и продавайте</p>
+									</div>
+								</a>
+								<a href="#">
+									<img src="img/svgicons/sofa.svg" alt="Иконка в виде небольшого диванчика">
+									<div class="dropdown__item">
+										<span>Меню 2</span>
+										<p>Давайте подружимся</p>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/svgicons/sofa.svg" alt="Иконка в виде небольшого диванчика">
+									<div class="dropdown__item">
+										<span>Меню 1</span>
+										<p>Покупайте и продавайте</p>
+									</div>
+								</a>
+								<a href="#">
+									<img src="img/svgicons/sofa.svg" alt="Иконка в виде небольшого диванчика">
+									<div class="dropdown__item">
+										<span>Меню 2</span>
+										<p>Давайте подружимся</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="header__list-item"><a href="#">Пункт 2</a></li>
+					<li class="header__list-item"><a href="#">Пункт 3</a></li>
+					<li class="header__list-item"><a href="#">Пункт 4</a></li>
+					<li class="header__list-item"><a href="#">Пункт 5</a></li>
+				</ul>
+				<a href="" class="button">Кнопка</a>
+			</nav>
+		</header>
+		<main class="page">
+			<section class="promo__content">
+				<div class="promo__container">
+					<h1 class="promo__title">Недвижимость Санкт-Петербурга и Москвы</h1>
+
+					<form action="#" class="promo__form">
+						<div class="promo__form-inner">
+							<span class="promo__form-field">
+								<label class="promo__label" for="select">Выбрать город</label>
+								<select name="form[]" class="form" id="select">
+									<option value="" hidden>Выбрать город</option>
+									<option value="Москва">Москва</option>
+									<option value="Санкт-Петербург">Санкт-Петербург</option>
+									<option value="Владивосток">Владивосток</option>
+									<option value="Оренбург">Оренбург</option>
+								</select>
+							</span>
+							<span class="promo__form-field">
+								<label class="promo__label" for="input-01">Ваш e-mail</label>
+								<input autocomplete="off" type="text" name="form[]" id="input-01" placeholder="info@mail.ru" class="promo__input">
+							</span>
+						</div>
+
+						<button type="submit" class="promo__button button">Кнопка действия</button>
+						<div class="checkbox">
+							<label class="custom-checkbox">
+								<input type="checkbox" name="checkbox" value="checkbox">
+								<span></span>
+							</label>
+							<span class="promo__checkbox-text">Отправляя нам данную форму вы соглашаетесь с <a href="#">политикой конфиденциальности</a></span>
+						</div>
+					</form>
+				</div>
+			</section>
+			<section class=" slider__container slider">
+				<h1 class="slider__title">Обычный слайдер</h1>
+				<div class="splide" role="group" aria-label="Splide Basic HTML Example">
+					<div class="splide__track">
+						<ul class="splide__list">
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/96bde6e1eb8f9353c73fc79641019f19.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">3</div>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/VRuH6PsEoTk-2.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">1</div>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/Murino_Final_0020_no_people.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">4</div>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/96bde6e1eb8f9353c73fc79641019f19.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">3</div>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/VRuH6PsEoTk-2.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">1</div>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/Murino_Final_0020_no_people.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">4</div>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/96bde6e1eb8f9353c73fc79641019f19.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">3</div>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/VRuH6PsEoTk-2.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">1</div>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div class="slide__inner">
+									<img class="slide__image" src="img/slider/Murino_Final_0020_no_people.jpg" alt="">
+									<div class="rating rating_set">
+										<div class="rating__body">
+											<div class="rating__active"></div>
+											<div class="rating__items">
+												<input type="radio" class="rating__item" value="1" name="rating">
+												<input type="radio" class="rating__item" value="2" name="rating">
+												<input type="radio" class="rating__item" value="3" name="rating">
+												<input type="radio" class="rating__item" value="4" name="rating">
+												<input type="radio" class="rating__item" value="5" name="rating">
+											</div>
+										</div>
+										<div class="rating__value">4</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section class="trics trics__container">
+				<div class="progress__bar">
+					<div class="progress__bar-inner">
+						<div class="progress__bar-item" style="width: 25%"></div>
+					</div>
+					<div class="progress__bar-nav">
+						<button class="button progress__button" data-value="25">+25%</button>
+						<p class="progress__bar-info">При нажатии на кнопку прогрессбар заполняется на столько процентов, сколько
+							указано на кнопке</p>
+					</div>
+				</div>
+
+				<div class="read__more">
+					<p class="read__more-text">Большинство онкологических пациентов испытывают страх перед неизвестностью того, что их
+						ожидает в процессе лечения рака. <span id="more">Lorem
+							ipsum dolor sit, amet
+							consectetur adipisicing elit. Numquam, omnis dolor. Cupiditate praesentium aut saepe eum fuga labore debitis
+							incidunt, eligendi aspernatur, repudiandae dignissimos dolor voluptate, est recusandae? Dolorem,
+							provident!</span></p>
+					<button type="button" class="read__more-btn">Подробнее</button>
+				</div>
+			</section>
+			<section class="map__container">
+				<div id="map" class="map"></div>
+			</section>
+			<section class="achievements achievements__container">
+				<div class="achievements__inner">
+					<div class="achievement">
+						<h2 class="achievement__count">3,000</h2>
+						<p class="achievement__descr">Агенств</p>
+					</div>
+					<div class="achievement">
+						<h2 class="achievement__count">10,000</h2>
+						<p class="achievement__descr">Партнеров</p>
+					</div>
+					<div class="achievement">
+						<h2 class="achievement__count">80,000</h2>
+						<p class="achievement__descr">Квартир в базе</p>
+					</div>
+					<div class="achievement">
+						<h2 class="achievement__count">100+</h2>
+						<p class="achievement__descr">Застройщиков</p>
+					</div>
+					<div class="achievement">
+						<h2 class="achievement__count">200</h2>
+						<p class="achievement__descr">Сотрудников</p>
+					</div>
+				</div>
+
+				<a class="scroll" data-goto-header data-goto="header">Вверх <img src="img/svgicons/scroll_on_top.svg" alt="Вверх"></a>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__container">
+				<div class="footer__content">
+					<p class="footer__address">Санкт-Петербург, Владимирский пр., д. 3 лит. А, офис 701</p>
+					<a class="phone" href="tel:+78124456809">+ 7 (812) 445-68-09</a>
+					<a class="write-to-us" href="#">Напишите нам</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU&_v=20220923212354"></script>
+	<script src="js/app.min.js?_v=20220923212354"></script>
+</body>
+
+</html>
