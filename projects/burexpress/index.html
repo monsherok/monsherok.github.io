@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Главная</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20230215012319">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&_v=20230215012319" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header" data-scroll="100" data-scroll-show="200">
+			<div class="container header__container">
+				<div class="header__inner">
+					<a href="/" class="header__logo">
+						<img src="img/icons/logo.svg" alt="БурЭкспресс" class="logo">
+					</a>
+
+					<div class="header__menu">
+						<button class="btn catalog_button">
+							<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<rect x="5.5" y="5" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
+								<rect x="5.5" y="14" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
+								<rect x="14.5" y="5" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
+								<rect x="14.5" y="14" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
+							</svg>
+
+							Каталог</button>
+						<form class="header__search" action="">
+							<div class="input__inner">
+								<input class="header__search-input img-search" type="text" placeholder="Поиск по товарам, услугам или компаниям" id="search">
+								<label for="search">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#777777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+										<path d="M21.0004 20.9999L16.6504 16.6499" stroke="#777777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+
+								</label>
+							</div>
+							<div class="input__inner">
+								<label for="location">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="#424888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+										<path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="#424888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</label>
+								<input class="header__search-input img-location" type="text" placeholder="Город" value="Петропавловск Камчатский" id="location">
+
+
+							</div>
+
+							<button class="btn header__search-btn">Найти</button>
+						</form>
+					</div>
+					<div class="header__user-menu">
+						<a href="#" class="user-card user-notifications">
+							<img src="img/icons/notification.svg" alt="">
+							<span>12</span>
+						</a>
+						<a href="#" class="user-card user-cart">
+							<img src="img/icons/shopping-cart.svg" alt="">
+							<span>1</span>
+						</a>
+						<a href="#" class="user-card user-favorites">
+							<img src="img/icons/favourites.svg" alt="">
+							<span>23</span>
+						</a>
+						<div class="user-image-menu">
+							<picture><source srcset="img/user-image.webp" type="image/webp"><img src="img/user-image.jpg" alt=""></picture>
+							<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M4.8 7.51196L1.84031 3.81235C1.5784 3.48497 1.81149 3 2.23074 3H8.15012C8.56937 3 8.80246 3.48497 8.54055 3.81235L5.58086 7.51196C5.3807 7.76216 5.00016 7.76216 4.8 7.51196Z" fill="#151515" />
+							</svg>
+							<ul class="user__menu">
+								<li class="user__menu-list">
+									<a href="#">buyer@mail.ru</a>
+								</li>
+								<li class="user__menu-list">
+									<a href="#">Тариф</a>
+								</li>
+								<li class="user__menu-list">
+									<a href="#">Общие настройки</a>
+								</li>
+								<li class="user__menu-list">
+									<a href="#">Поддержка</a>
+								</li>
+								<li class="user__menu-list">
+									<a href="#">Сменить аккаунт</a>
+								</li>
+								<li class="user__menu-list">
+									<a href="#">Безопасность</a>
+								</li>
+								<li class="user__menu-list">
+									<a href="#">Выйти</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="page">
+			<div class="container main__container">
+				<section class="splide hero__slider" aria-label="Splide Basic HTML Example">
+					<div class="splide__track">
+						<ul class="splide__list">
+							<li class="splide__slide">
+								<div style="background-image: url(img/cover.jpg);" class="slide__inner">
+									<div class="hero__promo">
+										<h1 class="title hero__title">
+											Даем пробный доступ к сервису
+										</h1>
+										<p class="subtitle hero__subtitle">
+											Просто заполните данные о своей компании
+										</p>
+										<button class="btn hero__button">
+											Получить доступ
+										</button>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div style="background-image: url(img/cover.jpg);" class="slide__inner">
+									<div class="hero__promo">
+										<h1 class="title hero__title">
+											Даем пробный доступ к сервису
+										</h1>
+										<p class="subtitle hero__subtitle">
+											Просто заполните данные о своей компании
+										</p>
+										<button class="btn hero__button">
+											Получить доступ
+										</button>
+									</div>
+								</div>
+							</li>
+							<li class="splide__slide">
+								<div style="background-image: url(img/cover.jpg);" class="slide__inner">
+									<div class="hero__promo">
+										<h1 class="title hero__title">
+											Даем пробный доступ к сервису
+										</h1>
+										<p class="subtitle hero__subtitle">
+											Просто заполните данные о своей компании
+										</p>
+										<button class="btn hero__button">
+											Получить доступ
+										</button>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="sortered__cards">
+					<div class="buttons__inner">
+						<button class="purple-btn">Долота</button>
+						<button class="purple-btn">Бурголовки</button>
+						<button class="purple-btn">Расширители</button>
+					</div>
+					<div class="cards__inner">
+						<div class="card">
+							<div class="card__image" style="background-image: url(img/cards/photo.jpg);">
+								<button class="card-to-favorite">
+									<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M11 1L14.09 7.26L21 8.27L16 13.14L17.18 20.02L11 16.77L4.82 20.02L6 13.14L1 8.27L7.91 7.26L11 1Z" stroke="#3F3F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+
+								</button>
+								<span class="card-rent">Аренда</span>
+							</div>
+							<p class="card__title">Комплект клина-отклонителя и фрезера для вырезания окна</p>
+							<p class="card__price">4 356 ₽</p>
+						</div>
+						<div class="card">
+							<div class="card__image" style="background-image: url(img/cards/photo.jpg);">
+								<span class="card-rent">Аренда</span>
+								<span class="card-manufacturer">ГК МеталлЭнергоХолдинг</span>
+							</div>
+							<p class="card__title">Комплект клина-отклонителя и фрезера для вырезания окна</p>
+							<p class="card__price">4 356 ₽</p>
+						</div>
+					</div>
+				</section>
+				<section class="equipment_selection">
+					<h2 class="selection__title">
+						Подбор бурового оборудования по параметрам
+					</h2>
+					<div class="selection">
+						<ul class="equipment">
+							<li>Долота</li>
+							<li>Бурголовки</li>
+							<li>Расширители</li>
+							<li>Амортизаторы наддолотные</li>
+							<li>Опорно-центрирующие элементы</li>
+							<li>Винтовые забойные двигатели</li>
+							<li>Турбобуры</li>
+							<li>Циркуляционные клапаны, переводники</li>
+							<li>Осциляторы</li>
+							<li>Ударные устройства</li>
+							<li>Lorem, ipsum dolor.</li>
+							<li>Lorem, ipsum dolor.</li>
+							<li>Lorem, ipsum dolor.</li>
+						</ul>
+						<div class="options">
+							<div class="option">
+								<label for="select1">Диаметр, мм:</label>
+								<select name="form[]" class="form" id="select1">
+									<option value="1" selected>104</option>
+									<option value="2">105</option>
+									<option value="3">106</option>
+									<option value="4">110</option>
+								</select>
+							</div>
+							<div class="option">
+								<label for="select2">Диаметр, мм:</label>
+								<select name="form[]" class="form" id="select2">
+									<option value="1" selected>104</option>
+									<option value="2">105</option>
+									<option value="3">106</option>
+									<option value="4">110</option>
+								</select>
+							</div>
+							<div class="option">
+								<label for="select3">Диаметр, мм:</label>
+								<select name="form[]" class="form" id="select3">
+									<option value="1" selected>104</option>
+									<option value="2">105</option>
+									<option value="3">106</option>
+									<option value="4">110</option>
+								</select>
+							</div>
+							<div class="option">
+								<label for="select4">Диаметр, мм:</label>
+								<select name="form[]" class="form" id="select4">
+									<option value="1" selected>104</option>
+									<option value="2">105</option>
+									<option value="3">106</option>
+									<option value="4">110</option>
+								</select>
+							</div>
+							<div class="option">
+								<label for="select5">Диаметр, мм:</label>
+								<select name="form[]" class="form" id="select5">
+									<option value="1" selected>104</option>
+									<option value="2">105</option>
+									<option value="3">106</option>
+									<option value="4">110</option>
+								</select>
+							</div>
+							<div class="option">
+								<label for="select6">Диаметр, мм:</label>
+								<select name="form[]" class="form" id="select6">
+									<option value="1" selected>104</option>
+									<option value="2">105</option>
+									<option value="3">106</option>
+									<option value="4">110</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="work__search">
+					<div class="job__card" style="background-image: url(img/Rectangle50.jpg);">
+						<h2 class="job__title">Поиск вакансий</h2>
+						<p class="job__subtitle">Более 200 вакансий</p>
+						<a class="btn job__button" href="#">Перейти</a>
+					</div>
+					<div class="job__card" style="background-image: url(img/Rectangle51.jpg)">
+						<h2 class="job__title">Поиск специалистов</h2>
+						<p class="job__subtitle">Ищите специалистов в любых областях</p>
+						<a class="btn job__button" href="#">Перейти</a>
+					</div>
+				</section>
+				<section class="companies">
+					<div class="slider__info">
+						<h2 class="slider__title">Компании</h2>
+						<a href="#" class="slider__link">Все компании</a>
+					</div>
+					<div class="splide" id="sliderCompanies">
+						<div class="splide__track companies__track">
+							<div class="splide__list companies__list">
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-1.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-1.jpg" alt=""></picture>
+									<div class="company__card-title">Роснефть</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-2.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-2.jpg" alt=""></picture>
+									<div class="company__card-title">Газпром</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-3.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-3.jpg" alt=""></picture>
+									<div class="company__card-title">Сибур</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-4.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-4.jpg" alt=""></picture>
+									<div class="company__card-title">РВП</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-5.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-5.jpg" alt=""></picture>
+									<div class="company__card-title">Башнефть</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-6.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-6.jpg" alt=""></picture>
+									<div class="company__card-title">Башкирэнерго</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-7.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-7.jpg" alt=""></picture>
+									<div class="company__card-title">TITLE</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-8.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-8.jpg" alt=""></picture>
+									<div class="company__card-title">TITLE</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+								<a href="#" class="splide__slide company__card">
+									<picture><source srcset="img/logos/Logos=Logo-9.webp" type="image/webp"><img class="company__card-image" src="img/logos/Logos=Logo-9.jpg" alt=""></picture>
+									<div class="company__card-title">TITLE</div>
+									<div class="company__card-descr">Производство и прадажа оборудования для добычи газа и нефти</div>
+									<p href="#" class="company__info">Подробнее</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="news">
+					<div class="slider__info">
+						<h2 class="slider__title">Новости</h2>
+						<a href="#" class="slider__link">Все новости</a>
+					</div>
+					<div class="splide" id="slidernews">
+						<div class="splide__track news__track">
+							<div class="splide__list news__list">
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo.webp" type="image/webp"><img class="news__card-image" src="img/news/photo.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">Компания «Газпром недра» успешно завершила буровой сезон на арктическом шельфе</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo-1.webp" type="image/webp"><img class="news__card-image" src="img/news/photo-1.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">Заявки на транзит российского газа по ГТС Украины и загрузка 2-й нитки МГП Турецкий поток немного снизились</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo-2.webp" type="image/webp"><img class="news__card-image" src="img/news/photo-2.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">FSRU Hoegh Esperanza для первого в Германии СПГ-терминала прибыла в порт Вильгельмсхафен</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo-3.webp" type="image/webp"><img class="news__card-image" src="img/news/photo-3.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">Иран заявил о своей готовности продолжить сотрудничество с МАГАТЭ и готов заключить ядерную сделку</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo-4.webp" type="image/webp"><img class="news__card-image" src="img/news/photo-4.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">Землетрясение создает новые препятствия для роста добычи нефти в Техасе</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo-1.webp" type="image/webp"><img class="news__card-image" src="img/news/photo-1.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">Компания «Газпром недра» успешно завершила буровой сезон на арктическом шельфе</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo-2.webp" type="image/webp"><img class="news__card-image" src="img/news/photo-2.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">Заявки на транзит российского газа по ГТС Украины и загрузка 2-й нитки МГП Турецкий поток немного снизились</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo-3.webp" type="image/webp"><img class="news__card-image" src="img/news/photo-3.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">FSRU Hoegh Esperanza для первого в Германии СПГ-терминала прибыла в порт Вильгельмсхафен</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo-4.webp" type="image/webp"><img class="news__card-image" src="img/news/photo-4.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">Иран заявил о своей готовности продолжить сотрудничество с МАГАТЭ и готов заключить ядерную сделку</div>
+								</a>
+								<a href="#" class="splide__slide news__card">
+									<picture><source srcset="img/news/photo.webp" type="image/webp"><img class="news__card-image" src="img/news/photo.jpg" alt=""></picture>
+									<div class="news__card-date">2 декабря, РБК</div>
+									<div class="news__card-descr">Землетрясение создает новые препятствия для роста добычи нефти в Техасе</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</main>
+		<footer class="footer">
+			<div class="footer__container">
+				<div class="footer__top">
+					<div class="footer__left">
+						<div class="footer__logo">
+							<a href="/"><img src="img/icons/logo.svg" alt=""></a>
+						</div>
+						<div class="footer__nums">
+							<div class="footer__num">
+								<div class="footer__num-count">23 340</div>
+								<div class="footer__num-desc">компаний</div>
+							</div>
+							<div class="footer__num">
+								<div class="footer__num-count">650 780</div>
+								<div class="footer__num-desc">товаров и услуг</div>
+							</div>
+						</div>
+					</div>
+					<div class="footer__right">
+						<nav class="footer__nav">
+							<ul>
+								<li class="footer__title">Продавцам</li>
+								<li><a href="#">Личный кабинет</a></li>
+								<li><a href="#">Документация для партнеров</a></li>
+							</ul>
+							<ul>
+								<li class="footer__title">Покупателям</li>
+								<li><a href="#">Как выбрать товар</a></li>
+								<li><a href="#">Оплата и доставка</a></li>
+								<li><a href="#">Обратная связь</a></li>
+								<li><a href="#">О сервисе</a></li>
+								<li><a href="#">Возвраты</a></li>
+							</ul>
+							<ul>
+								<li class="footer__title">Сотрудничество</li>
+								<li><a href="#">Новости компании</a></li>
+								<li><a href="#">Партнерская программа</a></li>
+								<li><a href="#">Производителям</a></li>
+								<li><a href="#">Вакансии</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div class="footer__bottom">
+					<p>Все права защищены ©</p>
+					<div class="footer__links">
+						<a href="#">Пользовательское соглашение</a>
+						<a href="#">Политика конфиденциальности</a>
+					</div>
+					<p>Разработано в <a href="#">Рыббла</a></p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- 
+<div id="popup" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close">Закрыть</button>
+			<div class="popup__text">
+			</div>
+		</div>
+	</div>
+</div>
+ -->
+
+	<script src="js/app.min.js?_v=20230215012319"></script>
+</body>
+
+</html>
