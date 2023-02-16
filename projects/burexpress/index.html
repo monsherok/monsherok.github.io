@@ -6,11 +6,11 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20230215012319">
+	<link rel="stylesheet" href="css/style.min.css?_v=20230216235549">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&_v=20230215012319" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&_v=20230216235549" rel="stylesheet">
 </head>
 
 <body>
@@ -22,13 +22,17 @@
 						<img src="img/icons/logo.svg" alt="БурЭкспресс" class="logo">
 					</a>
 
-					<div class="header__menu">
+					<div class="header__menu-middle" data-da=".menu__search,700">
 						<button class="btn catalog_button">
-							<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<svg class="catalog-open" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<rect x="5.5" y="5" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
 								<rect x="5.5" y="14" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
 								<rect x="14.5" y="5" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
 								<rect x="14.5" y="14" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
+							</svg>
+							<svg class="catalog-close" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M19.5 5L5.5 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M5.5 5L19.5 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 							</svg>
 
 							Каталог</button>
@@ -51,14 +55,22 @@
 									</svg>
 								</label>
 								<input class="header__search-input img-location" type="text" placeholder="Город" value="Петропавловск Камчатский" id="location">
-
-
 							</div>
 
 							<button class="btn header__search-btn">Найти</button>
 						</form>
 					</div>
-					<div class="header__user-menu">
+
+					<div class="header__user-menu" data-da=".menu__icons,700">
+						<button class="user-card user-catalog">
+							<img src="img/icons/catalog.svg" alt="">
+						</button>
+						<button class="user-card user-search" data-popup="#search-popup">
+							<img src="img/icons/search.svg" alt="">
+						</button>
+						<button class="user-card user-location" data-popup="#location-popup">
+							<img src="img/icons/location.svg" alt="">
+						</button>
 						<a href="#" class="user-card user-notifications">
 							<img src="img/icons/notification.svg" alt="">
 							<span>12</span>
@@ -71,14 +83,16 @@
 							<img src="img/icons/favourites.svg" alt="">
 							<span>23</span>
 						</a>
-						<div class="user-image-menu">
-							<picture><source srcset="img/user-image.webp" type="image/webp"><img src="img/user-image.jpg" alt=""></picture>
+						<div class="user-image-menu" data-da=".menu__user,700">
+							<div class="user-img-info">
+								<picture><source srcset="img/user-image.webp" type="image/webp"><img src="img/user-image.jpg" alt=""></picture>
+							</div>
 							<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M4.8 7.51196L1.84031 3.81235C1.5784 3.48497 1.81149 3 2.23074 3H8.15012C8.56937 3 8.80246 3.48497 8.54055 3.81235L5.58086 7.51196C5.3807 7.76216 5.00016 7.76216 4.8 7.51196Z" fill="#151515" />
 							</svg>
 							<ul class="user__menu">
 								<li class="user__menu-list">
-									<a href="#">buyer@mail.ru</a>
+									<a class="user__menu-usermail" href="#" data-da=".user-img-info,700">buyer@mail.ru</a>
 								</li>
 								<li class="user__menu-list">
 									<a href="#">Тариф</a>
@@ -101,6 +115,17 @@
 							</ul>
 						</div>
 					</div>
+
+					<div class="header__menu menu">
+						<button type="button" class="menu__icon icon-menu"><span></span></button>
+						<div class="menu__body">
+							<div class="menu__search"></div>
+							<div class="menu__user"></div>
+							<div class="menu__icons"></div>
+							<div class="menu__catalog"></div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</header>
@@ -122,6 +147,52 @@
 											Получить доступ
 										</button>
 									</div>
+									<div class="hero__decor">
+										<p>Доступ к тысячам товаров и услуг</p>
+										<svg width="104" height="58" viewBox="0 0 104 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<g filter="url(#filter0_i_1007_11396)">
+												<path d="M0 29C0 12.9837 12.9837 0 29 0H75C91.0163 0 104 12.9837 104 29C104 45.0163 91.0163 58 75 58H29C12.9837 58 0 45.0163 0 29Z" fill="#D9DCED" />
+											</g>
+											<g filter="url(#filter1_d_1007_11396)">
+												<circle cx="75" cy="29" r="23" fill="#424888" />
+											</g>
+											<g filter="url(#filter2_d_1007_11396)">
+												<path fill-rule="evenodd" clip-rule="evenodd" d="M87.4144 23.4141L73.0002 37.8283L64.5859 29.4141L67.4144 26.5857L73.0002 32.1715L84.5859 20.5857L87.4144 23.4141Z" fill="white" />
+											</g>
+											<defs>
+												<filter id="filter0_i_1007_11396" x="0" y="0" width="104" height="62" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+													<feFlood flood-opacity="0" result="BackgroundImageFix" />
+													<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+													<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+													<feOffset dy="4" />
+													<feGaussianBlur stdDeviation="2" />
+													<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+													<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0" />
+													<feBlend mode="normal" in2="shape" result="effect1_innerShadow_1007_11396" />
+												</filter>
+												<filter id="filter1_d_1007_11396" x="48" y="4" width="54" height="54" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+													<feFlood flood-opacity="0" result="BackgroundImageFix" />
+													<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+													<feOffset dy="2" />
+													<feGaussianBlur stdDeviation="2" />
+													<feComposite in2="hardAlpha" operator="out" />
+													<feColorMatrix type="matrix" values="0 0 0 0 0.258824 0 0 0 0 0.282353 0 0 0 0 0.533333 0 0 0 0.37 0" />
+													<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1007_11396" />
+													<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1007_11396" result="shape" />
+												</filter>
+												<filter id="filter2_d_1007_11396" x="60.5859" y="20.5857" width="30.8281" height="25.2427" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+													<feFlood flood-opacity="0" result="BackgroundImageFix" />
+													<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+													<feOffset dy="4" />
+													<feGaussianBlur stdDeviation="2" />
+													<feComposite in2="hardAlpha" operator="out" />
+													<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" />
+													<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1007_11396" />
+													<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1007_11396" result="shape" />
+												</filter>
+											</defs>
+										</svg>
+									</div>
 								</div>
 							</li>
 							<li class="splide__slide">
@@ -137,6 +208,7 @@
 											Получить доступ
 										</button>
 									</div>
+
 								</div>
 							</li>
 							<li class="splide__slide">
@@ -461,19 +533,344 @@
 			</div>
 		</footer>
 	</div>
-	<!-- 
-<div id="popup" aria-hidden="true" class="popup">
-	<div class="popup__wrapper">
-		<div class="popup__content">
-			<button data-close type="button" class="popup__close">Закрыть</button>
-			<div class="popup__text">
+	<section class="catalog">
+		<div class="catalog__container" data-da=".menu__catalog,700">
+			<div data-tabs="860" class="tabs">
+				<nav data-tabs-titles class="tabs__navigation">
+					<button type="button" class="tabs__title _tab-active">Подземное оборудование</button>
+					<button type="button" class="tabs__title">Наземное оборудование</button>
+					<button type="button" class="tabs__title">Оборудование для заканчивания скважин</button>
+				</nav>
+				<div data-tabs-body class="tabs__content">
+					<div class="tabs__body">
+						<div class="tabs__items">
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Долота</h4>
+								<ul>
+									<li><a href="#">PDC долото</a></li>
+									<li><a href="#">Шарошечное долото</a></li>
+									<li><a href="#">Бицентричное долото</a></li>
+									<li><a href="#">Импрегнированное долото</a></li>
+									<li><a href="#">Долото под бурение верхних интервалов, шурфов</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="tabs__body">
+						<div class="tabs__items">
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Опорно-центрирующие элементы</h4>
+								<ul>
+									<li><a href="#">Калибратор</a></li>
+									<li><a href="#">Центратор</a></li>
+									<li><a href="#">Стабилизатор</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="tabs__body">
+						<div class="tabs__items">
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Переводники</h4>
+								<ul>
+									<li><a href="#">Переходный переводник</a></li>
+									<li><a href="#">Муфтовый переводник</a></li>
+									<li><a href="#">Ниппельный переводник</a></li>
+									<li><a href="#">Безопасный переводник</a></li>
+									<li><a href="#">Переводник для ВСП</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Переводники</h4>
+								<ul>
+									<li><a href="#">Переходный переводник</a></li>
+									<li><a href="#">Муфтовый переводник</a></li>
+									<li><a href="#">Ниппельный переводник</a></li>
+									<li><a href="#">Безопасный переводник</a></li>
+									<li><a href="#">Переводник для ВСП</a></li>
+								</ul>
+							</div>
+							<div class="tabs__item">
+								<h4 class="tabs__item-title">Переводники</h4>
+								<ul>
+									<li><a href="#">Переходный переводник</a></li>
+									<li><a href="#">Муфтовый переводник</a></li>
+									<li><a href="#">Ниппельный переводник</a></li>
+									<li><a href="#">Безопасный переводник</a></li>
+									<li><a href="#">Переводник для ВСП</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div id="catalog-popup" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close">Закрыть</button>
+				<div class="popup__text">
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
- -->
 
-	<script src="js/app.min.js?_v=20230215012319"></script>
+	<div id="search-popup" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close">Закрыть</button>
+				<div class="header__search popup__text">
+					<div class="input__inner">
+						<input class="header__search-input img-search" type="text" placeholder="Поиск по товарам, услугам или компаниям" id="search">
+						<label for="search">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#777777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M21.0004 20.9999L16.6504 16.6499" stroke="#777777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+
+						</label>
+					</div>
+					<button class="btn header__search-btn">Найти</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="location-popup" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close">Закрыть</button>
+				<div class="header__search popup__text">
+					<div class="input__inner">
+						<label for="location">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="#424888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="#424888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</label>
+						<input class="header__search-input img-location" type="text" placeholder="Город" value="Петропавловск Камчатский" id="location">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="js/app.min.js?_v=20230216235549"></script>
 </body>
 
 </html>

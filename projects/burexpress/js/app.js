@@ -1,6605 +1,3528 @@
-/******/ (() => {
-  // webpackBootstrap
-  /******/ "use strict";
-  var __webpack_exports__ = {}; // CONCATENATED MODULE: ./src/js/files/modules.js
-
-  const modules_flsModules = {}; // CONCATENATED MODULE: ./src/js/files/functions.js
-  // Подключение списка активных модулей
-
-  /* Проверка поддержки webp, добавление класса webp или no-webp для HTML */
-  function isWebp() {
-    // Проверка поддержки webp
-    function testWebP(callback) {
-      let webP = new Image();
-      webP.onload = webP.onerror = function () {
-        callback(webP.height == 2);
-      };
-      webP.src =
-        "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
-    }
-    // Добавление класса _webp или _no-webp для HTML
-    testWebP(function (support) {
-      let className = support === true ? "webp" : "no-webp";
-      document.documentElement.classList.add(className);
-    });
-  }
-  /* Проверка мобильного браузера */
-  let isMobile = {
-    Android: function () {
-      return navigator.userAgent.match(/Android/i);
+/*! For license information please see app.min.js.LICENSE.txt */
+(() => {
+  "use strict";
+  const e = {};
+  let t = (e, t = 500, s = 0) => {
+      e.classList.contains("_slide") ||
+        (e.classList.add("_slide"),
+        (e.style.transitionProperty = "height, margin, padding"),
+        (e.style.transitionDuration = t + "ms"),
+        (e.style.height = `${e.offsetHeight}px`),
+        e.offsetHeight,
+        (e.style.overflow = "hidden"),
+        (e.style.height = s ? `${s}px` : "0px"),
+        (e.style.paddingTop = 0),
+        (e.style.paddingBottom = 0),
+        (e.style.marginTop = 0),
+        (e.style.marginBottom = 0),
+        window.setTimeout(() => {
+          (e.hidden = !s),
+            !s && e.style.removeProperty("height"),
+            e.style.removeProperty("padding-top"),
+            e.style.removeProperty("padding-bottom"),
+            e.style.removeProperty("margin-top"),
+            e.style.removeProperty("margin-bottom"),
+            !s && e.style.removeProperty("overflow"),
+            e.style.removeProperty("transition-duration"),
+            e.style.removeProperty("transition-property"),
+            e.classList.remove("_slide"),
+            document.dispatchEvent(
+              new CustomEvent("slideUpDone", { detail: { target: e } })
+            );
+        }, t));
     },
-    BlackBerry: function () {
-      return navigator.userAgent.match(/BlackBerry/i);
-    },
-    iOS: function () {
-      return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-    },
-    Opera: function () {
-      return navigator.userAgent.match(/Opera Mini/i);
-    },
-    Windows: function () {
-      return navigator.userAgent.match(/IEMobile/i);
-    },
-    any: function () {
-      return (
-        isMobile.Android() ||
-        isMobile.BlackBerry() ||
-        isMobile.iOS() ||
-        isMobile.Opera() ||
-        isMobile.Windows()
-      );
-    },
-  };
-  /* Добавление класса touch для HTML если браузер мобильный */
-  function addTouchClass() {
-    // Добавление класса _touch для HTML если браузер мобильный
-    if (isMobile.any()) document.documentElement.classList.add("touch");
-  }
-  // Добавление loaded для HTML после полной загрузки страницы
-  function addLoadedClass() {
-    window.addEventListener("load", function () {
-      setTimeout(function () {
-        document.documentElement.classList.add("loaded");
-      }, 0);
-    });
-  }
-  // Получение хеша в адресе сайта
-  function functions_getHash() {
-    if (location.hash) {
-      return location.hash.replace("#", "");
-    }
-  }
-  // Указание хеша в адресе сайта
-  function setHash(hash) {
-    hash = hash ? `#${hash}` : window.location.href.split("#")[0];
-    history.pushState("", "", hash);
-  }
-  // Учет плавающей панели на мобильных устройствах при 100vh
-  function fullVHfix() {
-    const fullScreens = document.querySelectorAll("[data-fullscreen]");
-    if (fullScreens.length && isMobile.any()) {
-      window.addEventListener("resize", fixHeight);
-      function fixHeight() {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty("--vh", `${vh}px`);
+    s = (e, t = 500, s = 0) => {
+      if (!e.classList.contains("_slide")) {
+        e.classList.add("_slide"),
+          (e.hidden = !e.hidden && null),
+          s && e.style.removeProperty("height");
+        let n = e.offsetHeight;
+        (e.style.overflow = "hidden"),
+          (e.style.height = s ? `${s}px` : "0px"),
+          (e.style.paddingTop = 0),
+          (e.style.paddingBottom = 0),
+          (e.style.marginTop = 0),
+          (e.style.marginBottom = 0),
+          e.offsetHeight,
+          (e.style.transitionProperty = "height, margin, padding"),
+          (e.style.transitionDuration = t + "ms"),
+          (e.style.height = n + "px"),
+          e.style.removeProperty("padding-top"),
+          e.style.removeProperty("padding-bottom"),
+          e.style.removeProperty("margin-top"),
+          e.style.removeProperty("margin-bottom"),
+          window.setTimeout(() => {
+            e.style.removeProperty("height"),
+              e.style.removeProperty("overflow"),
+              e.style.removeProperty("transition-duration"),
+              e.style.removeProperty("transition-property"),
+              e.classList.remove("_slide"),
+              document.dispatchEvent(
+                new CustomEvent("slideDownDone", { detail: { target: e } })
+              );
+          }, t);
       }
-      fixHeight();
-    }
-  }
-  // Вспомогательные модули плавного расскрытия и закрытия объекта ======================================================================================================================================================================
-  let _slideUp = (target, duration = 500, showmore = 0) => {
-    if (!target.classList.contains("_slide")) {
-      target.classList.add("_slide");
-      target.style.transitionProperty = "height, margin, padding";
-      target.style.transitionDuration = duration + "ms";
-      target.style.height = `${target.offsetHeight}px`;
-      target.offsetHeight;
-      target.style.overflow = "hidden";
-      target.style.height = showmore ? `${showmore}px` : `0px`;
-      target.style.paddingTop = 0;
-      target.style.paddingBottom = 0;
-      target.style.marginTop = 0;
-      target.style.marginBottom = 0;
-      window.setTimeout(() => {
-        target.hidden = !showmore ? true : false;
-        !showmore ? target.style.removeProperty("height") : null;
-        target.style.removeProperty("padding-top");
-        target.style.removeProperty("padding-bottom");
-        target.style.removeProperty("margin-top");
-        target.style.removeProperty("margin-bottom");
-        !showmore ? target.style.removeProperty("overflow") : null;
-        target.style.removeProperty("transition-duration");
-        target.style.removeProperty("transition-property");
-        target.classList.remove("_slide");
-        // Создаем событие
-        document.dispatchEvent(
-          new CustomEvent("slideUpDone", {
-            detail: {
-              target: target,
-            },
-          })
-        );
-      }, duration);
-    }
-  };
-  let _slideDown = (target, duration = 500, showmore = 0) => {
-    if (!target.classList.contains("_slide")) {
-      target.classList.add("_slide");
-      target.hidden = target.hidden ? false : null;
-      showmore ? target.style.removeProperty("height") : null;
-      let height = target.offsetHeight;
-      target.style.overflow = "hidden";
-      target.style.height = showmore ? `${showmore}px` : `0px`;
-      target.style.paddingTop = 0;
-      target.style.paddingBottom = 0;
-      target.style.marginTop = 0;
-      target.style.marginBottom = 0;
-      target.offsetHeight;
-      target.style.transitionProperty = "height, margin, padding";
-      target.style.transitionDuration = duration + "ms";
-      target.style.height = height + "px";
-      target.style.removeProperty("padding-top");
-      target.style.removeProperty("padding-bottom");
-      target.style.removeProperty("margin-top");
-      target.style.removeProperty("margin-bottom");
-      window.setTimeout(() => {
-        target.style.removeProperty("height");
-        target.style.removeProperty("overflow");
-        target.style.removeProperty("transition-duration");
-        target.style.removeProperty("transition-property");
-        target.classList.remove("_slide");
-        // Создаем событие
-        document.dispatchEvent(
-          new CustomEvent("slideDownDone", {
-            detail: {
-              target: target,
-            },
-          })
-        );
-      }, duration);
-    }
-  };
-  let _slideToggle = (target, duration = 500) => {
-    if (target.hidden) {
-      return _slideDown(target, duration);
-    } else {
-      return _slideUp(target, duration);
-    }
-  };
-  // Вспомогательные модули блокировки прокрутки и скочка ====================================================================================================================================================================================================================================================================================
-  let bodyLockStatus = true;
-  let bodyLockToggle = (delay = 500) => {
-    if (document.documentElement.classList.contains("lock")) {
-      bodyUnlock(delay);
-    } else {
-      bodyLock(delay);
-    }
-  };
-  let bodyUnlock = (delay = 500) => {
-    let body = document.querySelector("body");
-    if (bodyLockStatus) {
-      let lock_padding = document.querySelectorAll("[data-lp]");
-      setTimeout(() => {
-        for (let index = 0; index < lock_padding.length; index++) {
-          const el = lock_padding[index];
-          el.style.paddingRight = "0px";
+    },
+    n = (e, n = 500) => (e.hidden ? s(e, n) : t(e, n)),
+    i = !0,
+    o = (e = 500) => {
+      document.documentElement.classList.contains("lock") ? a(e) : r(e);
+    },
+    a = (e = 500) => {
+      let t = document.querySelector("body");
+      if (i) {
+        let s = document.querySelectorAll("[data-lp]");
+        setTimeout(() => {
+          for (let e = 0; e < s.length; e++) {
+            s[e].style.paddingRight = "0px";
+          }
+          (t.style.paddingRight = "0px"),
+            document.documentElement.classList.remove("lock");
+        }, e),
+          (i = !1),
+          setTimeout(function () {
+            i = !0;
+          }, e);
+      }
+    },
+    r = (e = 500) => {
+      let t = document.querySelector("body");
+      if (i) {
+        let s = document.querySelectorAll("[data-lp]");
+        for (let e = 0; e < s.length; e++) {
+          s[e].style.paddingRight =
+            window.innerWidth -
+            document.querySelector(".wrapper").offsetWidth +
+            "px";
         }
-        body.style.paddingRight = "0px";
-        document.documentElement.classList.remove("lock");
-      }, delay);
-      bodyLockStatus = false;
-      setTimeout(function () {
-        bodyLockStatus = true;
-      }, delay);
-    }
-  };
-  let bodyLock = (delay = 500) => {
-    let body = document.querySelector("body");
-    if (bodyLockStatus) {
-      let lock_padding = document.querySelectorAll("[data-lp]");
-      for (let index = 0; index < lock_padding.length; index++) {
-        const el = lock_padding[index];
-        el.style.paddingRight =
+        (t.style.paddingRight =
           window.innerWidth -
           document.querySelector(".wrapper").offsetWidth +
-          "px";
+          "px"),
+          document.documentElement.classList.add("lock"),
+          (i = !1),
+          setTimeout(function () {
+            i = !0;
+          }, e);
       }
-      body.style.paddingRight =
-        window.innerWidth -
-        document.querySelector(".wrapper").offsetWidth +
-        "px";
-      document.documentElement.classList.add("lock");
-
-      bodyLockStatus = false;
-      setTimeout(function () {
-        bodyLockStatus = true;
-      }, delay);
-    }
-  };
-  // Модуль работы со спойлерами =======================================================================================================================================================================================================================
-  /*
-Для родителя слойлеров пишем атрибут data-spollers
-Для заголовков слойлеров пишем атрибут data-spoller
-Если нужно включать\выключать работу спойлеров на разных размерах экранов
-пишем параметры ширины и типа брейкпоинта.
-
-Например: 
-data-spollers="992,max" - спойлеры будут работать только на экранах меньше или равно 992px
-data-spollers="768,min" - спойлеры будут работать только на экранах больше или равно 768px
-
-data-spollers-speed - скорость открытия
-
-Если нужно что бы в блоке открывался болько один слойлер добавляем атрибут data-one-spoller
-
-*/
-  function spollers() {
-    const spollersArray = document.querySelectorAll("[data-spollers]");
-    if (spollersArray.length > 0) {
-      // Получение обычных слойлеров
-      const spollersRegular = Array.from(spollersArray).filter(function (
-        item,
-        index,
-        self
-      ) {
-        return !item.dataset.spollers.split(",")[0];
-      });
-      // Инициализация обычных слойлеров
-      if (spollersRegular.length) {
-        initSpollers(spollersRegular);
-      }
-      // Получение слойлеров с медиа запросами
-      let mdQueriesArray = dataMediaQueries(spollersArray, "spollers");
-      if (mdQueriesArray && mdQueriesArray.length) {
-        mdQueriesArray.forEach((mdQueriesItem) => {
-          // Событие
-          mdQueriesItem.matchMedia.addEventListener("change", function () {
-            initSpollers(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-          });
-          initSpollers(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-        });
-      }
-
-      // Инициализация
-      function initSpollers(spollersArray, matchMedia = false) {
-        spollersArray.forEach((spollersBlock) => {
-          spollersBlock = matchMedia ? spollersBlock.item : spollersBlock;
-          if (matchMedia.matches || !matchMedia) {
-            spollersBlock.classList.add("_spoller-init");
-            initSpollerBody(spollersBlock);
-            spollersBlock.addEventListener("click", setSpollerAction);
-          } else {
-            spollersBlock.classList.remove("_spoller-init");
-            initSpollerBody(spollersBlock, false);
-            spollersBlock.removeEventListener("click", setSpollerAction);
-          }
-        });
-      }
-      // Работа с контентом
-      function initSpollerBody(spollersBlock, hideSpollerBody = true) {
-        let spollerTitles = spollersBlock.querySelectorAll("[data-spoller]");
-        if (spollerTitles.length) {
-          spollerTitles = Array.from(spollerTitles).filter(
-            (item) => item.closest("[data-spollers]") === spollersBlock
-          );
-          spollerTitles.forEach((spollerTitle) => {
-            if (hideSpollerBody) {
-              spollerTitle.removeAttribute("tabindex");
-              if (!spollerTitle.classList.contains("_spoller-active")) {
-                spollerTitle.nextElementSibling.hidden = true;
-              }
-            } else {
-              spollerTitle.setAttribute("tabindex", "-1");
-              spollerTitle.nextElementSibling.hidden = false;
-            }
-          });
-        }
-      }
-      function setSpollerAction(e) {
-        const el = e.target;
-        if (el.closest("[data-spoller]")) {
-          const spollerTitle = el.closest("[data-spoller]");
-          const spollersBlock = spollerTitle.closest("[data-spollers]");
-          const oneSpoller = spollersBlock.hasAttribute("data-one-spoller");
-          const spollerSpeed = spollersBlock.dataset.spollersSpeed
-            ? parseInt(spollersBlock.dataset.spollersSpeed)
-            : 500;
-          if (!spollersBlock.querySelectorAll("._slide").length) {
-            if (
-              oneSpoller &&
-              !spollerTitle.classList.contains("_spoller-active")
-            ) {
-              hideSpollersBody(spollersBlock);
-            }
-            spollerTitle.classList.toggle("_spoller-active");
-            _slideToggle(spollerTitle.nextElementSibling, spollerSpeed);
-          }
-          e.preventDefault();
-        }
-      }
-      function hideSpollersBody(spollersBlock) {
-        const spollerActiveTitle = spollersBlock.querySelector(
-          "[data-spoller]._spoller-active"
-        );
-        const spollerSpeed = spollersBlock.dataset.spollersSpeed
-          ? parseInt(spollersBlock.dataset.spollersSpeed)
-          : 500;
-        if (
-          spollerActiveTitle &&
-          !spollersBlock.querySelectorAll("._slide").length
-        ) {
-          spollerActiveTitle.classList.remove("_spoller-active");
-          _slideUp(spollerActiveTitle.nextElementSibling, spollerSpeed);
-        }
-      }
-    }
-  }
-  // Модуь работы с табами =======================================================================================================================================================================================================================
-  /*
-Для родителя табов пишем атрибут data-tabs
-Для родителя заголовков табов пишем атрибут data-tabs-titles
-Для родителя блоков табов пишем атрибут data-tabs-body
-Для родителя блоков табов можно указать data-tabs-hash, это втключит добавление хеша
-
-Если нужно чтобы табы открывались с анимацией 
-добавляем к data-tabs data-tabs-animate
-По умолчанию, скорость анимации 500ms, 
-указать свою скорость можно так: data-tabs-animate="1000"
-
-Если нужно чтобы табы превращались в "спойлеры", на неком размере экранов, пишем параметры ширины.
-Например: data-tabs="992" - табы будут превращаться в спойлеры на экранах меньше или равно 992px
-*/
-  function tabs() {
-    const tabs = document.querySelectorAll("[data-tabs]");
-    let tabsActiveHash = [];
-
-    if (tabs.length > 0) {
-      const hash = functions_getHash();
-      if (hash && hash.startsWith("tab-")) {
-        tabsActiveHash = hash.replace("tab-", "").split("-");
-      }
-      tabs.forEach((tabsBlock, index) => {
-        tabsBlock.classList.add("_tab-init");
-        tabsBlock.setAttribute("data-tabs-index", index);
-        tabsBlock.addEventListener("click", setTabsAction);
-        initTabs(tabsBlock);
-      });
-
-      // Получение слойлеров с медиа запросами
-      let mdQueriesArray = dataMediaQueries(tabs, "tabs");
-      if (mdQueriesArray && mdQueriesArray.length) {
-        mdQueriesArray.forEach((mdQueriesItem) => {
-          // Событие
-          mdQueriesItem.matchMedia.addEventListener("change", function () {
-            setTitlePosition(
-              mdQueriesItem.itemsArray,
-              mdQueriesItem.matchMedia
-            );
-          });
-          setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-        });
-      }
-    }
-    // Установка позиций заголовков
-    function setTitlePosition(tabsMediaArray, matchMedia) {
-      tabsMediaArray.forEach((tabsMediaItem) => {
-        tabsMediaItem = tabsMediaItem.item;
-        let tabsTitles = tabsMediaItem.querySelector("[data-tabs-titles]");
-        let tabsTitleItems =
-          tabsMediaItem.querySelectorAll("[data-tabs-title]");
-        let tabsContent = tabsMediaItem.querySelector("[data-tabs-body]");
-        let tabsContentItems =
-          tabsMediaItem.querySelectorAll("[data-tabs-item]");
-        tabsTitleItems = Array.from(tabsTitleItems).filter(
-          (item) => item.closest("[data-tabs]") === tabsMediaItem
-        );
-        tabsContentItems = Array.from(tabsContentItems).filter(
-          (item) => item.closest("[data-tabs]") === tabsMediaItem
-        );
-        tabsContentItems.forEach((tabsContentItem, index) => {
-          if (matchMedia.matches) {
-            tabsContent.append(tabsTitleItems[index]);
-            tabsContent.append(tabsContentItem);
-            tabsMediaItem.classList.add("_tab-spoller");
-          } else {
-            tabsTitles.append(tabsTitleItems[index]);
-            tabsMediaItem.classList.remove("_tab-spoller");
-          }
-        });
-      });
-    }
-    // Работа с контентом
-    function initTabs(tabsBlock) {
-      let tabsTitles = tabsBlock.querySelectorAll("[data-tabs-titles]>*");
-      let tabsContent = tabsBlock.querySelectorAll("[data-tabs-body]>*");
-      const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-      const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
-
-      if (tabsActiveHashBlock) {
-        const tabsActiveTitle = tabsBlock.querySelector(
-          "[data-tabs-titles]>._tab-active"
-        );
-        tabsActiveTitle
-          ? tabsActiveTitle.classList.remove("_tab-active")
-          : null;
-      }
-      if (tabsContent.length) {
-        tabsContent = Array.from(tabsContent).filter(
-          (item) => item.closest("[data-tabs]") === tabsBlock
-        );
-        tabsTitles = Array.from(tabsTitles).filter(
-          (item) => item.closest("[data-tabs]") === tabsBlock
-        );
-        tabsContent.forEach((tabsContentItem, index) => {
-          tabsTitles[index].setAttribute("data-tabs-title", "");
-          tabsContentItem.setAttribute("data-tabs-item", "");
-
-          if (tabsActiveHashBlock && index == tabsActiveHash[1]) {
-            tabsTitles[index].classList.add("_tab-active");
-          }
-          tabsContentItem.hidden =
-            !tabsTitles[index].classList.contains("_tab-active");
-        });
-      }
-    }
-    function setTabsStatus(tabsBlock) {
-      let tabsTitles = tabsBlock.querySelectorAll("[data-tabs-title]");
-      let tabsContent = tabsBlock.querySelectorAll("[data-tabs-item]");
-      const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-      function isTabsAnamate(tabsBlock) {
-        if (tabsBlock.hasAttribute("data-tabs-animate")) {
-          return tabsBlock.dataset.tabsAnimate > 0
-            ? Number(tabsBlock.dataset.tabsAnimate)
-            : 500;
-        }
-      }
-      const tabsBlockAnimate = isTabsAnamate(tabsBlock);
-      if (tabsContent.length > 0) {
-        const isHash = tabsBlock.hasAttribute("data-tabs-hash");
-        tabsContent = Array.from(tabsContent).filter(
-          (item) => item.closest("[data-tabs]") === tabsBlock
-        );
-        tabsTitles = Array.from(tabsTitles).filter(
-          (item) => item.closest("[data-tabs]") === tabsBlock
-        );
-        tabsContent.forEach((tabsContentItem, index) => {
-          if (tabsTitles[index].classList.contains("_tab-active")) {
-            if (tabsBlockAnimate) {
-              _slideDown(tabsContentItem, tabsBlockAnimate);
-            } else {
-              tabsContentItem.hidden = false;
-            }
-            if (isHash && !tabsContentItem.closest(".popup")) {
-              setHash(`tab-${tabsBlockIndex}-${index}`);
-            }
-          } else {
-            if (tabsBlockAnimate) {
-              _slideUp(tabsContentItem, tabsBlockAnimate);
-            } else {
-              tabsContentItem.hidden = true;
-            }
-          }
-        });
-      }
-    }
-    function setTabsAction(e) {
-      const el = e.target;
-      if (el.closest("[data-tabs-title]")) {
-        const tabTitle = el.closest("[data-tabs-title]");
-        const tabsBlock = tabTitle.closest("[data-tabs]");
-        if (
-          !tabTitle.classList.contains("_tab-active") &&
-          !tabsBlock.querySelector("._slide")
-        ) {
-          let tabActiveTitle = tabsBlock.querySelectorAll(
-            "[data-tabs-title]._tab-active"
-          );
-          tabActiveTitle.length
-            ? (tabActiveTitle = Array.from(tabActiveTitle).filter(
-                (item) => item.closest("[data-tabs]") === tabsBlock
-              ))
-            : null;
-          tabActiveTitle.length
-            ? tabActiveTitle[0].classList.remove("_tab-active")
-            : null;
-          tabTitle.classList.add("_tab-active");
-          setTabsStatus(tabsBlock);
-        }
-        e.preventDefault();
-      }
-    }
-  }
-  // Модуль работы с меню (бургер) =======================================================================================================================================================================================================================
-  function menuInit() {
-    if (document.querySelector(".icon-menu")) {
-      document.addEventListener("click", function (e) {
-        if (bodyLockStatus && e.target.closest(".icon-menu")) {
-          bodyLockToggle();
-          document.documentElement.classList.toggle("menu-open");
-        }
-      });
-    }
-  }
-  function menuOpen() {
-    bodyLock();
-    document.documentElement.classList.add("menu-open");
-  }
-  function functions_menuClose() {
-    bodyUnlock();
-    document.documentElement.classList.remove("menu-open");
-  }
-  // Модуль "показать еще" =======================================================================================================================================================================================================================
-  /*
-Документация по работе в шаблоне:
-data-showmore-media = "768,min"
-data-showmore="size/items"
-data-showmore-content="размер/кол-во"
-data-showmore-button="скорость"
-Сниппет (HTML): showmore
-*/
-  function showMore() {
-    window.addEventListener("load", function (e) {
-      const showMoreBlocks = document.querySelectorAll("[data-showmore]");
-      let showMoreBlocksRegular;
-      let mdQueriesArray;
-      if (showMoreBlocks.length) {
-        // Получение обычных объектов
-        showMoreBlocksRegular = Array.from(showMoreBlocks).filter(function (
-          item,
-          index,
-          self
-        ) {
-          return !item.dataset.showmoreMedia;
-        });
-        // Инициализация обычных объектов
-        showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
-
-        document.addEventListener("click", showMoreActions);
-        window.addEventListener("resize", showMoreActions);
-
-        // Получение объектов с медиа запросами
-        mdQueriesArray = dataMediaQueries(showMoreBlocks, "showmoreMedia");
-        if (mdQueriesArray && mdQueriesArray.length) {
-          mdQueriesArray.forEach((mdQueriesItem) => {
-            // Событие
-            mdQueriesItem.matchMedia.addEventListener("change", function () {
-              initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-            });
-          });
-          initItemsMedia(mdQueriesArray);
-        }
-      }
-      function initItemsMedia(mdQueriesArray) {
-        mdQueriesArray.forEach((mdQueriesItem) => {
-          initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-        });
-      }
-      function initItems(showMoreBlocks, matchMedia) {
-        showMoreBlocks.forEach((showMoreBlock) => {
-          initItem(showMoreBlock, matchMedia);
-        });
-      }
-      function initItem(showMoreBlock, matchMedia = false) {
-        showMoreBlock = matchMedia ? showMoreBlock.item : showMoreBlock;
-        let showMoreContent = showMoreBlock.querySelectorAll(
-          "[data-showmore-content]"
-        );
-        let showMoreButton = showMoreBlock.querySelectorAll(
-          "[data-showmore-button]"
-        );
-        showMoreContent = Array.from(showMoreContent).filter(
-          (item) => item.closest("[data-showmore]") === showMoreBlock
-        )[0];
-        showMoreButton = Array.from(showMoreButton).filter(
-          (item) => item.closest("[data-showmore]") === showMoreBlock
-        )[0];
-        const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
-        if (matchMedia.matches || !matchMedia) {
-          if (hiddenHeight < getOriginalHeight(showMoreContent)) {
-            _slideUp(showMoreContent, 0, hiddenHeight);
-            showMoreButton.hidden = false;
-          } else {
-            _slideDown(showMoreContent, 0, hiddenHeight);
-            showMoreButton.hidden = true;
-          }
-        } else {
-          _slideDown(showMoreContent, 0, hiddenHeight);
-          showMoreButton.hidden = true;
-        }
-      }
-      function getHeight(showMoreBlock, showMoreContent) {
-        let hiddenHeight = 0;
-        const showMoreType = showMoreBlock.dataset.showmore
-          ? showMoreBlock.dataset.showmore
-          : "size";
-        if (showMoreType === "items") {
-          const showMoreTypeValue = showMoreContent.dataset.showmoreContent
-            ? showMoreContent.dataset.showmoreContent
-            : 3;
-          const showMoreItems = showMoreContent.children;
-          for (let index = 1; index < showMoreItems.length; index++) {
-            const showMoreItem = showMoreItems[index - 1];
-            hiddenHeight += showMoreItem.offsetHeight;
-            if (index == showMoreTypeValue) break;
-          }
-        } else {
-          const showMoreTypeValue = showMoreContent.dataset.showmoreContent
-            ? showMoreContent.dataset.showmoreContent
-            : 150;
-          hiddenHeight = showMoreTypeValue;
-        }
-        return hiddenHeight;
-      }
-      function getOriginalHeight(showMoreContent) {
-        let parentHidden;
-        let hiddenHeight = showMoreContent.offsetHeight;
-        showMoreContent.style.removeProperty("height");
-        if (showMoreContent.closest(`[hidden]`)) {
-          parentHidden = showMoreContent.closest(`[hidden]`);
-          parentHidden.hidden = false;
-        }
-        let originalHeight = showMoreContent.offsetHeight;
-        parentHidden ? (parentHidden.hidden = true) : null;
-        showMoreContent.style.height = `${hiddenHeight}px`;
-        return originalHeight;
-      }
-      function showMoreActions(e) {
-        const targetEvent = e.target;
-        const targetType = e.type;
-        if (targetType === "click") {
-          if (targetEvent.closest("[data-showmore-button]")) {
-            const showMoreButton = targetEvent.closest(
-              "[data-showmore-button]"
-            );
-            const showMoreBlock = showMoreButton.closest("[data-showmore]");
-            const showMoreContent = showMoreBlock.querySelector(
-              "[data-showmore-content]"
-            );
-            const showMoreSpeed = showMoreBlock.dataset.showmoreButton
-              ? showMoreBlock.dataset.showmoreButton
-              : "500";
-            const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
-            if (!showMoreContent.classList.contains("_slide")) {
-              showMoreBlock.classList.contains("_showmore-active")
-                ? _slideUp(showMoreContent, showMoreSpeed, hiddenHeight)
-                : _slideDown(showMoreContent, showMoreSpeed, hiddenHeight);
-              showMoreBlock.classList.toggle("_showmore-active");
-            }
-          }
-        } else if (targetType === "resize") {
-          showMoreBlocksRegular && showMoreBlocksRegular.length
-            ? initItems(showMoreBlocksRegular)
-            : null;
-          mdQueriesArray && mdQueriesArray.length
-            ? initItemsMedia(mdQueriesArray)
-            : null;
-        }
-      }
-    });
-  }
-  //================================================================================================================================================================================================================================================================================================================
-  // Прочие полезные функции ================================================================================================================================================================================================================================================================================================================
-  //================================================================================================================================================================================================================================================================================================================
-
-  // FLS (Full Logging System)
-  function functions_FLS(message) {
+    };
+  function l(e) {
     setTimeout(() => {
-      if (window.FLS) {
-        console.log(message);
-      }
+      window.FLS && console.log(e);
     }, 0);
   }
-  // Получить цифры из строки
-  function getDigFromString(item) {
-    return parseInt(item.replace(/[^\d]/g, ""));
-  }
-  // Форматирование цифр типа 100 000 000
-  function getDigFormat(item) {
-    return item.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
-  }
-  // Убрать класс из всех элементов массива
-  function removeClasses(array, className) {
-    for (var i = 0; i < array.length; i++) {
-      array[i].classList.remove(className);
-    }
-  }
-  // Уникализация массива
-  function uniqArray(array) {
-    return array.filter(function (item, index, self) {
-      return self.indexOf(item) === index;
+  function c(e, t) {
+    const s = Array.from(e).filter(function (e, s, n) {
+      if (e.dataset[t]) return e.dataset[t].split(",")[0];
     });
-  }
-  // Функция получения индекса внутри родителя
-  function indexInParent(parent, element) {
-    const array = Array.prototype.slice.call(parent.children);
-    return Array.prototype.indexOf.call(array, element);
-  }
-  // Обработа медиа запросов из атрибутов
-  function dataMediaQueries(array, dataSetValue) {
-    // Получение объектов с медиа запросами
-    const media = Array.from(array).filter(function (item, index, self) {
-      if (item.dataset[dataSetValue]) {
-        return item.dataset[dataSetValue].split(",")[0];
-      }
-    });
-    // Инициализация объектов с медиа запросами
-    if (media.length) {
-      const breakpointsArray = [];
-      media.forEach((item) => {
-        const params = item.dataset[dataSetValue];
-        const breakpoint = {};
-        const paramsArray = params.split(",");
-        breakpoint.value = paramsArray[0];
-        breakpoint.type = paramsArray[1] ? paramsArray[1].trim() : "max";
-        breakpoint.item = item;
-        breakpointsArray.push(breakpoint);
+    if (s.length) {
+      const e = [];
+      s.forEach((s) => {
+        const n = {},
+          i = s.dataset[t].split(",");
+        (n.value = i[0]),
+          (n.type = i[1] ? i[1].trim() : "max"),
+          (n.item = s),
+          e.push(n);
       });
-      // Получаем уникальные брейкпоинты
-      let mdQueries = breakpointsArray.map(function (item) {
+      let n = e.map(function (e) {
         return (
-          "(" +
-          item.type +
-          "-width: " +
-          item.value +
-          "px)," +
-          item.value +
-          "," +
-          item.type
+          "(" + e.type + "-width: " + e.value + "px)," + e.value + "," + e.type
         );
       });
-      mdQueries = uniqArray(mdQueries);
-      const mdQueriesArray = [];
-
-      if (mdQueries.length) {
-        // Работаем с каждым брейкпоинтом
-        mdQueries.forEach((breakpoint) => {
-          const paramsArray = breakpoint.split(",");
-          const mediaBreakpoint = paramsArray[1];
-          const mediaType = paramsArray[2];
-          const matchMedia = window.matchMedia(paramsArray[0]);
-          // Объекты с нужными условиями
-          const itemsArray = breakpointsArray.filter(function (item) {
-            if (item.value === mediaBreakpoint && item.type === mediaType) {
-              return true;
-            }
-          });
-          mdQueriesArray.push({
-            itemsArray,
-            matchMedia,
-          });
+      n = (function (e) {
+        return e.filter(function (e, t, s) {
+          return s.indexOf(e) === t;
         });
-        return mdQueriesArray;
-      }
-    }
-  } // CONCATENATED MODULE: ./src/js/files/scroll/gotoblock.js
-  //================================================================================================================================================================================================================================================================================================================
-  // Подключение функционала "Чертогов Фрилансера"
-
-  // Подключение дополнения для увеличения возможностей
-  // Документация: https://github.com/cferdinandi/smooth-scroll
-  // import SmoothScroll from 'smooth-scroll';
-  //==============================================================================================================================================================================================================================================================================================================================
-
-  // Модуль плавной проктутки к блоку
-  let gotoblock_gotoBlock = (
-    targetBlock,
-    noHeader = false,
-    speed = 500,
-    offsetTop = 0
-  ) => {
-    const targetBlockElement = document.querySelector(targetBlock);
-    if (targetBlockElement) {
-      let headerItem = "";
-      let headerItemHeight = 0;
-      if (noHeader) {
-        headerItem = "header.header";
-        headerItemHeight = document.querySelector(headerItem).offsetHeight;
-      }
-      let options = {
-        speedAsDuration: true,
-        speed: speed,
-        header: headerItem,
-        offset: offsetTop,
-        easing: "easeOutQuad",
-      };
-      // Закрываем меню, если оно открыто
-      document.documentElement.classList.contains("menu-open")
-        ? menuClose()
-        : null;
-
-      if (typeof SmoothScroll !== "undefined") {
-        // Прокрутка с использованием дополнения
-        new SmoothScroll().animateScroll(targetBlockElement, "", options);
-      } else {
-        // Прокрутка стандартными средствами
-        let targetBlockElementPosition =
-          targetBlockElement.getBoundingClientRect().top + scrollY;
-        targetBlockElementPosition = headerItemHeight
-          ? targetBlockElementPosition - headerItemHeight
-          : targetBlockElementPosition;
-        targetBlockElementPosition = offsetTop
-          ? targetBlockElementPosition - offsetTop
-          : targetBlockElementPosition;
-        window.scrollTo({
-          top: targetBlockElementPosition,
-          behavior: "smooth",
-        });
-      }
-      FLS(`[gotoBlock]: Юхуу...едем к ${targetBlock}`);
-    } else {
-      FLS(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${targetBlock}`);
-    }
-  }; // CONCATENATED MODULE: ./src/js/files/forms/forms.js
-  // Подключение функционала "Чертогов Фрилансера"
-  // Подключение списка активных модулей
-
-  // Вспомогательные функции
-
-  // Модуль прокрутки к блоку
-
-  //================================================================================================================================================================================================================================================================================================================================
-
-  /*
-Чтобы поле участвовало в валидации добавляем атрибут data-required
-Особые проверки:
-data-required="email" - вадидация E-mail
-
-Чтобы поле валидировалось при потере фокуса, 
-к атрибуту data-required добавляем атрибут data-validate
-
-Чтобы вывести текст ошибки, нужно указать его в атрибуте data-error
-
-data-popup-message - указываем селектор попапа который нужно показать после отправки формы (режимы data-ajax или data-dev) ! необходимо подключить функционал попапов в app.js
-data-ajax - отправляем данные формы AJAX запросом по адресу указанному в action методом указанным в method
-data-dev - режим разработчика - эмитируем отправку формы
-data-goto-error - прокрутить страницу к ошибке
-*/
-
-  // Работа с полями формы. Добавление классов, работа с placeholder
-  function formFieldsInit() {
-    const formFields = document.querySelectorAll(
-      "input[placeholder],textarea[placeholder]"
-    );
-    if (formFields.length) {
-      formFields.forEach((formField) => {
-        formField.dataset.placeholder = formField.placeholder;
-      });
-    }
-    document.body.addEventListener("focusin", function (e) {
-      const targetElement = e.target;
-      if (
-        targetElement.tagName === "INPUT" ||
-        targetElement.tagName === "TEXTAREA"
-      ) {
-        if (targetElement.dataset.placeholder) {
-          targetElement.placeholder = "";
-        }
-        targetElement.classList.add("_form-focus");
-        targetElement.parentElement.classList.add("_form-focus");
-
-        formValidate.removeError(targetElement);
-      }
-    });
-    document.body.addEventListener("focusout", function (e) {
-      const targetElement = e.target;
-      if (
-        targetElement.tagName === "INPUT" ||
-        targetElement.tagName === "TEXTAREA"
-      ) {
-        if (targetElement.dataset.placeholder) {
-          targetElement.placeholder = targetElement.dataset.placeholder;
-        }
-        targetElement.classList.remove("_form-focus");
-        targetElement.parentElement.classList.remove("_form-focus");
-
-        // Моментальная валидация
-        if (targetElement.hasAttribute("data-validate")) {
-          formValidate.validateInput(targetElement);
-        }
-      }
-    });
-  }
-  // Валидация форм
-  let formValidate = {
-    getErrors(form) {
-      let error = 0;
-      let formRequiredItems = form.querySelectorAll("*[data-required]");
-      if (formRequiredItems.length) {
-        formRequiredItems.forEach((formRequiredItem) => {
-          if (
-            (formRequiredItem.offsetParent !== null ||
-              formRequiredItem.tagName === "SELECT") &&
-            !formRequiredItem.disabled
-          ) {
-            error += this.validateInput(formRequiredItem);
-          }
-        });
-      }
-      return error;
-    },
-    validateInput(formRequiredItem) {
-      let error = 0;
-      if (formRequiredItem.dataset.required === "email") {
-        formRequiredItem.value = formRequiredItem.value.replace(" ", "");
-        if (this.emailTest(formRequiredItem)) {
-          this.addError(formRequiredItem);
-          error++;
-        } else {
-          this.removeError(formRequiredItem);
-        }
-      } else if (
-        formRequiredItem.type === "checkbox" &&
-        !formRequiredItem.checked
-      ) {
-        this.addError(formRequiredItem);
-        error++;
-      } else {
-        if (!formRequiredItem.value) {
-          this.addError(formRequiredItem);
-          error++;
-        } else {
-          this.removeError(formRequiredItem);
-        }
-      }
-      return error;
-    },
-    addError(formRequiredItem) {
-      formRequiredItem.classList.add("_form-error");
-      formRequiredItem.parentElement.classList.add("_form-error");
-      let inputError =
-        formRequiredItem.parentElement.querySelector(".form__error");
-      if (inputError) formRequiredItem.parentElement.removeChild(inputError);
-      if (formRequiredItem.dataset.error) {
-        formRequiredItem.parentElement.insertAdjacentHTML(
-          "beforeend",
-          `<div class="form__error">${formRequiredItem.dataset.error}</div>`
+      })(n);
+      const i = [];
+      if (n.length)
+        return (
+          n.forEach((t) => {
+            const s = t.split(","),
+              n = s[1],
+              o = s[2],
+              a = window.matchMedia(s[0]),
+              r = e.filter(function (e) {
+                if (e.value === n && e.type === o) return !0;
+              });
+            i.push({ itemsArray: r, matchMedia: a });
+          }),
+          i
         );
-      }
-    },
-    removeError(formRequiredItem) {
-      formRequiredItem.classList.remove("_form-error");
-      formRequiredItem.parentElement.classList.remove("_form-error");
-      if (formRequiredItem.parentElement.querySelector(".form__error")) {
-        formRequiredItem.parentElement.removeChild(
-          formRequiredItem.parentElement.querySelector(".form__error")
-        );
-      }
-    },
-    formClean(form) {
-      form.reset();
-      setTimeout(() => {
-        let inputs = form.querySelectorAll("input,textarea");
-        for (let index = 0; index < inputs.length; index++) {
-          const el = inputs[index];
-          el.parentElement.classList.remove("_form-focus");
-          el.classList.remove("_form-focus");
-          formValidate.removeError(el);
-        }
-        let checkboxes = form.querySelectorAll(".checkbox__input");
-        if (checkboxes.length > 0) {
-          for (let index = 0; index < checkboxes.length; index++) {
-            const checkbox = checkboxes[index];
-            checkbox.checked = false;
-          }
-        }
-        if (modules_flsModules.select) {
-          let selects = form.querySelectorAll(".select");
-          if (selects.length) {
-            for (let index = 0; index < selects.length; index++) {
-              const select = selects[index].querySelector("select");
-              modules_flsModules.select.selectBuild(select);
-            }
-          }
-        }
-      }, 0);
-    },
-    emailTest(formRequiredItem) {
-      return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(
-        formRequiredItem.value
-      );
-    },
-  };
-  /* Отправка форм */
-  function formSubmit(validate) {
-    if (flsModules.popup) {
-      flsModules.popup.open("some");
-    }
-    const forms = document.forms;
-    if (forms.length) {
-      for (const form of forms) {
-        form.addEventListener("submit", function (e) {
-          const form = e.target;
-          formSubmitAction(form, e);
-        });
-        form.addEventListener("reset", function (e) {
-          const form = e.target;
-          formValidate.formClean(form);
-        });
-      }
-    }
-    async function formSubmitAction(form, e) {
-      const error = validate ? formValidate.getErrors(form) : 0;
-      if (error === 0) {
-        const ajax = form.hasAttribute("data-ajax");
-        if (ajax) {
-          // Если режим ajax
-          e.preventDefault();
-          const formAction = form.getAttribute("action")
-            ? form.getAttribute("action").trim()
-            : "#";
-          const formMethod = form.getAttribute("method")
-            ? form.getAttribute("method").trim()
-            : "GET";
-          const formData = new FormData(form);
-
-          form.classList.add("_sending");
-          const response = await fetch(formAction, {
-            method: formMethod,
-            body: formData,
-          });
-          if (response.ok) {
-            let responseResult = await response.json();
-            form.classList.remove("_sending");
-            formSent(form);
-          } else {
-            alert("Ошибка");
-            form.classList.remove("_sending");
-          }
-        } else if (form.hasAttribute("data-dev")) {
-          // Если режим разработки
-          e.preventDefault();
-          formSent(form);
-        }
-      } else {
-        e.preventDefault();
-        const formError = form.querySelector("._form-error");
-        if (formError && form.hasAttribute("data-goto-error")) {
-          gotoBlock(formError, true, 1000);
-        }
-      }
-    }
-    // Действия после отправки формы
-    function formSent(form) {
-      // Создаем событие отправки формы
-      document.dispatchEvent(
-        new CustomEvent("formSent", {
-          detail: {
-            form: form,
-          },
-        })
-      );
-      // Показываем попап, если подключен модуль попапов
-      // и для формы указана настройка
-      setTimeout(() => {
-        if (flsModules.popup) {
-          const popup = form.dataset.popupMessage;
-          popup ? flsModules.popup.open(popup) : null;
-        }
-      }, 0);
-      // Очищаем форму
-      formValidate.formClean(form);
-      // Сообщаем в консоль
-      formLogging(`Форма отправлена!`);
-    }
-    function formLogging(message) {
-      FLS(`[Формы]: ${message}`);
     }
   }
-  /* Модуь формы "показать пароль" */
-  function formViewpass() {
-    document.addEventListener("click", function (e) {
-      let targetElement = e.target;
-      if (targetElement.closest('[class*="__viewpass"]')) {
-        let inputType = targetElement.classList.contains("active")
-          ? "password"
-          : "text";
-        targetElement.parentElement
-          .querySelector("input")
-          .setAttribute("type", inputType);
-        targetElement.classList.toggle("active");
-      }
-    });
-  }
-  /* Модуь формы "колличество" */
-  function formQuantity() {
-    document.addEventListener("click", function (e) {
-      let targetElement = e.target;
-      if (targetElement.closest(".quantity__button")) {
-        let value = parseInt(
-          targetElement.closest(".quantity").querySelector("input").value
-        );
-        if (targetElement.classList.contains("quantity__button_plus")) {
-          value++;
-        } else {
-          --value;
-          if (value < 1) value = 1;
-        }
-        targetElement.closest(".quantity").querySelector("input").value = value;
-      }
-    });
-  }
-  /* Модуь звездного рейтинга */
-  function formRating() {
-    const ratings = document.querySelectorAll(".rating");
-    if (ratings.length > 0) {
-      initRatings();
-    }
-    // Основная функция
-    function initRatings() {
-      let ratingActive, ratingValue;
-      // "Бегаем" по всем рейтингам на странице
-      for (let index = 0; index < ratings.length; index++) {
-        const rating = ratings[index];
-        initRating(rating);
-      }
-      // Инициализируем конкретный рейтинг
-      function initRating(rating) {
-        initRatingVars(rating);
-
-        setRatingActiveWidth();
-
-        if (rating.classList.contains("rating_set")) {
-          setRating(rating);
-        }
-      }
-      // Инициализайция переменных
-      function initRatingVars(rating) {
-        ratingActive = rating.querySelector(".rating__active");
-        ratingValue = rating.querySelector(".rating__value");
-      }
-      // Изменяем ширину активных звезд
-      function setRatingActiveWidth(index = ratingValue.innerHTML) {
-        const ratingActiveWidth = index / 0.05;
-        ratingActive.style.width = `${ratingActiveWidth}%`;
-      }
-      // Возможность указать оценку
-      function setRating(rating) {
-        const ratingItems = rating.querySelectorAll(".rating__item");
-        for (let index = 0; index < ratingItems.length; index++) {
-          const ratingItem = ratingItems[index];
-          ratingItem.addEventListener("mouseenter", function (e) {
-            // Обновление переменных
-            initRatingVars(rating);
-            // Обновление активных звезд
-            setRatingActiveWidth(ratingItem.value);
-          });
-          ratingItem.addEventListener("mouseleave", function (e) {
-            // Обновление активных звезд
-            setRatingActiveWidth();
-          });
-          ratingItem.addEventListener("click", function (e) {
-            // Обновление переменных
-            initRatingVars(rating);
-
-            if (rating.dataset.ajax) {
-              // "Отправить" на сервер
-              setRatingValue(ratingItem.value, rating);
-            } else {
-              // Отобразить указанную оцнку
-              ratingValue.innerHTML = index + 1;
-              setRatingActiveWidth();
-            }
-          });
-        }
-      }
-      async function setRatingValue(value, rating) {
-        if (!rating.classList.contains("rating_sending")) {
-          rating.classList.add("rating_sending");
-
-          // Отправика данных (value) на сервер
-          let response = await fetch("rating.json", {
-            method: "GET",
-
-            //body: JSON.stringify({
-            //	userRating: value
-            //}),
-            //headers: {
-            //	'content-type': 'application/json'
-            //}
-          });
-          if (response.ok) {
-            const result = await response.json();
-
-            // Получаем новый рейтинг
-            const newRating = result.newRating;
-
-            // Вывод нового среднего результата
-            ratingValue.innerHTML = newRating;
-
-            // Обновление активных звезд
-            setRatingActiveWidth();
-
-            rating.classList.remove("rating_sending");
-          } else {
-            alert("Ошибка");
-
-            rating.classList.remove("rating_sending");
-          }
-        }
-      }
-    }
-  } // CONCATENATED MODULE: ./src/js/libs/select.js
-  // Подключение функционала "Чертогов Фрилансера"
-
-  // Подключение файла стилей
-  // Базовые стили поключаются в src/scss/forms.scss
-  // Файл базовых стилей src/scss/forms/select.scss
-
-  /*
-Документация:
-Снипет (HTML): sel
-*/
-  /*
-// Настройки
-Для селекта (select):
-class="имя класса" - модификатор к конкретному селекту
-multiple - мультивыбор
-data-tags - режим тегов, только для (только для multiple)
-data-scroll - включит прокрутку для выпадающего списка, дополнительно можно подключить кастомный скролл simplebar в app.js. Указанное число для атрибута ограничит высоту
-data-checkbox - стилизация элементов по checkbox (только для multiple)
-data-show-selected - отключает скрытие выбранного элемента
-data-search - позволяет искать по выпадающему списку
-data-open - селект открыт сразу
-data-submit - отправляет форму при изменении селекта
-
-Для плейсхолдера (Плейсхолдер - это option с value=""):
-data-label для плейсхолдера, добавляет label к селекту
-data-show для плейсхолдера, показывает его в списке (только для единичного выбора)
-
-Для элемента (option):
-data-class="имя класса" - добавляет класс
-data-asset="путь к картинке или текст" - добавляет структуру 2х колонок и данными
-data-href="адрес ссылки" - добавляет ссылку в элемент списка
-data-href-blank - откроет ссылку в новом окне
-*/
-
-  /*
-// Возможные доработки:
-попап на мобилке
-*/
-
-  // Класс построения Select
-  class SelectConstructor {
-    constructor(props, data = null) {
-      let defaultConfig = {
-        init: true,
-        logging: true,
+  e.popup = new (class {
+    constructor(e) {
+      let t = {
+        logging: !0,
+        init: !0,
+        attributeOpenButton: "data-popup",
+        attributeCloseButton: "data-close",
+        fixElementSelector: "[data-lp]",
+        youtubeAttribute: "data-youtube",
+        youtubePlaceAttribute: "data-youtube-place",
+        setAutoplayYoutube: !0,
+        classes: {
+          popup: "popup",
+          popupContent: "popup__content",
+          popupActive: "popup_show",
+          bodyActive: "popup-show",
+        },
+        focusCatch: !0,
+        closeEsc: !0,
+        bodyLock: !0,
+        bodyLockDelay: 500,
+        hashSettings: { location: !0, goHash: !0 },
+        on: {
+          beforeOpen: function () {},
+          afterOpen: function () {},
+          beforeClose: function () {},
+          afterClose: function () {},
+        },
       };
-      this.config = Object.assign(defaultConfig, props);
-      // CSS классы модуля
-      this.selectClasses = {
-        classSelect: "select", // Главный блок
-        classSelectBody: "select__body", // Тело селекта
-        classSelectTitle: "select__title", // Заголовок
-        classSelectValue: "select__value", // Значение в заголовке
-        classSelectLabel: "select__label", // Лабел
-        classSelectInput: "select__input", // Поле ввода
-        classSelectText: "select__text", // Оболочка текстовых данных
-        classSelectLink: "select__link", // Ссылка в элементе
-        classSelectOptions: "select__options", // Выпадающий список
-        classSelectOptionsScroll: "select__scroll", // Оболочка при скролле
-        classSelectOption: "select__option", // Пункт
-        classSelectContent: "select__content", // Оболочка контента в заголовке
-        classSelectRow: "select__row", // Ряд
-        classSelectData: "select__asset", // Дополнительные данные
-        classSelectDisabled: "_select-disabled", // Запрешен
-        classSelectTag: "_select-tag", // Класс тега
-        classSelectOpen: "_select-open", // Список открыт
-        classSelectActive: "_select-active", // Список выбран
-        classSelectFocus: "_select-focus", // Список в фокусе
-        classSelectMultiple: "_select-multiple", // Мультивыбор
-        classSelectCheckBox: "_select-checkbox", // Стиль чекбокса
-        classSelectOptionSelected: "_select-selected", // Выбранный пункт
-      };
-      this._this = this;
-      // Запуск инициализации
-      if (this.config.init) {
-        // Получение всех select на странице
-        const selectItems = data
-          ? document.querySelectorAll(data)
-          : document.querySelectorAll("select");
-        if (selectItems.length) {
-          this.selectsInit(selectItems);
-          this.setLogging(
-            `Проснулся, построил селектов: (${selectItems.length})`
-          );
-        } else {
-          this.setLogging("Сплю, нет ни одного select zzZZZzZZz");
-        }
-      }
+      (this.isOpen = !1),
+        (this.targetOpen = { selector: !1, element: !1 }),
+        (this.previousOpen = { selector: !1, element: !1 }),
+        (this.lastClosed = { selector: !1, element: !1 }),
+        (this._dataValue = !1),
+        (this.hash = !1),
+        (this._reopen = !1),
+        (this._selectorOpen = !1),
+        (this.lastFocusEl = !1),
+        (this._focusEl = [
+          "a[href]",
+          'input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
+          "button:not([disabled]):not([aria-hidden])",
+          "select:not([disabled]):not([aria-hidden])",
+          "textarea:not([disabled]):not([aria-hidden])",
+          "area[href]",
+          "iframe",
+          "object",
+          "embed",
+          "[contenteditable]",
+          '[tabindex]:not([tabindex^="-"])',
+        ]),
+        (this.options = {
+          ...t,
+          ...e,
+          classes: { ...t.classes, ...e?.classes },
+          hashSettings: { ...t.hashSettings, ...e?.hashSettings },
+          on: { ...t.on, ...e?.on },
+        }),
+        this.options.init && this.initPopups();
     }
-    // Конструктор CSS класса
-    getSelectClass(className) {
-      return `.${className}`;
+    initPopups() {
+      this.popupLogging("Проснулся"), this.eventsPopup();
     }
-    // Геттер элементов псевдоселекта
-    getSelectElement(selectItem, className) {
-      return {
-        originalSelect: selectItem.querySelector("select"),
-        selectElement: selectItem.querySelector(this.getSelectClass(className)),
-      };
-    }
-    // Функция инициализации всех селектов
-    selectsInit(selectItems) {
-      selectItems.forEach((originalSelect, index) => {
-        this.selectInit(originalSelect, index + 1);
-      });
-      // Обработчики событий...
-      // ...при клике
+    eventsPopup() {
       document.addEventListener(
         "click",
         function (e) {
-          this.selectsActions(e);
-        }.bind(this)
-      );
-      // ...при нажатии клавиши
-      document.addEventListener(
-        "keydown",
-        function (e) {
-          this.selectsActions(e);
-        }.bind(this)
-      );
-      // ...при фокусе
-      document.addEventListener(
-        "focusin",
-        function (e) {
-          this.selectsActions(e);
-        }.bind(this)
-      );
-      // ...при потере фокуса
-      document.addEventListener(
-        "focusout",
-        function (e) {
-          this.selectsActions(e);
-        }.bind(this)
-      );
-    }
-    // Функция инициализации конкретного селекта
-    selectInit(originalSelect, index) {
-      const _this = this;
-      // Создаем оболочку
-      let selectItem = document.createElement("div");
-      selectItem.classList.add(this.selectClasses.classSelect);
-      // Выводим оболочку перед оригинальным селектом
-      originalSelect.parentNode.insertBefore(selectItem, originalSelect);
-      // Помещаем оригинальный селект в оболочку
-      selectItem.appendChild(originalSelect);
-      // Скрываем оригинальный селект
-      originalSelect.hidden = true;
-      // Присваиваем уникальный ID
-      index ? (originalSelect.dataset.id = index) : null;
-
-      // Конструктор косновных элементов
-      selectItem.insertAdjacentHTML(
-        "beforeend",
-        `<div class="${this.selectClasses.classSelectBody}"><div hidden class="${this.selectClasses.classSelectOptions}"></div></div>`
-      );
-      // Запускаем конструктор псевдоселекта
-      this.selectBuild(originalSelect);
-
-      // Работа с плейсхолдером
-      if (this.getSelectPlaceholder(originalSelect)) {
-        // Запоминаем плейсхолдер
-        originalSelect.dataset.placeholder =
-          this.getSelectPlaceholder(originalSelect).value;
-        // Если включен режим label
-        if (this.getSelectPlaceholder(originalSelect).label.show) {
-          const selectItemTitle = this.getSelectElement(
-            selectItem,
-            this.selectClasses.classSelectTitle
-          ).selectElement;
-          selectItemTitle.insertAdjacentHTML(
-            "afterbegin",
-            `<span class="${this.selectClasses.classSelectLabel}">${
-              this.getSelectPlaceholder(originalSelect).label.text
-                ? this.getSelectPlaceholder(originalSelect).label.text
-                : this.getSelectPlaceholder(originalSelect).value
-            }</span>`
-          );
-        }
-      }
-      // Запоминаем скорость
-      originalSelect.dataset.speed = originalSelect.dataset.speed
-        ? originalSelect.dataset.speed
-        : "150";
-      // Событие при изменении оригинального select
-      originalSelect.addEventListener("change", function (e) {
-        _this.selectChange(e);
-      });
-    }
-    // Конструктор псевдоселекта
-    selectBuild(originalSelect) {
-      const selectItem = originalSelect.parentElement;
-      // Добавляем ID селекта
-      selectItem.dataset.id = originalSelect.dataset.id;
-      // Получаем класс оригинального селекта, создаем модификатор и добавляем его
-      selectItem.classList.add(
-        originalSelect.getAttribute("class")
-          ? `select_${originalSelect.getAttribute("class")}`
-          : ""
-      );
-      // Если множественный выбор, добавляем класс
-      originalSelect.multiple
-        ? selectItem.classList.add(this.selectClasses.classSelectMultiple)
-        : selectItem.classList.remove(this.selectClasses.classSelectMultiple);
-      // Cтилизация элементов под checkbox (только для multiple)
-      originalSelect.hasAttribute("data-checkbox") && originalSelect.multiple
-        ? selectItem.classList.add(this.selectClasses.classSelectCheckBox)
-        : selectItem.classList.remove(this.selectClasses.classSelectCheckBox);
-      // Сеттер значения заголовка селекта
-      this.setSelectTitleValue(selectItem, originalSelect);
-      // Сеттер элементов списка (options)
-      this.setOptions(selectItem, originalSelect);
-      // Если включена опция поиска data-search, запускаем обработчик
-      originalSelect.hasAttribute("data-search")
-        ? this.searchActions(selectItem)
-        : null;
-      // Если указана настройка data-open, открываем селект
-      originalSelect.hasAttribute("data-open")
-        ? this.selectAction(selectItem)
-        : null;
-      // Обработчик disabled
-      this.selectDisabled(selectItem, originalSelect);
-    }
-    // Функция реакций на события
-    selectsActions(e) {
-      const targetElement = e.target;
-      const targetType = e.type;
-      if (
-        targetElement.closest(
-          this.getSelectClass(this.selectClasses.classSelect)
-        ) ||
-        targetElement.closest(
-          this.getSelectClass(this.selectClasses.classSelectTag)
-        )
-      ) {
-        const selectItem = targetElement.closest(".select")
-          ? targetElement.closest(".select")
-          : document.querySelector(
-              `.${this.selectClasses.classSelect}[data-id="${
-                targetElement.closest(
-                  this.getSelectClass(this.selectClasses.classSelectTag)
-                ).dataset.selectId
-              }"]`
-            );
-        const originalSelect = this.getSelectElement(selectItem).originalSelect;
-        if (targetType === "click") {
-          if (!originalSelect.disabled) {
-            if (
-              targetElement.closest(
-                this.getSelectClass(this.selectClasses.classSelectTag)
+          const t = e.target.closest(`[${this.options.attributeOpenButton}]`);
+          if (t)
+            return (
+              e.preventDefault(),
+              (this._dataValue = t.getAttribute(
+                this.options.attributeOpenButton
               )
+                ? t.getAttribute(this.options.attributeOpenButton)
+                : "error"),
+              "error" !== this._dataValue
+                ? (this.isOpen || (this.lastFocusEl = t),
+                  (this.targetOpen.selector = `${this._dataValue}`),
+                  (this._selectorOpen = !0),
+                  void this.open())
+                : void this.popupLogging(
+                    `Ой ой, не заполнен атрибут у ${t.classList}`
+                  )
+            );
+          return e.target.closest(`[${this.options.attributeCloseButton}]`) ||
+            (!e.target.closest(`.${this.options.classes.popupContent}`) &&
+              this.isOpen)
+            ? (e.preventDefault(), void this.close())
+            : void 0;
+        }.bind(this)
+      ),
+        document.addEventListener(
+          "keydown",
+          function (e) {
+            if (
+              this.options.closeEsc &&
+              27 == e.which &&
+              "Escape" === e.code &&
+              this.isOpen
+            )
+              return e.preventDefault(), void this.close();
+            this.options.focusCatch &&
+              9 == e.which &&
+              this.isOpen &&
+              this._focusCatch(e);
+          }.bind(this)
+        ),
+        this.options.hashSettings.goHash &&
+          (window.addEventListener(
+            "hashchange",
+            function () {
+              window.location.hash
+                ? this._openToHash()
+                : this.close(this.targetOpen.selector);
+            }.bind(this)
+          ),
+          window.addEventListener(
+            "load",
+            function () {
+              window.location.hash && this._openToHash();
+            }.bind(this)
+          ));
+    }
+    open(e) {
+      if (
+        (e &&
+          "string" == typeof e &&
+          "" !== e.trim() &&
+          ((this.targetOpen.selector = e), (this._selectorOpen = !0)),
+        this.isOpen && ((this._reopen = !0), this.close()),
+        this._selectorOpen ||
+          (this.targetOpen.selector = this.lastClosed.selector),
+        this._reopen || (this.previousActiveElement = document.activeElement),
+        (this.targetOpen.element = document.querySelector(
+          this.targetOpen.selector
+        )),
+        this.targetOpen.element)
+      ) {
+        if (
+          this.targetOpen.element.hasAttribute(this.options.youtubeAttribute)
+        ) {
+          const e = `https://www.youtube.com/embed/${this.targetOpen.element.getAttribute(
+              this.options.youtubeAttribute
+            )}?rel=0&showinfo=0&autoplay=1`,
+            t = document.createElement("iframe");
+          t.setAttribute("allowfullscreen", "");
+          const s = this.options.setAutoplayYoutube ? "autoplay;" : "";
+          t.setAttribute("allow", `${s}; encrypted-media`),
+            t.setAttribute("src", e),
+            this.targetOpen.element.querySelector(
+              `[${this.options.youtubePlaceAttribute}]`
+            ) &&
+              this.targetOpen.element
+                .querySelector(`[${this.options.youtubePlaceAttribute}]`)
+                .appendChild(t);
+        }
+        this.options.hashSettings.location &&
+          (this._getHash(), this._setHash()),
+          this.options.on.beforeOpen(this),
+          this.targetOpen.element.classList.add(
+            this.options.classes.popupActive
+          ),
+          document.body.classList.add(this.options.classes.bodyActive),
+          this._reopen ? (this._reopen = !1) : o(),
+          this.targetOpen.element.setAttribute("aria-hidden", "false"),
+          (this.previousOpen.selector = this.targetOpen.selector),
+          (this.previousOpen.element = this.targetOpen.element),
+          (this._selectorOpen = !1),
+          (this.isOpen = !0),
+          setTimeout(() => {
+            this._focusTrap();
+          }, 50),
+          document.dispatchEvent(
+            new CustomEvent("afterPopupOpen", { detail: { popup: this } })
+          ),
+          this.popupLogging("Открыл попап");
+      } else
+        this.popupLogging(
+          "Ой ой, такого попапа нет. Проверьте корректность ввода. "
+        );
+    }
+    close(e) {
+      e &&
+        "string" == typeof e &&
+        "" !== e.trim() &&
+        (this.previousOpen.selector = e),
+        this.isOpen &&
+          i &&
+          (this.options.on.beforeClose(this),
+          this.targetOpen.element.hasAttribute(this.options.youtubeAttribute) &&
+            this.targetOpen.element.querySelector(
+              `[${this.options.youtubePlaceAttribute}]`
+            ) &&
+            (this.targetOpen.element.querySelector(
+              `[${this.options.youtubePlaceAttribute}]`
+            ).innerHTML = ""),
+          this.previousOpen.element.classList.remove(
+            this.options.classes.popupActive
+          ),
+          this.previousOpen.element.setAttribute("aria-hidden", "true"),
+          this._reopen ||
+            (document.body.classList.remove(this.options.classes.bodyActive),
+            o(),
+            (this.isOpen = !1)),
+          this._removeHash(),
+          this._selectorOpen &&
+            ((this.lastClosed.selector = this.previousOpen.selector),
+            (this.lastClosed.element = this.previousOpen.element)),
+          this.options.on.afterClose(this),
+          setTimeout(() => {
+            this._focusTrap();
+          }, 50),
+          this.popupLogging("Закрыл попап"));
+    }
+    _getHash() {
+      this.options.hashSettings.location &&
+        (this.hash = this.targetOpen.selector.includes("#")
+          ? this.targetOpen.selector
+          : this.targetOpen.selector.replace(".", "#"));
+    }
+    _openToHash() {
+      let e = document.querySelector(
+        `.${window.location.hash.replace("#", "")}`
+      )
+        ? `.${window.location.hash.replace("#", "")}`
+        : document.querySelector(`${window.location.hash}`)
+        ? `${window.location.hash}`
+        : null;
+      document.querySelector(`[${this.options.attributeOpenButton}="${e}"]`) &&
+        e &&
+        this.open(e);
+    }
+    _setHash() {
+      history.pushState("", "", this.hash);
+    }
+    _removeHash() {
+      history.pushState("", "", window.location.href.split("#")[0]);
+    }
+    _focusCatch(e) {
+      const t = this.targetOpen.element.querySelectorAll(this._focusEl),
+        s = Array.prototype.slice.call(t),
+        n = s.indexOf(document.activeElement);
+      e.shiftKey && 0 === n && (s[s.length - 1].focus(), e.preventDefault()),
+        e.shiftKey || n !== s.length - 1 || (s[0].focus(), e.preventDefault());
+    }
+    _focusTrap() {
+      const e = this.previousOpen.element.querySelectorAll(this._focusEl);
+      !this.isOpen && this.lastFocusEl
+        ? this.lastFocusEl.focus()
+        : e[0].focus();
+    }
+    popupLogging(e) {
+      this.options.logging && l(`[Попапос]: ${e}`);
+    }
+  })({});
+  let u = {
+    getErrors(e) {
+      let t = 0,
+        s = e.querySelectorAll("*[data-required]");
+      return (
+        s.length &&
+          s.forEach((e) => {
+            (null === e.offsetParent && "SELECT" !== e.tagName) ||
+              e.disabled ||
+              (t += this.validateInput(e));
+          }),
+        t
+      );
+    },
+    validateInput(e) {
+      let t = 0;
+      return (
+        "email" === e.dataset.required
+          ? ((e.value = e.value.replace(" ", "")),
+            this.emailTest(e) ? (this.addError(e), t++) : this.removeError(e))
+          : ("checkbox" !== e.type || e.checked) && e.value
+          ? this.removeError(e)
+          : (this.addError(e), t++),
+        t
+      );
+    },
+    addError(e) {
+      e.classList.add("_form-error"),
+        e.parentElement.classList.add("_form-error");
+      let t = e.parentElement.querySelector(".form__error");
+      t && e.parentElement.removeChild(t),
+        e.dataset.error &&
+          e.parentElement.insertAdjacentHTML(
+            "beforeend",
+            `<div class="form__error">${e.dataset.error}</div>`
+          );
+    },
+    removeError(e) {
+      e.classList.remove("_form-error"),
+        e.parentElement.classList.remove("_form-error"),
+        e.parentElement.querySelector(".form__error") &&
+          e.parentElement.removeChild(
+            e.parentElement.querySelector(".form__error")
+          );
+    },
+    formClean(t) {
+      t.reset(),
+        setTimeout(() => {
+          let s = t.querySelectorAll("input,textarea");
+          for (let e = 0; e < s.length; e++) {
+            const t = s[e];
+            t.parentElement.classList.remove("_form-focus"),
+              t.classList.remove("_form-focus"),
+              u.removeError(t);
+          }
+          let n = t.querySelectorAll(".checkbox__input");
+          if (n.length > 0)
+            for (let e = 0; e < n.length; e++) {
+              n[e].checked = !1;
+            }
+          if (e.select) {
+            let s = t.querySelectorAll(".select");
+            if (s.length)
+              for (let t = 0; t < s.length; t++) {
+                const n = s[t].querySelector("select");
+                e.select.selectBuild(n);
+              }
+          }
+        }, 0);
+    },
+    emailTest: (e) =>
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(e.value),
+  };
+  e.select = new (class {
+    constructor(e, t = null) {
+      if (
+        ((this.config = Object.assign({ init: !0, logging: !0 }, e)),
+        (this.selectClasses = {
+          classSelect: "select",
+          classSelectBody: "select__body",
+          classSelectTitle: "select__title",
+          classSelectValue: "select__value",
+          classSelectLabel: "select__label",
+          classSelectInput: "select__input",
+          classSelectText: "select__text",
+          classSelectLink: "select__link",
+          classSelectOptions: "select__options",
+          classSelectOptionsScroll: "select__scroll",
+          classSelectOption: "select__option",
+          classSelectContent: "select__content",
+          classSelectRow: "select__row",
+          classSelectData: "select__asset",
+          classSelectDisabled: "_select-disabled",
+          classSelectTag: "_select-tag",
+          classSelectOpen: "_select-open",
+          classSelectActive: "_select-active",
+          classSelectFocus: "_select-focus",
+          classSelectMultiple: "_select-multiple",
+          classSelectCheckBox: "_select-checkbox",
+          classSelectOptionSelected: "_select-selected",
+        }),
+        (this._this = this),
+        this.config.init)
+      ) {
+        const e = t
+          ? document.querySelectorAll(t)
+          : document.querySelectorAll("select");
+        e.length
+          ? (this.selectsInit(e),
+            this.setLogging(`Проснулся, построил селектов: (${e.length})`))
+          : this.setLogging("Сплю, нет ни одного select zzZZZzZZz");
+      }
+    }
+    getSelectClass(e) {
+      return `.${e}`;
+    }
+    getSelectElement(e, t) {
+      return {
+        originalSelect: e.querySelector("select"),
+        selectElement: e.querySelector(this.getSelectClass(t)),
+      };
+    }
+    selectsInit(e) {
+      e.forEach((e, t) => {
+        this.selectInit(e, t + 1);
+      }),
+        document.addEventListener(
+          "click",
+          function (e) {
+            this.selectsActions(e);
+          }.bind(this)
+        ),
+        document.addEventListener(
+          "keydown",
+          function (e) {
+            this.selectsActions(e);
+          }.bind(this)
+        ),
+        document.addEventListener(
+          "focusin",
+          function (e) {
+            this.selectsActions(e);
+          }.bind(this)
+        ),
+        document.addEventListener(
+          "focusout",
+          function (e) {
+            this.selectsActions(e);
+          }.bind(this)
+        );
+    }
+    selectInit(e, t) {
+      const s = this;
+      let n = document.createElement("div");
+      if (
+        (n.classList.add(this.selectClasses.classSelect),
+        e.parentNode.insertBefore(n, e),
+        n.appendChild(e),
+        (e.hidden = !0),
+        t && (e.dataset.id = t),
+        n.insertAdjacentHTML(
+          "beforeend",
+          `<div class="${this.selectClasses.classSelectBody}"><div hidden class="${this.selectClasses.classSelectOptions}"></div></div>`
+        ),
+        this.selectBuild(e),
+        this.getSelectPlaceholder(e) &&
+          ((e.dataset.placeholder = this.getSelectPlaceholder(e).value),
+          this.getSelectPlaceholder(e).label.show))
+      ) {
+        this.getSelectElement(
+          n,
+          this.selectClasses.classSelectTitle
+        ).selectElement.insertAdjacentHTML(
+          "afterbegin",
+          `<span class="${this.selectClasses.classSelectLabel}">${
+            this.getSelectPlaceholder(e).label.text
+              ? this.getSelectPlaceholder(e).label.text
+              : this.getSelectPlaceholder(e).value
+          }</span>`
+        );
+      }
+      (e.dataset.speed = e.dataset.speed ? e.dataset.speed : "150"),
+        e.addEventListener("change", function (e) {
+          s.selectChange(e);
+        });
+    }
+    selectBuild(e) {
+      const t = e.parentElement;
+      (t.dataset.id = e.dataset.id),
+        t.classList.add(
+          e.getAttribute("class") ? `select_${e.getAttribute("class")}` : ""
+        ),
+        e.multiple
+          ? t.classList.add(this.selectClasses.classSelectMultiple)
+          : t.classList.remove(this.selectClasses.classSelectMultiple),
+        e.hasAttribute("data-checkbox") && e.multiple
+          ? t.classList.add(this.selectClasses.classSelectCheckBox)
+          : t.classList.remove(this.selectClasses.classSelectCheckBox),
+        this.setSelectTitleValue(t, e),
+        this.setOptions(t, e),
+        e.hasAttribute("data-search") && this.searchActions(t),
+        e.hasAttribute("data-open") && this.selectAction(t),
+        this.selectDisabled(t, e);
+    }
+    selectsActions(e) {
+      const t = e.target,
+        s = e.type;
+      if (
+        t.closest(this.getSelectClass(this.selectClasses.classSelect)) ||
+        t.closest(this.getSelectClass(this.selectClasses.classSelectTag))
+      ) {
+        const n = t.closest(".select")
+            ? t.closest(".select")
+            : document.querySelector(
+                `.${this.selectClasses.classSelect}[data-id="${
+                  t.closest(
+                    this.getSelectClass(this.selectClasses.classSelectTag)
+                  ).dataset.selectId
+                }"]`
+              ),
+          i = this.getSelectElement(n).originalSelect;
+        if ("click" === s) {
+          if (!i.disabled)
+            if (
+              t.closest(this.getSelectClass(this.selectClasses.classSelectTag))
             ) {
-              // Обработка клика на тег
-              const targetTag = targetElement.closest(
-                this.getSelectClass(this.selectClasses.classSelectTag)
-              );
-              const optionItem = document.querySelector(
-                `.${this.selectClasses.classSelect}[data-id="${targetTag.dataset.selectId}"] .select__option[data-value="${targetTag.dataset.value}"]`
-              );
-              this.optionAction(selectItem, originalSelect, optionItem);
+              const e = t.closest(
+                  this.getSelectClass(this.selectClasses.classSelectTag)
+                ),
+                s = document.querySelector(
+                  `.${this.selectClasses.classSelect}[data-id="${e.dataset.selectId}"] .select__option[data-value="${e.dataset.value}"]`
+                );
+              this.optionAction(n, i, s);
             } else if (
-              targetElement.closest(
+              t.closest(
                 this.getSelectClass(this.selectClasses.classSelectTitle)
               )
-            ) {
-              // Обработка клика на заголовок селекта
-              this.selectAction(selectItem);
-            } else if (
-              targetElement.closest(
+            )
+              this.selectAction(n);
+            else if (
+              t.closest(
                 this.getSelectClass(this.selectClasses.classSelectOption)
               )
             ) {
-              // Обработка клика на элемент селекта
-              const optionItem = targetElement.closest(
+              const e = t.closest(
                 this.getSelectClass(this.selectClasses.classSelectOption)
               );
-              this.optionAction(selectItem, originalSelect, optionItem);
+              this.optionAction(n, i, e);
             }
-          }
-        } else if (targetType === "focusin" || targetType === "focusout") {
-          if (
-            targetElement.closest(
-              this.getSelectClass(this.selectClasses.classSelect)
-            )
-          ) {
-            targetType === "focusin"
-              ? selectItem.classList.add(this.selectClasses.classSelectFocus)
-              : selectItem.classList.remove(
-                  this.selectClasses.classSelectFocus
-                );
-          }
-        } else if (targetType === "keydown" && e.code === "Escape") {
-          this.selectsСlose();
-        }
-      } else {
-        this.selectsСlose();
-      }
+        } else
+          "focusin" === s || "focusout" === s
+            ? t.closest(this.getSelectClass(this.selectClasses.classSelect)) &&
+              ("focusin" === s
+                ? n.classList.add(this.selectClasses.classSelectFocus)
+                : n.classList.remove(this.selectClasses.classSelectFocus))
+            : "keydown" === s && "Escape" === e.code && this.selectsСlose();
+      } else this.selectsСlose();
     }
-    // Функция закрытия всех селектов
     selectsСlose() {
-      const selectActiveItems = document.querySelectorAll(
+      const e = document.querySelectorAll(
         `${this.getSelectClass(
           this.selectClasses.classSelect
         )}${this.getSelectClass(this.selectClasses.classSelectOpen)}`
       );
-      if (selectActiveItems.length) {
-        selectActiveItems.forEach((selectActiveItem) => {
-          this.selectAction(selectActiveItem);
+      e.length &&
+        e.forEach((e) => {
+          this.selectAction(e);
         });
-      }
     }
-    // Функция открытия/закрытия конкретного селекта
-    selectAction(selectItem) {
-      const originalSelect = this.getSelectElement(selectItem).originalSelect;
-      const selectOptions = this.getSelectElement(
-        selectItem,
-        this.selectClasses.classSelectOptions
-      ).selectElement;
-      if (!selectOptions.classList.contains("_slide")) {
-        selectItem.classList.toggle(this.selectClasses.classSelectOpen);
-        _slideToggle(selectOptions, originalSelect.dataset.speed);
-      }
+    selectAction(e) {
+      const t = this.getSelectElement(e).originalSelect,
+        s = this.getSelectElement(
+          e,
+          this.selectClasses.classSelectOptions
+        ).selectElement;
+      s.classList.contains("_slide") ||
+        (e.classList.toggle(this.selectClasses.classSelectOpen),
+        n(s, t.dataset.speed));
     }
-    // Сеттер значения заголовка селекта
-    setSelectTitleValue(selectItem, originalSelect) {
-      const selectItemBody = this.getSelectElement(
-        selectItem,
-        this.selectClasses.classSelectBody
-      ).selectElement;
-      const selectItemTitle = this.getSelectElement(
-        selectItem,
-        this.selectClasses.classSelectTitle
-      ).selectElement;
-      if (selectItemTitle) selectItemTitle.remove();
-      selectItemBody.insertAdjacentHTML(
-        "afterbegin",
-        this.getSelectTitleValue(selectItem, originalSelect)
-      );
+    setSelectTitleValue(e, t) {
+      const s = this.getSelectElement(
+          e,
+          this.selectClasses.classSelectBody
+        ).selectElement,
+        n = this.getSelectElement(
+          e,
+          this.selectClasses.classSelectTitle
+        ).selectElement;
+      n && n.remove(),
+        s.insertAdjacentHTML("afterbegin", this.getSelectTitleValue(e, t));
     }
-    // Конструктор значения заголовка
-    getSelectTitleValue(selectItem, originalSelect) {
-      // Получаем выбранные текстовые значения
-      let selectTitleValue = this.getSelectedOptionsData(
-        originalSelect,
-        2
-      ).html;
-      // Обработка значений мультивыбора
-      // Если включен режим тегов (указана настройка data-tags)
-      if (originalSelect.multiple && originalSelect.hasAttribute("data-tags")) {
-        selectTitleValue = this.getSelectedOptionsData(originalSelect)
-          .elements.map(
-            (option) =>
-              `<span role="button" data-select-id="${
-                selectItem.dataset.id
-              }" data-value="${
-                option.value
-              }" class="_select-tag">${this.getSelectElementContent(
-                option
-              )}</span>`
-          )
-          .join("");
-        // Если вывод тегов во внешний блок
-        if (
-          originalSelect.dataset.tags &&
-          document.querySelector(originalSelect.dataset.tags)
-        ) {
-          document.querySelector(originalSelect.dataset.tags).innerHTML =
-            selectTitleValue;
-          if (originalSelect.hasAttribute("data-search"))
-            selectTitleValue = false;
-        }
-      }
-      // Значение(я) или плейсхолдер
-      selectTitleValue = selectTitleValue.length
-        ? selectTitleValue
-        : originalSelect.dataset.placeholder;
-      // Если есть значение, добавляем класс
-      this.getSelectedOptionsData(originalSelect).values.length
-        ? selectItem.classList.add(this.selectClasses.classSelectActive)
-        : selectItem.classList.remove(this.selectClasses.classSelectActive);
-      // Возвращаем поле ввода для поиска или текст
-      if (originalSelect.hasAttribute("data-search")) {
-        // Выводим поле ввода для поиска
-
-        return `<div class="${this.selectClasses.classSelectTitle}"><span class="${this.selectClasses.classSelectValue}"><input autocomplete="off" type="text" placeholder="${selectTitleValue}" data-placeholder="${selectTitleValue}" class="${this.selectClasses.classSelectInput}"></span></div>`;
-      } else {
-        // Если выбран элемент со своим классом
-        const customClass =
-          this.getSelectedOptionsData(originalSelect).elements.length &&
-          this.getSelectedOptionsData(originalSelect).elements[0].dataset.class
-            ? ` ${
-                this.getSelectedOptionsData(originalSelect).elements[0].dataset
-                  .class
-              }`
-            : "";
-        // Выводим текстовое значение
-        return `<button type="button" class="${this.selectClasses.classSelectTitle}"><span class="${this.selectClasses.classSelectValue}"><span class="${this.selectClasses.classSelectContent}${customClass}">${selectTitleValue}</span></span></button>`;
-      }
-    }
-    // Конструктор данных для значения заголовка
-    getSelectElementContent(selectOption) {
-      // Если для элемента указан вывод картинки или текста, перестраиваем конструкцию
-      const selectOptionData = selectOption.dataset.asset
-        ? `${selectOption.dataset.asset}`
-        : "";
-      const selectOptionDataHTML =
-        selectOptionData.indexOf("img") >= 0
-          ? `<img src="${selectOptionData}" alt="">`
-          : selectOptionData;
-      let selectOptionContentHTML = ``;
-      selectOptionContentHTML += selectOptionData
-        ? `<span class="${this.selectClasses.classSelectRow}">`
-        : "";
-      selectOptionContentHTML += selectOptionData
-        ? `<span class="${this.selectClasses.classSelectData}">`
-        : "";
-      selectOptionContentHTML += selectOptionData ? selectOptionDataHTML : "";
-      selectOptionContentHTML += selectOptionData ? `</span>` : "";
-      selectOptionContentHTML += selectOptionData
-        ? `<span class="${this.selectClasses.classSelectText}">`
-        : "";
-      selectOptionContentHTML += selectOption.textContent;
-      selectOptionContentHTML += selectOptionData ? `</span>` : "";
-      selectOptionContentHTML += selectOptionData ? `</span>` : "";
-      return selectOptionContentHTML;
-    }
-    // Получение данных плейсхолдера
-    getSelectPlaceholder(originalSelect) {
-      const selectPlaceholder = Array.from(originalSelect.options).find(
-        (option) => !option.value
-      );
-      if (selectPlaceholder) {
-        return {
-          value: selectPlaceholder.textContent,
-          show: selectPlaceholder.hasAttribute("data-show"),
-          label: {
-            show: selectPlaceholder.hasAttribute("data-label"),
-            text: selectPlaceholder.dataset.label,
-          },
-        };
-      }
-    }
-    // Получение данных из выбранных элементов
-    getSelectedOptionsData(originalSelect, type) {
-      // Получаем все выбранные объекты из select
-      let selectedOptions = [];
-      if (originalSelect.multiple) {
-        // Если мультивыбор
-        // Убираем плейсхолдер, получаем остальные выбранные элементы
-        selectedOptions = Array.from(originalSelect.options)
-          .filter((option) => option.value)
-          .filter((option) => option.selected);
-      } else {
-        // Если единичный выбор
-        selectedOptions.push(
-          originalSelect.options[originalSelect.selectedIndex]
-        );
-      }
-      return {
-        elements: selectedOptions.map((option) => option),
-        values: selectedOptions
-          .filter((option) => option.value)
-          .map((option) => option.value),
-        html: selectedOptions.map((option) =>
-          this.getSelectElementContent(option)
-        ),
-      };
-    }
-    // Конструктор элементов списка
-    getOptions(originalSelect) {
-      // Настрока скролла элементов
-      let selectOptionsScroll = originalSelect.hasAttribute("data-scroll")
-        ? `data-simplebar`
-        : "";
-      let selectOptionsScrollHeight = originalSelect.dataset.scroll
-        ? `style="max-height:${originalSelect.dataset.scroll}px"`
-        : "";
-      // Получаем элементы списка
-      let selectOptions = Array.from(originalSelect.options);
-      if (selectOptions.length > 0) {
-        let selectOptionsHTML = ``;
-        // Если указана настройка data-show, показываем плейсхолдер в списке
-        if (
-          (this.getSelectPlaceholder(originalSelect) &&
-            !this.getSelectPlaceholder(originalSelect).show) ||
-          originalSelect.multiple
-        ) {
-          selectOptions = selectOptions.filter((option) => option.value);
-        }
-        // Строим и выводим основную конструкцию
-        selectOptionsHTML += selectOptionsScroll
-          ? `<div ${selectOptionsScroll} ${selectOptionsScrollHeight} class="${this.selectClasses.classSelectOptionsScroll}">`
-          : "";
-        selectOptions.forEach((selectOption) => {
-          // Получаем конструкцию конкретного элемента списка
-          selectOptionsHTML += this.getOption(selectOption, originalSelect);
-        });
-        selectOptionsHTML += selectOptionsScroll ? `</div>` : "";
-        return selectOptionsHTML;
-      }
-    }
-    // Конструктор конкретного элемента списка
-    getOption(selectOption, originalSelect) {
-      // Если элемент выбран и включен режим мультивыбора, добавляем класс
-      const selectOptionSelected =
-        selectOption.selected && originalSelect.multiple
-          ? ` ${this.selectClasses.classSelectOptionSelected}`
-          : "";
-      // Если элемент выбрани нет настройки data-show-selected, скрываем элемент
-      const selectOptionHide =
-        selectOption.selected &&
-        !originalSelect.hasAttribute("data-show-selected")
-          ? `hidden`
-          : ``;
-      // Если для элемента указан класс добавляем
-      const selectOptionClass = selectOption.dataset.class
-        ? ` ${selectOption.dataset.class}`
-        : "";
-      // Если указан режим ссылки
-      const selectOptionLink = selectOption.dataset.href
-        ? selectOption.dataset.href
-        : false;
-      const selectOptionLinkTarget = selectOption.hasAttribute(
-        "data-href-blank"
+    getSelectTitleValue(e, t) {
+      let s = this.getSelectedOptionsData(t, 2).html;
+      if (
+        (t.multiple &&
+          t.hasAttribute("data-tags") &&
+          ((s = this.getSelectedOptionsData(t)
+            .elements.map(
+              (t) =>
+                `<span role="button" data-select-id="${
+                  e.dataset.id
+                }" data-value="${
+                  t.value
+                }" class="_select-tag">${this.getSelectElementContent(
+                  t
+                )}</span>`
+            )
+            .join("")),
+          t.dataset.tags &&
+            document.querySelector(t.dataset.tags) &&
+            ((document.querySelector(t.dataset.tags).innerHTML = s),
+            t.hasAttribute("data-search") && (s = !1))),
+        (s = s.length ? s : t.dataset.placeholder),
+        this.getSelectedOptionsData(t).values.length
+          ? e.classList.add(this.selectClasses.classSelectActive)
+          : e.classList.remove(this.selectClasses.classSelectActive),
+        t.hasAttribute("data-search"))
       )
-        ? `target="_blank"`
-        : "";
-      // Строим и возвращаем конструкцию элемента
-      let selectOptionHTML = ``;
-      selectOptionHTML += selectOptionLink
-        ? `<a ${selectOptionLinkTarget} ${selectOptionHide} href="${selectOptionLink}" data-value="${selectOption.value}" class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}">`
-        : `<button ${selectOptionHide} class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}" data-value="${selectOption.value}" type="button">`;
-      selectOptionHTML += this.getSelectElementContent(selectOption);
-      selectOptionHTML += selectOptionLink ? `</a>` : `</button>`;
-      return selectOptionHTML;
-    }
-    // Сеттер элементов списка (options)
-    setOptions(selectItem, originalSelect) {
-      // Получаем объект тела псевдоселекта
-      const selectItemOptions = this.getSelectElement(
-        selectItem,
-        this.selectClasses.classSelectOptions
-      ).selectElement;
-      // Запускаем конструктор элементов списка (options) и добавляем в тело псевдоселекта
-      selectItemOptions.innerHTML = this.getOptions(originalSelect);
-    }
-    // Обработчик клика на элемент списка
-    optionAction(selectItem, originalSelect, optionItem) {
-      if (originalSelect.multiple) {
-        // Если мультивыбор
-        // Выделяем классом элемент
-        optionItem.classList.toggle(
-          this.selectClasses.classSelectOptionSelected
-        );
-        // Очищаем выбранные элементы
-        const originalSelectSelectedItems =
-          this.getSelectedOptionsData(originalSelect).elements;
-        originalSelectSelectedItems.forEach((originalSelectSelectedItem) => {
-          originalSelectSelectedItem.removeAttribute("selected");
-        });
-        // Выбираем элементы
-        const selectSelectedItems = selectItem.querySelectorAll(
-          this.getSelectClass(this.selectClasses.classSelectOptionSelected)
-        );
-        selectSelectedItems.forEach((selectSelectedItems) => {
-          originalSelect
-            .querySelector(
-              `option[value="${selectSelectedItems.dataset.value}"]`
-            )
-            .setAttribute("selected", "selected");
-        });
-      } else {
-        // Если единичный выбор
-        // Если не указана настройка data-show-selected, скрываем выбранный элемент
-        if (!originalSelect.hasAttribute("data-show-selected")) {
-          // Сначала все показать
-          if (
-            selectItem.querySelector(
-              `${this.getSelectClass(
-                this.selectClasses.classSelectOption
-              )}[hidden]`
-            )
-          ) {
-            selectItem.querySelector(
-              `${this.getSelectClass(
-                this.selectClasses.classSelectOption
-              )}[hidden]`
-            ).hidden = false;
-          }
-          // Скрываем выбранную
-          optionItem.hidden = true;
-        }
-        originalSelect.value = optionItem.hasAttribute("data-value")
-          ? optionItem.dataset.value
-          : optionItem.textContent;
-        this.selectAction(selectItem);
-      }
-      // Обновляем заголовок селекта
-      this.setSelectTitleValue(selectItem, originalSelect);
-      // Вызываем реакцию на изменение селекта
-      this.setSelectChange(originalSelect);
-    }
-    // Реакция на измененение оригинального select
-    selectChange(e) {
-      const originalSelect = e.target;
-      this.selectBuild(originalSelect);
-      this.setSelectChange(originalSelect);
-    }
-    // Обработчик изменения в селекте
-    setSelectChange(originalSelect) {
-      // Моментальная валидация селекта
-      if (originalSelect.hasAttribute("data-validate")) {
-        formValidate.validateInput(originalSelect);
-      }
-      // При изменении селекта отправляем форму
-      if (originalSelect.hasAttribute("data-submit") && originalSelect.value) {
-        let tempButton = document.createElement("button");
-        tempButton.type = "submit";
-        originalSelect.closest("form").append(tempButton);
-        tempButton.click();
-        tempButton.remove();
-      }
-      const selectItem = originalSelect.parentElement;
-      // Вызов коллбэк функции
-      this.selectCallback(selectItem, originalSelect);
-    }
-    // Обработчик disabled
-    selectDisabled(selectItem, originalSelect) {
-      if (originalSelect.disabled) {
-        selectItem.classList.add(this.selectClasses.classSelectDisabled);
-        this.getSelectElement(
-          selectItem,
-          this.selectClasses.classSelectTitle
-        ).selectElement.disabled = true;
-      } else {
-        selectItem.classList.remove(this.selectClasses.classSelectDisabled);
-        this.getSelectElement(
-          selectItem,
-          this.selectClasses.classSelectTitle
-        ).selectElement.disabled = false;
-      }
-    }
-    // Обработчик поиска по элементам списка
-    searchActions(selectItem) {
-      const originalSelect = this.getSelectElement(selectItem).originalSelect;
-      const selectInput = this.getSelectElement(
-        selectItem,
-        this.selectClasses.classSelectInput
-      ).selectElement;
-      const selectOptions = this.getSelectElement(
-        selectItem,
-        this.selectClasses.classSelectOptions
-      ).selectElement;
-      const selectOptionsItems = selectOptions.querySelectorAll(
-        `.${this.selectClasses.classSelectOption}`
-      );
-      const _this = this;
-      selectInput.addEventListener("input", function () {
-        selectOptionsItems.forEach((selectOptionsItem) => {
-          if (
-            selectOptionsItem.textContent
-              .toUpperCase()
-              .indexOf(selectInput.value.toUpperCase()) >= 0
-          ) {
-            selectOptionsItem.hidden = false;
-          } else {
-            selectOptionsItem.hidden = true;
-          }
-        });
-        // Если список закрыт открываем
-        selectOptions.hidden === true ? _this.selectAction(selectItem) : null;
-      });
-    }
-    // Коллбэк функция
-    selectCallback(selectItem, originalSelect) {
-      document.dispatchEvent(
-        new CustomEvent("selectCallback", {
-          detail: {
-            select: originalSelect,
-          },
-        })
-      );
-    }
-    // Логгинг в консоль
-    setLogging(message) {
-      this.config.logging ? functions_FLS(`[select]: ${message}`) : null;
-    }
-  }
-  // Запускаем и добавляем в объект модулей
-  modules_flsModules.select = new SelectConstructor({}); // CONCATENATED MODULE: ./src/js/files/scroll/scroll.js
-
-  // Подключение функционала "Чертогов Фрилансера"
-
-  // Модуль прокрутки к блоку
-
-  // Переменная контроля добавления события window scroll.
-  let addWindowScrollEvent = false;
-  //====================================================================================================================================================================================================================================================================================================
-  // Плавная навигация по странице
-  function pageNavigation() {
-    // data-goto - указать ID блока
-    // data-goto-header - учитывать header
-    // data-goto-top - недокрутить на указанный размер
-    // data-goto-speed - скорость (только если используется доп плагин)
-    // Работаем при клике на пункт
-    document.addEventListener("click", pageNavigationAction);
-    // Если подключен scrollWatcher, подсвечиваем текущий пукт меню
-    document.addEventListener("watcherCallback", pageNavigationAction);
-    // Основная функция
-    function pageNavigationAction(e) {
-      if (e.type === "click") {
-        const targetElement = e.target;
-        if (targetElement.closest("[data-goto]")) {
-          const gotoLink = targetElement.closest("[data-goto]");
-          const gotoLinkSelector = gotoLink.dataset.goto
-            ? gotoLink.dataset.goto
+        return `<div class="${this.selectClasses.classSelectTitle}"><span class="${this.selectClasses.classSelectValue}"><input autocomplete="off" type="text" placeholder="${s}" data-placeholder="${s}" class="${this.selectClasses.classSelectInput}"></span></div>`;
+      {
+        const e =
+          this.getSelectedOptionsData(t).elements.length &&
+          this.getSelectedOptionsData(t).elements[0].dataset.class
+            ? ` ${this.getSelectedOptionsData(t).elements[0].dataset.class}`
             : "";
-          const noHeader = gotoLink.hasAttribute("data-goto-header")
-            ? true
-            : false;
-          const gotoSpeed = gotoLink.dataset.gotoSpeed
-            ? gotoLink.dataset.gotoSpeed
-            : 500;
-          const offsetTop = gotoLink.dataset.gotoTop
-            ? parseInt(gotoLink.dataset.gotoTop)
-            : 0;
-          gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
-          e.preventDefault();
-        }
-      } else if (e.type === "watcherCallback" && e.detail) {
-        const entry = e.detail.entry;
-        const targetElement = entry.target;
-        // Обработка пунктов навигации, если указано значение navigator подсвечиваем текущий пукт меню
-        if (targetElement.dataset.watch === "navigator") {
-          const navigatorActiveItem = document.querySelector(
-            `[data-goto]._navigator-active`
-          );
-          let navigatorCurrentItem;
-          if (
-            targetElement.id &&
-            document.querySelector(`[data-goto="#${targetElement.id}"]`)
-          ) {
-            navigatorCurrentItem = document.querySelector(
-              `[data-goto="#${targetElement.id}"]`
-            );
-          } else if (targetElement.classList.length) {
-            for (
-              let index = 0;
-              index < targetElement.classList.length;
-              index++
-            ) {
-              const element = targetElement.classList[index];
-              if (document.querySelector(`[data-goto=".${element}"]`)) {
-                navigatorCurrentItem = document.querySelector(
-                  `[data-goto=".${element}"]`
-                );
-                break;
-              }
-            }
-          }
-          if (entry.isIntersecting) {
-            // Видим объект
-            // navigatorActiveItem ? navigatorActiveItem.classList.remove('_navigator-active') : null;
-            navigatorCurrentItem
-              ? navigatorCurrentItem.classList.add("_navigator-active")
-              : null;
-          } else {
-            // Не видим объект
-            navigatorCurrentItem
-              ? navigatorCurrentItem.classList.remove("_navigator-active")
-              : null;
-          }
-        }
+        return `<button type="button" class="${this.selectClasses.classSelectTitle}"><span class="${this.selectClasses.classSelectValue}"><span class="${this.selectClasses.classSelectContent}${e}">${s}</span></span></button>`;
       }
     }
-    // Прокрутка по хешу
-    if (getHash()) {
-      let goToHash;
-      if (document.querySelector(`#${getHash()}`)) {
-        goToHash = `#${getHash()}`;
-      } else if (document.querySelector(`.${getHash()}`)) {
-        goToHash = `.${getHash()}`;
-      }
-      goToHash ? gotoBlock(goToHash, true, 500, 20) : null;
-    }
-  }
-  // Работа с шапкой при скроле
-  function headerScroll() {
-    addWindowScrollEvent = true;
-    const header = document.querySelector("header.header");
-    const headerShow = header.hasAttribute("data-scroll-show");
-    const headerShowTimer = header.dataset.scrollShow
-      ? header.dataset.scrollShow
-      : 500;
-    const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
-    let scrollDirection = 0;
-    let timer;
-    document.addEventListener("windowScroll", function (e) {
-      const scrollTop = window.scrollY;
-      clearTimeout(timer);
-      if (scrollTop >= startPoint) {
-        !header.classList.contains("_header-scroll")
-          ? header.classList.add("_header-scroll")
-          : null;
-        if (headerShow) {
-          if (scrollTop > scrollDirection) {
-            // downscroll code
-            header.classList.contains("_header-show")
-              ? header.classList.remove("_header-show")
-              : null;
-          } else {
-            // upscroll code
-            !header.classList.contains("_header-show")
-              ? header.classList.add("_header-show")
-              : null;
-          }
-          timer = setTimeout(() => {
-            !header.classList.contains("_header-show")
-              ? header.classList.add("_header-show")
-              : null;
-          }, headerShowTimer);
-        }
-      } else {
-        header.classList.contains("_header-scroll")
-          ? header.classList.remove("_header-scroll")
-          : null;
-        if (headerShow) {
-          header.classList.contains("_header-show")
-            ? header.classList.remove("_header-show")
-            : null;
-        }
-      }
-      scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
-    });
-  }
-  // Прилипающий блок
-  function stickyBlock() {
-    addWindowScrollEvent = true;
-    // data-sticky для родителя внутри которого прилипает блок *
-    // data-sticky-header для родителя, учитываем высоту хедера
-    // data-sticky-top="" для родителя, можно указать отступ сверху
-    // data-sticky-bottom="" для родителя, можно указать отступ снизу
-    // data-sticky-item для прилипающего блока *
-    function stickyBlockInit() {
-      const stickyParents = document.querySelectorAll("[data-sticky]");
-      if (stickyParents.length) {
-        stickyParents.forEach((stickyParent) => {
-          let stickyConfig = {
-            media: stickyParent.dataset.sticky
-              ? parseInt(stickyParent.dataset.sticky)
-              : null,
-            top: stickyParent.dataset.stickyTop
-              ? parseInt(stickyParent.dataset.stickyTop)
-              : 0,
-            bottom: stickyParent.dataset.stickyBottom
-              ? parseInt(stickyParent.dataset.stickyBottom)
-              : 0,
-            header: stickyParent.hasAttribute("data-sticky-header")
-              ? document.querySelector("header.header").offsetHeight
-              : 0,
-          };
-          stickyBlockItem(stickyParent, stickyConfig);
-        });
-      }
-    }
-    function stickyBlockItem(stickyParent, stickyConfig) {
-      const stickyBlockItem = stickyParent.querySelector("[data-sticky-item]");
-      const headerHeight = stickyConfig.header;
-      const offsetTop = headerHeight + stickyConfig.top;
-      const startPoint =
-        stickyBlockItem.getBoundingClientRect().top + scrollY - offsetTop;
-
-      document.addEventListener("windowScroll", stickyBlockActions);
-      //window.addEventListener("resize", stickyBlockActions);
-
-      function stickyBlockActions(e) {
-        const endPoint =
-          stickyParent.offsetHeight +
-          stickyParent.getBoundingClientRect().top +
-          scrollY -
-          (offsetTop + stickyBlockItem.offsetHeight + stickyConfig.bottom);
-        let stickyItemValues = {
-          position: "relative",
-          bottom: "auto",
-          top: "0px",
-          left: "0px",
-          width: "auto",
-        };
-        if (!stickyConfig.media || stickyConfig.media < window.innerWidth) {
-          if (
-            offsetTop + stickyConfig.bottom + stickyBlockItem.offsetHeight <
-            window.innerHeight
-          ) {
-            if (scrollY >= startPoint && scrollY <= endPoint) {
-              stickyItemValues.position = `fixed`;
-              stickyItemValues.bottom = `auto`;
-              stickyItemValues.top = `${offsetTop}px`;
-              stickyItemValues.left = `${
-                stickyBlockItem.getBoundingClientRect().left
-              }px`; // Учесть разницу в ширине экрана?
-              stickyItemValues.width = `${stickyBlockItem.offsetWidth}px`;
-            } else if (scrollY >= endPoint) {
-              stickyItemValues.position = `absolute`;
-              stickyItemValues.bottom = `${stickyConfig.bottom}px`;
-              stickyItemValues.top = `auto`;
-              stickyItemValues.left = `0px`;
-              stickyItemValues.width = `${stickyBlockItem.offsetWidth}px`;
-            }
-          }
-        }
-        stickyBlockType(stickyBlockItem, stickyItemValues);
-      }
-    }
-    function stickyBlockType(stickyBlockItem, stickyItemValues) {
-      stickyBlockItem.style.cssText = `position:${stickyItemValues.position};bottom:${stickyItemValues.bottom};top:${stickyItemValues.top};left:${stickyItemValues.left};width:${stickyItemValues.width};`;
-    }
-    stickyBlockInit();
-  }
-  // При подключении модуля обработчик события запустится автоматически
-  setTimeout(() => {
-    if (addWindowScrollEvent) {
-      let windowScroll = new Event("windowScroll");
-      window.addEventListener("scroll", function (e) {
-        document.dispatchEvent(windowScroll);
-      });
-    }
-  }, 0); // CONCATENATED MODULE: ./src/js/files/script.js
-  // Подключение функционала "Чертогов Фрилансера"
-
-  // Подключение списка активных модулей
-
-  document.querySelector(".user-image-menu").addEventListener("click", (e) => {
-    document.querySelector(".user-image-menu").classList.toggle("active");
-  }); // CONCATENATED MODULE: ./node_modules/@splidejs/splide/dist/js/splide.esm.js
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", { writable: false });
-    return Constructor;
-  }
-
-  /*!
-   * Splide.js
-   * Version  : 4.1.4
-   * License  : MIT
-   * Copyright: 2022 Naotoshi Fujita
-   */
-  var MEDIA_PREFERS_REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
-  var CREATED = 1;
-  var MOUNTED = 2;
-  var IDLE = 3;
-  var MOVING = 4;
-  var SCROLLING = 5;
-  var DRAGGING = 6;
-  var DESTROYED = 7;
-  var STATES = {
-    CREATED: CREATED,
-    MOUNTED: MOUNTED,
-    IDLE: IDLE,
-    MOVING: MOVING,
-    SCROLLING: SCROLLING,
-    DRAGGING: DRAGGING,
-    DESTROYED: DESTROYED,
-  };
-
-  function empty(array) {
-    array.length = 0;
-  }
-
-  function slice(arrayLike, start, end) {
-    return Array.prototype.slice.call(arrayLike, start, end);
-  }
-
-  function apply(func) {
-    return func.bind.apply(func, [null].concat(slice(arguments, 1)));
-  }
-
-  var nextTick = setTimeout;
-
-  var noop = function noop() {};
-
-  function raf(func) {
-    return requestAnimationFrame(func);
-  }
-
-  function typeOf(type, subject) {
-    return typeof subject === type;
-  }
-
-  function isObject(subject) {
-    return !isNull(subject) && typeOf("object", subject);
-  }
-
-  var isArray = Array.isArray;
-  var isFunction = apply(typeOf, "function");
-  var isString = apply(typeOf, "string");
-  var isUndefined = apply(typeOf, "undefined");
-
-  function isNull(subject) {
-    return subject === null;
-  }
-
-  function isHTMLElement(subject) {
-    try {
+    getSelectElementContent(e) {
+      const t = e.dataset.asset ? `${e.dataset.asset}` : "",
+        s = t.indexOf("img") >= 0 ? `<img src="${t}" alt="">` : t;
+      let n = "";
       return (
-        subject instanceof
-        (subject.ownerDocument.defaultView || window).HTMLElement
+        (n += t ? `<span class="${this.selectClasses.classSelectRow}">` : ""),
+        (n += t ? `<span class="${this.selectClasses.classSelectData}">` : ""),
+        (n += t ? s : ""),
+        (n += t ? "</span>" : ""),
+        (n += t ? `<span class="${this.selectClasses.classSelectText}">` : ""),
+        (n += e.textContent),
+        (n += t ? "</span>" : ""),
+        (n += t ? "</span>" : ""),
+        n
       );
-    } catch (e) {
-      return false;
     }
-  }
-
-  function toArray(value) {
-    return isArray(value) ? value : [value];
-  }
-
-  function forEach(values, iteratee) {
-    toArray(values).forEach(iteratee);
-  }
-
-  function includes(array, value) {
-    return array.indexOf(value) > -1;
-  }
-
-  function push(array, items) {
-    array.push.apply(array, toArray(items));
-    return array;
-  }
-
-  function toggleClass(elm, classes, add) {
-    if (elm) {
-      forEach(classes, function (name) {
-        if (name) {
-          elm.classList[add ? "add" : "remove"](name);
+    getSelectPlaceholder(e) {
+      const t = Array.from(e.options).find((e) => !e.value);
+      if (t)
+        return {
+          value: t.textContent,
+          show: t.hasAttribute("data-show"),
+          label: { show: t.hasAttribute("data-label"), text: t.dataset.label },
+        };
+    }
+    getSelectedOptionsData(e, t) {
+      let s = [];
+      return (
+        e.multiple
+          ? (s = Array.from(e.options)
+              .filter((e) => e.value)
+              .filter((e) => e.selected))
+          : s.push(e.options[e.selectedIndex]),
+        {
+          elements: s.map((e) => e),
+          values: s.filter((e) => e.value).map((e) => e.value),
+          html: s.map((e) => this.getSelectElementContent(e)),
         }
+      );
+    }
+    getOptions(e) {
+      let t = e.hasAttribute("data-scroll") ? "data-simplebar" : "",
+        s = e.dataset.scroll ? `style="max-height:${e.dataset.scroll}px"` : "",
+        n = Array.from(e.options);
+      if (n.length > 0) {
+        let i = "";
+        return (
+          ((this.getSelectPlaceholder(e) &&
+            !this.getSelectPlaceholder(e).show) ||
+            e.multiple) &&
+            (n = n.filter((e) => e.value)),
+          (i += t
+            ? `<div ${t} ${s} class="${this.selectClasses.classSelectOptionsScroll}">`
+            : ""),
+          n.forEach((t) => {
+            i += this.getOption(t, e);
+          }),
+          (i += t ? "</div>" : ""),
+          i
+        );
+      }
+    }
+    getOption(e, t) {
+      const s =
+          e.selected && t.multiple
+            ? ` ${this.selectClasses.classSelectOptionSelected}`
+            : "",
+        n = e.selected && !t.hasAttribute("data-show-selected") ? "hidden" : "",
+        i = e.dataset.class ? ` ${e.dataset.class}` : "",
+        o = !!e.dataset.href && e.dataset.href,
+        a = e.hasAttribute("data-href-blank") ? 'target="_blank"' : "";
+      let r = "";
+      return (
+        (r += o
+          ? `<a ${a} ${n} href="${o}" data-value="${e.value}" class="${this.selectClasses.classSelectOption}${i}${s}">`
+          : `<button ${n} class="${this.selectClasses.classSelectOption}${i}${s}" data-value="${e.value}" type="button">`),
+        (r += this.getSelectElementContent(e)),
+        (r += o ? "</a>" : "</button>"),
+        r
+      );
+    }
+    setOptions(e, t) {
+      this.getSelectElement(
+        e,
+        this.selectClasses.classSelectOptions
+      ).selectElement.innerHTML = this.getOptions(t);
+    }
+    optionAction(e, t, s) {
+      if (t.multiple) {
+        s.classList.toggle(this.selectClasses.classSelectOptionSelected);
+        this.getSelectedOptionsData(t).elements.forEach((e) => {
+          e.removeAttribute("selected");
+        });
+        e.querySelectorAll(
+          this.getSelectClass(this.selectClasses.classSelectOptionSelected)
+        ).forEach((e) => {
+          t.querySelector(`option[value="${e.dataset.value}"]`).setAttribute(
+            "selected",
+            "selected"
+          );
+        });
+      } else
+        t.hasAttribute("data-show-selected") ||
+          (e.querySelector(
+            `${this.getSelectClass(
+              this.selectClasses.classSelectOption
+            )}[hidden]`
+          ) &&
+            (e.querySelector(
+              `${this.getSelectClass(
+                this.selectClasses.classSelectOption
+              )}[hidden]`
+            ).hidden = !1),
+          (s.hidden = !0)),
+          (t.value = s.hasAttribute("data-value")
+            ? s.dataset.value
+            : s.textContent),
+          this.selectAction(e);
+      this.setSelectTitleValue(e, t), this.setSelectChange(t);
+    }
+    selectChange(e) {
+      const t = e.target;
+      this.selectBuild(t), this.setSelectChange(t);
+    }
+    setSelectChange(e) {
+      if (
+        (e.hasAttribute("data-validate") && u.validateInput(e),
+        e.hasAttribute("data-submit") && e.value)
+      ) {
+        let t = document.createElement("button");
+        (t.type = "submit"), e.closest("form").append(t), t.click(), t.remove();
+      }
+      const t = e.parentElement;
+      this.selectCallback(t, e);
+    }
+    selectDisabled(e, t) {
+      t.disabled
+        ? (e.classList.add(this.selectClasses.classSelectDisabled),
+          (this.getSelectElement(
+            e,
+            this.selectClasses.classSelectTitle
+          ).selectElement.disabled = !0))
+        : (e.classList.remove(this.selectClasses.classSelectDisabled),
+          (this.getSelectElement(
+            e,
+            this.selectClasses.classSelectTitle
+          ).selectElement.disabled = !1));
+    }
+    searchActions(e) {
+      this.getSelectElement(e).originalSelect;
+      const t = this.getSelectElement(
+          e,
+          this.selectClasses.classSelectInput
+        ).selectElement,
+        s = this.getSelectElement(
+          e,
+          this.selectClasses.classSelectOptions
+        ).selectElement,
+        n = s.querySelectorAll(`.${this.selectClasses.classSelectOption}`),
+        i = this;
+      t.addEventListener("input", function () {
+        n.forEach((e) => {
+          e.textContent.toUpperCase().indexOf(t.value.toUpperCase()) >= 0
+            ? (e.hidden = !1)
+            : (e.hidden = !0);
+        }),
+          !0 === s.hidden && i.selectAction(e);
       });
     }
+    selectCallback(e, t) {
+      document.dispatchEvent(
+        new CustomEvent("selectCallback", { detail: { select: t } })
+      );
+    }
+    setLogging(e) {
+      this.config.logging && l(`[select]: ${e}`);
+    }
+  })({});
+  let d = !1;
+  function h(e) {
+    this.type = e;
   }
-
-  function addClass(elm, classes) {
-    toggleClass(elm, isString(classes) ? classes.split(" ") : classes, true);
-  }
-
-  function append(parent, children) {
-    forEach(children, parent.appendChild.bind(parent));
-  }
-
-  function before(nodes, ref) {
-    forEach(nodes, function (node) {
-      var parent = (ref || node).parentNode;
-
-      if (parent) {
-        parent.insertBefore(node, ref);
+  setTimeout(() => {
+    if (d) {
+      let e = new Event("windowScroll");
+      window.addEventListener("scroll", function (t) {
+        document.dispatchEvent(e);
+      });
+    }
+  }, 0),
+    (h.prototype.init = function () {
+      const e = this;
+      (this.оbjects = []),
+        (this.daClassname = "_dynamic_adapt_"),
+        (this.nodes = document.querySelectorAll("[data-da]"));
+      for (let e = 0; e < this.nodes.length; e++) {
+        const t = this.nodes[e],
+          s = t.dataset.da.trim().split(","),
+          n = {};
+        (n.element = t),
+          (n.parent = t.parentNode),
+          (n.destination = document.querySelector(s[0].trim())),
+          (n.breakpoint = s[1] ? s[1].trim() : "767"),
+          (n.place = s[2] ? s[2].trim() : "last"),
+          (n.index = this.indexInParent(n.parent, n.element)),
+          this.оbjects.push(n);
       }
+      this.arraySort(this.оbjects),
+        (this.mediaQueries = Array.prototype.map.call(
+          this.оbjects,
+          function (e) {
+            return (
+              "(" +
+              this.type +
+              "-width: " +
+              e.breakpoint +
+              "px)," +
+              e.breakpoint
+            );
+          },
+          this
+        )),
+        (this.mediaQueries = Array.prototype.filter.call(
+          this.mediaQueries,
+          function (e, t, s) {
+            return Array.prototype.indexOf.call(s, e) === t;
+          }
+        ));
+      for (let t = 0; t < this.mediaQueries.length; t++) {
+        const s = this.mediaQueries[t],
+          n = String.prototype.split.call(s, ","),
+          i = window.matchMedia(n[0]),
+          o = n[1],
+          a = Array.prototype.filter.call(this.оbjects, function (e) {
+            return e.breakpoint === o;
+          });
+        i.addListener(function () {
+          e.mediaHandler(i, a);
+        }),
+          this.mediaHandler(i, a);
+      }
+    }),
+    (h.prototype.mediaHandler = function (e, t) {
+      if (e.matches)
+        for (let e = 0; e < t.length; e++) {
+          const s = t[e];
+          (s.index = this.indexInParent(s.parent, s.element)),
+            this.moveTo(s.place, s.element, s.destination);
+        }
+      else
+        for (let e = t.length - 1; e >= 0; e--) {
+          const s = t[e];
+          s.element.classList.contains(this.daClassname) &&
+            this.moveBack(s.parent, s.element, s.index);
+        }
+    }),
+    (h.prototype.moveTo = function (e, t, s) {
+      t.classList.add(this.daClassname),
+        "last" === e || e >= s.children.length
+          ? s.insertAdjacentElement("beforeend", t)
+          : "first" !== e
+          ? s.children[e].insertAdjacentElement("beforebegin", t)
+          : s.insertAdjacentElement("afterbegin", t);
+    }),
+    (h.prototype.moveBack = function (e, t, s) {
+      t.classList.remove(this.daClassname),
+        void 0 !== e.children[s]
+          ? e.children[s].insertAdjacentElement("beforebegin", t)
+          : e.insertAdjacentElement("beforeend", t);
+    }),
+    (h.prototype.indexInParent = function (e, t) {
+      const s = Array.prototype.slice.call(e.children);
+      return Array.prototype.indexOf.call(s, t);
+    }),
+    (h.prototype.arraySort = function (e) {
+      "min" === this.type
+        ? Array.prototype.sort.call(e, function (e, t) {
+            return e.breakpoint === t.breakpoint
+              ? e.place === t.place
+                ? 0
+                : "first" === e.place || "last" === t.place
+                ? -1
+                : "last" === e.place || "first" === t.place
+                ? 1
+                : e.place - t.place
+              : e.breakpoint - t.breakpoint;
+          })
+        : Array.prototype.sort.call(e, function (e, t) {
+            return e.breakpoint === t.breakpoint
+              ? e.place === t.place
+                ? 0
+                : "first" === e.place || "last" === t.place
+                ? 1
+                : "last" === e.place || "first" === t.place
+                ? -1
+                : t.place - e.place
+              : t.breakpoint - e.breakpoint;
+          });
+    });
+  new h("max").init(),
+    document
+      .querySelector(".user-image-menu")
+      .addEventListener("click", (e) => {
+        document.querySelector(".user-image-menu").classList.toggle("active");
+      });
+  const p = document.querySelector("button.catalog_button"),
+    f = document.querySelector(".user-catalog"),
+    g = document.querySelector("section.catalog");
+  function m(e, t) {
+    for (var s = 0; s < t.length; s++) {
+      var n = t[s];
+      (n.enumerable = n.enumerable || !1),
+        (n.configurable = !0),
+        "value" in n && (n.writable = !0),
+        Object.defineProperty(e, n.key, n);
+    }
+  }
+  p.addEventListener("click", (e) => {
+    g.classList.toggle("catalog-open"),
+      p.classList.toggle("catalog-close"),
+      document.querySelector("body").classList.toggle("lock");
+  }),
+    f.addEventListener("click", (e) => {
+      g.classList.toggle("catalog-open"),
+        p.classList.toggle("catalog-close"),
+        document.querySelector("body").classList.toggle("lock");
+    });
+  var v = "(prefers-reduced-motion: reduce)",
+    y = 1,
+    b = 3,
+    S = 4,
+    w = 5,
+    E = 6,
+    A = 7,
+    C = {
+      CREATED: y,
+      MOUNTED: 2,
+      IDLE: b,
+      MOVING: S,
+      SCROLLING: w,
+      DRAGGING: E,
+      DESTROYED: A,
+    };
+  function _(e) {
+    e.length = 0;
+  }
+  function L(e, t, s) {
+    return Array.prototype.slice.call(e, t, s);
+  }
+  function O(e) {
+    return e.bind.apply(e, [null].concat(L(arguments, 1)));
+  }
+  var x = setTimeout,
+    P = function () {};
+  function k(e) {
+    return requestAnimationFrame(e);
+  }
+  function $(e, t) {
+    return typeof t === e;
+  }
+  function T(e) {
+    return !B(e) && $("object", e);
+  }
+  var q = Array.isArray,
+    D = O($, "function"),
+    M = O($, "string"),
+    I = O($, "undefined");
+  function B(e) {
+    return null === e;
+  }
+  function j(e) {
+    try {
+      return e instanceof (e.ownerDocument.defaultView || window).HTMLElement;
+    } catch (e) {
+      return !1;
+    }
+  }
+  function H(e) {
+    return q(e) ? e : [e];
+  }
+  function z(e, t) {
+    H(e).forEach(t);
+  }
+  function N(e, t) {
+    return e.indexOf(t) > -1;
+  }
+  function F(e, t) {
+    return e.push.apply(e, H(t)), e;
+  }
+  function R(e, t, s) {
+    e &&
+      z(t, function (t) {
+        t && e.classList[s ? "add" : "remove"](t);
+      });
+  }
+  function W(e, t) {
+    R(e, M(t) ? t.split(" ") : t, !0);
+  }
+  function V(e, t) {
+    z(t, e.appendChild.bind(e));
+  }
+  function X(e, t) {
+    z(e, function (e) {
+      var s = (t || e).parentNode;
+      s && s.insertBefore(e, t);
     });
   }
-
-  function matches(elm, selector) {
+  function G(e, t) {
+    return j(e) && (e.msMatchesSelector || e.matches).call(e, t);
+  }
+  function U(e, t) {
+    var s = e ? L(e.children) : [];
+    return t
+      ? s.filter(function (e) {
+          return G(e, t);
+        })
+      : s;
+  }
+  function Y(e, t) {
+    return t ? U(e, t)[0] : e.firstElementChild;
+  }
+  var Q = Object.keys;
+  function K(e, t, s) {
     return (
-      isHTMLElement(elm) &&
-      (elm["msMatchesSelector"] || elm.matches).call(elm, selector)
+      e &&
+        (s ? Q(e).reverse() : Q(e)).forEach(function (s) {
+          "__proto__" !== s && t(e[s], s);
+        }),
+      e
     );
   }
-
-  function children(parent, selector) {
-    var children2 = parent ? slice(parent.children) : [];
-    return selector
-      ? children2.filter(function (child) {
-          return matches(child, selector);
+  function Z(e) {
+    return (
+      L(arguments, 1).forEach(function (t) {
+        K(t, function (s, n) {
+          e[n] = t[n];
+        });
+      }),
+      e
+    );
+  }
+  function J(e) {
+    return (
+      L(arguments, 1).forEach(function (t) {
+        K(t, function (t, s) {
+          q(t)
+            ? (e[s] = t.slice())
+            : T(t)
+            ? (e[s] = J({}, T(e[s]) ? e[s] : {}, t))
+            : (e[s] = t);
+        });
+      }),
+      e
+    );
+  }
+  function ee(e, t) {
+    z(t || Q(e), function (t) {
+      delete e[t];
+    });
+  }
+  function te(e, t) {
+    z(e, function (e) {
+      z(t, function (t) {
+        e && e.removeAttribute(t);
+      });
+    });
+  }
+  function se(e, t, s) {
+    T(t)
+      ? K(t, function (t, s) {
+          se(e, s, t);
         })
-      : children2;
+      : z(e, function (e) {
+          B(s) || "" === s ? te(e, t) : e.setAttribute(t, String(s));
+        });
   }
-
-  function child(parent, selector) {
-    return selector ? children(parent, selector)[0] : parent.firstElementChild;
+  function ne(e, t, s) {
+    var n = document.createElement(e);
+    return t && (M(t) ? W(n, t) : se(n, t)), s && V(s, n), n;
   }
-
-  var ownKeys = Object.keys;
-
-  function forOwn(object, iteratee, right) {
-    if (object) {
-      (right ? ownKeys(object).reverse() : ownKeys(object)).forEach(function (
-        key
-      ) {
-        key !== "__proto__" && iteratee(object[key], key);
-      });
-    }
-
-    return object;
+  function ie(e, t, s) {
+    if (I(s)) return getComputedStyle(e)[t];
+    B(s) || (e.style[t] = "" + s);
   }
-
-  function splide_esm_assign(object) {
-    slice(arguments, 1).forEach(function (source) {
-      forOwn(source, function (value, key) {
-        object[key] = source[key];
-      });
-    });
-    return object;
+  function oe(e, t) {
+    ie(e, "display", t);
   }
-
-  function merge(object) {
-    slice(arguments, 1).forEach(function (source) {
-      forOwn(source, function (value, key) {
-        if (isArray(value)) {
-          object[key] = value.slice();
-        } else if (isObject(value)) {
-          object[key] = merge(
-            {},
-            isObject(object[key]) ? object[key] : {},
-            value
-          );
-        } else {
-          object[key] = value;
-        }
-      });
-    });
-    return object;
+  function ae(e) {
+    (e.setActive && e.setActive()) || e.focus({ preventScroll: !0 });
   }
-
-  function omit(object, keys) {
-    forEach(keys || ownKeys(object), function (key) {
-      delete object[key];
+  function re(e, t) {
+    return e.getAttribute(t);
+  }
+  function le(e, t) {
+    return e && e.classList.contains(t);
+  }
+  function ce(e) {
+    return e.getBoundingClientRect();
+  }
+  function ue(e) {
+    z(e, function (e) {
+      e && e.parentNode && e.parentNode.removeChild(e);
     });
   }
-
-  function removeAttribute(elms, attrs) {
-    forEach(elms, function (elm) {
-      forEach(attrs, function (attr) {
-        elm && elm.removeAttribute(attr);
-      });
-    });
+  function de(e) {
+    return Y(new DOMParser().parseFromString(e, "text/html").body);
   }
-
-  function setAttribute(elms, attrs, value) {
-    if (isObject(attrs)) {
-      forOwn(attrs, function (value2, name) {
-        setAttribute(elms, name, value2);
-      });
-    } else {
-      forEach(elms, function (elm) {
-        isNull(value) || value === ""
-          ? removeAttribute(elm, attrs)
-          : elm.setAttribute(attrs, String(value));
-      });
-    }
+  function he(e, t) {
+    e.preventDefault(),
+      t && (e.stopPropagation(), e.stopImmediatePropagation());
   }
-
-  function create(tag, attrs, parent) {
-    var elm = document.createElement(tag);
-
-    if (attrs) {
-      isString(attrs) ? addClass(elm, attrs) : setAttribute(elm, attrs);
-    }
-
-    parent && append(parent, elm);
-    return elm;
+  function pe(e, t) {
+    return e && e.querySelector(t);
   }
-
-  function style(elm, prop, value) {
-    if (isUndefined(value)) {
-      return getComputedStyle(elm)[prop];
-    }
-
-    if (!isNull(value)) {
-      elm.style[prop] = "" + value;
-    }
+  function fe(e, t) {
+    return t ? L(e.querySelectorAll(t)) : [];
   }
-
-  function display(elm, display2) {
-    style(elm, "display", display2);
+  function ge(e, t) {
+    R(e, t, !1);
   }
-
-  function splide_esm_focus(elm) {
-    (elm["setActive"] && elm["setActive"]()) ||
-      elm.focus({
-        preventScroll: true,
-      });
-  }
-
-  function getAttribute(elm, attr) {
-    return elm.getAttribute(attr);
-  }
-
-  function hasClass(elm, className) {
-    return elm && elm.classList.contains(className);
-  }
-
-  function rect(target) {
-    return target.getBoundingClientRect();
-  }
-
-  function remove(nodes) {
-    forEach(nodes, function (node) {
-      if (node && node.parentNode) {
-        node.parentNode.removeChild(node);
-      }
-    });
-  }
-
-  function parseHtml(html) {
-    return child(new DOMParser().parseFromString(html, "text/html").body);
-  }
-
-  function prevent(e, stopPropagation) {
-    e.preventDefault();
-
-    if (stopPropagation) {
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-    }
-  }
-
-  function query(parent, selector) {
-    return parent && parent.querySelector(selector);
-  }
-
-  function queryAll(parent, selector) {
-    return selector ? slice(parent.querySelectorAll(selector)) : [];
-  }
-
-  function removeClass(elm, classes) {
-    toggleClass(elm, classes, false);
-  }
-
-  function timeOf(e) {
+  function me(e) {
     return e.timeStamp;
   }
-
-  function unit(value) {
-    return isString(value) ? value : value ? value + "px" : "";
+  function ve(e) {
+    return M(e) ? e : e ? e + "px" : "";
   }
-
-  var PROJECT_CODE = "splide";
-  var DATA_ATTRIBUTE = "data-" + PROJECT_CODE;
-
-  function assert(condition, message) {
-    if (!condition) {
-      throw new Error("[" + PROJECT_CODE + "] " + (message || ""));
-    }
+  var ye = "splide",
+    be = "data-" + ye;
+  function Se(e, t) {
+    if (!e) throw new Error("[" + ye + "] " + (t || ""));
   }
-
-  var min = Math.min,
-    max = Math.max,
-    floor = Math.floor,
-    ceil = Math.ceil,
-    abs = Math.abs;
-
-  function approximatelyEqual(x, y, epsilon) {
-    return abs(x - y) < epsilon;
+  var we = Math.min,
+    Ee = Math.max,
+    Ae = Math.floor,
+    Ce = Math.ceil,
+    _e = Math.abs;
+  function Le(e, t, s) {
+    return _e(e - t) < s;
   }
-
-  function between(number, x, y, exclusive) {
-    var minimum = min(x, y);
-    var maximum = max(x, y);
-    return exclusive
-      ? minimum < number && number < maximum
-      : minimum <= number && number <= maximum;
+  function Oe(e, t, s, n) {
+    var i = we(t, s),
+      o = Ee(t, s);
+    return n ? i < e && e < o : i <= e && e <= o;
   }
-
-  function clamp(number, x, y) {
-    var minimum = min(x, y);
-    var maximum = max(x, y);
-    return min(max(minimum, number), maximum);
+  function xe(e, t, s) {
+    var n = we(t, s),
+      i = Ee(t, s);
+    return we(Ee(n, e), i);
   }
-
-  function sign(x) {
-    return +(x > 0) - +(x < 0);
+  function Pe(e) {
+    return +(e > 0) - +(e < 0);
   }
-
-  function camelToKebab(string) {
-    return string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+  function ke(e, t) {
+    return (
+      z(t, function (t) {
+        e = e.replace("%s", "" + t);
+      }),
+      e
+    );
   }
-
-  function format(string, replacements) {
-    forEach(replacements, function (replacement) {
-      string = string.replace("%s", "" + replacement);
-    });
-    return string;
+  function $e(e) {
+    return e < 10 ? "0" + e : "" + e;
   }
-
-  function pad(number) {
-    return number < 10 ? "0" + number : "" + number;
+  var Te = {};
+  function qe(e) {
+    return "" + e + $e((Te[e] = (Te[e] || 0) + 1));
   }
-
-  var ids = {};
-
-  function uniqueId(prefix) {
-    return "" + prefix + pad((ids[prefix] = (ids[prefix] || 0) + 1));
-  }
-
-  function EventBinder() {
-    var listeners = [];
-
-    function bind(targets, events, callback, options) {
-      forEachEvent(targets, events, function (target, event, namespace) {
-        var isEventTarget = "addEventListener" in target;
-        var remover = isEventTarget
-          ? target.removeEventListener.bind(target, event, callback, options)
-          : target["removeListener"].bind(target, callback);
-        isEventTarget
-          ? target.addEventListener(event, callback, options)
-          : target["addListener"](callback);
-        listeners.push([target, event, namespace, callback, remover]);
-      });
-    }
-
-    function unbind(targets, events, callback) {
-      forEachEvent(targets, events, function (target, event, namespace) {
-        listeners = listeners.filter(function (listener) {
-          if (
-            listener[0] === target &&
-            listener[1] === event &&
-            listener[2] === namespace &&
-            (!callback || listener[3] === callback)
-          ) {
-            listener[4]();
-            return false;
-          }
-
-          return true;
-        });
-      });
-    }
-
-    function dispatch(target, type, detail) {
-      var e;
-      var bubbles = true;
-
-      if (typeof CustomEvent === "function") {
-        e = new CustomEvent(type, {
-          bubbles: bubbles,
-          detail: detail,
-        });
-      } else {
-        e = document.createEvent("CustomEvent");
-        e.initCustomEvent(type, bubbles, false, detail);
-      }
-
-      target.dispatchEvent(e);
-      return e;
-    }
-
-    function forEachEvent(targets, events, iteratee) {
-      forEach(targets, function (target) {
-        target &&
-          forEach(events, function (events2) {
-            events2.split(" ").forEach(function (eventNS) {
-              var fragment = eventNS.split(".");
-              iteratee(target, fragment[0], fragment[1]);
+  function De() {
+    var e = [];
+    function t(e, t, s) {
+      z(e, function (e) {
+        e &&
+          z(t, function (t) {
+            t.split(" ").forEach(function (t) {
+              var n = t.split(".");
+              s(e, n[0], n[1]);
             });
           });
       });
     }
-
-    function destroy() {
-      listeners.forEach(function (data) {
-        data[4]();
-      });
-      empty(listeners);
-    }
-
     return {
-      bind: bind,
-      unbind: unbind,
-      dispatch: dispatch,
-      destroy: destroy,
-    };
-  }
-
-  var EVENT_MOUNTED = "mounted";
-  var EVENT_READY = "ready";
-  var EVENT_MOVE = "move";
-  var EVENT_MOVED = "moved";
-  var EVENT_CLICK = "click";
-  var EVENT_ACTIVE = "active";
-  var EVENT_INACTIVE = "inactive";
-  var EVENT_VISIBLE = "visible";
-  var EVENT_HIDDEN = "hidden";
-  var EVENT_REFRESH = "refresh";
-  var EVENT_UPDATED = "updated";
-  var EVENT_RESIZE = "resize";
-  var EVENT_RESIZED = "resized";
-  var EVENT_DRAG = "drag";
-  var EVENT_DRAGGING = "dragging";
-  var EVENT_DRAGGED = "dragged";
-  var EVENT_SCROLL = "scroll";
-  var EVENT_SCROLLED = "scrolled";
-  var EVENT_OVERFLOW = "overflow";
-  var EVENT_DESTROY = "destroy";
-  var EVENT_ARROWS_MOUNTED = "arrows:mounted";
-  var EVENT_ARROWS_UPDATED = "arrows:updated";
-  var EVENT_PAGINATION_MOUNTED = "pagination:mounted";
-  var EVENT_PAGINATION_UPDATED = "pagination:updated";
-  var EVENT_NAVIGATION_MOUNTED = "navigation:mounted";
-  var EVENT_AUTOPLAY_PLAY = "autoplay:play";
-  var EVENT_AUTOPLAY_PLAYING = "autoplay:playing";
-  var EVENT_AUTOPLAY_PAUSE = "autoplay:pause";
-  var EVENT_LAZYLOAD_LOADED = "lazyload:loaded";
-  var EVENT_SLIDE_KEYDOWN = "sk";
-  var EVENT_SHIFTED = "sh";
-  var EVENT_END_INDEX_CHANGED = "ei";
-
-  function EventInterface(Splide2) {
-    var bus = Splide2 ? Splide2.event.bus : document.createDocumentFragment();
-    var binder = EventBinder();
-
-    function on(events, callback) {
-      binder.bind(bus, toArray(events).join(" "), function (e) {
-        callback.apply(callback, isArray(e.detail) ? e.detail : []);
-      });
-    }
-
-    function emit(event) {
-      binder.dispatch(bus, event, slice(arguments, 1));
-    }
-
-    if (Splide2) {
-      Splide2.event.on(EVENT_DESTROY, binder.destroy);
-    }
-
-    return splide_esm_assign(binder, {
-      bus: bus,
-      on: on,
-      off: apply(binder.unbind, bus),
-      emit: emit,
-    });
-  }
-
-  function RequestInterval(interval, onInterval, onUpdate, limit) {
-    var now = Date.now;
-    var startTime;
-    var rate = 0;
-    var id;
-    var paused = true;
-    var count = 0;
-
-    function update() {
-      if (!paused) {
-        rate = interval ? min((now() - startTime) / interval, 1) : 1;
-        onUpdate && onUpdate(rate);
-
-        if (rate >= 1) {
-          onInterval();
-          startTime = now();
-
-          if (limit && ++count >= limit) {
-            return pause();
-          }
-        }
-
-        id = raf(update);
-      }
-    }
-
-    function start(resume) {
-      resume || cancel();
-      startTime = now() - (resume ? rate * interval : 0);
-      paused = false;
-      id = raf(update);
-    }
-
-    function pause() {
-      paused = true;
-    }
-
-    function rewind() {
-      startTime = now();
-      rate = 0;
-
-      if (onUpdate) {
-        onUpdate(rate);
-      }
-    }
-
-    function cancel() {
-      id && cancelAnimationFrame(id);
-      rate = 0;
-      id = 0;
-      paused = true;
-    }
-
-    function set(time) {
-      interval = time;
-    }
-
-    function isPaused() {
-      return paused;
-    }
-
-    return {
-      start: start,
-      rewind: rewind,
-      pause: pause,
-      cancel: cancel,
-      set: set,
-      isPaused: isPaused,
-    };
-  }
-
-  function State(initialState) {
-    var state = initialState;
-
-    function set(value) {
-      state = value;
-    }
-
-    function is(states) {
-      return includes(toArray(states), state);
-    }
-
-    return {
-      set: set,
-      is: is,
-    };
-  }
-
-  function Throttle(func, duration) {
-    var interval = RequestInterval(duration || 0, func, null, 1);
-    return function () {
-      interval.isPaused() && interval.start();
-    };
-  }
-
-  function Media(Splide2, Components2, options) {
-    var state = Splide2.state;
-    var breakpoints = options.breakpoints || {};
-    var reducedMotion = options.reducedMotion || {};
-    var binder = EventBinder();
-    var queries = [];
-
-    function setup() {
-      var isMin = options.mediaQuery === "min";
-      ownKeys(breakpoints)
-        .sort(function (n, m) {
-          return isMin ? +n - +m : +m - +n;
-        })
-        .forEach(function (key) {
-          register(
-            breakpoints[key],
-            "(" + (isMin ? "min" : "max") + "-width:" + key + "px)"
-          );
+      bind: function (s, n, i, o) {
+        t(s, n, function (t, s, n) {
+          var a = "addEventListener" in t,
+            r = a
+              ? t.removeEventListener.bind(t, s, i, o)
+              : t.removeListener.bind(t, i);
+          a ? t.addEventListener(s, i, o) : t.addListener(i),
+            e.push([t, s, n, i, r]);
         });
-      register(reducedMotion, MEDIA_PREFERS_REDUCED_MOTION);
-      update();
-    }
-
-    function destroy(completely) {
-      if (completely) {
-        binder.destroy();
-      }
-    }
-
-    function register(options2, query) {
-      var queryList = matchMedia(query);
-      binder.bind(queryList, "change", update);
-      queries.push([options2, queryList]);
-    }
-
-    function update() {
-      var destroyed = state.is(DESTROYED);
-      var direction = options.direction;
-      var merged = queries.reduce(function (merged2, entry) {
-        return merge(merged2, entry[1].matches ? entry[0] : {});
-      }, {});
-      omit(options);
-      set(merged);
-
-      if (options.destroy) {
-        Splide2.destroy(options.destroy === "completely");
-      } else if (destroyed) {
-        destroy(true);
-        Splide2.mount();
-      } else {
-        direction !== options.direction && Splide2.refresh();
-      }
-    }
-
-    function reduce(enable) {
-      if (matchMedia(MEDIA_PREFERS_REDUCED_MOTION).matches) {
-        enable
-          ? merge(options, reducedMotion)
-          : omit(options, ownKeys(reducedMotion));
-      }
-    }
-
-    function set(opts, base, notify) {
-      merge(options, opts);
-      base && merge(Object.getPrototypeOf(options), opts);
-
-      if (notify || !state.is(CREATED)) {
-        Splide2.emit(EVENT_UPDATED, options);
-      }
-    }
-
-    return {
-      setup: setup,
-      destroy: destroy,
-      reduce: reduce,
-      set: set,
-    };
-  }
-
-  var ARROW = "Arrow";
-  var ARROW_LEFT = ARROW + "Left";
-  var ARROW_RIGHT = ARROW + "Right";
-  var ARROW_UP = ARROW + "Up";
-  var ARROW_DOWN = ARROW + "Down";
-  var LTR = "ltr";
-  var RTL = "rtl";
-  var TTB = "ttb";
-  var ORIENTATION_MAP = {
-    width: ["height"],
-    left: ["top", "right"],
-    right: ["bottom", "left"],
-    x: ["y"],
-    X: ["Y"],
-    Y: ["X"],
-    ArrowLeft: [ARROW_UP, ARROW_RIGHT],
-    ArrowRight: [ARROW_DOWN, ARROW_LEFT],
-  };
-
-  function Direction(Splide2, Components2, options) {
-    function resolve(prop, axisOnly, direction) {
-      direction = direction || options.direction;
-      var index =
-        direction === RTL && !axisOnly ? 1 : direction === TTB ? 0 : -1;
-      return (
-        (ORIENTATION_MAP[prop] && ORIENTATION_MAP[prop][index]) ||
-        prop.replace(/width|left|right/i, function (match, offset) {
-          var replacement =
-            ORIENTATION_MAP[match.toLowerCase()][index] || match;
-          return offset > 0
-            ? replacement.charAt(0).toUpperCase() + replacement.slice(1)
-            : replacement;
-        })
-      );
-    }
-
-    function orient(value) {
-      return value * (options.direction === RTL ? 1 : -1);
-    }
-
-    return {
-      resolve: resolve,
-      orient: orient,
-    };
-  }
-
-  var ROLE = "role";
-  var TAB_INDEX = "tabindex";
-  var DISABLED = "disabled";
-  var ARIA_PREFIX = "aria-";
-  var ARIA_CONTROLS = ARIA_PREFIX + "controls";
-  var ARIA_CURRENT = ARIA_PREFIX + "current";
-  var ARIA_SELECTED = ARIA_PREFIX + "selected";
-  var ARIA_LABEL = ARIA_PREFIX + "label";
-  var ARIA_LABELLEDBY = ARIA_PREFIX + "labelledby";
-  var ARIA_HIDDEN = ARIA_PREFIX + "hidden";
-  var ARIA_ORIENTATION = ARIA_PREFIX + "orientation";
-  var ARIA_ROLEDESCRIPTION = ARIA_PREFIX + "roledescription";
-  var ARIA_LIVE = ARIA_PREFIX + "live";
-  var ARIA_BUSY = ARIA_PREFIX + "busy";
-  var ARIA_ATOMIC = ARIA_PREFIX + "atomic";
-  var ALL_ATTRIBUTES = [
-    ROLE,
-    TAB_INDEX,
-    DISABLED,
-    ARIA_CONTROLS,
-    ARIA_CURRENT,
-    ARIA_LABEL,
-    ARIA_LABELLEDBY,
-    ARIA_HIDDEN,
-    ARIA_ORIENTATION,
-    ARIA_ROLEDESCRIPTION,
-  ];
-  var CLASS_PREFIX = PROJECT_CODE + "__";
-  var STATUS_CLASS_PREFIX = "is-";
-  var CLASS_ROOT = PROJECT_CODE;
-  var CLASS_TRACK = CLASS_PREFIX + "track";
-  var CLASS_LIST = CLASS_PREFIX + "list";
-  var CLASS_SLIDE = CLASS_PREFIX + "slide";
-  var CLASS_CLONE = CLASS_SLIDE + "--clone";
-  var CLASS_CONTAINER = CLASS_SLIDE + "__container";
-  var CLASS_ARROWS = CLASS_PREFIX + "arrows";
-  var CLASS_ARROW = CLASS_PREFIX + "arrow";
-  var CLASS_ARROW_PREV = CLASS_ARROW + "--prev";
-  var CLASS_ARROW_NEXT = CLASS_ARROW + "--next";
-  var CLASS_PAGINATION = CLASS_PREFIX + "pagination";
-  var CLASS_PAGINATION_PAGE = CLASS_PAGINATION + "__page";
-  var CLASS_PROGRESS = CLASS_PREFIX + "progress";
-  var CLASS_PROGRESS_BAR = CLASS_PROGRESS + "__bar";
-  var CLASS_TOGGLE = CLASS_PREFIX + "toggle";
-  var CLASS_TOGGLE_PLAY = CLASS_TOGGLE + "__play";
-  var CLASS_TOGGLE_PAUSE = CLASS_TOGGLE + "__pause";
-  var CLASS_SPINNER = CLASS_PREFIX + "spinner";
-  var CLASS_SR = CLASS_PREFIX + "sr";
-  var CLASS_INITIALIZED = STATUS_CLASS_PREFIX + "initialized";
-  var CLASS_ACTIVE = STATUS_CLASS_PREFIX + "active";
-  var CLASS_PREV = STATUS_CLASS_PREFIX + "prev";
-  var CLASS_NEXT = STATUS_CLASS_PREFIX + "next";
-  var CLASS_VISIBLE = STATUS_CLASS_PREFIX + "visible";
-  var CLASS_LOADING = STATUS_CLASS_PREFIX + "loading";
-  var CLASS_FOCUS_IN = STATUS_CLASS_PREFIX + "focus-in";
-  var CLASS_OVERFLOW = STATUS_CLASS_PREFIX + "overflow";
-  var STATUS_CLASSES = [
-    CLASS_ACTIVE,
-    CLASS_VISIBLE,
-    CLASS_PREV,
-    CLASS_NEXT,
-    CLASS_LOADING,
-    CLASS_FOCUS_IN,
-    CLASS_OVERFLOW,
-  ];
-  var CLASSES = {
-    slide: CLASS_SLIDE,
-    clone: CLASS_CLONE,
-    arrows: CLASS_ARROWS,
-    arrow: CLASS_ARROW,
-    prev: CLASS_ARROW_PREV,
-    next: CLASS_ARROW_NEXT,
-    pagination: CLASS_PAGINATION,
-    page: CLASS_PAGINATION_PAGE,
-    spinner: CLASS_SPINNER,
-  };
-
-  function closest(from, selector) {
-    if (isFunction(from.closest)) {
-      return from.closest(selector);
-    }
-
-    var elm = from;
-
-    while (elm && elm.nodeType === 1) {
-      if (matches(elm, selector)) {
-        break;
-      }
-
-      elm = elm.parentElement;
-    }
-
-    return elm;
-  }
-
-  var FRICTION = 5;
-  var LOG_INTERVAL = 200;
-  var POINTER_DOWN_EVENTS = "touchstart mousedown";
-  var POINTER_MOVE_EVENTS = "touchmove mousemove";
-  var POINTER_UP_EVENTS = "touchend touchcancel mouseup click";
-
-  function Elements(Splide2, Components2, options) {
-    var _EventInterface = EventInterface(Splide2),
-      on = _EventInterface.on,
-      bind = _EventInterface.bind;
-
-    var root = Splide2.root;
-    var i18n = options.i18n;
-    var elements = {};
-    var slides = [];
-    var rootClasses = [];
-    var trackClasses = [];
-    var track;
-    var list;
-    var isUsingKey;
-
-    function setup() {
-      collect();
-      init();
-      update();
-    }
-
-    function mount() {
-      on(EVENT_REFRESH, destroy);
-      on(EVENT_REFRESH, setup);
-      on(EVENT_UPDATED, update);
-      bind(
-        document,
-        POINTER_DOWN_EVENTS + " keydown",
-        function (e) {
-          isUsingKey = e.type === "keydown";
-        },
-        {
-          capture: true,
-        }
-      );
-      bind(root, "focusin", function () {
-        toggleClass(root, CLASS_FOCUS_IN, !!isUsingKey);
-      });
-    }
-
-    function destroy(completely) {
-      var attrs = ALL_ATTRIBUTES.concat("style");
-      empty(slides);
-      removeClass(root, rootClasses);
-      removeClass(track, trackClasses);
-      removeAttribute([track, list], attrs);
-      removeAttribute(
-        root,
-        completely ? attrs : ["style", ARIA_ROLEDESCRIPTION]
-      );
-    }
-
-    function update() {
-      removeClass(root, rootClasses);
-      removeClass(track, trackClasses);
-      rootClasses = getClasses(CLASS_ROOT);
-      trackClasses = getClasses(CLASS_TRACK);
-      addClass(root, rootClasses);
-      addClass(track, trackClasses);
-      setAttribute(root, ARIA_LABEL, options.label);
-      setAttribute(root, ARIA_LABELLEDBY, options.labelledby);
-    }
-
-    function collect() {
-      track = find("." + CLASS_TRACK);
-      list = child(track, "." + CLASS_LIST);
-      assert(track && list, "A track/list element is missing.");
-      push(
-        slides,
-        children(list, "." + CLASS_SLIDE + ":not(." + CLASS_CLONE + ")")
-      );
-      forOwn(
-        {
-          arrows: CLASS_ARROWS,
-          pagination: CLASS_PAGINATION,
-          prev: CLASS_ARROW_PREV,
-          next: CLASS_ARROW_NEXT,
-          bar: CLASS_PROGRESS_BAR,
-          toggle: CLASS_TOGGLE,
-        },
-        function (className, key) {
-          elements[key] = find("." + className);
-        }
-      );
-      splide_esm_assign(elements, {
-        root: root,
-        track: track,
-        list: list,
-        slides: slides,
-      });
-    }
-
-    function init() {
-      var id = root.id || uniqueId(PROJECT_CODE);
-      var role = options.role;
-      root.id = id;
-      track.id = track.id || id + "-track";
-      list.id = list.id || id + "-list";
-
-      if (!getAttribute(root, ROLE) && root.tagName !== "SECTION" && role) {
-        setAttribute(root, ROLE, role);
-      }
-
-      setAttribute(root, ARIA_ROLEDESCRIPTION, i18n.carousel);
-      setAttribute(list, ROLE, "presentation");
-    }
-
-    function find(selector) {
-      var elm = query(root, selector);
-      return elm && closest(elm, "." + CLASS_ROOT) === root ? elm : void 0;
-    }
-
-    function getClasses(base) {
-      return [
-        base + "--" + options.type,
-        base + "--" + options.direction,
-        options.drag && base + "--draggable",
-        options.isNavigation && base + "--nav",
-        base === CLASS_ROOT && CLASS_ACTIVE,
-      ];
-    }
-
-    return splide_esm_assign(elements, {
-      setup: setup,
-      mount: mount,
-      destroy: destroy,
-    });
-  }
-
-  var SLIDE = "slide";
-  var LOOP = "loop";
-  var FADE = "fade";
-
-  function Slide$1(Splide2, index, slideIndex, slide) {
-    var event = EventInterface(Splide2);
-    var on = event.on,
-      emit = event.emit,
-      bind = event.bind;
-    var Components = Splide2.Components,
-      root = Splide2.root,
-      options = Splide2.options;
-    var isNavigation = options.isNavigation,
-      updateOnMove = options.updateOnMove,
-      i18n = options.i18n,
-      pagination = options.pagination,
-      slideFocus = options.slideFocus;
-    var resolve = Components.Direction.resolve;
-    var styles = getAttribute(slide, "style");
-    var label = getAttribute(slide, ARIA_LABEL);
-    var isClone = slideIndex > -1;
-    var container = child(slide, "." + CLASS_CONTAINER);
-    var destroyed;
-
-    function mount() {
-      if (!isClone) {
-        slide.id = root.id + "-slide" + pad(index + 1);
-        setAttribute(slide, ROLE, pagination ? "tabpanel" : "group");
-        setAttribute(slide, ARIA_ROLEDESCRIPTION, i18n.slide);
-        setAttribute(
-          slide,
-          ARIA_LABEL,
-          label || format(i18n.slideLabel, [index + 1, Splide2.length])
+      },
+      unbind: function (s, n, i) {
+        t(s, n, function (t, s, n) {
+          e = e.filter(function (e) {
+            return (
+              !!(e[0] !== t || e[1] !== s || e[2] !== n || (i && e[3] !== i)) ||
+              (e[4](), !1)
+            );
+          });
+        });
+      },
+      dispatch: function (e, t, s) {
+        var n;
+        return (
+          "function" == typeof CustomEvent
+            ? (n = new CustomEvent(t, { bubbles: true, detail: s }))
+            : (n = document.createEvent("CustomEvent")).initCustomEvent(
+                t,
+                true,
+                !1,
+                s
+              ),
+          e.dispatchEvent(n),
+          n
         );
+      },
+      destroy: function () {
+        e.forEach(function (e) {
+          e[4]();
+        }),
+          _(e);
+      },
+    };
+  }
+  var Me = "mounted",
+    Ie = "ready",
+    Be = "move",
+    je = "moved",
+    He = "click",
+    ze = "active",
+    Ne = "inactive",
+    Fe = "visible",
+    Re = "hidden",
+    We = "refresh",
+    Ve = "updated",
+    Xe = "resize",
+    Ge = "resized",
+    Ue = "drag",
+    Ye = "dragging",
+    Qe = "dragged",
+    Ke = "scroll",
+    Ze = "scrolled",
+    Je = "overflow",
+    et = "destroy",
+    tt = "arrows:mounted",
+    st = "arrows:updated",
+    nt = "pagination:mounted",
+    it = "pagination:updated",
+    ot = "navigation:mounted",
+    at = "autoplay:play",
+    rt = "autoplay:playing",
+    lt = "autoplay:pause",
+    ct = "lazyload:loaded",
+    ut = "sk",
+    dt = "sh",
+    ht = "ei";
+  function pt(e) {
+    var t = e ? e.event.bus : document.createDocumentFragment(),
+      s = De();
+    return (
+      e && e.event.on(et, s.destroy),
+      Z(s, {
+        bus: t,
+        on: function (e, n) {
+          s.bind(t, H(e).join(" "), function (e) {
+            n.apply(n, q(e.detail) ? e.detail : []);
+          });
+        },
+        off: O(s.unbind, t),
+        emit: function (e) {
+          s.dispatch(t, e, L(arguments, 1));
+        },
+      })
+    );
+  }
+  function ft(e, t, s, n) {
+    var i,
+      o,
+      a = Date.now,
+      r = 0,
+      l = !0,
+      c = 0;
+    function u() {
+      if (!l) {
+        if (
+          ((r = e ? we((a() - i) / e, 1) : 1),
+          s && s(r),
+          r >= 1 && (t(), (i = a()), n && ++c >= n))
+        )
+          return d();
+        o = k(u);
       }
-
-      listen();
     }
-
-    function listen() {
-      bind(slide, "click", apply(emit, EVENT_CLICK, self));
-      bind(slide, "keydown", apply(emit, EVENT_SLIDE_KEYDOWN, self));
-      on([EVENT_MOVED, EVENT_SHIFTED, EVENT_SCROLLED], update);
-      on(EVENT_NAVIGATION_MOUNTED, initNavigation);
-
-      if (updateOnMove) {
-        on(EVENT_MOVE, onMove);
-      }
+    function d() {
+      l = !0;
     }
-
-    function destroy() {
-      destroyed = true;
-      event.destroy();
-      removeClass(slide, STATUS_CLASSES);
-      removeAttribute(slide, ALL_ATTRIBUTES);
-      setAttribute(slide, "style", styles);
-      setAttribute(slide, ARIA_LABEL, label || "");
+    function h() {
+      o && cancelAnimationFrame(o), (r = 0), (o = 0), (l = !0);
     }
-
-    function initNavigation() {
-      var controls = Splide2.splides
-        .map(function (target) {
-          var Slide2 = target.splide.Components.Slides.getAt(index);
-          return Slide2 ? Slide2.slide.id : "";
+    return {
+      start: function (t) {
+        t || h(), (i = a() - (t ? r * e : 0)), (l = !1), (o = k(u));
+      },
+      rewind: function () {
+        (i = a()), (r = 0), s && s(r);
+      },
+      pause: d,
+      cancel: h,
+      set: function (t) {
+        e = t;
+      },
+      isPaused: function () {
+        return l;
+      },
+    };
+  }
+  var gt = "Arrow",
+    mt = gt + "Left",
+    vt = gt + "Right",
+    yt = gt + "Up",
+    bt = gt + "Down",
+    St = "rtl",
+    wt = "ttb",
+    Et = {
+      width: ["height"],
+      left: ["top", "right"],
+      right: ["bottom", "left"],
+      x: ["y"],
+      X: ["Y"],
+      Y: ["X"],
+      ArrowLeft: [yt, vt],
+      ArrowRight: [bt, mt],
+    };
+  function At(e, t, s) {
+    return {
+      resolve: function (e, t, n) {
+        var i = (n = n || s.direction) !== St || t ? (n === wt ? 0 : -1) : 1;
+        return (
+          (Et[e] && Et[e][i]) ||
+          e.replace(/width|left|right/i, function (e, t) {
+            var s = Et[e.toLowerCase()][i] || e;
+            return t > 0 ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+          })
+        );
+      },
+      orient: function (e) {
+        return e * (s.direction === St ? 1 : -1);
+      },
+    };
+  }
+  var Ct = "role",
+    _t = "tabindex",
+    Lt = "aria-",
+    Ot = Lt + "controls",
+    xt = Lt + "current",
+    Pt = Lt + "selected",
+    kt = Lt + "label",
+    $t = Lt + "labelledby",
+    Tt = Lt + "hidden",
+    qt = Lt + "orientation",
+    Dt = Lt + "roledescription",
+    Mt = Lt + "live",
+    It = Lt + "busy",
+    Bt = Lt + "atomic",
+    jt = [Ct, _t, "disabled", Ot, xt, kt, $t, Tt, qt, Dt],
+    Ht = ye + "__",
+    zt = "is-",
+    Nt = ye,
+    Ft = Ht + "track",
+    Rt = Ht + "list",
+    Wt = Ht + "slide",
+    Vt = Wt + "--clone",
+    Xt = Wt + "__container",
+    Gt = Ht + "arrows",
+    Ut = Ht + "arrow",
+    Yt = Ut + "--prev",
+    Qt = Ut + "--next",
+    Kt = Ht + "pagination",
+    Zt = Kt + "__page",
+    Jt = Ht + "progress" + "__bar",
+    es = Ht + "toggle",
+    ts = Ht + "sr",
+    ss = zt + "initialized",
+    ns = zt + "active",
+    is = zt + "prev",
+    os = zt + "next",
+    as = zt + "visible",
+    rs = zt + "loading",
+    ls = zt + "focus-in",
+    cs = zt + "overflow",
+    us = [ns, as, is, os, rs, ls, cs],
+    ds = {
+      slide: Wt,
+      clone: Vt,
+      arrows: Gt,
+      arrow: Ut,
+      prev: Yt,
+      next: Qt,
+      pagination: Kt,
+      page: Zt,
+      spinner: Ht + "spinner",
+    };
+  var hs = 5,
+    ps = 200,
+    fs = "touchstart mousedown",
+    gs = "touchmove mousemove",
+    ms = "touchend touchcancel mouseup click";
+  var vs = "slide",
+    ys = "loop",
+    bs = "fade";
+  function Ss(e, t, s, n) {
+    var i,
+      o = pt(e),
+      a = o.on,
+      r = o.emit,
+      l = o.bind,
+      c = e.Components,
+      u = e.root,
+      d = e.options,
+      h = d.isNavigation,
+      p = d.updateOnMove,
+      f = d.i18n,
+      g = d.pagination,
+      m = d.slideFocus,
+      v = c.Direction.resolve,
+      y = re(n, "style"),
+      b = re(n, kt),
+      E = s > -1,
+      A = Y(n, "." + Xt);
+    function C() {
+      var i = e.splides
+        .map(function (e) {
+          var s = e.splide.Components.Slides.getAt(t);
+          return s ? s.slide.id : "";
         })
         .join(" ");
-      setAttribute(
-        slide,
-        ARIA_LABEL,
-        format(i18n.slideX, (isClone ? slideIndex : index) + 1)
-      );
-      setAttribute(slide, ARIA_CONTROLS, controls);
-      setAttribute(slide, ROLE, slideFocus ? "button" : "");
-      slideFocus && removeAttribute(slide, ARIA_ROLEDESCRIPTION);
+      se(n, kt, ke(f.slideX, (E ? s : t) + 1)),
+        se(n, Ot, i),
+        se(n, Ct, m ? "button" : ""),
+        m && te(n, Dt);
     }
-
-    function onMove() {
-      if (!destroyed) {
-        update();
-      }
+    function _() {
+      i || L();
     }
-
-    function update() {
-      if (!destroyed) {
-        var curr = Splide2.index;
-        updateActivity();
-        updateVisibility();
-        toggleClass(slide, CLASS_PREV, index === curr - 1);
-        toggleClass(slide, CLASS_NEXT, index === curr + 1);
-      }
-    }
-
-    function updateActivity() {
-      var active = isActive();
-
-      if (active !== hasClass(slide, CLASS_ACTIVE)) {
-        toggleClass(slide, CLASS_ACTIVE, active);
-        setAttribute(slide, ARIA_CURRENT, (isNavigation && active) || "");
-        emit(active ? EVENT_ACTIVE : EVENT_INACTIVE, self);
-      }
-    }
-
-    function updateVisibility() {
-      var visible = isVisible();
-      var hidden = !visible && (!isActive() || isClone);
-
-      if (!Splide2.state.is([MOVING, SCROLLING])) {
-        setAttribute(slide, ARIA_HIDDEN, hidden || "");
-      }
-
-      setAttribute(
-        queryAll(slide, options.focusableNodes || ""),
-        TAB_INDEX,
-        hidden ? -1 : ""
-      );
-
-      if (slideFocus) {
-        setAttribute(slide, TAB_INDEX, hidden ? -1 : 0);
-      }
-
-      if (visible !== hasClass(slide, CLASS_VISIBLE)) {
-        toggleClass(slide, CLASS_VISIBLE, visible);
-        emit(visible ? EVENT_VISIBLE : EVENT_HIDDEN, self);
-      }
-
-      if (!visible && document.activeElement === slide) {
-        var Slide2 = Components.Slides.getAt(Splide2.index);
-        Slide2 && splide_esm_focus(Slide2.slide);
-      }
-    }
-
-    function style$1(prop, value, useContainer) {
-      style((useContainer && container) || slide, prop, value);
-    }
-
-    function isActive() {
-      var curr = Splide2.index;
-      return curr === index || (options.cloneStatus && curr === slideIndex);
-    }
-
-    function isVisible() {
-      if (Splide2.is(FADE)) {
-        return isActive();
-      }
-
-      var trackRect = rect(Components.Elements.track);
-      var slideRect = rect(slide);
-      var left = resolve("left", true);
-      var right = resolve("right", true);
-      return (
-        floor(trackRect[left]) <= ceil(slideRect[left]) &&
-        floor(slideRect[right]) <= ceil(trackRect[right])
-      );
-    }
-
-    function isWithin(from, distance) {
-      var diff = abs(from - index);
-
-      if (!isClone && (options.rewind || Splide2.is(LOOP))) {
-        diff = min(diff, Splide2.length - diff);
-      }
-
-      return diff <= distance;
-    }
-
-    var self = {
-      index: index,
-      slideIndex: slideIndex,
-      slide: slide,
-      container: container,
-      isClone: isClone,
-      mount: mount,
-      destroy: destroy,
-      update: update,
-      style: style$1,
-      isWithin: isWithin,
-    };
-    return self;
-  }
-
-  function Slides(Splide2, Components2, options) {
-    var _EventInterface2 = EventInterface(Splide2),
-      on = _EventInterface2.on,
-      emit = _EventInterface2.emit,
-      bind = _EventInterface2.bind;
-
-    var _Components2$Elements = Components2.Elements,
-      slides = _Components2$Elements.slides,
-      list = _Components2$Elements.list;
-    var Slides2 = [];
-
-    function mount() {
-      init();
-      on(EVENT_REFRESH, destroy);
-      on(EVENT_REFRESH, init);
-    }
-
-    function init() {
-      slides.forEach(function (slide, index) {
-        register(slide, index, -1);
-      });
-    }
-
-    function destroy() {
-      forEach$1(function (Slide2) {
-        Slide2.destroy();
-      });
-      empty(Slides2);
-    }
-
-    function update() {
-      forEach$1(function (Slide2) {
-        Slide2.update();
-      });
-    }
-
-    function register(slide, index, slideIndex) {
-      var object = Slide$1(Splide2, index, slideIndex, slide);
-      object.mount();
-      Slides2.push(object);
-      Slides2.sort(function (Slide1, Slide2) {
-        return Slide1.index - Slide2.index;
-      });
-    }
-
-    function get(excludeClones) {
-      return excludeClones
-        ? filter(function (Slide2) {
-            return !Slide2.isClone;
-          })
-        : Slides2;
-    }
-
-    function getIn(page) {
-      var Controller = Components2.Controller;
-      var index = Controller.toIndex(page);
-      var max = Controller.hasFocus() ? 1 : options.perPage;
-      return filter(function (Slide2) {
-        return between(Slide2.index, index, index + max - 1);
-      });
-    }
-
-    function getAt(index) {
-      return filter(index)[0];
-    }
-
-    function add(items, index) {
-      forEach(items, function (slide) {
-        if (isString(slide)) {
-          slide = parseHtml(slide);
-        }
-
-        if (isHTMLElement(slide)) {
-          var ref = slides[index];
-          ref ? before(slide, ref) : append(list, slide);
-          addClass(slide, options.classes.slide);
-          observeImages(slide, apply(emit, EVENT_RESIZE));
-        }
-      });
-      emit(EVENT_REFRESH);
-    }
-
-    function remove$1(matcher) {
-      remove(
-        filter(matcher).map(function (Slide2) {
-          return Slide2.slide;
-        })
-      );
-      emit(EVENT_REFRESH);
-    }
-
-    function forEach$1(iteratee, excludeClones) {
-      get(excludeClones).forEach(iteratee);
-    }
-
-    function filter(matcher) {
-      return Slides2.filter(
-        isFunction(matcher)
-          ? matcher
-          : function (Slide2) {
-              return isString(matcher)
-                ? matches(Slide2.slide, matcher)
-                : includes(toArray(matcher), Slide2.index);
+    function L() {
+      if (!i) {
+        var s = e.index;
+        (o = x()) !== le(n, ns) &&
+          (R(n, ns, o), se(n, xt, (h && o) || ""), r(o ? ze : Ne, P)),
+          (function () {
+            var t = (function () {
+                if (e.is(bs)) return x();
+                var t = ce(c.Elements.track),
+                  s = ce(n),
+                  i = v("left", !0),
+                  o = v("right", !0);
+                return Ae(t[i]) <= Ce(s[i]) && Ae(s[o]) <= Ce(t[o]);
+              })(),
+              s = !t && (!x() || E);
+            e.state.is([S, w]) || se(n, Tt, s || "");
+            se(fe(n, d.focusableNodes || ""), _t, s ? -1 : ""),
+              m && se(n, _t, s ? -1 : 0);
+            t !== le(n, as) && (R(n, as, t), r(t ? Fe : Re, P));
+            if (!t && document.activeElement === n) {
+              var i = c.Slides.getAt(e.index);
+              i && ae(i.slide);
             }
-      );
-    }
-
-    function style(prop, value, useContainer) {
-      forEach$1(function (Slide2) {
-        Slide2.style(prop, value, useContainer);
-      });
-    }
-
-    function observeImages(elm, callback) {
-      var images = queryAll(elm, "img");
-      var length = images.length;
-
-      if (length) {
-        images.forEach(function (img) {
-          bind(img, "load error", function () {
-            if (!--length) {
-              callback();
-            }
-          });
-        });
-      } else {
-        callback();
-      }
-    }
-
-    function getLength(excludeClones) {
-      return excludeClones ? slides.length : Slides2.length;
-    }
-
-    function isEnough() {
-      return Slides2.length > options.perPage;
-    }
-
-    return {
-      mount: mount,
-      destroy: destroy,
-      update: update,
-      register: register,
-      get: get,
-      getIn: getIn,
-      getAt: getAt,
-      add: add,
-      remove: remove$1,
-      forEach: forEach$1,
-      filter: filter,
-      style: style,
-      getLength: getLength,
-      isEnough: isEnough,
-    };
-  }
-
-  function Layout(Splide2, Components2, options) {
-    var _EventInterface3 = EventInterface(Splide2),
-      on = _EventInterface3.on,
-      bind = _EventInterface3.bind,
-      emit = _EventInterface3.emit;
-
-    var Slides = Components2.Slides;
-    var resolve = Components2.Direction.resolve;
-    var _Components2$Elements2 = Components2.Elements,
-      root = _Components2$Elements2.root,
-      track = _Components2$Elements2.track,
-      list = _Components2$Elements2.list;
-    var getAt = Slides.getAt,
-      styleSlides = Slides.style;
-    var vertical;
-    var rootRect;
-    var overflow;
-
-    function mount() {
-      init();
-      bind(window, "resize load", Throttle(apply(emit, EVENT_RESIZE)));
-      on([EVENT_UPDATED, EVENT_REFRESH], init);
-      on(EVENT_RESIZE, resize);
-    }
-
-    function init() {
-      vertical = options.direction === TTB;
-      style(root, "maxWidth", unit(options.width));
-      style(track, resolve("paddingLeft"), cssPadding(false));
-      style(track, resolve("paddingRight"), cssPadding(true));
-      resize(true);
-    }
-
-    function resize(force) {
-      var newRect = rect(root);
-
-      if (
-        force ||
-        rootRect.width !== newRect.width ||
-        rootRect.height !== newRect.height
-      ) {
-        style(track, "height", cssTrackHeight());
-        styleSlides(resolve("marginRight"), unit(options.gap));
-        styleSlides("width", cssSlideWidth());
-        styleSlides("height", cssSlideHeight(), true);
-        rootRect = newRect;
-        emit(EVENT_RESIZED);
-
-        if (overflow !== (overflow = isOverflow())) {
-          toggleClass(root, CLASS_OVERFLOW, overflow);
-          emit(EVENT_OVERFLOW, overflow);
-        }
-      }
-    }
-
-    function cssPadding(right) {
-      var padding = options.padding;
-      var prop = resolve(right ? "right" : "left");
-      return (
-        (padding && unit(padding[prop] || (isObject(padding) ? 0 : padding))) ||
-        "0px"
-      );
-    }
-
-    function cssTrackHeight() {
-      var height = "";
-
-      if (vertical) {
-        height = cssHeight();
-        assert(height, "height or heightRatio is missing.");
-        height =
-          "calc(" +
-          height +
-          " - " +
-          cssPadding(false) +
-          " - " +
-          cssPadding(true) +
-          ")";
-      }
-
-      return height;
-    }
-
-    function cssHeight() {
-      return unit(options.height || rect(list).width * options.heightRatio);
-    }
-
-    function cssSlideWidth() {
-      return options.autoWidth
-        ? null
-        : unit(options.fixedWidth) || (vertical ? "" : cssSlideSize());
-    }
-
-    function cssSlideHeight() {
-      return (
-        unit(options.fixedHeight) ||
-        (vertical ? (options.autoHeight ? null : cssSlideSize()) : cssHeight())
-      );
-    }
-
-    function cssSlideSize() {
-      var gap = unit(options.gap);
-      return (
-        "calc((100%" +
-        (gap && " + " + gap) +
-        ")/" +
-        (options.perPage || 1) +
-        (gap && " - " + gap) +
-        ")"
-      );
-    }
-
-    function listSize() {
-      return rect(list)[resolve("width")];
-    }
-
-    function slideSize(index, withoutGap) {
-      var Slide = getAt(index || 0);
-      return Slide
-        ? rect(Slide.slide)[resolve("width")] + (withoutGap ? 0 : getGap())
-        : 0;
-    }
-
-    function totalSize(index, withoutGap) {
-      var Slide = getAt(index);
-
-      if (Slide) {
-        var right = rect(Slide.slide)[resolve("right")];
-        var left = rect(list)[resolve("left")];
-        return abs(right - left) + (withoutGap ? 0 : getGap());
-      }
-
-      return 0;
-    }
-
-    function sliderSize(withoutGap) {
-      return (
-        totalSize(Splide2.length - 1) - totalSize(0) + slideSize(0, withoutGap)
-      );
-    }
-
-    function getGap() {
-      var Slide = getAt(0);
-      return (
-        (Slide && parseFloat(style(Slide.slide, resolve("marginRight")))) || 0
-      );
-    }
-
-    function getPadding(right) {
-      return (
-        parseFloat(
-          style(track, resolve("padding" + (right ? "Right" : "Left")))
-        ) || 0
-      );
-    }
-
-    function isOverflow() {
-      return Splide2.is(FADE) || sliderSize(true) > listSize();
-    }
-
-    return {
-      mount: mount,
-      resize: resize,
-      listSize: listSize,
-      slideSize: slideSize,
-      sliderSize: sliderSize,
-      totalSize: totalSize,
-      getPadding: getPadding,
-      isOverflow: isOverflow,
-    };
-  }
-
-  var MULTIPLIER = 2;
-
-  function Clones(Splide2, Components2, options) {
-    var event = EventInterface(Splide2);
-    var on = event.on;
-    var Elements = Components2.Elements,
-      Slides = Components2.Slides;
-    var resolve = Components2.Direction.resolve;
-    var clones = [];
-    var cloneCount;
-
-    function mount() {
-      on(EVENT_REFRESH, remount);
-      on([EVENT_UPDATED, EVENT_RESIZE], observe);
-
-      if ((cloneCount = computeCloneCount())) {
-        generate(cloneCount);
-        Components2.Layout.resize(true);
-      }
-    }
-
-    function remount() {
-      destroy();
-      mount();
-    }
-
-    function destroy() {
-      remove(clones);
-      empty(clones);
-      event.destroy();
-    }
-
-    function observe() {
-      var count = computeCloneCount();
-
-      if (cloneCount !== count) {
-        if (cloneCount < count || !count) {
-          event.emit(EVENT_REFRESH);
-        }
-      }
-    }
-
-    function generate(count) {
-      var slides = Slides.get().slice();
-      var length = slides.length;
-
-      if (length) {
-        while (slides.length < count) {
-          push(slides, slides);
-        }
-
-        push(slides.slice(-count), slides.slice(0, count)).forEach(function (
-          Slide,
-          index
-        ) {
-          var isHead = index < count;
-          var clone = cloneDeep(Slide.slide, index);
-          isHead
-            ? before(clone, slides[0].slide)
-            : append(Elements.list, clone);
-          push(clones, clone);
-          Slides.register(
-            clone,
-            index - count + (isHead ? 0 : length),
-            Slide.index
-          );
-        });
-      }
-    }
-
-    function cloneDeep(elm, index) {
-      var clone = elm.cloneNode(true);
-      addClass(clone, options.classes.clone);
-      clone.id = Splide2.root.id + "-clone" + pad(index + 1);
-      return clone;
-    }
-
-    function computeCloneCount() {
-      var clones2 = options.clones;
-
-      if (!Splide2.is(LOOP)) {
-        clones2 = 0;
-      } else if (isUndefined(clones2)) {
-        var fixedSize =
-          options[resolve("fixedWidth")] && Components2.Layout.slideSize(0);
-        var fixedCount =
-          fixedSize && ceil(rect(Elements.track)[resolve("width")] / fixedSize);
-        clones2 =
-          fixedCount ||
-          (options[resolve("autoWidth")] && Splide2.length) ||
-          options.perPage * MULTIPLIER;
-      }
-
-      return clones2;
-    }
-
-    return {
-      mount: mount,
-      destroy: destroy,
-    };
-  }
-
-  function Move(Splide2, Components2, options) {
-    var _EventInterface4 = EventInterface(Splide2),
-      on = _EventInterface4.on,
-      emit = _EventInterface4.emit;
-
-    var set = Splide2.state.set;
-    var _Components2$Layout = Components2.Layout,
-      slideSize = _Components2$Layout.slideSize,
-      getPadding = _Components2$Layout.getPadding,
-      totalSize = _Components2$Layout.totalSize,
-      listSize = _Components2$Layout.listSize,
-      sliderSize = _Components2$Layout.sliderSize;
-    var _Components2$Directio = Components2.Direction,
-      resolve = _Components2$Directio.resolve,
-      orient = _Components2$Directio.orient;
-    var _Components2$Elements3 = Components2.Elements,
-      list = _Components2$Elements3.list,
-      track = _Components2$Elements3.track;
-    var Transition;
-
-    function mount() {
-      Transition = Components2.Transition;
-      on(
-        [EVENT_MOUNTED, EVENT_RESIZED, EVENT_UPDATED, EVENT_REFRESH],
-        reposition
-      );
-    }
-
-    function reposition() {
-      if (!Components2.Controller.isBusy()) {
-        Components2.Scroll.cancel();
-        jump(Splide2.index);
-        Components2.Slides.update();
-      }
-    }
-
-    function move(dest, index, prev, callback) {
-      if (dest !== index && canShift(dest > prev)) {
-        cancel();
-        translate(shift(getPosition(), dest > prev), true);
-      }
-
-      set(MOVING);
-      emit(EVENT_MOVE, index, prev, dest);
-      Transition.start(index, function () {
-        set(IDLE);
-        emit(EVENT_MOVED, index, prev, dest);
-        callback && callback();
-      });
-    }
-
-    function jump(index) {
-      translate(toPosition(index, true));
-    }
-
-    function translate(position, preventLoop) {
-      if (!Splide2.is(FADE)) {
-        var destination = preventLoop ? position : loop(position);
-        style(
-          list,
-          "transform",
-          "translate" + resolve("X") + "(" + destination + "px)"
-        );
-        position !== destination && emit(EVENT_SHIFTED);
-      }
-    }
-
-    function loop(position) {
-      if (Splide2.is(LOOP)) {
-        var index = toIndex(position);
-        var exceededMax = index > Components2.Controller.getEnd();
-        var exceededMin = index < 0;
-
-        if (exceededMin || exceededMax) {
-          position = shift(position, exceededMax);
-        }
-      }
-
-      return position;
-    }
-
-    function shift(position, backwards) {
-      var excess = position - getLimit(backwards);
-      var size = sliderSize();
-      position -=
-        orient(size * (ceil(abs(excess) / size) || 1)) * (backwards ? 1 : -1);
-      return position;
-    }
-
-    function cancel() {
-      translate(getPosition(), true);
-      Transition.cancel();
-    }
-
-    function toIndex(position) {
-      var Slides = Components2.Slides.get();
-      var index = 0;
-      var minDistance = Infinity;
-
-      for (var i = 0; i < Slides.length; i++) {
-        var slideIndex = Slides[i].index;
-        var distance = abs(toPosition(slideIndex, true) - position);
-
-        if (distance <= minDistance) {
-          minDistance = distance;
-          index = slideIndex;
-        } else {
-          break;
-        }
-      }
-
-      return index;
-    }
-
-    function toPosition(index, trimming) {
-      var position = orient(totalSize(index - 1) - offset(index));
-      return trimming ? trim(position) : position;
-    }
-
-    function getPosition() {
-      var left = resolve("left");
-      return rect(list)[left] - rect(track)[left] + orient(getPadding(false));
-    }
-
-    function trim(position) {
-      if (options.trimSpace && Splide2.is(SLIDE)) {
-        position = clamp(position, 0, orient(sliderSize(true) - listSize()));
-      }
-
-      return position;
-    }
-
-    function offset(index) {
-      var focus = options.focus;
-      return focus === "center"
-        ? (listSize() - slideSize(index, true)) / 2
-        : +focus * slideSize(index) || 0;
-    }
-
-    function getLimit(max) {
-      return toPosition(
-        max ? Components2.Controller.getEnd() : 0,
-        !!options.trimSpace
-      );
-    }
-
-    function canShift(backwards) {
-      var shifted = orient(shift(getPosition(), backwards));
-      return backwards
-        ? shifted >= 0
-        : shifted <=
-            list[resolve("scrollWidth")] - rect(track)[resolve("width")];
-    }
-
-    function exceededLimit(max, position) {
-      position = isUndefined(position) ? getPosition() : position;
-      var exceededMin =
-        max !== true && orient(position) < orient(getLimit(false));
-      var exceededMax =
-        max !== false && orient(position) > orient(getLimit(true));
-      return exceededMin || exceededMax;
-    }
-
-    return {
-      mount: mount,
-      move: move,
-      jump: jump,
-      translate: translate,
-      shift: shift,
-      cancel: cancel,
-      toIndex: toIndex,
-      toPosition: toPosition,
-      getPosition: getPosition,
-      getLimit: getLimit,
-      exceededLimit: exceededLimit,
-      reposition: reposition,
-    };
-  }
-
-  function Controller(Splide2, Components2, options) {
-    var _EventInterface5 = EventInterface(Splide2),
-      on = _EventInterface5.on,
-      emit = _EventInterface5.emit;
-
-    var Move = Components2.Move;
-    var getPosition = Move.getPosition,
-      getLimit = Move.getLimit,
-      toPosition = Move.toPosition;
-    var _Components2$Slides = Components2.Slides,
-      isEnough = _Components2$Slides.isEnough,
-      getLength = _Components2$Slides.getLength;
-    var omitEnd = options.omitEnd;
-    var isLoop = Splide2.is(LOOP);
-    var isSlide = Splide2.is(SLIDE);
-    var getNext = apply(getAdjacent, false);
-    var getPrev = apply(getAdjacent, true);
-    var currIndex = options.start || 0;
-    var endIndex;
-    var prevIndex = currIndex;
-    var slideCount;
-    var perMove;
-    var perPage;
-
-    function mount() {
-      init();
-      on([EVENT_UPDATED, EVENT_REFRESH, EVENT_END_INDEX_CHANGED], init);
-      on(EVENT_RESIZED, onResized);
-    }
-
-    function init() {
-      slideCount = getLength(true);
-      perMove = options.perMove;
-      perPage = options.perPage;
-      endIndex = getEnd();
-      var index = clamp(currIndex, 0, omitEnd ? endIndex : slideCount - 1);
-
-      if (index !== currIndex) {
-        currIndex = index;
-        Move.reposition();
-      }
-    }
-
-    function onResized() {
-      if (endIndex !== getEnd()) {
-        emit(EVENT_END_INDEX_CHANGED);
-      }
-    }
-
-    function go(control, allowSameIndex, callback) {
-      if (!isBusy()) {
-        var dest = parse(control);
-        var index = loop(dest);
-
-        if (index > -1 && (allowSameIndex || index !== currIndex)) {
-          setIndex(index);
-          Move.move(dest, index, prevIndex, callback);
-        }
-      }
-    }
-
-    function scroll(destination, duration, snap, callback) {
-      Components2.Scroll.scroll(destination, duration, snap, function () {
-        var index = loop(Move.toIndex(getPosition()));
-        setIndex(omitEnd ? min(index, endIndex) : index);
-        callback && callback();
-      });
-    }
-
-    function parse(control) {
-      var index = currIndex;
-
-      if (isString(control)) {
-        var _ref = control.match(/([+\-<>])(\d+)?/) || [],
-          indicator = _ref[1],
-          number = _ref[2];
-
-        if (indicator === "+" || indicator === "-") {
-          index = computeDestIndex(
-            currIndex + +("" + indicator + (+number || 1)),
-            currIndex
-          );
-        } else if (indicator === ">") {
-          index = number ? toIndex(+number) : getNext(true);
-        } else if (indicator === "<") {
-          index = getPrev(true);
-        }
-      } else {
-        index = isLoop ? control : clamp(control, 0, endIndex);
-      }
-
-      return index;
-    }
-
-    function getAdjacent(prev, destination) {
-      var number = perMove || (hasFocus() ? 1 : perPage);
-      var dest = computeDestIndex(
-        currIndex + number * (prev ? -1 : 1),
-        currIndex,
-        !(perMove || hasFocus())
-      );
-
-      if (dest === -1 && isSlide) {
-        if (!approximatelyEqual(getPosition(), getLimit(!prev), 1)) {
-          return prev ? 0 : endIndex;
-        }
-      }
-
-      return destination ? dest : loop(dest);
-    }
-
-    function computeDestIndex(dest, from, snapPage) {
-      if (isEnough() || hasFocus()) {
-        var index = computeMovableDestIndex(dest);
-
-        if (index !== dest) {
-          from = dest;
-          dest = index;
-          snapPage = false;
-        }
-
-        if (dest < 0 || dest > endIndex) {
-          if (
-            !perMove &&
-            (between(0, dest, from, true) ||
-              between(endIndex, from, dest, true))
-          ) {
-            dest = toIndex(toPage(dest));
-          } else {
-            if (isLoop) {
-              dest = snapPage
-                ? dest < 0
-                  ? -(slideCount % perPage || perPage)
-                  : slideCount
-                : dest;
-            } else if (options.rewind) {
-              dest = dest < 0 ? endIndex : 0;
-            } else {
-              dest = -1;
-            }
-          }
-        } else {
-          if (snapPage && dest !== from) {
-            dest = toIndex(toPage(from) + (dest < from ? -1 : 1));
-          }
-        }
-      } else {
-        dest = -1;
-      }
-
-      return dest;
-    }
-
-    function computeMovableDestIndex(dest) {
-      if (isSlide && options.trimSpace === "move" && dest !== currIndex) {
-        var position = getPosition();
-
-        while (
-          position === toPosition(dest, true) &&
-          between(dest, 0, Splide2.length - 1, !options.rewind)
-        ) {
-          dest < currIndex ? --dest : ++dest;
-        }
-      }
-
-      return dest;
-    }
-
-    function loop(index) {
-      return isLoop ? (index + slideCount) % slideCount || 0 : index;
-    }
-
-    function getEnd() {
-      var end = slideCount - (hasFocus() || (isLoop && perMove) ? 1 : perPage);
-
-      while (omitEnd && end-- > 0) {
-        if (toPosition(slideCount - 1, true) !== toPosition(end, true)) {
-          end++;
-          break;
-        }
-      }
-
-      return clamp(end, 0, slideCount - 1);
-    }
-
-    function toIndex(page) {
-      return clamp(hasFocus() ? page : perPage * page, 0, endIndex);
-    }
-
-    function toPage(index) {
-      return hasFocus()
-        ? min(index, endIndex)
-        : floor((index >= endIndex ? slideCount - 1 : index) / perPage);
-    }
-
-    function toDest(destination) {
-      var closest = Move.toIndex(destination);
-      return isSlide ? clamp(closest, 0, endIndex) : closest;
-    }
-
-    function setIndex(index) {
-      if (index !== currIndex) {
-        prevIndex = currIndex;
-        currIndex = index;
-      }
-    }
-
-    function getIndex(prev) {
-      return prev ? prevIndex : currIndex;
-    }
-
-    function hasFocus() {
-      return !isUndefined(options.focus) || options.isNavigation;
-    }
-
-    function isBusy() {
-      return (
-        Splide2.state.is([MOVING, SCROLLING]) && !!options.waitForTransition
-      );
-    }
-
-    return {
-      mount: mount,
-      go: go,
-      scroll: scroll,
-      getNext: getNext,
-      getPrev: getPrev,
-      getAdjacent: getAdjacent,
-      getEnd: getEnd,
-      setIndex: setIndex,
-      getIndex: getIndex,
-      toIndex: toIndex,
-      toPage: toPage,
-      toDest: toDest,
-      hasFocus: hasFocus,
-      isBusy: isBusy,
-    };
-  }
-
-  var XML_NAME_SPACE = "http://www.w3.org/2000/svg";
-  var PATH =
-    "m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z";
-  var SIZE = 40;
-
-  function Arrows(Splide2, Components2, options) {
-    var event = EventInterface(Splide2);
-    var on = event.on,
-      bind = event.bind,
-      emit = event.emit;
-    var classes = options.classes,
-      i18n = options.i18n;
-    var Elements = Components2.Elements,
-      Controller = Components2.Controller;
-    var placeholder = Elements.arrows,
-      track = Elements.track;
-    var wrapper = placeholder;
-    var prev = Elements.prev;
-    var next = Elements.next;
-    var created;
-    var wrapperClasses;
-    var arrows = {};
-
-    function mount() {
-      init();
-      on(EVENT_UPDATED, remount);
-    }
-
-    function remount() {
-      destroy();
-      mount();
-    }
-
-    function init() {
-      var enabled = options.arrows;
-
-      if (enabled && !(prev && next)) {
-        createArrows();
-      }
-
-      if (prev && next) {
-        splide_esm_assign(arrows, {
-          prev: prev,
-          next: next,
-        });
-        display(wrapper, enabled ? "" : "none");
-        addClass(
-          wrapper,
-          (wrapperClasses = CLASS_ARROWS + "--" + options.direction)
-        );
-
-        if (enabled) {
-          listen();
-          update();
-          setAttribute([prev, next], ARIA_CONTROLS, track.id);
-          emit(EVENT_ARROWS_MOUNTED, prev, next);
-        }
-      }
-    }
-
-    function destroy() {
-      event.destroy();
-      removeClass(wrapper, wrapperClasses);
-
-      if (created) {
-        remove(placeholder ? [prev, next] : wrapper);
-        prev = next = null;
-      } else {
-        removeAttribute([prev, next], ALL_ATTRIBUTES);
-      }
-    }
-
-    function listen() {
-      on(
-        [
-          EVENT_MOUNTED,
-          EVENT_MOVED,
-          EVENT_REFRESH,
-          EVENT_SCROLLED,
-          EVENT_END_INDEX_CHANGED,
-        ],
-        update
-      );
-      bind(next, "click", apply(go, ">"));
-      bind(prev, "click", apply(go, "<"));
-    }
-
-    function go(control) {
-      Controller.go(control, true);
-    }
-
-    function createArrows() {
-      wrapper = placeholder || create("div", classes.arrows);
-      prev = createArrow(true);
-      next = createArrow(false);
-      created = true;
-      append(wrapper, [prev, next]);
-      !placeholder && before(wrapper, track);
-    }
-
-    function createArrow(prev2) {
-      var arrow =
-        '<button class="' +
-        classes.arrow +
-        " " +
-        (prev2 ? classes.prev : classes.next) +
-        '" type="button"><svg xmlns="' +
-        XML_NAME_SPACE +
-        '" viewBox="0 0 ' +
-        SIZE +
-        " " +
-        SIZE +
-        '" width="' +
-        SIZE +
-        '" height="' +
-        SIZE +
-        '" focusable="false"><path d="' +
-        (options.arrowPath || PATH) +
-        '" />';
-      return parseHtml(arrow);
-    }
-
-    function update() {
-      if (prev && next) {
-        var index = Splide2.index;
-        var prevIndex = Controller.getPrev();
-        var nextIndex = Controller.getNext();
-        var prevLabel =
-          prevIndex > -1 && index < prevIndex ? i18n.last : i18n.prev;
-        var nextLabel =
-          nextIndex > -1 && index > nextIndex ? i18n.first : i18n.next;
-        prev.disabled = prevIndex < 0;
-        next.disabled = nextIndex < 0;
-        setAttribute(prev, ARIA_LABEL, prevLabel);
-        setAttribute(next, ARIA_LABEL, nextLabel);
-        emit(EVENT_ARROWS_UPDATED, prev, next, prevIndex, nextIndex);
-      }
-    }
-
-    return {
-      arrows: arrows,
-      mount: mount,
-      destroy: destroy,
-      update: update,
-    };
-  }
-
-  var INTERVAL_DATA_ATTRIBUTE = DATA_ATTRIBUTE + "-interval";
-
-  function Autoplay(Splide2, Components2, options) {
-    var _EventInterface6 = EventInterface(Splide2),
-      on = _EventInterface6.on,
-      bind = _EventInterface6.bind,
-      emit = _EventInterface6.emit;
-
-    var interval = RequestInterval(
-      options.interval,
-      Splide2.go.bind(Splide2, ">"),
-      onAnimationFrame
-    );
-    var isPaused = interval.isPaused;
-    var Elements = Components2.Elements,
-      _Components2$Elements4 = Components2.Elements,
-      root = _Components2$Elements4.root,
-      toggle = _Components2$Elements4.toggle;
-    var autoplay = options.autoplay;
-    var hovered;
-    var focused;
-    var stopped = autoplay === "pause";
-
-    function mount() {
-      if (autoplay) {
-        listen();
-        toggle && setAttribute(toggle, ARIA_CONTROLS, Elements.track.id);
-        stopped || play();
-        update();
-      }
-    }
-
-    function listen() {
-      if (options.pauseOnHover) {
-        bind(root, "mouseenter mouseleave", function (e) {
-          hovered = e.type === "mouseenter";
-          autoToggle();
-        });
-      }
-
-      if (options.pauseOnFocus) {
-        bind(root, "focusin focusout", function (e) {
-          focused = e.type === "focusin";
-          autoToggle();
-        });
-      }
-
-      if (toggle) {
-        bind(toggle, "click", function () {
-          stopped ? play() : pause(true);
-        });
-      }
-
-      on([EVENT_MOVE, EVENT_SCROLL, EVENT_REFRESH], interval.rewind);
-      on(EVENT_MOVE, onMove);
-    }
-
-    function play() {
-      if (isPaused() && Components2.Slides.isEnough()) {
-        interval.start(!options.resetProgress);
-        focused = hovered = stopped = false;
-        update();
-        emit(EVENT_AUTOPLAY_PLAY);
-      }
-    }
-
-    function pause(stop) {
-      if (stop === void 0) {
-        stop = true;
-      }
-
-      stopped = !!stop;
-      update();
-
-      if (!isPaused()) {
-        interval.pause();
-        emit(EVENT_AUTOPLAY_PAUSE);
-      }
-    }
-
-    function autoToggle() {
-      if (!stopped) {
-        hovered || focused ? pause(false) : play();
-      }
-    }
-
-    function update() {
-      if (toggle) {
-        toggleClass(toggle, CLASS_ACTIVE, !stopped);
-        setAttribute(
-          toggle,
-          ARIA_LABEL,
-          options.i18n[stopped ? "play" : "pause"]
-        );
-      }
-    }
-
-    function onAnimationFrame(rate) {
-      var bar = Elements.bar;
-      bar && style(bar, "width", rate * 100 + "%");
-      emit(EVENT_AUTOPLAY_PLAYING, rate);
-    }
-
-    function onMove(index) {
-      var Slide = Components2.Slides.getAt(index);
-      interval.set(
-        (Slide && +getAttribute(Slide.slide, INTERVAL_DATA_ATTRIBUTE)) ||
-          options.interval
-      );
-    }
-
-    return {
-      mount: mount,
-      destroy: interval.cancel,
-      play: play,
-      pause: pause,
-      isPaused: isPaused,
-    };
-  }
-
-  function Cover(Splide2, Components2, options) {
-    var _EventInterface7 = EventInterface(Splide2),
-      on = _EventInterface7.on;
-
-    function mount() {
-      if (options.cover) {
-        on(EVENT_LAZYLOAD_LOADED, apply(toggle, true));
-        on([EVENT_MOUNTED, EVENT_UPDATED, EVENT_REFRESH], apply(cover, true));
-      }
-    }
-
-    function cover(cover2) {
-      Components2.Slides.forEach(function (Slide) {
-        var img = child(Slide.container || Slide.slide, "img");
-
-        if (img && img.src) {
-          toggle(cover2, img, Slide);
-        }
-      });
-    }
-
-    function toggle(cover2, img, Slide) {
-      Slide.style(
-        "background",
-        cover2 ? 'center/cover no-repeat url("' + img.src + '")' : "",
-        true
-      );
-      display(img, cover2 ? "none" : "");
-    }
-
-    return {
-      mount: mount,
-      destroy: apply(cover, false),
-    };
-  }
-
-  var BOUNCE_DIFF_THRESHOLD = 10;
-  var BOUNCE_DURATION = 600;
-  var FRICTION_FACTOR = 0.6;
-  var BASE_VELOCITY = 1.5;
-  var MIN_DURATION = 800;
-
-  function Scroll(Splide2, Components2, options) {
-    var _EventInterface8 = EventInterface(Splide2),
-      on = _EventInterface8.on,
-      emit = _EventInterface8.emit;
-
-    var set = Splide2.state.set;
-    var Move = Components2.Move;
-    var getPosition = Move.getPosition,
-      getLimit = Move.getLimit,
-      exceededLimit = Move.exceededLimit,
-      translate = Move.translate;
-    var isSlide = Splide2.is(SLIDE);
-    var interval;
-    var callback;
-    var friction = 1;
-
-    function mount() {
-      on(EVENT_MOVE, clear);
-      on([EVENT_UPDATED, EVENT_REFRESH], cancel);
-    }
-
-    function scroll(destination, duration, snap, onScrolled, noConstrain) {
-      var from = getPosition();
-      clear();
-
-      if (snap && (!isSlide || !exceededLimit())) {
-        var size = Components2.Layout.sliderSize();
-        var offset =
-          sign(destination) * size * floor(abs(destination) / size) || 0;
-        destination =
-          Move.toPosition(Components2.Controller.toDest(destination % size)) +
-          offset;
-      }
-
-      var noDistance = approximatelyEqual(from, destination, 1);
-      friction = 1;
-      duration = noDistance
-        ? 0
-        : duration ||
-          max(abs(destination - from) / BASE_VELOCITY, MIN_DURATION);
-      callback = onScrolled;
-      interval = RequestInterval(
-        duration,
-        onEnd,
-        apply(update, from, destination, noConstrain),
-        1
-      );
-      set(SCROLLING);
-      emit(EVENT_SCROLL);
-      interval.start();
-    }
-
-    function onEnd() {
-      set(IDLE);
-      callback && callback();
-      emit(EVENT_SCROLLED);
-    }
-
-    function update(from, to, noConstrain, rate) {
-      var position = getPosition();
-      var target = from + (to - from) * easing(rate);
-      var diff = (target - position) * friction;
-      translate(position + diff);
-
-      if (isSlide && !noConstrain && exceededLimit()) {
-        friction *= FRICTION_FACTOR;
-
-        if (abs(diff) < BOUNCE_DIFF_THRESHOLD) {
-          scroll(
-            getLimit(exceededLimit(true)),
-            BOUNCE_DURATION,
-            false,
-            callback,
-            true
-          );
-        }
-      }
-    }
-
-    function clear() {
-      if (interval) {
-        interval.cancel();
-      }
-    }
-
-    function cancel() {
-      if (interval && !interval.isPaused()) {
-        clear();
-        onEnd();
-      }
-    }
-
-    function easing(t) {
-      var easingFunc = options.easingFunc;
-      return easingFunc ? easingFunc(t) : 1 - Math.pow(1 - t, 4);
-    }
-
-    return {
-      mount: mount,
-      destroy: clear,
-      scroll: scroll,
-      cancel: cancel,
-    };
-  }
-
-  var SCROLL_LISTENER_OPTIONS = {
-    passive: false,
-    capture: true,
-  };
-
-  function Drag(Splide2, Components2, options) {
-    var _EventInterface9 = EventInterface(Splide2),
-      on = _EventInterface9.on,
-      emit = _EventInterface9.emit,
-      bind = _EventInterface9.bind,
-      unbind = _EventInterface9.unbind;
-
-    var state = Splide2.state;
-    var Move = Components2.Move,
-      Scroll = Components2.Scroll,
-      Controller = Components2.Controller,
-      track = Components2.Elements.track,
-      reduce = Components2.Media.reduce;
-    var _Components2$Directio2 = Components2.Direction,
-      resolve = _Components2$Directio2.resolve,
-      orient = _Components2$Directio2.orient;
-    var getPosition = Move.getPosition,
-      exceededLimit = Move.exceededLimit;
-    var basePosition;
-    var baseEvent;
-    var prevBaseEvent;
-    var isFree;
-    var dragging;
-    var exceeded = false;
-    var clickPrevented;
-    var disabled;
-    var target;
-
-    function mount() {
-      bind(track, POINTER_MOVE_EVENTS, noop, SCROLL_LISTENER_OPTIONS);
-      bind(track, POINTER_UP_EVENTS, noop, SCROLL_LISTENER_OPTIONS);
-      bind(track, POINTER_DOWN_EVENTS, onPointerDown, SCROLL_LISTENER_OPTIONS);
-      bind(track, "click", onClick, {
-        capture: true,
-      });
-      bind(track, "dragstart", prevent);
-      on([EVENT_MOUNTED, EVENT_UPDATED], init);
-    }
-
-    function init() {
-      var drag = options.drag;
-      disable(!drag);
-      isFree = drag === "free";
-    }
-
-    function onPointerDown(e) {
-      clickPrevented = false;
-
-      if (!disabled) {
-        var isTouch = isTouchEvent(e);
-
-        if (isDraggable(e.target) && (isTouch || !e.button)) {
-          if (!Controller.isBusy()) {
-            target = isTouch ? track : window;
-            dragging = state.is([MOVING, SCROLLING]);
-            prevBaseEvent = null;
-            bind(
-              target,
-              POINTER_MOVE_EVENTS,
-              onPointerMove,
-              SCROLL_LISTENER_OPTIONS
-            );
-            bind(
-              target,
-              POINTER_UP_EVENTS,
-              onPointerUp,
-              SCROLL_LISTENER_OPTIONS
-            );
-            Move.cancel();
-            Scroll.cancel();
-            save(e);
-          } else {
-            prevent(e, true);
-          }
-        }
-      }
-    }
-
-    function onPointerMove(e) {
-      if (!state.is(DRAGGING)) {
-        state.set(DRAGGING);
-        emit(EVENT_DRAG);
-      }
-
-      if (e.cancelable) {
-        if (dragging) {
-          Move.translate(basePosition + constrain(diffCoord(e)));
-          var expired = diffTime(e) > LOG_INTERVAL;
-          var hasExceeded = exceeded !== (exceeded = exceededLimit());
-
-          if (expired || hasExceeded) {
-            save(e);
-          }
-
-          clickPrevented = true;
-          emit(EVENT_DRAGGING);
-          prevent(e);
-        } else if (isSliderDirection(e)) {
-          dragging = shouldStart(e);
-          prevent(e);
-        }
-      }
-    }
-
-    function onPointerUp(e) {
-      if (state.is(DRAGGING)) {
-        state.set(IDLE);
-        emit(EVENT_DRAGGED);
-      }
-
-      if (dragging) {
-        move(e);
-        prevent(e);
-      }
-
-      unbind(target, POINTER_MOVE_EVENTS, onPointerMove);
-      unbind(target, POINTER_UP_EVENTS, onPointerUp);
-      dragging = false;
-    }
-
-    function onClick(e) {
-      if (!disabled && clickPrevented) {
-        prevent(e, true);
-      }
-    }
-
-    function save(e) {
-      prevBaseEvent = baseEvent;
-      baseEvent = e;
-      basePosition = getPosition();
-    }
-
-    function move(e) {
-      var velocity = computeVelocity(e);
-      var destination = computeDestination(velocity);
-      var rewind = options.rewind && options.rewindByDrag;
-      reduce(false);
-
-      if (isFree) {
-        Controller.scroll(destination, 0, options.snap);
-      } else if (Splide2.is(FADE)) {
-        Controller.go(
-          orient(sign(velocity)) < 0 ? (rewind ? "<" : "-") : rewind ? ">" : "+"
-        );
-      } else if (Splide2.is(SLIDE) && exceeded && rewind) {
-        Controller.go(exceededLimit(true) ? ">" : "<");
-      } else {
-        Controller.go(Controller.toDest(destination), true);
-      }
-
-      reduce(true);
-    }
-
-    function shouldStart(e) {
-      var thresholds = options.dragMinThreshold;
-      var isObj = isObject(thresholds);
-      var mouse = (isObj && thresholds.mouse) || 0;
-      var touch = (isObj ? thresholds.touch : +thresholds) || 10;
-      return abs(diffCoord(e)) > (isTouchEvent(e) ? touch : mouse);
-    }
-
-    function isSliderDirection(e) {
-      return abs(diffCoord(e)) > abs(diffCoord(e, true));
-    }
-
-    function computeVelocity(e) {
-      if (Splide2.is(LOOP) || !exceeded) {
-        var time = diffTime(e);
-
-        if (time && time < LOG_INTERVAL) {
-          return diffCoord(e) / time;
-        }
-      }
-
-      return 0;
-    }
-
-    function computeDestination(velocity) {
-      return (
-        getPosition() +
-        sign(velocity) *
-          min(
-            abs(velocity) * (options.flickPower || 600),
-            isFree
-              ? Infinity
-              : Components2.Layout.listSize() * (options.flickMaxPages || 1)
-          )
-      );
-    }
-
-    function diffCoord(e, orthogonal) {
-      return coordOf(e, orthogonal) - coordOf(getBaseEvent(e), orthogonal);
-    }
-
-    function diffTime(e) {
-      return timeOf(e) - timeOf(getBaseEvent(e));
-    }
-
-    function getBaseEvent(e) {
-      return (baseEvent === e && prevBaseEvent) || baseEvent;
-    }
-
-    function coordOf(e, orthogonal) {
-      return (isTouchEvent(e) ? e.changedTouches[0] : e)[
-        "page" + resolve(orthogonal ? "Y" : "X")
-      ];
-    }
-
-    function constrain(diff) {
-      return diff / (exceeded && Splide2.is(SLIDE) ? FRICTION : 1);
-    }
-
-    function isDraggable(target2) {
-      var noDrag = options.noDrag;
-      return (
-        !matches(target2, "." + CLASS_PAGINATION_PAGE + ", ." + CLASS_ARROW) &&
-        (!noDrag || !matches(target2, noDrag))
-      );
-    }
-
-    function isTouchEvent(e) {
-      return typeof TouchEvent !== "undefined" && e instanceof TouchEvent;
-    }
-
-    function isDragging() {
-      return dragging;
-    }
-
-    function disable(value) {
-      disabled = value;
-    }
-
-    return {
-      mount: mount,
-      disable: disable,
-      isDragging: isDragging,
-    };
-  }
-
-  var NORMALIZATION_MAP = {
-    Spacebar: " ",
-    Right: ARROW_RIGHT,
-    Left: ARROW_LEFT,
-    Up: ARROW_UP,
-    Down: ARROW_DOWN,
-  };
-
-  function normalizeKey(key) {
-    key = isString(key) ? key : key.key;
-    return NORMALIZATION_MAP[key] || key;
-  }
-
-  var KEYBOARD_EVENT = "keydown";
-
-  function Keyboard(Splide2, Components2, options) {
-    var _EventInterface10 = EventInterface(Splide2),
-      on = _EventInterface10.on,
-      bind = _EventInterface10.bind,
-      unbind = _EventInterface10.unbind;
-
-    var root = Splide2.root;
-    var resolve = Components2.Direction.resolve;
-    var target;
-    var disabled;
-
-    function mount() {
-      init();
-      on(EVENT_UPDATED, destroy);
-      on(EVENT_UPDATED, init);
-      on(EVENT_MOVE, onMove);
-    }
-
-    function init() {
-      var keyboard = options.keyboard;
-
-      if (keyboard) {
-        target = keyboard === "global" ? window : root;
-        bind(target, KEYBOARD_EVENT, onKeydown);
-      }
-    }
-
-    function destroy() {
-      unbind(target, KEYBOARD_EVENT);
-    }
-
-    function disable(value) {
-      disabled = value;
-    }
-
-    function onMove() {
-      var _disabled = disabled;
-      disabled = true;
-      nextTick(function () {
-        disabled = _disabled;
-      });
-    }
-
-    function onKeydown(e) {
-      if (!disabled) {
-        var key = normalizeKey(e);
-
-        if (key === resolve(ARROW_LEFT)) {
-          Splide2.go("<");
-        } else if (key === resolve(ARROW_RIGHT)) {
-          Splide2.go(">");
-        }
-      }
-    }
-
-    return {
-      mount: mount,
-      destroy: destroy,
-      disable: disable,
-    };
-  }
-
-  var SRC_DATA_ATTRIBUTE = DATA_ATTRIBUTE + "-lazy";
-  var SRCSET_DATA_ATTRIBUTE = SRC_DATA_ATTRIBUTE + "-srcset";
-  var IMAGE_SELECTOR =
-    "[" + SRC_DATA_ATTRIBUTE + "], [" + SRCSET_DATA_ATTRIBUTE + "]";
-
-  function LazyLoad(Splide2, Components2, options) {
-    var _EventInterface11 = EventInterface(Splide2),
-      on = _EventInterface11.on,
-      off = _EventInterface11.off,
-      bind = _EventInterface11.bind,
-      emit = _EventInterface11.emit;
-
-    var isSequential = options.lazyLoad === "sequential";
-    var events = [EVENT_MOVED, EVENT_SCROLLED];
-    var entries = [];
-
-    function mount() {
-      if (options.lazyLoad) {
-        init();
-        on(EVENT_REFRESH, init);
-      }
-    }
-
-    function init() {
-      empty(entries);
-      register();
-
-      if (isSequential) {
-        loadNext();
-      } else {
-        off(events);
-        on(events, check);
-        check();
-      }
-    }
-
-    function register() {
-      Components2.Slides.forEach(function (Slide) {
-        queryAll(Slide.slide, IMAGE_SELECTOR).forEach(function (img) {
-          var src = getAttribute(img, SRC_DATA_ATTRIBUTE);
-          var srcset = getAttribute(img, SRCSET_DATA_ATTRIBUTE);
-
-          if (src !== img.src || srcset !== img.srcset) {
-            var className = options.classes.spinner;
-            var parent = img.parentElement;
-            var spinner =
-              child(parent, "." + className) ||
-              create("span", className, parent);
-            entries.push([img, Slide, spinner]);
-            img.src || display(img, "none");
-          }
-        });
-      });
-    }
-
-    function check() {
-      entries = entries.filter(function (data) {
-        var distance = options.perPage * ((options.preloadPages || 1) + 1) - 1;
-        return data[1].isWithin(Splide2.index, distance) ? load(data) : true;
-      });
-      entries.length || off(events);
-    }
-
-    function load(data) {
-      var img = data[0];
-      addClass(data[1].slide, CLASS_LOADING);
-      bind(img, "load error", apply(onLoad, data));
-      setAttribute(img, "src", getAttribute(img, SRC_DATA_ATTRIBUTE));
-      setAttribute(img, "srcset", getAttribute(img, SRCSET_DATA_ATTRIBUTE));
-      removeAttribute(img, SRC_DATA_ATTRIBUTE);
-      removeAttribute(img, SRCSET_DATA_ATTRIBUTE);
-    }
-
-    function onLoad(data, e) {
-      var img = data[0],
-        Slide = data[1];
-      removeClass(Slide.slide, CLASS_LOADING);
-
-      if (e.type !== "error") {
-        remove(data[2]);
-        display(img, "");
-        emit(EVENT_LAZYLOAD_LOADED, img, Slide);
-        emit(EVENT_RESIZE);
-      }
-
-      isSequential && loadNext();
-    }
-
-    function loadNext() {
-      entries.length && load(entries.shift());
-    }
-
-    return {
-      mount: mount,
-      destroy: apply(empty, entries),
-      check: check,
-    };
-  }
-
-  function Pagination(Splide2, Components2, options) {
-    var event = EventInterface(Splide2);
-    var on = event.on,
-      emit = event.emit,
-      bind = event.bind;
-    var Slides = Components2.Slides,
-      Elements = Components2.Elements,
-      Controller = Components2.Controller;
-    var hasFocus = Controller.hasFocus,
-      getIndex = Controller.getIndex,
-      go = Controller.go;
-    var resolve = Components2.Direction.resolve;
-    var placeholder = Elements.pagination;
-    var items = [];
-    var list;
-    var paginationClasses;
-
-    function mount() {
-      destroy();
-      on([EVENT_UPDATED, EVENT_REFRESH, EVENT_END_INDEX_CHANGED], mount);
-      var enabled = options.pagination;
-      placeholder && display(placeholder, enabled ? "" : "none");
-
-      if (enabled) {
-        on([EVENT_MOVE, EVENT_SCROLL, EVENT_SCROLLED], update);
-        createPagination();
-        update();
-        emit(
-          EVENT_PAGINATION_MOUNTED,
-          {
-            list: list,
-            items: items,
-          },
-          getAt(Splide2.index)
-        );
-      }
-    }
-
-    function destroy() {
-      if (list) {
-        remove(placeholder ? slice(list.children) : list);
-        removeClass(list, paginationClasses);
-        empty(items);
-        list = null;
-      }
-
-      event.destroy();
-    }
-
-    function createPagination() {
-      var length = Splide2.length;
-      var classes = options.classes,
-        i18n = options.i18n,
-        perPage = options.perPage;
-      var max = hasFocus() ? Controller.getEnd() + 1 : ceil(length / perPage);
-      list =
-        placeholder ||
-        create("ul", classes.pagination, Elements.track.parentElement);
-      addClass(
-        list,
-        (paginationClasses = CLASS_PAGINATION + "--" + getDirection())
-      );
-      setAttribute(list, ROLE, "tablist");
-      setAttribute(list, ARIA_LABEL, i18n.select);
-      setAttribute(
-        list,
-        ARIA_ORIENTATION,
-        getDirection() === TTB ? "vertical" : ""
-      );
-
-      for (var i = 0; i < max; i++) {
-        var li = create("li", null, list);
-        var button = create(
-          "button",
-          {
-            class: classes.page,
-            type: "button",
-          },
-          li
-        );
-        var controls = Slides.getIn(i).map(function (Slide) {
-          return Slide.slide.id;
-        });
-        var text = !hasFocus() && perPage > 1 ? i18n.pageX : i18n.slideX;
-        bind(button, "click", apply(onClick, i));
-
-        if (options.paginationKeyboard) {
-          bind(button, "keydown", apply(onKeydown, i));
-        }
-
-        setAttribute(li, ROLE, "presentation");
-        setAttribute(button, ROLE, "tab");
-        setAttribute(button, ARIA_CONTROLS, controls.join(" "));
-        setAttribute(button, ARIA_LABEL, format(text, i + 1));
-        setAttribute(button, TAB_INDEX, -1);
-        items.push({
-          li: li,
-          button: button,
-          page: i,
-        });
-      }
-    }
-
-    function onClick(page) {
-      go(">" + page, true);
-    }
-
-    function onKeydown(page, e) {
-      var length = items.length;
-      var key = normalizeKey(e);
-      var dir = getDirection();
-      var nextPage = -1;
-
-      if (key === resolve(ARROW_RIGHT, false, dir)) {
-        nextPage = ++page % length;
-      } else if (key === resolve(ARROW_LEFT, false, dir)) {
-        nextPage = (--page + length) % length;
-      } else if (key === "Home") {
-        nextPage = 0;
-      } else if (key === "End") {
-        nextPage = length - 1;
-      }
-
-      var item = items[nextPage];
-
-      if (item) {
-        splide_esm_focus(item.button);
-        go(">" + nextPage);
-        prevent(e, true);
-      }
-    }
-
-    function getDirection() {
-      return options.paginationDirection || options.direction;
-    }
-
-    function getAt(index) {
-      return items[Controller.toPage(index)];
-    }
-
-    function update() {
-      var prev = getAt(getIndex(true));
-      var curr = getAt(getIndex());
-
-      if (prev) {
-        var button = prev.button;
-        removeClass(button, CLASS_ACTIVE);
-        removeAttribute(button, ARIA_SELECTED);
-        setAttribute(button, TAB_INDEX, -1);
-      }
-
-      if (curr) {
-        var _button = curr.button;
-        addClass(_button, CLASS_ACTIVE);
-        setAttribute(_button, ARIA_SELECTED, true);
-        setAttribute(_button, TAB_INDEX, "");
-      }
-
-      emit(
-        EVENT_PAGINATION_UPDATED,
-        {
-          list: list,
-          items: items,
-        },
-        prev,
-        curr
-      );
-    }
-
-    return {
-      items: items,
-      mount: mount,
-      destroy: destroy,
-      getAt: getAt,
-      update: update,
-    };
-  }
-
-  var TRIGGER_KEYS = [" ", "Enter"];
-
-  function Sync(Splide2, Components2, options) {
-    var isNavigation = options.isNavigation,
-      slideFocus = options.slideFocus;
-    var events = [];
-
-    function mount() {
-      Splide2.splides.forEach(function (target) {
-        if (!target.isParent) {
-          sync(Splide2, target.splide);
-          sync(target.splide, Splide2);
-        }
-      });
-
-      if (isNavigation) {
-        navigate();
-      }
-    }
-
-    function destroy() {
-      events.forEach(function (event) {
-        event.destroy();
-      });
-      empty(events);
-    }
-
-    function remount() {
-      destroy();
-      mount();
-    }
-
-    function sync(splide, target) {
-      var event = EventInterface(splide);
-      event.on(EVENT_MOVE, function (index, prev, dest) {
-        target.go(target.is(LOOP) ? dest : index);
-      });
-      events.push(event);
-    }
-
-    function navigate() {
-      var event = EventInterface(Splide2);
-      var on = event.on;
-      on(EVENT_CLICK, onClick);
-      on(EVENT_SLIDE_KEYDOWN, onKeydown);
-      on([EVENT_MOUNTED, EVENT_UPDATED], update);
-      events.push(event);
-      event.emit(EVENT_NAVIGATION_MOUNTED, Splide2.splides);
-    }
-
-    function update() {
-      setAttribute(
-        Components2.Elements.list,
-        ARIA_ORIENTATION,
-        options.direction === TTB ? "vertical" : ""
-      );
-    }
-
-    function onClick(Slide) {
-      Splide2.go(Slide.index);
-    }
-
-    function onKeydown(Slide, e) {
-      if (includes(TRIGGER_KEYS, normalizeKey(e))) {
-        onClick(Slide);
-        prevent(e);
-      }
-    }
-
-    return {
-      setup: apply(
-        Components2.Media.set,
-        {
-          slideFocus: isUndefined(slideFocus) ? isNavigation : slideFocus,
-        },
-        true
-      ),
-      mount: mount,
-      destroy: destroy,
-      remount: remount,
-    };
-  }
-
-  function Wheel(Splide2, Components2, options) {
-    var _EventInterface12 = EventInterface(Splide2),
-      bind = _EventInterface12.bind;
-
-    var lastTime = 0;
-
-    function mount() {
-      if (options.wheel) {
-        bind(
-          Components2.Elements.track,
-          "wheel",
-          onWheel,
-          SCROLL_LISTENER_OPTIONS
-        );
-      }
-    }
-
-    function onWheel(e) {
-      if (e.cancelable) {
-        var deltaY = e.deltaY;
-        var backwards = deltaY < 0;
-        var timeStamp = timeOf(e);
-
-        var _min = options.wheelMinThreshold || 0;
-
-        var sleep = options.wheelSleep || 0;
-
-        if (abs(deltaY) > _min && timeStamp - lastTime > sleep) {
-          Splide2.go(backwards ? "<" : ">");
-          lastTime = timeStamp;
-        }
-
-        shouldPrevent(backwards) && prevent(e);
-      }
-    }
-
-    function shouldPrevent(backwards) {
-      return (
-        !options.releaseWheel ||
-        Splide2.state.is(MOVING) ||
-        Components2.Controller.getAdjacent(backwards) !== -1
-      );
-    }
-
-    return {
-      mount: mount,
-    };
-  }
-
-  var SR_REMOVAL_DELAY = 90;
-
-  function Live(Splide2, Components2, options) {
-    var _EventInterface13 = EventInterface(Splide2),
-      on = _EventInterface13.on;
-
-    var track = Components2.Elements.track;
-    var enabled = options.live && !options.isNavigation;
-    var sr = create("span", CLASS_SR);
-    var interval = RequestInterval(SR_REMOVAL_DELAY, apply(toggle, false));
-
-    function mount() {
-      if (enabled) {
-        disable(!Components2.Autoplay.isPaused());
-        setAttribute(track, ARIA_ATOMIC, true);
-        sr.textContent = "\u2026";
-        on(EVENT_AUTOPLAY_PLAY, apply(disable, true));
-        on(EVENT_AUTOPLAY_PAUSE, apply(disable, false));
-        on([EVENT_MOVED, EVENT_SCROLLED], apply(toggle, true));
-      }
-    }
-
-    function toggle(active) {
-      setAttribute(track, ARIA_BUSY, active);
-
-      if (active) {
-        append(track, sr);
-        interval.start();
-      } else {
-        remove(sr);
-        interval.cancel();
-      }
-    }
-
-    function destroy() {
-      removeAttribute(track, [ARIA_LIVE, ARIA_ATOMIC, ARIA_BUSY]);
-      remove(sr);
-    }
-
-    function disable(disabled) {
-      if (enabled) {
-        setAttribute(track, ARIA_LIVE, disabled ? "off" : "polite");
-      }
-    }
-
-    return {
-      mount: mount,
-      disable: disable,
-      destroy: destroy,
-    };
-  }
-
-  var ComponentConstructors = /*#__PURE__*/ Object.freeze({
-    __proto__: null,
-    Media: Media,
-    Direction: Direction,
-    Elements: Elements,
-    Slides: Slides,
-    Layout: Layout,
-    Clones: Clones,
-    Move: Move,
-    Controller: Controller,
-    Arrows: Arrows,
-    Autoplay: Autoplay,
-    Cover: Cover,
-    Scroll: Scroll,
-    Drag: Drag,
-    Keyboard: Keyboard,
-    LazyLoad: LazyLoad,
-    Pagination: Pagination,
-    Sync: Sync,
-    Wheel: Wheel,
-    Live: Live,
-  });
-  var I18N = {
-    prev: "Previous slide",
-    next: "Next slide",
-    first: "Go to first slide",
-    last: "Go to last slide",
-    slideX: "Go to slide %s",
-    pageX: "Go to page %s",
-    play: "Start autoplay",
-    pause: "Pause autoplay",
-    carousel: "carousel",
-    slide: "slide",
-    select: "Select a slide to show",
-    slideLabel: "%s of %s",
-  };
-  var DEFAULTS = {
-    type: "slide",
-    role: "region",
-    speed: 400,
-    perPage: 1,
-    cloneStatus: true,
-    arrows: true,
-    pagination: true,
-    paginationKeyboard: true,
-    interval: 5e3,
-    pauseOnHover: true,
-    pauseOnFocus: true,
-    resetProgress: true,
-    easing: "cubic-bezier(0.25, 1, 0.5, 1)",
-    drag: true,
-    direction: "ltr",
-    trimSpace: true,
-    focusableNodes: "a, button, textarea, input, select, iframe",
-    live: true,
-    classes: CLASSES,
-    i18n: I18N,
-    reducedMotion: {
-      speed: 0,
-      rewindSpeed: 0,
-      autoplay: "pause",
-    },
-  };
-
-  function Fade(Splide2, Components2, options) {
-    var Slides = Components2.Slides;
-
-    function mount() {
-      EventInterface(Splide2).on([EVENT_MOUNTED, EVENT_REFRESH], init);
-    }
-
-    function init() {
-      Slides.forEach(function (Slide) {
-        Slide.style("transform", "translateX(-" + 100 * Slide.index + "%)");
-      });
-    }
-
-    function start(index, done) {
-      Slides.style(
-        "transition",
-        "opacity " + options.speed + "ms " + options.easing
-      );
-      nextTick(done);
-    }
-
-    return {
-      mount: mount,
-      start: start,
-      cancel: noop,
-    };
-  }
-
-  function Slide(Splide2, Components2, options) {
-    var Move = Components2.Move,
-      Controller = Components2.Controller,
-      Scroll = Components2.Scroll;
-    var list = Components2.Elements.list;
-    var transition = apply(style, list, "transition");
-    var endCallback;
-
-    function mount() {
-      EventInterface(Splide2).bind(list, "transitionend", function (e) {
-        if (e.target === list && endCallback) {
-          cancel();
-          endCallback();
-        }
-      });
-    }
-
-    function start(index, done) {
-      var destination = Move.toPosition(index, true);
-      var position = Move.getPosition();
-      var speed = getSpeed(index);
-
-      if (abs(destination - position) >= 1 && speed >= 1) {
-        if (options.useScroll) {
-          Scroll.scroll(destination, speed, false, done);
-        } else {
-          transition("transform " + speed + "ms " + options.easing);
-          Move.translate(destination, true);
-          endCallback = done;
-        }
-      } else {
-        Move.jump(index);
-        done();
-      }
-    }
-
-    function cancel() {
-      transition("");
-      Scroll.cancel();
-    }
-
-    function getSpeed(index) {
-      var rewindSpeed = options.rewindSpeed;
-
-      if (Splide2.is(SLIDE) && rewindSpeed) {
-        var prev = Controller.getIndex(true);
-        var end = Controller.getEnd();
-
-        if ((prev === 0 && index >= end) || (prev >= end && index === 0)) {
-          return rewindSpeed;
-        }
-      }
-
-      return options.speed;
-    }
-
-    return {
-      mount: mount,
-      start: start,
-      cancel: cancel,
-    };
-  }
-
-  var _Splide = /*#__PURE__*/ (function () {
-    function _Splide(target, options) {
-      this.event = EventInterface();
-      this.Components = {};
-      this.state = State(CREATED);
-      this.splides = [];
-      this._o = {};
-      this._E = {};
-      var root = isString(target) ? query(document, target) : target;
-      assert(root, root + " is invalid.");
-      this.root = root;
-      options = merge(
-        {
-          label: getAttribute(root, ARIA_LABEL) || "",
-          labelledby: getAttribute(root, ARIA_LABELLEDBY) || "",
-        },
-        DEFAULTS,
-        _Splide.defaults,
-        options || {}
-      );
-
-      try {
-        merge(options, JSON.parse(getAttribute(root, DATA_ATTRIBUTE)));
-      } catch (e) {
-        assert(false, "Invalid JSON");
-      }
-
-      this._o = Object.create(merge({}, options));
-    }
-
-    var _proto = _Splide.prototype;
-
-    _proto.mount = function mount(Extensions, Transition) {
-      var _this = this;
-
-      var state = this.state,
-        Components2 = this.Components;
-      assert(state.is([CREATED, DESTROYED]), "Already mounted!");
-      state.set(CREATED);
-      this._C = Components2;
-      this._T = Transition || this._T || (this.is(FADE) ? Fade : Slide);
-      this._E = Extensions || this._E;
-      var Constructors = splide_esm_assign({}, ComponentConstructors, this._E, {
-        Transition: this._T,
-      });
-      forOwn(Constructors, function (Component, key) {
-        var component = Component(_this, Components2, _this._o);
-        Components2[key] = component;
-        component.setup && component.setup();
-      });
-      forOwn(Components2, function (component) {
-        component.mount && component.mount();
-      });
-      this.emit(EVENT_MOUNTED);
-      addClass(this.root, CLASS_INITIALIZED);
-      state.set(IDLE);
-      this.emit(EVENT_READY);
-      return this;
-    };
-
-    _proto.sync = function sync(splide) {
-      this.splides.push({
-        splide: splide,
-      });
-      splide.splides.push({
-        splide: this,
-        isParent: true,
-      });
-
-      if (this.state.is(IDLE)) {
-        this._C.Sync.remount();
-
-        splide.Components.Sync.remount();
-      }
-
-      return this;
-    };
-
-    _proto.go = function go(control) {
-      this._C.Controller.go(control);
-
-      return this;
-    };
-
-    _proto.on = function on(events, callback) {
-      this.event.on(events, callback);
-      return this;
-    };
-
-    _proto.off = function off(events) {
-      this.event.off(events);
-      return this;
-    };
-
-    _proto.emit = function emit(event) {
-      var _this$event;
-
-      (_this$event = this.event).emit.apply(
-        _this$event,
-        [event].concat(slice(arguments, 1))
-      );
-
-      return this;
-    };
-
-    _proto.add = function add(slides, index) {
-      this._C.Slides.add(slides, index);
-
-      return this;
-    };
-
-    _proto.remove = function remove(matcher) {
-      this._C.Slides.remove(matcher);
-
-      return this;
-    };
-
-    _proto.is = function is(type) {
-      return this._o.type === type;
-    };
-
-    _proto.refresh = function refresh() {
-      this.emit(EVENT_REFRESH);
-      return this;
-    };
-
-    _proto.destroy = function destroy(completely) {
-      if (completely === void 0) {
-        completely = true;
-      }
-
-      var event = this.event,
-        state = this.state;
-
-      if (state.is(CREATED)) {
-        EventInterface(this).on(
-          EVENT_READY,
-          this.destroy.bind(this, completely)
-        );
-      } else {
-        forOwn(
-          this._C,
-          function (component) {
-            component.destroy && component.destroy(completely);
-          },
-          true
-        );
-        event.emit(EVENT_DESTROY);
-        event.destroy();
-        completely && empty(this.splides);
-        state.set(DESTROYED);
-      }
-
-      return this;
-    };
-
-    _createClass(_Splide, [
-      {
-        key: "options",
-        get: function get() {
-          return this._o;
-        },
-        set: function set(options) {
-          this._C.Media.set(options, true, true);
-        },
+          })(),
+          R(n, is, t === s - 1),
+          R(n, os, t === s + 1);
+      }
+      var o;
+    }
+    function x() {
+      var n = e.index;
+      return n === t || (d.cloneStatus && n === s);
+    }
+    var P = {
+      index: t,
+      slideIndex: s,
+      slide: n,
+      container: A,
+      isClone: E,
+      mount: function () {
+        E ||
+          ((n.id = u.id + "-slide" + $e(t + 1)),
+          se(n, Ct, g ? "tabpanel" : "group"),
+          se(n, Dt, f.slide),
+          se(n, kt, b || ke(f.slideLabel, [t + 1, e.length]))),
+          l(n, "click", O(r, He, P)),
+          l(n, "keydown", O(r, ut, P)),
+          a([je, dt, Ze], L),
+          a(ot, C),
+          p && a(Be, _);
       },
-      {
-        key: "length",
-        get: function get() {
-          return this._C.Slides.getLength(true);
-        },
+      destroy: function () {
+        (i = !0),
+          o.destroy(),
+          ge(n, us),
+          te(n, jt),
+          se(n, "style", y),
+          se(n, kt, b || "");
       },
-      {
-        key: "index",
-        get: function get() {
-          return this._C.Controller.getIndex();
-        },
+      update: L,
+      style: function (e, t, s) {
+        ie((s && A) || n, e, t);
       },
-    ]);
-
-    return _Splide;
-  })();
-
-  var Splide = _Splide;
-  Splide.defaults = {};
-  Splide.STATES = STATES;
-  var CLASS_RENDERED = "is-rendered";
-  var RENDERER_DEFAULT_CONFIG = {
-    listTag: "ul",
-    slideTag: "li",
-  };
-
-  var Style =
-    /*#__PURE__*/ /* unused pure expression or super */ null &&
-    (function () {
-      function Style(id, options) {
-        this.styles = {};
-        this.id = id;
-        this.options = options;
-      }
-
-      var _proto2 = Style.prototype;
-
-      _proto2.rule = function rule(selector, prop, value, breakpoint) {
-        breakpoint = breakpoint || "default";
-        var selectors = (this.styles[breakpoint] =
-          this.styles[breakpoint] || {});
-        var styles = (selectors[selector] = selectors[selector] || {});
-        styles[prop] = value;
-      };
-
-      _proto2.build = function build() {
-        var _this2 = this;
-
-        var css = "";
-
-        if (this.styles.default) {
-          css += this.buildSelectors(this.styles.default);
-        }
-
-        Object.keys(this.styles)
-          .sort(function (n, m) {
-            return _this2.options.mediaQuery === "min" ? +n - +m : +m - +n;
-          })
-          .forEach(function (breakpoint) {
-            if (breakpoint !== "default") {
-              css += "@media screen and (max-width: " + breakpoint + "px) {";
-              css += _this2.buildSelectors(_this2.styles[breakpoint]);
-              css += "}";
-            }
-          });
-        return css;
-      };
-
-      _proto2.buildSelectors = function buildSelectors(selectors) {
-        var _this3 = this;
-
-        var css = "";
-        forOwn(selectors, function (styles, selector) {
-          selector = ("#" + _this3.id + " " + selector).trim();
-          css += selector + " {";
-          forOwn(styles, function (value, prop) {
-            if (value || value === 0) {
-              css += prop + ": " + value + ";";
-            }
-          });
-          css += "}";
-        });
-        return css;
-      };
-
-      return Style;
-    })();
-
-  var SplideRenderer =
-    /*#__PURE__*/ /* unused pure expression or super */ null &&
-    (function () {
-      function SplideRenderer(contents, options, config, defaults) {
-        this.slides = [];
-        this.options = {};
-        this.breakpoints = [];
-        merge(DEFAULTS, defaults || {});
-        merge(merge(this.options, DEFAULTS), options || {});
-        this.contents = contents;
-        this.config = splide_esm_assign(
-          {},
-          RENDERER_DEFAULT_CONFIG,
-          config || {}
-        );
-        this.id = this.config.id || uniqueId("splide");
-        this.Style = new Style(this.id, this.options);
-        this.Direction = Direction(null, null, this.options);
-        assert(this.contents.length, "Provide at least 1 content.");
-        this.init();
-      }
-
-      SplideRenderer.clean = function clean(splide) {
-        var _EventInterface14 = EventInterface(splide),
-          on = _EventInterface14.on;
-
-        var root = splide.root;
-        var clones = queryAll(root, "." + CLASS_CLONE);
-        on(EVENT_MOUNTED, function () {
-          remove(child(root, "style"));
-        });
-        remove(clones);
-      };
-
-      var _proto3 = SplideRenderer.prototype;
-
-      _proto3.init = function init() {
-        this.parseBreakpoints();
-        this.initSlides();
-        this.registerRootStyles();
-        this.registerTrackStyles();
-        this.registerSlideStyles();
-        this.registerListStyles();
-      };
-
-      _proto3.initSlides = function initSlides() {
-        var _this4 = this;
-
-        push(
-          this.slides,
-          this.contents.map(function (content, index) {
-            content = isString(content)
-              ? {
-                  html: content,
-                }
-              : content;
-            content.styles = content.styles || {};
-            content.attrs = content.attrs || {};
-
-            _this4.cover(content);
-
-            var classes =
-              _this4.options.classes.slide +
-              " " +
-              (index === 0 ? CLASS_ACTIVE : "");
-            splide_esm_assign(content.attrs, {
-              class: (classes + " " + (content.attrs.class || "")).trim(),
-              style: _this4.buildStyles(content.styles),
-            });
-            return content;
-          })
-        );
-
-        if (this.isLoop()) {
-          this.generateClones(this.slides);
-        }
-      };
-
-      _proto3.registerRootStyles = function registerRootStyles() {
-        var _this5 = this;
-
-        this.breakpoints.forEach(function (_ref2) {
-          var width = _ref2[0],
-            options = _ref2[1];
-
-          _this5.Style.rule(" ", "max-width", unit(options.width), width);
-        });
-      };
-
-      _proto3.registerTrackStyles = function registerTrackStyles() {
-        var _this6 = this;
-
-        var Style2 = this.Style;
-        var selector = "." + CLASS_TRACK;
-        this.breakpoints.forEach(function (_ref3) {
-          var width = _ref3[0],
-            options = _ref3[1];
-          Style2.rule(
-            selector,
-            _this6.resolve("paddingLeft"),
-            _this6.cssPadding(options, false),
-            width
-          );
-          Style2.rule(
-            selector,
-            _this6.resolve("paddingRight"),
-            _this6.cssPadding(options, true),
-            width
-          );
-          Style2.rule(
-            selector,
-            "height",
-            _this6.cssTrackHeight(options),
-            width
-          );
-        });
-      };
-
-      _proto3.registerListStyles = function registerListStyles() {
-        var _this7 = this;
-
-        var Style2 = this.Style;
-        var selector = "." + CLASS_LIST;
-        this.breakpoints.forEach(function (_ref4) {
-          var width = _ref4[0],
-            options = _ref4[1];
-          Style2.rule(
-            selector,
-            "transform",
-            _this7.buildTranslate(options),
-            width
-          );
-
-          if (!_this7.cssSlideHeight(options)) {
-            Style2.rule(
-              selector,
-              "aspect-ratio",
-              _this7.cssAspectRatio(options),
-              width
-            );
-          }
-        });
-      };
-
-      _proto3.registerSlideStyles = function registerSlideStyles() {
-        var _this8 = this;
-
-        var Style2 = this.Style;
-        var selector = "." + CLASS_SLIDE;
-        this.breakpoints.forEach(function (_ref5) {
-          var width = _ref5[0],
-            options = _ref5[1];
-          Style2.rule(selector, "width", _this8.cssSlideWidth(options), width);
-          Style2.rule(
-            selector,
-            "height",
-            _this8.cssSlideHeight(options) || "100%",
-            width
-          );
-          Style2.rule(
-            selector,
-            _this8.resolve("marginRight"),
-            unit(options.gap) || "0px",
-            width
-          );
-          Style2.rule(
-            selector + " > img",
-            "display",
-            options.cover ? "none" : "inline",
-            width
-          );
-        });
-      };
-
-      _proto3.buildTranslate = function buildTranslate(options) {
-        var _this$Direction = this.Direction,
-          resolve = _this$Direction.resolve,
-          orient = _this$Direction.orient;
-        var values = [];
-        values.push(this.cssOffsetClones(options));
-        values.push(this.cssOffsetGaps(options));
-
-        if (this.isCenter(options)) {
-          values.push(this.buildCssValue(orient(-50), "%"));
-          values.push.apply(values, this.cssOffsetCenter(options));
-        }
-
-        return values
-          .filter(Boolean)
-          .map(function (value) {
-            return "translate" + resolve("X") + "(" + value + ")";
-          })
-          .join(" ");
-      };
-
-      _proto3.cssOffsetClones = function cssOffsetClones(options) {
-        var _this$Direction2 = this.Direction,
-          resolve = _this$Direction2.resolve,
-          orient = _this$Direction2.orient;
-        var cloneCount = this.getCloneCount();
-
-        if (this.isFixedWidth(options)) {
-          var _this$parseCssValue = this.parseCssValue(
-              options[resolve("fixedWidth")]
-            ),
-            value = _this$parseCssValue.value,
-            unit2 = _this$parseCssValue.unit;
-
-          return this.buildCssValue(orient(value) * cloneCount, unit2);
-        }
-
-        var percent = (100 * cloneCount) / options.perPage;
-        return orient(percent) + "%";
-      };
-
-      _proto3.cssOffsetCenter = function cssOffsetCenter(options) {
-        var _this$Direction3 = this.Direction,
-          resolve = _this$Direction3.resolve,
-          orient = _this$Direction3.orient;
-
-        if (this.isFixedWidth(options)) {
-          var _this$parseCssValue2 = this.parseCssValue(
-              options[resolve("fixedWidth")]
-            ),
-            value = _this$parseCssValue2.value,
-            unit2 = _this$parseCssValue2.unit;
-
-          return [this.buildCssValue(orient(value / 2), unit2)];
-        }
-
-        var values = [];
-        var perPage = options.perPage,
-          gap = options.gap;
-        values.push(orient(50 / perPage) + "%");
-
-        if (gap) {
-          var _this$parseCssValue3 = this.parseCssValue(gap),
-            _value = _this$parseCssValue3.value,
-            _unit = _this$parseCssValue3.unit;
-
-          var gapOffset = (_value / perPage - _value) / 2;
-          values.push(this.buildCssValue(orient(gapOffset), _unit));
-        }
-
-        return values;
-      };
-
-      _proto3.cssOffsetGaps = function cssOffsetGaps(options) {
-        var cloneCount = this.getCloneCount();
-
-        if (cloneCount && options.gap) {
-          var orient = this.Direction.orient;
-
-          var _this$parseCssValue4 = this.parseCssValue(options.gap),
-            value = _this$parseCssValue4.value,
-            unit2 = _this$parseCssValue4.unit;
-
-          if (this.isFixedWidth(options)) {
-            return this.buildCssValue(orient(value * cloneCount), unit2);
-          }
-
-          var perPage = options.perPage;
-          var gaps = cloneCount / perPage;
-          return this.buildCssValue(orient(gaps * value), unit2);
-        }
-
-        return "";
-      };
-
-      _proto3.resolve = function resolve(prop) {
-        return camelToKebab(this.Direction.resolve(prop));
-      };
-
-      _proto3.cssPadding = function cssPadding(options, right) {
-        var padding = options.padding;
-        var prop = this.Direction.resolve(right ? "right" : "left", true);
+      isWithin: function (s, n) {
+        var i = _e(s - t);
         return (
-          (padding &&
-            unit(padding[prop] || (isObject(padding) ? 0 : padding))) ||
-          "0px"
+          E || (!d.rewind && !e.is(ys)) || (i = we(i, e.length - i)), i <= n
         );
-      };
-
-      _proto3.cssTrackHeight = function cssTrackHeight(options) {
-        var height = "";
-
-        if (this.isVertical()) {
-          height = this.cssHeight(options);
-          assert(height, '"height" is missing.');
-          height =
-            "calc(" +
-            height +
-            " - " +
-            this.cssPadding(options, false) +
-            " - " +
-            this.cssPadding(options, true) +
-            ")";
+      },
+    };
+    return P;
+  }
+  var ws = 2;
+  var Es = "http://www.w3.org/2000/svg",
+    As =
+      "m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z",
+    Cs = 40;
+  var _s = be + "-interval";
+  var Ls = 10,
+    Os = 600,
+    xs = 0.6,
+    Ps = 1.5,
+    ks = 800;
+  var $s = { passive: !1, capture: !0 };
+  var Ts = { Spacebar: " ", Right: vt, Left: mt, Up: yt, Down: bt };
+  function qs(e) {
+    return (e = M(e) ? e : e.key), Ts[e] || e;
+  }
+  var Ds = "keydown";
+  var Ms = be + "-lazy",
+    Is = Ms + "-srcset",
+    Bs = "[" + Ms + "], [" + Is + "]";
+  var js = [" ", "Enter"];
+  var Hs = 90;
+  var zs = Object.freeze({
+      __proto__: null,
+      Media: function (e, t, s) {
+        var n = e.state,
+          i = s.breakpoints || {},
+          o = s.reducedMotion || {},
+          a = De(),
+          r = [];
+        function l(e) {
+          e && a.destroy();
         }
-
-        return height;
-      };
-
-      _proto3.cssHeight = function cssHeight(options) {
-        return unit(options.height);
-      };
-
-      _proto3.cssSlideWidth = function cssSlideWidth(options) {
-        return options.autoWidth
-          ? ""
-          : unit(options.fixedWidth) ||
-              (this.isVertical() ? "" : this.cssSlideSize(options));
-      };
-
-      _proto3.cssSlideHeight = function cssSlideHeight(options) {
-        return (
-          unit(options.fixedHeight) ||
-          (this.isVertical()
-            ? options.autoHeight
-              ? ""
-              : this.cssSlideSize(options)
-            : this.cssHeight(options))
-        );
-      };
-
-      _proto3.cssSlideSize = function cssSlideSize(options) {
-        var gap = unit(options.gap);
-        return (
-          "calc((100%" +
-          (gap && " + " + gap) +
-          ")/" +
-          (options.perPage || 1) +
-          (gap && " - " + gap) +
-          ")"
-        );
-      };
-
-      _proto3.cssAspectRatio = function cssAspectRatio(options) {
-        var heightRatio = options.heightRatio;
-        return heightRatio ? "" + 1 / heightRatio : "";
-      };
-
-      _proto3.buildCssValue = function buildCssValue(value, unit2) {
-        return "" + value + unit2;
-      };
-
-      _proto3.parseCssValue = function parseCssValue(value) {
-        if (isString(value)) {
-          var number = parseFloat(value) || 0;
-          var unit2 = value.replace(/\d*(\.\d*)?/, "") || "px";
-          return {
-            value: number,
-            unit: unit2,
-          };
+        function c(e, t) {
+          var s = matchMedia(t);
+          a.bind(s, "change", u), r.push([e, s]);
         }
-
+        function u() {
+          var t = n.is(A),
+            i = s.direction,
+            o = r.reduce(function (e, t) {
+              return J(e, t[1].matches ? t[0] : {});
+            }, {});
+          ee(s),
+            d(o),
+            s.destroy
+              ? e.destroy("completely" === s.destroy)
+              : t
+              ? (l(!0), e.mount())
+              : i !== s.direction && e.refresh();
+        }
+        function d(t, i, o) {
+          J(s, t),
+            i && J(Object.getPrototypeOf(s), t),
+            (!o && n.is(y)) || e.emit(Ve, s);
+        }
         return {
-          value: value,
-          unit: "px",
+          setup: function () {
+            var e = "min" === s.mediaQuery;
+            Q(i)
+              .sort(function (t, s) {
+                return e ? +t - +s : +s - +t;
+              })
+              .forEach(function (t) {
+                c(i[t], "(" + (e ? "min" : "max") + "-width:" + t + "px)");
+              }),
+              c(o, v),
+              u();
+          },
+          destroy: l,
+          reduce: function (e) {
+            matchMedia(v).matches && (e ? J(s, o) : ee(s, Q(o)));
+          },
+          set: d,
         };
-      };
-
-      _proto3.parseBreakpoints = function parseBreakpoints() {
-        var _this9 = this;
-
-        var breakpoints = this.options.breakpoints;
-        this.breakpoints.push(["default", this.options]);
-
-        if (breakpoints) {
-          forOwn(breakpoints, function (options, width) {
-            _this9.breakpoints.push([
-              width,
-              merge(merge({}, _this9.options), options),
-            ]);
+      },
+      Direction: At,
+      Elements: function (e, t, s) {
+        var n,
+          i,
+          o,
+          a = pt(e),
+          r = a.on,
+          l = a.bind,
+          c = e.root,
+          u = s.i18n,
+          d = {},
+          h = [],
+          p = [],
+          f = [];
+        function g() {
+          (n = y("." + Ft)),
+            (i = Y(n, "." + Rt)),
+            Se(n && i, "A track/list element is missing."),
+            F(h, U(i, "." + Wt + ":not(." + Vt + ")")),
+            K(
+              {
+                arrows: Gt,
+                pagination: Kt,
+                prev: Yt,
+                next: Qt,
+                bar: Jt,
+                toggle: es,
+              },
+              function (e, t) {
+                d[t] = y("." + e);
+              }
+            ),
+            Z(d, { root: c, track: n, list: i, slides: h }),
+            (function () {
+              var e = c.id || qe(ye),
+                t = s.role;
+              (c.id = e),
+                (n.id = n.id || e + "-track"),
+                (i.id = i.id || e + "-list"),
+                !re(c, Ct) && "SECTION" !== c.tagName && t && se(c, Ct, t);
+              se(c, Dt, u.carousel), se(i, Ct, "presentation");
+            })(),
+            v();
+        }
+        function m(e) {
+          var t = jt.concat("style");
+          _(h), ge(c, p), ge(n, f), te([n, i], t), te(c, e ? t : ["style", Dt]);
+        }
+        function v() {
+          ge(c, p),
+            ge(n, f),
+            (p = b(Nt)),
+            (f = b(Ft)),
+            W(c, p),
+            W(n, f),
+            se(c, kt, s.label),
+            se(c, $t, s.labelledby);
+        }
+        function y(e) {
+          var t = pe(c, e);
+          return t &&
+            (function (e, t) {
+              if (D(e.closest)) return e.closest(t);
+              for (var s = e; s && 1 === s.nodeType && !G(s, t); )
+                s = s.parentElement;
+              return s;
+            })(t, "." + Nt) === c
+            ? t
+            : void 0;
+        }
+        function b(e) {
+          return [
+            e + "--" + s.type,
+            e + "--" + s.direction,
+            s.drag && e + "--draggable",
+            s.isNavigation && e + "--nav",
+            e === Nt && ns,
+          ];
+        }
+        return Z(d, {
+          setup: g,
+          mount: function () {
+            r(We, m),
+              r(We, g),
+              r(Ve, v),
+              l(
+                document,
+                fs + " keydown",
+                function (e) {
+                  o = "keydown" === e.type;
+                },
+                { capture: !0 }
+              ),
+              l(c, "focusin", function () {
+                R(c, ls, !!o);
+              });
+          },
+          destroy: m,
+        });
+      },
+      Slides: function (e, t, s) {
+        var n = pt(e),
+          i = n.on,
+          o = n.emit,
+          a = n.bind,
+          r = t.Elements,
+          l = r.slides,
+          c = r.list,
+          u = [];
+        function d() {
+          l.forEach(function (e, t) {
+            p(e, t, -1);
           });
         }
-      };
-
-      _proto3.isFixedWidth = function isFixedWidth(options) {
-        return !!options[this.Direction.resolve("fixedWidth")];
-      };
-
-      _proto3.isLoop = function isLoop() {
-        return this.options.type === LOOP;
-      };
-
-      _proto3.isCenter = function isCenter(options) {
-        if (options.focus === "center") {
-          if (this.isLoop()) {
-            return true;
-          }
-
-          if (this.options.type === SLIDE) {
-            return !this.options.trimSpace;
-          }
+        function h() {
+          g(function (e) {
+            e.destroy();
+          }),
+            _(u);
         }
-
-        return false;
-      };
-
-      _proto3.isVertical = function isVertical() {
-        return this.options.direction === TTB;
-      };
-
-      _proto3.buildClasses = function buildClasses() {
-        var options = this.options;
-        return [
-          CLASS_ROOT,
-          CLASS_ROOT + "--" + options.type,
-          CLASS_ROOT + "--" + options.direction,
-          options.drag && CLASS_ROOT + "--draggable",
-          options.isNavigation && CLASS_ROOT + "--nav",
-          CLASS_ACTIVE,
-          !this.config.hidden && CLASS_RENDERED,
-        ]
-          .filter(Boolean)
-          .join(" ");
-      };
-
-      _proto3.buildAttrs = function buildAttrs(attrs) {
-        var attr = "";
-        forOwn(attrs, function (value, key) {
-          attr += value ? " " + camelToKebab(key) + '="' + value + '"' : "";
-        });
-        return attr.trim();
-      };
-
-      _proto3.buildStyles = function buildStyles(styles) {
-        var style = "";
-        forOwn(styles, function (value, key) {
-          style += " " + camelToKebab(key) + ":" + value + ";";
-        });
-        return style.trim();
-      };
-
-      _proto3.renderSlides = function renderSlides() {
-        var _this10 = this;
-
-        var tag = this.config.slideTag;
-        return this.slides
-          .map(function (content) {
-            return (
-              "<" +
-              tag +
-              " " +
-              _this10.buildAttrs(content.attrs) +
-              ">" +
-              (content.html || "") +
-              "</" +
-              tag +
-              ">"
-            );
-          })
-          .join("");
-      };
-
-      _proto3.cover = function cover(content) {
-        var styles = content.styles,
-          _content$html = content.html,
-          html = _content$html === void 0 ? "" : _content$html;
-
-        if (this.options.cover && !this.options.lazyLoad) {
-          var src = html.match(/<img.*?src\s*=\s*(['"])(.+?)\1.*?>/);
-
-          if (src && src[2]) {
-            styles.background = "center/cover no-repeat url('" + src[2] + "')";
-          }
-        }
-      };
-
-      _proto3.generateClones = function generateClones(contents) {
-        var classes = this.options.classes;
-        var count = this.getCloneCount();
-        var slides = contents.slice();
-
-        while (slides.length < count) {
-          push(slides, slides);
-        }
-
-        push(slides.slice(-count).reverse(), slides.slice(0, count)).forEach(
-          function (content, index) {
-            var attrs = splide_esm_assign({}, content.attrs, {
-              class: content.attrs.class + " " + classes.clone,
+        function p(t, s, n) {
+          var i = Ss(e, s, n, t);
+          i.mount(),
+            u.push(i),
+            u.sort(function (e, t) {
+              return e.index - t.index;
             });
-            var clone = splide_esm_assign({}, content, {
-              attrs: attrs,
-            });
-            index < count ? contents.unshift(clone) : contents.push(clone);
-          }
-        );
-      };
-
-      _proto3.getCloneCount = function getCloneCount() {
-        if (this.isLoop()) {
-          var options = this.options;
-
-          if (options.clones) {
-            return options.clones;
-          }
-
-          var perPage = max.apply(
-            void 0,
-            this.breakpoints.map(function (_ref6) {
-              var options2 = _ref6[1];
-              return options2.perPage;
-            })
+        }
+        function f(e) {
+          return e
+            ? m(function (e) {
+                return !e.isClone;
+              })
+            : u;
+        }
+        function g(e, t) {
+          f(t).forEach(e);
+        }
+        function m(e) {
+          return u.filter(
+            D(e)
+              ? e
+              : function (t) {
+                  return M(e) ? G(t.slide, e) : N(H(e), t.index);
+                }
           );
-          return perPage * ((options.flickMaxPages || 1) + 1);
         }
-
-        return 0;
-      };
-
-      _proto3.renderArrows = function renderArrows() {
-        var html = "";
-        html += '<div class="' + this.options.classes.arrows + '">';
-        html += this.renderArrow(true);
-        html += this.renderArrow(false);
-        html += "</div>";
-        return html;
-      };
-
-      _proto3.renderArrow = function renderArrow(prev) {
-        var _this$options = this.options,
-          classes = _this$options.classes,
-          i18n = _this$options.i18n;
-        var attrs = {
-          class: classes.arrow + " " + (prev ? classes.prev : classes.next),
-          type: "button",
-          ariaLabel: prev ? i18n.prev : i18n.next,
+        return {
+          mount: function () {
+            d(), i(We, h), i(We, d);
+          },
+          destroy: h,
+          update: function () {
+            g(function (e) {
+              e.update();
+            });
+          },
+          register: p,
+          get: f,
+          getIn: function (e) {
+            var n = t.Controller,
+              i = n.toIndex(e),
+              o = n.hasFocus() ? 1 : s.perPage;
+            return m(function (e) {
+              return Oe(e.index, i, i + o - 1);
+            });
+          },
+          getAt: function (e) {
+            return m(e)[0];
+          },
+          add: function (e, t) {
+            z(e, function (e) {
+              if ((M(e) && (e = de(e)), j(e))) {
+                var n = l[t];
+                n ? X(e, n) : V(c, e),
+                  W(e, s.classes.slide),
+                  (i = e),
+                  (r = O(o, Xe)),
+                  (u = fe(i, "img")),
+                  (d = u.length)
+                    ? u.forEach(function (e) {
+                        a(e, "load error", function () {
+                          --d || r();
+                        });
+                      })
+                    : r();
+              }
+              var i, r, u, d;
+            }),
+              o(We);
+          },
+          remove: function (e) {
+            ue(
+              m(e).map(function (e) {
+                return e.slide;
+              })
+            ),
+              o(We);
+          },
+          forEach: g,
+          filter: m,
+          style: function (e, t, s) {
+            g(function (n) {
+              n.style(e, t, s);
+            });
+          },
+          getLength: function (e) {
+            return e ? l.length : u.length;
+          },
+          isEnough: function () {
+            return u.length > s.perPage;
+          },
         };
+      },
+      Layout: function (e, t, s) {
+        var n,
+          i,
+          o,
+          a = pt(e),
+          r = a.on,
+          l = a.bind,
+          c = a.emit,
+          u = t.Slides,
+          d = t.Direction.resolve,
+          h = t.Elements,
+          p = h.root,
+          f = h.track,
+          g = h.list,
+          m = u.getAt,
+          v = u.style;
+        function y() {
+          (n = s.direction === wt),
+            ie(p, "maxWidth", ve(s.width)),
+            ie(f, d("paddingLeft"), S(!1)),
+            ie(f, d("paddingRight"), S(!0)),
+            b(!0);
+        }
+        function b(e) {
+          var t = ce(p);
+          (e || i.width !== t.width || i.height !== t.height) &&
+            (ie(
+              f,
+              "height",
+              (function () {
+                var e = "";
+                n &&
+                  (Se((e = w()), "height or heightRatio is missing."),
+                  (e = "calc(" + e + " - " + S(!1) + " - " + S(!0) + ")"));
+                return e;
+              })()
+            ),
+            v(d("marginRight"), ve(s.gap)),
+            v("width", s.autoWidth ? null : ve(s.fixedWidth) || (n ? "" : E())),
+            v(
+              "height",
+              ve(s.fixedHeight) || (n ? (s.autoHeight ? null : E()) : w()),
+              !0
+            ),
+            (i = t),
+            c(Ge),
+            o !== (o = P()) && (R(p, cs, o), c(Je, o)));
+        }
+        function S(e) {
+          var t = s.padding,
+            n = d(e ? "right" : "left");
+          return (t && ve(t[n] || (T(t) ? 0 : t))) || "0px";
+        }
+        function w() {
+          return ve(s.height || ce(g).width * s.heightRatio);
+        }
+        function E() {
+          var e = ve(s.gap);
+          return (
+            "calc((100%" +
+            (e && " + " + e) +
+            ")/" +
+            (s.perPage || 1) +
+            (e && " - " + e) +
+            ")"
+          );
+        }
+        function A() {
+          return ce(g)[d("width")];
+        }
+        function C(e, t) {
+          var s = m(e || 0);
+          return s ? ce(s.slide)[d("width")] + (t ? 0 : x()) : 0;
+        }
+        function _(e, t) {
+          var s = m(e);
+          if (s) {
+            var n = ce(s.slide)[d("right")],
+              i = ce(g)[d("left")];
+            return _e(n - i) + (t ? 0 : x());
+          }
+          return 0;
+        }
+        function L(t) {
+          return _(e.length - 1) - _(0) + C(0, t);
+        }
+        function x() {
+          var e = m(0);
+          return (e && parseFloat(ie(e.slide, d("marginRight")))) || 0;
+        }
+        function P() {
+          return e.is(bs) || L(!0) > A();
+        }
+        return {
+          mount: function () {
+            var e, t, s;
+            y(),
+              l(
+                window,
+                "resize load",
+                ((e = O(c, Xe)),
+                (s = ft(t || 0, e, null, 1)),
+                function () {
+                  s.isPaused() && s.start();
+                })
+              ),
+              r([Ve, We], y),
+              r(Xe, b);
+          },
+          resize: b,
+          listSize: A,
+          slideSize: C,
+          sliderSize: L,
+          totalSize: _,
+          getPadding: function (e) {
+            return (
+              parseFloat(ie(f, d("padding" + (e ? "Right" : "Left")))) || 0
+            );
+          },
+          isOverflow: P,
+        };
+      },
+      Clones: function (e, t, s) {
+        var n,
+          i = pt(e),
+          o = i.on,
+          a = t.Elements,
+          r = t.Slides,
+          l = t.Direction.resolve,
+          c = [];
+        function u() {
+          o(We, d),
+            o([Ve, Xe], p),
+            (n = f()) &&
+              (!(function (t) {
+                var n = r.get().slice(),
+                  i = n.length;
+                if (i) {
+                  for (; n.length < t; ) F(n, n);
+                  F(n.slice(-t), n.slice(0, t)).forEach(function (o, l) {
+                    var u = l < t,
+                      d = (function (t, n) {
+                        var i = t.cloneNode(!0);
+                        return (
+                          W(i, s.classes.clone),
+                          (i.id = e.root.id + "-clone" + $e(n + 1)),
+                          i
+                        );
+                      })(o.slide, l);
+                    u ? X(d, n[0].slide) : V(a.list, d),
+                      F(c, d),
+                      r.register(d, l - t + (u ? 0 : i), o.index);
+                  });
+                }
+              })(n),
+              t.Layout.resize(!0));
+        }
+        function d() {
+          h(), u();
+        }
+        function h() {
+          ue(c), _(c), i.destroy();
+        }
+        function p() {
+          var e = f();
+          n !== e && (n < e || !e) && i.emit(We);
+        }
+        function f() {
+          var n = s.clones;
+          if (e.is(ys)) {
+            if (I(n)) {
+              var i = s[l("fixedWidth")] && t.Layout.slideSize(0);
+              n =
+                (i && Ce(ce(a.track)[l("width")] / i)) ||
+                (s[l("autoWidth")] && e.length) ||
+                s.perPage * ws;
+            }
+          } else n = 0;
+          return n;
+        }
+        return { mount: u, destroy: h };
+      },
+      Move: function (e, t, s) {
+        var n,
+          i = pt(e),
+          o = i.on,
+          a = i.emit,
+          r = e.state.set,
+          l = t.Layout,
+          c = l.slideSize,
+          u = l.getPadding,
+          d = l.totalSize,
+          h = l.listSize,
+          p = l.sliderSize,
+          f = t.Direction,
+          g = f.resolve,
+          m = f.orient,
+          v = t.Elements,
+          y = v.list,
+          w = v.track;
+        function E() {
+          t.Controller.isBusy() ||
+            (t.Scroll.cancel(), A(e.index), t.Slides.update());
+        }
+        function A(e) {
+          C(x(e, !0));
+        }
+        function C(s, n) {
+          if (!e.is(bs)) {
+            var i = n
+              ? s
+              : (function (s) {
+                  if (e.is(ys)) {
+                    var n = O(s),
+                      i = n > t.Controller.getEnd();
+                    (n < 0 || i) && (s = _(s, i));
+                  }
+                  return s;
+                })(s);
+            ie(y, "transform", "translate" + g("X") + "(" + i + "px)"),
+              s !== i && a(dt);
+          }
+        }
+        function _(e, t) {
+          var s = e - k(t),
+            n = p();
+          return (e -= m(n * (Ce(_e(s) / n) || 1)) * (t ? 1 : -1));
+        }
+        function L() {
+          C(P(), !0), n.cancel();
+        }
+        function O(e) {
+          for (
+            var s = t.Slides.get(), n = 0, i = 1 / 0, o = 0;
+            o < s.length;
+            o++
+          ) {
+            var a = s[o].index,
+              r = _e(x(a, !0) - e);
+            if (!(r <= i)) break;
+            (i = r), (n = a);
+          }
+          return n;
+        }
+        function x(t, n) {
+          var i = m(
+            d(t - 1) -
+              (function (e) {
+                var t = s.focus;
+                return "center" === t ? (h() - c(e, !0)) / 2 : +t * c(e) || 0;
+              })(t)
+          );
+          return n
+            ? (function (t) {
+                s.trimSpace && e.is(vs) && (t = xe(t, 0, m(p(!0) - h())));
+                return t;
+              })(i)
+            : i;
+        }
+        function P() {
+          var e = g("left");
+          return ce(y)[e] - ce(w)[e] + m(u(!1));
+        }
+        function k(e) {
+          return x(e ? t.Controller.getEnd() : 0, !!s.trimSpace);
+        }
+        return {
+          mount: function () {
+            (n = t.Transition), o([Me, Ge, Ve, We], E);
+          },
+          move: function (e, t, s, i) {
+            var o, l;
+            e !== t &&
+              ((o = e > s),
+              (l = m(_(P(), o))),
+              o ? l >= 0 : l <= y[g("scrollWidth")] - ce(w)[g("width")]) &&
+              (L(), C(_(P(), e > s), !0)),
+              r(S),
+              a(Be, t, s, e),
+              n.start(t, function () {
+                r(b), a(je, t, s, e), i && i();
+              });
+          },
+          jump: A,
+          translate: C,
+          shift: _,
+          cancel: L,
+          toIndex: O,
+          toPosition: x,
+          getPosition: P,
+          getLimit: k,
+          exceededLimit: function (e, t) {
+            t = I(t) ? P() : t;
+            var s = !0 !== e && m(t) < m(k(!1)),
+              n = !1 !== e && m(t) > m(k(!0));
+            return s || n;
+          },
+          reposition: E,
+        };
+      },
+      Controller: function (e, t, s) {
+        var n,
+          i,
+          o,
+          a,
+          r = pt(e),
+          l = r.on,
+          c = r.emit,
+          u = t.Move,
+          d = u.getPosition,
+          h = u.getLimit,
+          p = u.toPosition,
+          f = t.Slides,
+          g = f.isEnough,
+          m = f.getLength,
+          v = s.omitEnd,
+          y = e.is(ys),
+          b = e.is(vs),
+          E = O(P, !1),
+          A = O(P, !0),
+          C = s.start || 0,
+          _ = C;
+        function L() {
+          (i = m(!0)), (o = s.perMove), (a = s.perPage), (n = T());
+          var e = xe(C, 0, v ? n : i - 1);
+          e !== C && ((C = e), u.reposition());
+        }
+        function x() {
+          n !== T() && c(ht);
+        }
+        function P(e, t) {
+          var s = o || (j() ? 1 : a),
+            i = k(C + s * (e ? -1 : 1), C, !(o || j()));
+          return -1 === i && b && !Le(d(), h(!e), 1)
+            ? e
+              ? 0
+              : n
+            : t
+            ? i
+            : $(i);
+        }
+        function k(t, r, l) {
+          if (g() || j()) {
+            var c = (function (t) {
+              if (b && "move" === s.trimSpace && t !== C)
+                for (
+                  var n = d();
+                  n === p(t, !0) && Oe(t, 0, e.length - 1, !s.rewind);
+
+                )
+                  t < C ? --t : ++t;
+              return t;
+            })(t);
+            c !== t && ((r = t), (t = c), (l = !1)),
+              t < 0 || t > n
+                ? (t =
+                    o || (!Oe(0, t, r, !0) && !Oe(n, r, t, !0))
+                      ? y
+                        ? l
+                          ? t < 0
+                            ? -(i % a || a)
+                            : i
+                          : t
+                        : s.rewind
+                        ? t < 0
+                          ? n
+                          : 0
+                        : -1
+                      : q(D(t)))
+                : l && t !== r && (t = q(D(r) + (t < r ? -1 : 1)));
+          } else t = -1;
+          return t;
+        }
+        function $(e) {
+          return y ? (e + i) % i || 0 : e;
+        }
+        function T() {
+          for (var e = i - (j() || (y && o) ? 1 : a); v && e-- > 0; )
+            if (p(i - 1, !0) !== p(e, !0)) {
+              e++;
+              break;
+            }
+          return xe(e, 0, i - 1);
+        }
+        function q(e) {
+          return xe(j() ? e : a * e, 0, n);
+        }
+        function D(e) {
+          return j() ? we(e, n) : Ae((e >= n ? i - 1 : e) / a);
+        }
+        function B(e) {
+          e !== C && ((_ = C), (C = e));
+        }
+        function j() {
+          return !I(s.focus) || s.isNavigation;
+        }
+        function H() {
+          return e.state.is([S, w]) && !!s.waitForTransition;
+        }
+        return {
+          mount: function () {
+            L(), l([Ve, We, ht], L), l(Ge, x);
+          },
+          go: function (e, t, s) {
+            if (!H()) {
+              var i = (function (e) {
+                  var t = C;
+                  if (M(e)) {
+                    var s = e.match(/([+\-<>])(\d+)?/) || [],
+                      i = s[1],
+                      o = s[2];
+                    "+" === i || "-" === i
+                      ? (t = k(C + +("" + i + (+o || 1)), C))
+                      : ">" === i
+                      ? (t = o ? q(+o) : E(!0))
+                      : "<" === i && (t = A(!0));
+                  } else t = y ? e : xe(e, 0, n);
+                  return t;
+                })(e),
+                o = $(i);
+              o > -1 && (t || o !== C) && (B(o), u.move(i, o, _, s));
+            }
+          },
+          scroll: function (e, s, i, o) {
+            t.Scroll.scroll(e, s, i, function () {
+              var e = $(u.toIndex(d()));
+              B(v ? we(e, n) : e), o && o();
+            });
+          },
+          getNext: E,
+          getPrev: A,
+          getAdjacent: P,
+          getEnd: T,
+          setIndex: B,
+          getIndex: function (e) {
+            return e ? _ : C;
+          },
+          toIndex: q,
+          toPage: D,
+          toDest: function (e) {
+            var t = u.toIndex(e);
+            return b ? xe(t, 0, n) : t;
+          },
+          hasFocus: j,
+          isBusy: H,
+        };
+      },
+      Arrows: function (e, t, s) {
+        var n,
+          i,
+          o = pt(e),
+          a = o.on,
+          r = o.bind,
+          l = o.emit,
+          c = s.classes,
+          u = s.i18n,
+          d = t.Elements,
+          h = t.Controller,
+          p = d.arrows,
+          f = d.track,
+          g = p,
+          m = d.prev,
+          v = d.next,
+          y = {};
+        function b() {
+          !(function () {
+            var e = s.arrows;
+            !e ||
+              (m && v) ||
+              ((g = p || ne("div", c.arrows)),
+              (m = A(!0)),
+              (v = A(!1)),
+              (n = !0),
+              V(g, [m, v]),
+              !p && X(g, f));
+            m &&
+              v &&
+              (Z(y, { prev: m, next: v }),
+              oe(g, e ? "" : "none"),
+              W(g, (i = Gt + "--" + s.direction)),
+              e &&
+                (a([Me, je, We, Ze, ht], C),
+                r(v, "click", O(E, ">")),
+                r(m, "click", O(E, "<")),
+                C(),
+                se([m, v], Ot, f.id),
+                l(tt, m, v)));
+          })(),
+            a(Ve, S);
+        }
+        function S() {
+          w(), b();
+        }
+        function w() {
+          o.destroy(),
+            ge(g, i),
+            n ? (ue(p ? [m, v] : g), (m = v = null)) : te([m, v], jt);
+        }
+        function E(e) {
+          h.go(e, !0);
+        }
+        function A(e) {
+          return de(
+            '<button class="' +
+              c.arrow +
+              " " +
+              (e ? c.prev : c.next) +
+              '" type="button"><svg xmlns="' +
+              Es +
+              '" viewBox="0 0 ' +
+              Cs +
+              " " +
+              Cs +
+              '" width="' +
+              Cs +
+              '" height="' +
+              Cs +
+              '" focusable="false"><path d="' +
+              (s.arrowPath || As) +
+              '" />'
+          );
+        }
+        function C() {
+          if (m && v) {
+            var t = e.index,
+              s = h.getPrev(),
+              n = h.getNext(),
+              i = s > -1 && t < s ? u.last : u.prev,
+              o = n > -1 && t > n ? u.first : u.next;
+            (m.disabled = s < 0),
+              (v.disabled = n < 0),
+              se(m, kt, i),
+              se(v, kt, o),
+              l(st, m, v, s, n);
+          }
+        }
+        return { arrows: y, mount: b, destroy: w, update: C };
+      },
+      Autoplay: function (e, t, s) {
+        var n,
+          i,
+          o = pt(e),
+          a = o.on,
+          r = o.bind,
+          l = o.emit,
+          c = ft(s.interval, e.go.bind(e, ">"), function (e) {
+            var t = d.bar;
+            t && ie(t, "width", 100 * e + "%"), l(rt, e);
+          }),
+          u = c.isPaused,
+          d = t.Elements,
+          h = t.Elements,
+          p = h.root,
+          f = h.toggle,
+          g = s.autoplay,
+          m = "pause" === g;
+        function v() {
+          u() &&
+            t.Slides.isEnough() &&
+            (c.start(!s.resetProgress), (i = n = m = !1), S(), l(at));
+        }
+        function y(e) {
+          void 0 === e && (e = !0), (m = !!e), S(), u() || (c.pause(), l(lt));
+        }
+        function b() {
+          m || (n || i ? y(!1) : v());
+        }
+        function S() {
+          f && (R(f, ns, !m), se(f, kt, s.i18n[m ? "play" : "pause"]));
+        }
+        function w(e) {
+          var n = t.Slides.getAt(e);
+          c.set((n && +re(n.slide, _s)) || s.interval);
+        }
+        return {
+          mount: function () {
+            g &&
+              (!(function () {
+                s.pauseOnHover &&
+                  r(p, "mouseenter mouseleave", function (e) {
+                    (n = "mouseenter" === e.type), b();
+                  });
+                s.pauseOnFocus &&
+                  r(p, "focusin focusout", function (e) {
+                    (i = "focusin" === e.type), b();
+                  });
+                f &&
+                  r(f, "click", function () {
+                    m ? v() : y(!0);
+                  });
+                a([Be, Ke, We], c.rewind), a(Be, w);
+              })(),
+              f && se(f, Ot, d.track.id),
+              m || v(),
+              S());
+          },
+          destroy: c.cancel,
+          play: v,
+          pause: y,
+          isPaused: u,
+        };
+      },
+      Cover: function (e, t, s) {
+        var n = pt(e).on;
+        function i(e) {
+          t.Slides.forEach(function (t) {
+            var s = Y(t.container || t.slide, "img");
+            s && s.src && o(e, s, t);
+          });
+        }
+        function o(e, t, s) {
+          s.style(
+            "background",
+            e ? 'center/cover no-repeat url("' + t.src + '")' : "",
+            !0
+          ),
+            oe(t, e ? "none" : "");
+        }
+        return {
+          mount: function () {
+            s.cover && (n(ct, O(o, !0)), n([Me, Ve, We], O(i, !0)));
+          },
+          destroy: O(i, !1),
+        };
+      },
+      Scroll: function (e, t, s) {
+        var n,
+          i,
+          o = pt(e),
+          a = o.on,
+          r = o.emit,
+          l = e.state.set,
+          c = t.Move,
+          u = c.getPosition,
+          d = c.getLimit,
+          h = c.exceededLimit,
+          p = c.translate,
+          f = e.is(vs),
+          g = 1;
+        function m(e, s, o, a, d) {
+          var p = u();
+          if ((S(), o && (!f || !h()))) {
+            var m = t.Layout.sliderSize(),
+              b = Pe(e) * m * Ae(_e(e) / m) || 0;
+            e = c.toPosition(t.Controller.toDest(e % m)) + b;
+          }
+          var E = Le(p, e, 1);
+          (g = 1),
+            (s = E ? 0 : s || Ee(_e(e - p) / Ps, ks)),
+            (i = a),
+            (n = ft(s, v, O(y, p, e, d), 1)),
+            l(w),
+            r(Ke),
+            n.start();
+        }
+        function v() {
+          l(b), i && i(), r(Ze);
+        }
+        function y(e, t, n, o) {
+          var a,
+            r,
+            l = u(),
+            c =
+              (e +
+                (t - e) *
+                  ((a = o),
+                  (r = s.easingFunc) ? r(a) : 1 - Math.pow(1 - a, 4)) -
+                l) *
+              g;
+          p(l + c),
+            f &&
+              !n &&
+              h() &&
+              ((g *= xs), _e(c) < Ls && m(d(h(!0)), Os, !1, i, !0));
+        }
+        function S() {
+          n && n.cancel();
+        }
+        function E() {
+          n && !n.isPaused() && (S(), v());
+        }
+        return {
+          mount: function () {
+            a(Be, S), a([Ve, We], E);
+          },
+          destroy: S,
+          scroll: m,
+          cancel: E,
+        };
+      },
+      Drag: function (e, t, s) {
+        var n,
+          i,
+          o,
+          a,
+          r,
+          l,
+          c,
+          u,
+          d = pt(e),
+          h = d.on,
+          p = d.emit,
+          f = d.bind,
+          g = d.unbind,
+          m = e.state,
+          v = t.Move,
+          y = t.Scroll,
+          A = t.Controller,
+          C = t.Elements.track,
+          _ = t.Media.reduce,
+          L = t.Direction,
+          O = L.resolve,
+          x = L.orient,
+          k = v.getPosition,
+          $ = v.exceededLimit,
+          q = !1;
+        function D() {
+          var e = s.drag;
+          V(!e), (a = "free" === e);
+        }
+        function M(e) {
+          if (((l = !1), !c)) {
+            var t = W(e);
+            (n = e.target),
+              (i = s.noDrag),
+              G(n, "." + Zt + ", ." + Ut) ||
+                (i && G(n, i)) ||
+                (!t && e.button) ||
+                (A.isBusy()
+                  ? he(e, !0)
+                  : ((u = t ? C : window),
+                    (r = m.is([S, w])),
+                    (o = null),
+                    f(u, gs, I, $s),
+                    f(u, ms, B, $s),
+                    v.cancel(),
+                    y.cancel(),
+                    H(e)));
+          }
+          var n, i;
+        }
+        function I(t) {
+          if ((m.is(E) || (m.set(E), p(Ue)), t.cancelable))
+            if (r) {
+              v.translate(n + z(t) / (q && e.is(vs) ? hs : 1));
+              var i = N(t) > ps,
+                o = q !== (q = $());
+              (i || o) && H(t), (l = !0), p(Ye), he(t);
+            } else
+              (function (e) {
+                return _e(z(e)) > _e(z(e, !0));
+              })(t) &&
+                ((r = (function (e) {
+                  var t = s.dragMinThreshold,
+                    n = T(t),
+                    i = (n && t.mouse) || 0,
+                    o = (n ? t.touch : +t) || 10;
+                  return _e(z(e)) > (W(e) ? o : i);
+                })(t)),
+                he(t));
+        }
+        function B(n) {
+          m.is(E) && (m.set(b), p(Qe)),
+            r &&
+              (!(function (n) {
+                var i = (function (t) {
+                    if (e.is(ys) || !q) {
+                      var s = N(t);
+                      if (s && s < ps) return z(t) / s;
+                    }
+                    return 0;
+                  })(n),
+                  o = (function (e) {
+                    return (
+                      k() +
+                      Pe(e) *
+                        we(
+                          _e(e) * (s.flickPower || 600),
+                          a
+                            ? 1 / 0
+                            : t.Layout.listSize() * (s.flickMaxPages || 1)
+                        )
+                    );
+                  })(i),
+                  r = s.rewind && s.rewindByDrag;
+                _(!1),
+                  a
+                    ? A.scroll(o, 0, s.snap)
+                    : e.is(bs)
+                    ? A.go(x(Pe(i)) < 0 ? (r ? "<" : "-") : r ? ">" : "+")
+                    : e.is(vs) && q && r
+                    ? A.go($(!0) ? ">" : "<")
+                    : A.go(A.toDest(o), !0);
+                _(!0);
+              })(n),
+              he(n)),
+            g(u, gs, I),
+            g(u, ms, B),
+            (r = !1);
+        }
+        function j(e) {
+          !c && l && he(e, !0);
+        }
+        function H(e) {
+          (o = i), (i = e), (n = k());
+        }
+        function z(e, t) {
+          return R(e, t) - R(F(e), t);
+        }
+        function N(e) {
+          return me(e) - me(F(e));
+        }
+        function F(e) {
+          return (i === e && o) || i;
+        }
+        function R(e, t) {
+          return (W(e) ? e.changedTouches[0] : e)["page" + O(t ? "Y" : "X")];
+        }
+        function W(e) {
+          return "undefined" != typeof TouchEvent && e instanceof TouchEvent;
+        }
+        function V(e) {
+          c = e;
+        }
+        return {
+          mount: function () {
+            f(C, gs, P, $s),
+              f(C, ms, P, $s),
+              f(C, fs, M, $s),
+              f(C, "click", j, { capture: !0 }),
+              f(C, "dragstart", he),
+              h([Me, Ve], D);
+          },
+          disable: V,
+          isDragging: function () {
+            return r;
+          },
+        };
+      },
+      Keyboard: function (e, t, s) {
+        var n,
+          i,
+          o = pt(e),
+          a = o.on,
+          r = o.bind,
+          l = o.unbind,
+          c = e.root,
+          u = t.Direction.resolve;
+        function d() {
+          var e = s.keyboard;
+          e && ((n = "global" === e ? window : c), r(n, Ds, f));
+        }
+        function h() {
+          l(n, Ds);
+        }
+        function p() {
+          var e = i;
+          (i = !0),
+            x(function () {
+              i = e;
+            });
+        }
+        function f(t) {
+          if (!i) {
+            var s = qs(t);
+            s === u(mt) ? e.go("<") : s === u(vt) && e.go(">");
+          }
+        }
+        return {
+          mount: function () {
+            d(), a(Ve, h), a(Ve, d), a(Be, p);
+          },
+          destroy: h,
+          disable: function (e) {
+            i = e;
+          },
+        };
+      },
+      LazyLoad: function (e, t, s) {
+        var n = pt(e),
+          i = n.on,
+          o = n.off,
+          a = n.bind,
+          r = n.emit,
+          l = "sequential" === s.lazyLoad,
+          c = [je, Ze],
+          u = [];
+        function d() {
+          _(u),
+            t.Slides.forEach(function (e) {
+              fe(e.slide, Bs).forEach(function (t) {
+                var n = re(t, Ms),
+                  i = re(t, Is);
+                if (n !== t.src || i !== t.srcset) {
+                  var o = s.classes.spinner,
+                    a = t.parentElement,
+                    r = Y(a, "." + o) || ne("span", o, a);
+                  u.push([t, e, r]), t.src || oe(t, "none");
+                }
+              });
+            }),
+            l ? g() : (o(c), i(c, h), h());
+        }
+        function h() {
+          (u = u.filter(function (t) {
+            var n = s.perPage * ((s.preloadPages || 1) + 1) - 1;
+            return !t[1].isWithin(e.index, n) || p(t);
+          })).length || o(c);
+        }
+        function p(e) {
+          var t = e[0];
+          W(e[1].slide, rs),
+            a(t, "load error", O(f, e)),
+            se(t, "src", re(t, Ms)),
+            se(t, "srcset", re(t, Is)),
+            te(t, Ms),
+            te(t, Is);
+        }
+        function f(e, t) {
+          var s = e[0],
+            n = e[1];
+          ge(n.slide, rs),
+            "error" !== t.type && (ue(e[2]), oe(s, ""), r(ct, s, n), r(Xe)),
+            l && g();
+        }
+        function g() {
+          u.length && p(u.shift());
+        }
+        return {
+          mount: function () {
+            s.lazyLoad && (d(), i(We, d));
+          },
+          destroy: O(_, u),
+          check: h,
+        };
+      },
+      Pagination: function (e, t, s) {
+        var n,
+          i,
+          o = pt(e),
+          a = o.on,
+          r = o.emit,
+          l = o.bind,
+          c = t.Slides,
+          u = t.Elements,
+          d = t.Controller,
+          h = d.hasFocus,
+          p = d.getIndex,
+          f = d.go,
+          g = t.Direction.resolve,
+          m = u.pagination,
+          v = [];
+        function y() {
+          n && (ue(m ? L(n.children) : n), ge(n, i), _(v), (n = null)),
+            o.destroy();
+        }
+        function b(e) {
+          f(">" + e, !0);
+        }
+        function S(e, t) {
+          var s = v.length,
+            n = qs(t),
+            i = w(),
+            o = -1;
+          n === g(vt, !1, i)
+            ? (o = ++e % s)
+            : n === g(mt, !1, i)
+            ? (o = (--e + s) % s)
+            : "Home" === n
+            ? (o = 0)
+            : "End" === n && (o = s - 1);
+          var a = v[o];
+          a && (ae(a.button), f(">" + o), he(t, !0));
+        }
+        function w() {
+          return s.paginationDirection || s.direction;
+        }
+        function E(e) {
+          return v[d.toPage(e)];
+        }
+        function A() {
+          var e = E(p(!0)),
+            t = E(p());
+          if (e) {
+            var s = e.button;
+            ge(s, ns), te(s, Pt), se(s, _t, -1);
+          }
+          if (t) {
+            var i = t.button;
+            W(i, ns), se(i, Pt, !0), se(i, _t, "");
+          }
+          r(it, { list: n, items: v }, e, t);
+        }
+        return {
+          items: v,
+          mount: function t() {
+            y(), a([Ve, We, ht], t);
+            var o = s.pagination;
+            m && oe(m, o ? "" : "none"),
+              o &&
+                (a([Be, Ke, Ze], A),
+                (function () {
+                  var t = e.length,
+                    o = s.classes,
+                    a = s.i18n,
+                    r = s.perPage,
+                    p = h() ? d.getEnd() + 1 : Ce(t / r);
+                  W(
+                    (n = m || ne("ul", o.pagination, u.track.parentElement)),
+                    (i = Kt + "--" + w())
+                  ),
+                    se(n, Ct, "tablist"),
+                    se(n, kt, a.select),
+                    se(n, qt, w() === wt ? "vertical" : "");
+                  for (var f = 0; f < p; f++) {
+                    var g = ne("li", null, n),
+                      y = ne("button", { class: o.page, type: "button" }, g),
+                      E = c.getIn(f).map(function (e) {
+                        return e.slide.id;
+                      }),
+                      A = !h() && r > 1 ? a.pageX : a.slideX;
+                    l(y, "click", O(b, f)),
+                      s.paginationKeyboard && l(y, "keydown", O(S, f)),
+                      se(g, Ct, "presentation"),
+                      se(y, Ct, "tab"),
+                      se(y, Ot, E.join(" ")),
+                      se(y, kt, ke(A, f + 1)),
+                      se(y, _t, -1),
+                      v.push({ li: g, button: y, page: f });
+                  }
+                })(),
+                A(),
+                r(nt, { list: n, items: v }, E(e.index)));
+          },
+          destroy: y,
+          getAt: E,
+          update: A,
+        };
+      },
+      Sync: function (e, t, s) {
+        var n = s.isNavigation,
+          i = s.slideFocus,
+          o = [];
+        function a() {
+          var t, s;
+          e.splides.forEach(function (t) {
+            t.isParent || (l(e, t.splide), l(t.splide, e));
+          }),
+            n &&
+              ((t = pt(e)),
+              (s = t.on)(He, u),
+              s(ut, d),
+              s([Me, Ve], c),
+              o.push(t),
+              t.emit(ot, e.splides));
+        }
+        function r() {
+          o.forEach(function (e) {
+            e.destroy();
+          }),
+            _(o);
+        }
+        function l(e, t) {
+          var s = pt(e);
+          s.on(Be, function (e, s, n) {
+            t.go(t.is(ys) ? n : e);
+          }),
+            o.push(s);
+        }
+        function c() {
+          se(t.Elements.list, qt, s.direction === wt ? "vertical" : "");
+        }
+        function u(t) {
+          e.go(t.index);
+        }
+        function d(e, t) {
+          N(js, qs(t)) && (u(e), he(t));
+        }
+        return {
+          setup: O(t.Media.set, { slideFocus: I(i) ? n : i }, !0),
+          mount: a,
+          destroy: r,
+          remount: function () {
+            r(), a();
+          },
+        };
+      },
+      Wheel: function (e, t, s) {
+        var n = pt(e).bind,
+          i = 0;
+        function o(n) {
+          if (n.cancelable) {
+            var o = n.deltaY,
+              a = o < 0,
+              r = me(n),
+              l = s.wheelMinThreshold || 0,
+              c = s.wheelSleep || 0;
+            _e(o) > l && r - i > c && (e.go(a ? "<" : ">"), (i = r)),
+              (function (n) {
+                return (
+                  !s.releaseWheel ||
+                  e.state.is(S) ||
+                  -1 !== t.Controller.getAdjacent(n)
+                );
+              })(a) && he(n);
+          }
+        }
+        return {
+          mount: function () {
+            s.wheel && n(t.Elements.track, "wheel", o, $s);
+          },
+        };
+      },
+      Live: function (e, t, s) {
+        var n = pt(e).on,
+          i = t.Elements.track,
+          o = s.live && !s.isNavigation,
+          a = ne("span", ts),
+          r = ft(Hs, O(l, !1));
+        function l(e) {
+          se(i, It, e), e ? (V(i, a), r.start()) : (ue(a), r.cancel());
+        }
+        function c(e) {
+          o && se(i, Mt, e ? "off" : "polite");
+        }
+        return {
+          mount: function () {
+            o &&
+              (c(!t.Autoplay.isPaused()),
+              se(i, Bt, !0),
+              (a.textContent = "…"),
+              n(at, O(c, !0)),
+              n(lt, O(c, !1)),
+              n([je, Ze], O(l, !0)));
+          },
+          disable: c,
+          destroy: function () {
+            te(i, [Mt, Bt, It]), ue(a);
+          },
+        };
+      },
+    }),
+    Ns = {
+      type: "slide",
+      role: "region",
+      speed: 400,
+      perPage: 1,
+      cloneStatus: !0,
+      arrows: !0,
+      pagination: !0,
+      paginationKeyboard: !0,
+      interval: 5e3,
+      pauseOnHover: !0,
+      pauseOnFocus: !0,
+      resetProgress: !0,
+      easing: "cubic-bezier(0.25, 1, 0.5, 1)",
+      drag: !0,
+      direction: "ltr",
+      trimSpace: !0,
+      focusableNodes: "a, button, textarea, input, select, iframe",
+      live: !0,
+      classes: ds,
+      i18n: {
+        prev: "Previous slide",
+        next: "Next slide",
+        first: "Go to first slide",
+        last: "Go to last slide",
+        slideX: "Go to slide %s",
+        pageX: "Go to page %s",
+        play: "Start autoplay",
+        pause: "Pause autoplay",
+        carousel: "carousel",
+        slide: "slide",
+        select: "Select a slide to show",
+        slideLabel: "%s of %s",
+      },
+      reducedMotion: { speed: 0, rewindSpeed: 0, autoplay: "pause" },
+    };
+  function Fs(e, t, s) {
+    var n = t.Slides;
+    function i() {
+      n.forEach(function (e) {
+        e.style("transform", "translateX(-" + 100 * e.index + "%)");
+      });
+    }
+    return {
+      mount: function () {
+        pt(e).on([Me, We], i);
+      },
+      start: function (e, t) {
+        n.style("transition", "opacity " + s.speed + "ms " + s.easing), x(t);
+      },
+      cancel: P,
+    };
+  }
+  function Rs(e, t, s) {
+    var n,
+      i = t.Move,
+      o = t.Controller,
+      a = t.Scroll,
+      r = t.Elements.list,
+      l = O(ie, r, "transition");
+    function c() {
+      l(""), a.cancel();
+    }
+    return {
+      mount: function () {
+        pt(e).bind(r, "transitionend", function (e) {
+          e.target === r && n && (c(), n());
+        });
+      },
+      start: function (t, r) {
+        var c = i.toPosition(t, !0),
+          u = i.getPosition(),
+          d = (function (t) {
+            var n = s.rewindSpeed;
+            if (e.is(vs) && n) {
+              var i = o.getIndex(!0),
+                a = o.getEnd();
+              if ((0 === i && t >= a) || (i >= a && 0 === t)) return n;
+            }
+            return s.speed;
+          })(t);
+        _e(c - u) >= 1 && d >= 1
+          ? s.useScroll
+            ? a.scroll(c, d, !1, r)
+            : (l("transform " + d + "ms " + s.easing),
+              i.translate(c, !0),
+              (n = r))
+          : (i.jump(t), r());
+      },
+      cancel: c,
+    };
+  }
+  var Ws = (function () {
+    function e(t, s) {
+      var n;
+      (this.event = pt()),
+        (this.Components = {}),
+        (this.state =
+          ((n = y),
+          {
+            set: function (e) {
+              n = e;
+            },
+            is: function (e) {
+              return N(H(e), n);
+            },
+          })),
+        (this.splides = []),
+        (this._o = {}),
+        (this._E = {});
+      var i = M(t) ? pe(document, t) : t;
+      Se(i, i + " is invalid."),
+        (this.root = i),
+        (s = J(
+          { label: re(i, kt) || "", labelledby: re(i, $t) || "" },
+          Ns,
+          e.defaults,
+          s || {}
+        ));
+      try {
+        J(s, JSON.parse(re(i, be)));
+      } catch (e) {
+        Se(!1, "Invalid JSON");
+      }
+      this._o = Object.create(J({}, s));
+    }
+    var t,
+      s,
+      n,
+      i = e.prototype;
+    return (
+      (i.mount = function (e, t) {
+        var s = this,
+          n = this.state,
+          i = this.Components;
         return (
-          "<button " +
-          this.buildAttrs(attrs) +
-          '><svg xmlns="' +
-          XML_NAME_SPACE +
-          '" viewBox="0 0 ' +
-          SIZE +
-          " " +
-          SIZE +
-          '" width="' +
-          SIZE +
-          '" height="' +
-          SIZE +
-          '"><path d="' +
-          (this.options.arrowPath || PATH) +
-          '" /></svg></button>'
+          Se(n.is([y, A]), "Already mounted!"),
+          n.set(y),
+          (this._C = i),
+          (this._T = t || this._T || (this.is(bs) ? Fs : Rs)),
+          (this._E = e || this._E),
+          K(Z({}, zs, this._E, { Transition: this._T }), function (e, t) {
+            var n = e(s, i, s._o);
+            (i[t] = n), n.setup && n.setup();
+          }),
+          K(i, function (e) {
+            e.mount && e.mount();
+          }),
+          this.emit(Me),
+          W(this.root, ss),
+          n.set(b),
+          this.emit(Ie),
+          this
         );
-      };
-
-      _proto3.html = function html() {
-        var _this$config = this.config,
-          rootClass = _this$config.rootClass,
-          listTag = _this$config.listTag,
-          arrows = _this$config.arrows,
-          beforeTrack = _this$config.beforeTrack,
-          afterTrack = _this$config.afterTrack,
-          slider = _this$config.slider,
-          beforeSlider = _this$config.beforeSlider,
-          afterSlider = _this$config.afterSlider;
-        var html = "";
-        html +=
-          '<div id="' +
-          this.id +
-          '" class="' +
-          this.buildClasses() +
-          " " +
-          (rootClass || "") +
-          '">';
-        html += "<style>" + this.Style.build() + "</style>";
-
-        if (slider) {
-          html += beforeSlider || "";
-          html += '<div class="splide__slider">';
+      }),
+      (i.sync = function (e) {
+        return (
+          this.splides.push({ splide: e }),
+          e.splides.push({ splide: this, isParent: !0 }),
+          this.state.is(b) &&
+            (this._C.Sync.remount(), e.Components.Sync.remount()),
+          this
+        );
+      }),
+      (i.go = function (e) {
+        return this._C.Controller.go(e), this;
+      }),
+      (i.on = function (e, t) {
+        return this.event.on(e, t), this;
+      }),
+      (i.off = function (e) {
+        return this.event.off(e), this;
+      }),
+      (i.emit = function (e) {
+        var t;
+        return (
+          (t = this.event).emit.apply(t, [e].concat(L(arguments, 1))), this
+        );
+      }),
+      (i.add = function (e, t) {
+        return this._C.Slides.add(e, t), this;
+      }),
+      (i.remove = function (e) {
+        return this._C.Slides.remove(e), this;
+      }),
+      (i.is = function (e) {
+        return this._o.type === e;
+      }),
+      (i.refresh = function () {
+        return this.emit(We), this;
+      }),
+      (i.destroy = function (e) {
+        void 0 === e && (e = !0);
+        var t = this.event,
+          s = this.state;
+        return (
+          s.is(y)
+            ? pt(this).on(Ie, this.destroy.bind(this, e))
+            : (K(
+                this._C,
+                function (t) {
+                  t.destroy && t.destroy(e);
+                },
+                !0
+              ),
+              t.emit(et),
+              t.destroy(),
+              e && _(this.splides),
+              s.set(A)),
+          this
+        );
+      }),
+      (t = e),
+      (s = [
+        {
+          key: "options",
+          get: function () {
+            return this._o;
+          },
+          set: function (e) {
+            this._C.Media.set(e, !0, !0);
+          },
+        },
+        {
+          key: "length",
+          get: function () {
+            return this._C.Slides.getLength(!0);
+          },
+        },
+        {
+          key: "index",
+          get: function () {
+            return this._C.Controller.getIndex();
+          },
+        },
+      ]) && m(t.prototype, s),
+      n && m(t, n),
+      Object.defineProperty(t, "prototype", { writable: !1 }),
+      e
+    );
+  })();
+  (Ws.defaults = {}), (Ws.STATES = C);
+  (window.FLS = !0),
+    (function (e) {
+      let t = new Image();
+      (t.onload = t.onerror =
+        function () {
+          e(2 == t.height);
+        }),
+        (t.src =
+          "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA");
+    })(function (e) {
+      let t = !0 === e ? "webp" : "no-webp";
+      document.documentElement.classList.add(t);
+    }),
+    document.querySelector(".icon-menu") &&
+      document.addEventListener("click", function (e) {
+        i &&
+          e.target.closest(".icon-menu") &&
+          (o(), document.documentElement.classList.toggle("menu-open"));
+      }),
+    (function () {
+      const e = document.querySelectorAll("[data-tabs]");
+      let n = [];
+      if (e.length > 0) {
+        const t = (function () {
+          if (location.hash) return location.hash.replace("#", "");
+        })();
+        t && t.startsWith("tab-") && (n = t.replace("tab-", "").split("-")),
+          e.forEach((e, t) => {
+            e.classList.add("_tab-init"),
+              e.setAttribute("data-tabs-index", t),
+              e.addEventListener("click", a),
+              (function (e) {
+                let t = e.querySelectorAll("[data-tabs-titles]>*"),
+                  s = e.querySelectorAll("[data-tabs-body]>*");
+                const i = e.dataset.tabsIndex,
+                  o = n[0] == i;
+                if (o) {
+                  const t = e.querySelector("[data-tabs-titles]>._tab-active");
+                  t && t.classList.remove("_tab-active");
+                }
+                s.length &&
+                  ((s = Array.from(s).filter(
+                    (t) => t.closest("[data-tabs]") === e
+                  )),
+                  (t = Array.from(t).filter(
+                    (t) => t.closest("[data-tabs]") === e
+                  )),
+                  s.forEach((e, s) => {
+                    t[s].setAttribute("data-tabs-title", ""),
+                      e.setAttribute("data-tabs-item", ""),
+                      o && s == n[1] && t[s].classList.add("_tab-active"),
+                      (e.hidden = !t[s].classList.contains("_tab-active"));
+                  }));
+              })(e);
+          });
+        let s = c(e, "tabs");
+        s &&
+          s.length &&
+          s.forEach((e) => {
+            e.matchMedia.addEventListener("change", function () {
+              i(e.itemsArray, e.matchMedia);
+            }),
+              i(e.itemsArray, e.matchMedia);
+          });
+      }
+      function i(e, t) {
+        e.forEach((e) => {
+          let s = (e = e.item).querySelector("[data-tabs-titles]"),
+            n = e.querySelectorAll("[data-tabs-title]"),
+            i = e.querySelector("[data-tabs-body]"),
+            o = e.querySelectorAll("[data-tabs-item]");
+          (n = Array.from(n).filter((t) => t.closest("[data-tabs]") === e)),
+            (o = Array.from(o).filter((t) => t.closest("[data-tabs]") === e)),
+            o.forEach((o, a) => {
+              t.matches
+                ? (i.append(n[a]), i.append(o), e.classList.add("_tab-spoller"))
+                : (s.append(n[a]), e.classList.remove("_tab-spoller"));
+            });
+        });
+      }
+      function o(e) {
+        let n = e.querySelectorAll("[data-tabs-title]"),
+          i = e.querySelectorAll("[data-tabs-item]");
+        const o = e.dataset.tabsIndex;
+        const a = (function (e) {
+          if (e.hasAttribute("data-tabs-animate"))
+            return e.dataset.tabsAnimate > 0
+              ? Number(e.dataset.tabsAnimate)
+              : 500;
+        })(e);
+        if (i.length > 0) {
+          const r = e.hasAttribute("data-tabs-hash");
+          (i = Array.from(i).filter((t) => t.closest("[data-tabs]") === e)),
+            (n = Array.from(n).filter((t) => t.closest("[data-tabs]") === e)),
+            i.forEach((e, i) => {
+              var l;
+              n[i].classList.contains("_tab-active")
+                ? (a ? s(e, a) : (e.hidden = !1),
+                  r &&
+                    !e.closest(".popup") &&
+                    ((l = (l = `tab-${o}-${i}`)
+                      ? `#${l}`
+                      : window.location.href.split("#")[0]),
+                    history.pushState("", "", l)))
+                : a
+                ? t(e, a)
+                : (e.hidden = !0);
+            });
         }
-
-        html += beforeTrack || "";
-
-        if (arrows) {
-          html += this.renderArrows();
+      }
+      function a(e) {
+        const t = e.target;
+        if (t.closest("[data-tabs-title]")) {
+          const s = t.closest("[data-tabs-title]"),
+            n = s.closest("[data-tabs]");
+          if (
+            !s.classList.contains("_tab-active") &&
+            !n.querySelector("._slide")
+          ) {
+            let e = n.querySelectorAll("[data-tabs-title]._tab-active");
+            e.length &&
+              (e = Array.from(e).filter((e) => e.closest("[data-tabs]") === n)),
+              e.length && e[0].classList.remove("_tab-active"),
+              s.classList.add("_tab-active"),
+              o(n);
+          }
+          e.preventDefault();
         }
-
-        html += '<div class="splide__track">';
-        html += "<" + listTag + ' class="splide__list">';
-        html += this.renderSlides();
-        html += "</" + listTag + ">";
-        html += "</div>";
-        html += afterTrack || "";
-
-        if (slider) {
-          html += "</div>";
-          html += afterSlider || "";
-        }
-
-        html += "</div>";
-        return html;
-      };
-
-      return SplideRenderer;
-    })(); // CONCATENATED MODULE: ./src/js/app.js
-
-  /*
-(i) Код попадает в итоговый файл,
-только когда вызвана функция,
-например flsFunctions.spollers();
-Или когда импортирован весь файл,
-например import "files/script.js";
-Неиспользуемый (не вызванный)
-код в итоговый файл не попадает.
-
-Если мы хотим добавить модуль
-следует его расскоментировать
-*/
-
-  // Включить/выключить FLS (Full Logging System) (в работе)
-  window["FLS"] = true;
-
-  // Подключение основного файла стилей
-
-  // ========================================================================================================================================================================================================================================================
-  // Функционал ========================================================================================================================================================================================================================================================
-  // ========================================================================================================================================================================================================================================================
-
-  /* Проверка поддержки webp, добавление класса webp или no-webp для HTML */
-  /* (i) необходимо для корректного отображения webp из css  */
-  isWebp();
-  /* Добавление класса touch для HTML если браузер мобильный */
-  // flsFunctions.addTouchClass();
-  /* Добавление loaded для HTML после полной загрузки страницы */
-  // flsFunctions.addLoadedClass();
-  /* Модуль для работы с меню (Бургер) */
-  // flsFunctions.menuInit();
-  /* Учет плавающей панели на мобильных устройствах при 100vh */
-  // flsFunctions.fullVHfix();
-
-  /*
-Модуль работы со спойлерами
-Документация:
-Сниппет (HTML): spollers
-*/
-  // flsFunctions.spollers();
-
-  /*
-Модуль работы с табами
-Документация:
-Сниппет (HTML): tabs
-*/
-  // flsFunctions.tabs();
-
-  /*
-Модуль "показать еще"
-Документация по работе в шаблоне:
-Сниппет (HTML): showmore
-*/
-  // flsFunctions.showMore();
-
-  /*
-Попапы
-Документация по работе в шаблоне:
-Сниппет (HTML): pl
-*/
-  // import './libs/popup.js'
-
-  /*
-Модуль параллакса мышью
-Документация по работе в шаблоне:
-Сниппет (HTML): 
-*/
-  // import './libs/parallax-mouse.js'
-
-  // ========================================================================================================================================================================================================================================================
-  // Работа с формами ========================================================================================================================================================================================================================================================
-  // ========================================================================================================================================================================================================================================================
-
-  /* Работа с полями формы: добавление классов, работа с placeholder. */
-  // flsForms.formFieldsInit();
-
-  /* Oтправка формы со встроенной валидацией полей. false - отключит валидацию */
-  // flsForms.formSubmit(true);
-
-  /* Модуль формы "колличество" */
-  // flsForms.formQuantity();
-
-  /* Модуль формы "показать пароль" */
-  // flsForms.formViewpass();
-
-  /* Модуль звездного рейтинга */
-  // flsForms.formRating();
-
-  /* Модуль работы с select. */
-
-  /* (В работе) Модуль работы с масками.*/
-  /*
-Подключение и настройка выполняется в файле js/files/forms/inputmask.js
-Документация по работе в шаблоне:
-Документация плагина: https://github.com/RobinHerbots/inputmask
-Сниппет(HTML):
-*/
-  // import "./files/forms/inputmask.js";
-
-  /* Модуль работы с ползунком */
-  /*
-Подключение и настройка выполняется в файле js/files/forms/range.js
-Документация по работе в шаблоне:
-Документация плагина: https://refreshless.com/nouislider/
-Сниппет (HTML): range
-*/
-  // import "./files/forms/range.js";
-
-  /* Модуль работы с подсказками (tippy) */
-  /*
-Подключение плагина Tippy.js и настройка выполняется в файле js/files/tippy.js
-Документация по работе в шаблоне:
-Документация плагина: https://atomiks.github.io/tippyjs/
-Сниппет (HTML): tip (добавляет атрибут с подсказкой для html тега)
-*/
-  // import "./files/tippy.js";
-
-  // ========================================================================================================================================================================================================================================================
-  // Работа со слайдером (Swiper) ========================================================================================================================================================================================================================================================
-  // ========================================================================================================================================================================================================================================================
-  /*
-Настройка подключения плагина слайдера Swiper и новых слайдеров выполняется в файле js/files/sliders.js
-Документация по работе в шаблоне:
-Документация плагина: https://swiperjs.com/
-Сниппет(HTML): swiper
-*/
-  // import "./files/sliders.js";
-
-  // ========================================================================================================================================================================================================================================================
-  // Модули работы с прокруткой страницы ========================================================================================================================================================================================================================================================
-  // ========================================================================================================================================================================================================================================================
-
-  /*
-Изменение дизайна скроллбара
-Документация по работе в шаблоне: В HTML добавляем к блоку атрибут data-simplebar
-Документация плагина: https://github.com/Grsmto/simplebar/tree/master/packages/simplebar
-Сниппет(HTML): 
-*/
-  // import './files/scroll/simplebar.js';
-
-  // Ленивая (отложенная) загрузка картинок
-  // Документация по работе в шаблоне: В HTML добавляем img, video, audio, iframe но вместо src пишем data-src
-  // Документация плагина: https://github.com/verlok/vanilla-lazyload
-  // Сниппет(HTML):
-  //import './files/scroll/lazyload.js';
-
-  // Наблюдатель за объектами c атрибутом data-watch
-  // Документация по работе в шаблоне: js/libs/watcher.js
-  // Сниппет(HTML):
-  // import './libs/watcher.js'
-
-  // Функции работы скроллом
-
-  // Плавная навигация по странице
-  // flsScroll.pageNavigation();
-
-  // Функционал добавления классов к хедеру при прокрутке
-  headerScroll();
-
-  // Функционал липкого блока
-  // flsScroll.stickyBlock();
-
-  // ========================================================================================================================================================================================================================================================
-  // Галерея ========================================================================================================================================================================================================================================================
-  // ========================================================================================================================================================================================================================================================
-  /*
-Документация по работе в шаблоне: https://www.lightgalleryjs.com/docs/
-Документация плагина: https://www.lightgalleryjs.com/docs/
-Сниппет(HTML):
-*/
-  // import "./files/gallery.js";
-
-  // ========================================================================================================================================================================================================================================================
-  // Прочие плагины ============================================================================================================================================================================================================================================================================================================
-  // ========================================================================================================================================================================================================================================================
-
-  /* Динамический адаптив */
-  // import "./libs/dynamic_adapt.js";
-
-  /* Форматирование чисел */
-  // import './libs/wNumb.min.js';
-
-  // ========================================================================================================================================================================================================================================================
-  // Прочее ========================================================================================================================================================================================================================================================
-  // ========================================================================================================================================================================================================================================================
-  /* Подключаем файлы со своим кодом */
-
-  new Splide(".splide", {
-    rewind: true,
-    rewindByDrag: true,
-    breakpoints: {
-      1230: {
-        arrows: false,
+      }
+    })(),
+    (function () {
+      d = !0;
+      const e = document.querySelector("header.header"),
+        t = e.hasAttribute("data-scroll-show"),
+        s = e.dataset.scrollShow ? e.dataset.scrollShow : 500,
+        n = e.dataset.scroll ? e.dataset.scroll : 1;
+      let i,
+        o = 0;
+      document.addEventListener("windowScroll", function (a) {
+        const r = window.scrollY;
+        clearTimeout(i),
+          r >= n
+            ? (!e.classList.contains("_header-scroll") &&
+                e.classList.add("_header-scroll"),
+              t &&
+                (r > o
+                  ? e.classList.contains("_header-show") &&
+                    e.classList.remove("_header-show")
+                  : !e.classList.contains("_header-show") &&
+                    e.classList.add("_header-show"),
+                (i = setTimeout(() => {
+                  !e.classList.contains("_header-show") &&
+                    e.classList.add("_header-show");
+                }, s))))
+            : (e.classList.contains("_header-scroll") &&
+                e.classList.remove("_header-scroll"),
+              t &&
+                e.classList.contains("_header-show") &&
+                e.classList.remove("_header-show")),
+          (o = r <= 0 ? 0 : r);
+      });
+    })(),
+    new Ws(".splide", {
+      rewind: !0,
+      rewindByDrag: !0,
+      breakpoints: { 1230: { arrows: !1 } },
+    }).mount(),
+    new Ws("#sliderCompanies", {
+      perPage: 6,
+      perMove: 1,
+      pagination: !1,
+      gap: 30,
+      rewind: !0,
+      rewindByDrag: !0,
+      breakpoints: {
+        1230: { perPage: 5, gap: 20, arrows: !1 },
+        1024: { perPage: 4, gap: 20 },
+        867: { perPage: 3 },
+        640: { perPage: 2 },
+        480: { perPage: 1 },
       },
-    },
-  }).mount();
-
-  new Splide("#sliderCompanies", {
-    perPage: 6,
-    perMove: 1,
-    pagination: false,
-    gap: 30,
-    rewind: true,
-    rewindByDrag: true,
-    breakpoints: {
-      1230: {
-        perPage: 5,
-        gap: 20,
-        arrows: false,
+    }).mount(),
+    new Ws("#slidernews", {
+      perPage: 5,
+      perMove: 1,
+      pagination: !1,
+      gap: 30,
+      rewind: !0,
+      rewindByDrag: !0,
+      breakpoints: {
+        1630: { perPage: 4, gap: 20 },
+        1334: { perPage: 3, gap: 20, arrows: !1 },
+        1e3: { perPage: 2 },
+        740: { perPage: 1.5 },
+        500: { perPage: 1.2 },
+        410: { perPage: 1.1 },
+        370: { perPage: 1 },
       },
-      1024: {
-        perPage: 4,
-        gap: 20,
-      },
-      867: {
-        perPage: 3,
-      },
-      640: {
-        perPage: 2,
-      },
-      480: {
-        perPage: 1,
-      },
-    },
-  }).mount();
-
-  new Splide("#slidernews", {
-    perPage: 5,
-    perMove: 1,
-    pagination: false,
-    gap: 30,
-    rewind: true,
-    rewindByDrag: true,
-    breakpoints: {
-      1630: {
-        perPage: 4,
-        gap: 20,
-      },
-      1334: {
-        perPage: 3,
-        gap: 20,
-        arrows: false,
-      },
-      1000: {
-        perPage: 2,
-      },
-      740: {
-        perPage: 1.5,
-      },
-      500: {
-        perPage: 1.2,
-      },
-      410: {
-        perPage: 1.1,
-      },
-      370: {
-        perPage: 1,
-      },
-    },
-  }).mount();
-
-  //============================================================================================================================================================================================================================================
-  /******/
+    }).mount();
 })();
