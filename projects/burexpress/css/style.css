@@ -1666,6 +1666,30 @@ body.lock {
   }
 }
 
+.selection_btn {
+  padding: 14px 30px;
+}
+.selection__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 109.375em) {
+  .selection__button {
+    padding-top: 2.5rem;
+  }
+}
+@media (min-width: 20em) and (max-width: 109.375em) {
+  .selection__button {
+    padding-top: clamp( 0.625rem , 0.2054195804rem  +  2.0979020979vw , 2.5rem );
+  }
+}
+@media (max-width: 20em) {
+  .selection__button {
+    padding-top: 0.625rem;
+  }
+}
+
 .work__search {
   display: flex;
   gap: 30px;
