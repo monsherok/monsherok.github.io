@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Главная</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20230308020149">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Mulish:wght@400;500;700&family=Open+Sans:wght@400;500;600&family=Oswald:wght@600&display=swap&_v=20230308020149" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js?_v=20230308020149"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__container">
+				<div class="logo">
+					<a href="/">
+						<img src="img/logo.svg" alt="Логотип Di-SAN">
+					</a>
+				</div>
+				<div class="header__inner">
+					<div class="header__top" data-da=".menu__body-bottom, 1180">
+						<div class="header__top-contacts">
+							<span class="contact header__top-contact">
+								<a href="mailto:di-san@di-san.com.tr" class="mail">
+									di-san@di-san.com.tr</a>
+							</span>
+							<span class="contact header__top-contact">
+								<a href="tel:+79782392244" class="phone">+7 978 239
+									22 44</a>
+							</span>
+						</div>
+						<div class="header__top-socials">
+							<a href="#" class="social header__top-social youtube">
+								<span>
+									<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M20.7081 0.476364C21.691 0.741818 22.4636 1.51636 22.7248 2.49818C23.1999 4.28 23.1999 8 23.1999 8C23.1999 8 23.1999 11.72 22.7248 13.5018C22.46 14.4873 21.6874 15.2618 20.7081 15.5236C18.9308 16 11.7999 16 11.7999 16C11.7999 16 4.67264 16 2.89173 15.5236C1.90878 15.2582 1.13621 14.4836 0.875053 13.5018C0.399902 11.72 0.399902 8 0.399902 8C0.399902 8 0.399902 4.28 0.875053 2.49818C1.13983 1.51273 1.91241 0.738182 2.89173 0.476364C4.67264 0 11.7999 0 11.7999 0C11.7999 0 18.9308 0 20.7081 0.476364ZM15.4451 8L9.52208 11.4291V4.57091L15.4451 8Z" fill="#232176" />
+									</svg>
+								</span>
+
+							</a>
+							<a href="#" class="social header__top-social facebook">
+								<span>
+									<svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M10.4932 11.2493L11.0631 7.63143H7.55241V5.27982C7.55241 4.29056 8.04254 3.32391 9.60982 3.32391H11.2284V0.243075C10.2858 0.0929007 9.33338 0.0116567 8.37879 0C5.4893 0 3.60286 1.73544 3.60286 4.87281V7.63143H0.399902V11.2493H3.60286V20H7.55241V11.2493H10.4932Z" fill="#232176" />
+									</svg>
+								</span>
+							</a>
+							<a href="#" class="social header__top-social instagram">
+								<span>
+									<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M7.4862 11.1215C7.4862 9.111 9.11659 7.48072 11.1283 7.48072C13.1401 7.48072 14.7713 9.111 14.7713 11.1215C14.7713 13.1321 13.1401 14.7624 11.1283 14.7624C9.11659 14.7624 7.4862 13.1321 7.4862 11.1215ZM5.51687 11.1215C5.51687 14.2189 8.02911 16.7296 11.1283 16.7296C14.2276 16.7296 16.7398 14.2189 16.7398 11.1215C16.7398 8.02417 14.2276 5.51343 11.1283 5.51343C8.02911 5.51343 5.51687 8.02417 5.51687 11.1215ZM15.6506 5.29107C15.6505 5.55028 15.7273 5.8037 15.8713 6.01928C16.0153 6.23487 16.22 6.40293 16.4596 6.50222C16.6992 6.60151 16.9629 6.62757 17.2173 6.5771C17.4717 6.52664 17.7054 6.40191 17.8889 6.21869C18.0723 6.03547 18.1973 5.802 18.248 5.54779C18.2987 5.29358 18.2729 5.03006 18.1737 4.79054C18.0745 4.55102 17.9065 4.34626 17.6909 4.20217C17.4753 4.05807 17.2218 3.98111 16.9625 3.981H16.9619C16.6143 3.98117 16.2809 4.11923 16.035 4.36486C15.7891 4.6105 15.6509 4.94362 15.6506 5.29107ZM6.71337 20.0114C5.64792 19.9629 5.06881 19.7856 4.68397 19.6357C4.17375 19.4372 3.80972 19.2008 3.42697 18.8188C3.04422 18.4368 2.8073 18.0733 2.60954 17.5634C2.45952 17.179 2.28205 16.6001 2.23362 15.5353C2.18064 14.384 2.17006 14.0382 2.17006 11.1216C2.17006 8.20504 2.18151 7.86018 2.23362 6.70799C2.28214 5.64318 2.46092 5.06539 2.60954 4.67981C2.80817 4.1699 3.04475 3.80608 3.42697 3.42357C3.80919 3.04105 4.17288 2.80427 4.68397 2.60663C5.06864 2.4567 5.64792 2.27933 6.71337 2.23093C7.86528 2.17798 8.21131 2.16741 11.1283 2.16741C14.0454 2.16741 14.3917 2.17885 15.5446 2.23093C16.6101 2.27942 17.1882 2.4581 17.574 2.60663C18.0842 2.80427 18.4483 3.04157 18.831 3.42357C19.2138 3.80556 19.4498 4.1699 19.6484 4.67981C19.7985 5.06425 19.9759 5.64318 20.0244 6.70799C20.0773 7.86018 20.0879 8.20504 20.0879 11.1216C20.0879 14.0382 20.0773 14.3831 20.0244 15.5353C19.9758 16.6001 19.7975 17.1788 19.6484 17.5634C19.4498 18.0733 19.2132 18.4372 18.831 18.8188C18.4488 19.2004 18.0842 19.4372 17.574 19.6357C17.1893 19.7857 16.6101 19.963 15.5446 20.0114C14.3927 20.0644 14.0467 20.075 11.1283 20.075C8.21 20.075 7.86493 20.0644 6.71337 20.0114ZM6.62288 0.266092C5.45951 0.31904 4.66456 0.503396 3.97032 0.773378C3.25133 1.05218 2.64268 1.42623 2.03446 2.03312C1.42624 2.64001 1.05294 3.24926 0.773966 3.96781C0.503823 4.66207 0.319356 5.45612 0.266376 6.61878C0.212522 7.78329 0.200195 8.15558 0.200195 11.1215C0.200195 14.0875 0.212522 14.4598 0.266376 15.6243C0.319356 16.787 0.503823 17.581 0.773966 18.2753C1.05294 18.9934 1.42633 19.6033 2.03446 20.21C2.64259 20.8166 3.25133 21.1901 3.97032 21.4697C4.66587 21.7397 5.45951 21.924 6.62288 21.977C7.78869 22.0299 8.1606 22.0431 11.1283 22.0431C14.0961 22.0431 14.4686 22.0308 15.6338 21.977C16.7972 21.924 17.5917 21.7397 18.2864 21.4697C19.0049 21.1901 19.614 20.8168 20.2222 20.21C20.8304 19.6031 21.2029 18.9934 21.4827 18.2753C21.7528 17.581 21.9382 16.787 21.9903 15.6243C22.0433 14.4589 22.0556 14.0875 22.0556 11.1215C22.0556 8.15558 22.0433 7.78329 21.9903 6.61878C21.9373 5.45603 21.7528 4.66164 21.4827 3.96781C21.2029 3.24969 20.8295 2.64097 20.2222 2.03312C19.615 1.42527 19.0049 1.05218 18.2872 0.773378C17.5917 0.503396 16.7972 0.318166 15.6347 0.266092C14.4695 0.213144 14.0969 0.199951 11.1292 0.199951C8.16147 0.199951 7.78869 0.212271 6.62288 0.266092Z" fill="#232176" />
+									</svg>
+								</span>
+
+							</a>
+							<a href="#" class="social header__top-social twitter">
+								<span>
+									<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M19.4119 2.25114C18.8071 2.51139 18.1714 2.69262 17.5203 2.79034C17.8247 2.73816 18.2726 2.19026 18.4509 1.96849C18.7217 1.63398 18.9281 1.2521 19.0596 0.842264C19.0596 0.811825 19.0901 0.768341 19.0596 0.746599C19.0443 0.738226 19.0271 0.733839 19.0096 0.733839C18.9922 0.733839 18.975 0.738226 18.9596 0.746599C18.2527 1.12944 17.5003 1.42164 16.7202 1.61628C16.693 1.62458 16.6641 1.62533 16.6365 1.61843C16.6089 1.61154 16.5838 1.59726 16.5637 1.57714C16.503 1.50484 16.4376 1.43657 16.368 1.37277C16.0498 1.08771 15.6889 0.854399 15.2983 0.681374C14.7711 0.465075 14.2016 0.371401 13.6329 0.407426C13.081 0.442277 12.5423 0.590292 12.0501 0.842264C11.5654 1.10792 11.1394 1.46881 10.7977 1.90327C10.4383 2.35043 10.1789 2.86938 10.0368 3.4252C9.91959 3.9539 9.9063 4.50033 9.99762 5.0341C9.99762 5.12542 9.99762 5.13846 9.91935 5.12542C6.81896 4.66884 4.27516 3.5687 2.19663 1.20753C2.10532 1.10317 2.05748 1.10317 1.98356 1.20753C1.0791 2.58162 1.51829 4.75581 2.64886 5.82985C2.80106 5.97335 2.9576 6.1125 3.12284 6.24295C2.60447 6.20615 2.09877 6.06568 1.63569 5.82985C1.54872 5.77333 1.50089 5.80376 1.49654 5.90812C1.48422 6.05281 1.48422 6.19828 1.49654 6.34296C1.58728 7.03635 1.86054 7.69321 2.28838 8.24635C2.71623 8.7995 3.28331 9.22909 3.93164 9.49119C4.08968 9.55888 4.25436 9.60989 4.423 9.64338C3.94313 9.73786 3.45095 9.75255 2.9663 9.68687C2.86193 9.66512 2.8228 9.72165 2.86193 9.82167C3.50115 11.561 4.88828 12.0915 5.9058 12.3872C6.04495 12.409 6.1841 12.409 6.34064 12.4437C6.34064 12.4437 6.34064 12.4437 6.31455 12.4698C6.01451 13.0177 4.80131 13.3873 4.24472 13.5787C3.2288 13.9436 2.14563 14.0831 1.0704 13.9874C0.900816 13.9613 0.861681 13.9657 0.818197 13.9874C0.774713 14.0092 0.818197 14.057 0.866029 14.1005C1.08345 14.244 1.30087 14.3701 1.52698 14.4918C2.20013 14.859 2.91179 15.1506 3.64899 15.3615C7.46687 16.4138 11.7631 15.6398 14.6286 12.7916C16.8811 10.5565 17.6725 7.47354 17.6725 4.38619C17.6725 4.26879 17.816 4.19921 17.8986 4.13833C18.4685 3.69432 18.9709 3.16995 19.3901 2.58162C19.4627 2.49392 19.4999 2.38225 19.4945 2.26853C19.4945 2.20331 19.4945 2.21635 19.4119 2.25114Z" fill="#232176" />
+									</svg>
+								</span>
+							</a>
+						</div>
+						<div class="header__top-links">
+							<span class="header__top-link">
+								<button class="web-form">отправить запрос</button>
+							</span>
+							<span class="header__top-link">
+								<a href="#" class="button">сайт производителя</a>
+							</span>
+							<!- Здесь будет кнопка, веб форма -->
+
+						</div>
+					</div>
+					<div class="header__bottom">
+						<div class="header__bottom-menu" data-da=".menu__body-top, 860">
+							<ul class="menu">
+								<li class="first leaf"><a href="/" title="" class="active">каталог</a></li>
+								<li class="leaf"><a href="/" title="" class="active">редукторы</a></li>
+								<li class="leaf"><a href="/" title="" class="active">карданы</a></li>
+								<li class="leaf"><a href="/" title="" class="active">шестерни</a></li>
+								<li class="last leaf"><a href="/" title="" class="active">контакты</a></li>
+							</ul>
+						</div>
+						<div class="header__bottom-patch">
+							<img src="img/patch.svg" alt="Официальные представители Di-San Dişli San.Co.">
+						</div>
+						<div class="header__bottom-burger menu">
+							<button type="button" class="menu__icon icon-menu"><span></span></button>
+							<div class="menu__body">
+								<div class="menu__body-top"></div>
+								<div class="menu__body-bottom"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="page">
+			<div class="splide main-splide" aria-label="Main Slider" data-splide='{"type":"loop"}'>
+				<div class="splide__track">
+					<ul class="splide__list">
+						<li class="splide__slide" style="background-image: url(img/mainsliderbgimg.jpg);">
+							<div class="main__splide-text">
+								<div class="title-text">Качественные карданы и редукторы по доступным ценам</div>
+								<div class="sub-text">Надежный партнер для решения ваших технических задач</div>
+								<a class="btn main__slider-btn">Перейти в каталог</a>
+							</div>
+							<div class="main__splide-image" style="background-image: url(img/reductor.png);bottom: -141px;right: -94px;">
+								<div class="main__slider-tips">
+									<div class="main__slider-tip" style="top: 498px; left: 0;">
+										Устойчивость к перегрузкам
+										<p>Редукторы позволяют экономить энергию, уменьшая потери при передаче мощности, и повышая эффективность вашей техники.</p>
+									</div>
+									<div class="main__slider-tip" style="top: 210px; left: 487px;">
+										Экономия энергии
+										<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptatibus, dolores minima dolore voluptas earum. Recusandae odio quae laborum minus saepe, doloribus ullam enim, repellat eius omnis, ex accusamus vitae!</p>
+									</div>
+									<div class="main__slider-tip" style="top: 110px; left: 868px;">
+										Высокая надежность
+										<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quibusdam perferendis ex ut molestias excepturi impedit eum, non, magnam sed aperiam corporis. Quos dolorem perspiciatis maiores unde nobis? Dolor, neque.
+											Dolorem vitae explicabo dignissimos? Neque nemo magni assumenda id placeat iure molestias cupiditate dicta nisi? Quam dicta et eius, dolores minus tenetur ipsa ullam! Sunt ab sequi vero nihil aliquid!</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="about about__container">
+				<div class="about__left">
+					<h2 class="about__left-title">О компании</h2>
+					<p class="about__left-subtitle">Мы специализируемся на поставках высококачественных изделий от ведущих производителей в отрасли. С нами вы можете быть уверены в том, что получите продукцию наилучшего качества по конкурентоспособным ценам. Наша команда профессионалов всегда готова предложить вам оптимальные решения и помочь с выбором продукции.</p>
+				</div>
+				<div class="about__right">
+					<div class="about__item">
+						<h3 class="about__right-num">01</h3>
+						<div class="about__right-title">Широкий ассортимент продукции</div>
+						<div class="about__right-subtitle">Мы предлагаем широкий выбор карданов и редукторов для различных типов и моделей техники, чтобы удовлетворить потребности наших клиентов.</div>
+					</div>
+					<div class="about__item">
+						<h3 class="about__right-num">02</h3>
+						<div class="about__right-title">Эффективная техническая поддержка</div>
+						<div class="about__right-subtitle">Мы предлагаем качественную техническую поддержку, чтобы наши клиенты могли решить все вопросы и проблемы, связанные с использованием нашей продукции.</div>
+					</div>
+					<div class="about__item">
+						<h3 class="about__right-num">03</h3>
+						<div class="about__right-title">Своевременная доставка</div>
+						<div class="about__right-subtitle">Мы гарантируем своевременную доставку, чтобы наши клиенты могли быстро и эффективно восстановить работоспособность своей техники.</div>
+					</div>
+					<div class="about__item">
+						<h3 class="about__right-num">04</h3>
+						<div class="about__right-title">Высокое качество продукции</div>
+						<div class="about__right-subtitle">Мы заботимся о качестве нашей продукции, чтобы обеспечить ее надежность и долговечностьв эксплуатации.</div>
+					</div>
+					<div class="about__item">
+						<h3 class="about__right-num">05</h3>
+						<div class="about__right-title">Компетентные консультанты</div>
+						<div class="about__right-subtitle">Наши консультанты обладают богатым опытом и знаниями, чтобы помочь вам выбрать наилучший вариант кардана или редуктора для вашей техники.</div>
+					</div>
+					<div class="about__item">
+						<h3 class="about__right-num">06</h3>
+						<div class="about__right-title">Доступные цены</div>
+						<div class="about__right-subtitle">Мы стремимся предложить нашим клиентам качественную продукцию по доступным ценам, чтобы они могли выгодно и недорого решить свои технические задачи.</div>
+					</div>
+
+				</div>
+			</div>
+			<section class="reductors">
+				<div class="block-header reductors__header reductors__container">
+					<h2 class="block__title">Редукторы</h2>
+					<div class="block-btns reductors__header-btns" data-da=".reductors__mobile-buttons, 750">
+						<a href="#" class="btn primary">Смотреть все редукторы</a>
+						<a href="#" class="btn outline">Скачать каталог</a>
+					</div>
+				</div>
+				<div class="slider__stairs">
+					<div class="splide stairs_splide-nav reductors_splide-nav">
+						<div class="splide__track">
+							<ul class="splide__list">
+								<li class="splide__slide">Обработка почвы</li>
+								<li class="splide__slide">Разбрасывание удобрений</li>
+								<li class="splide__slide">Косильные машины</li>
+								<li class="splide__slide">Уборочные машины</li>
+								<li class="splide__slide">Подготовка почвы</li>
+								<li class="splide__slide">Различные машины</li>
+							</ul>
+						</div>
+					</div>
+					<div class="splide stairs_splide reductors_splide" role="region">
+						<div class="splide__track">
+							<div class="splide__list">
+								<a href="#" class="splide__slide" style="background-image: url(img/e3c76e9f28f0e6c3aa643db1e5a17fab.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+								<a href="#" class="splide__slide" style="background-image: url(img/sliderbg1.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+								<a href="#" class="splide__slide" style="background-image: url(img/df226f53e79e92f4f5d9561992d3cde2.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+								<a href="#" class="splide__slide" style="background-image: url(img/e3c76e9f28f0e6c3aa643db1e5a17fab.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+								<a href="#" class="splide__slide" style="background-image: url(img/sliderbg1.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+								<a href="#" class="splide__slide" style="background-image: url(img/df226f53e79e92f4f5d9561992d3cde2.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="reductors__container reductors__mobile-buttons"></div>
+			</section>
+			<section class="gimbal">
+				<div class="block-header gimbal__header gimbal__container">
+					<h2 class="block__title">Карданы</h2>
+					<div class="block-btns gimbal__header-btns" data-da=".gimbal__mobile-buttons, 750">
+						<a href="#" class="btn primary">Смотреть все карданы</a>
+						<a href="#" class="btn outline">Скачать каталог</a>
+					</div>
+				</div>
+				<div class="splide gimbal__container gimbal__splide">
+					<div class="splide__track">
+						<div class="splide__list">
+							<div class="splide__slide gimbal__card">
+								<div class="gimbal__card-image">
+									<picture><source srcset="img/df226f53e79e92f4f5d9561992d3cde2.webp" type="image/webp"><img src="img/df226f53e79e92f4f5d9561992d3cde2.png" alt=""></picture>
+								</div>
+								<h4 class="gimbal__card-title">Вал с карданным соединением</h4>
+								<div class="gimbal__card-content">
+									<p class="gimbal__card-description">
+										Передаточное число оборотов: 15 : 1<br>
+										Частота вращения входного сигнала: 540 об/мин<br>
+										Выходной оборот: 36 об/мин
+									</p>
+								</div>
+								<div class="gimbal__card-buttons">
+									<a href="#" class="gimbal__showmore">Узнать подробнее</a>
+									<a href="#" class="gimbal__consultation">Получить консультацию</a>
+								</div>
+							</div>
+							<div class="splide__slide gimbal__card">
+								<div class="gimbal__card-image">
+									<img src="img/Rectangle 196 (2).jpg" alt="">
+								</div>
+								<h4 class="gimbal__card-title">Вал с карданным соединением</h4>
+								<div class="gimbal__card-content">
+									<p class="gimbal__card-description">
+										Передаточное число оборотов: 15 : 1<br>
+										Частота вращения входного сигнала: 540 об/мин<br>
+										Выходной оборот: 36 об/мин
+									</p>
+
+								</div>
+								<div class="gimbal__card-buttons">
+									<a href="#" class="gimbal__showmore">Узнать подробнее</a>
+									<a href="#" class="gimbal__consultation">Получить консультацию</a>
+								</div>
+							</div>
+							<div class="splide__slide gimbal__card">
+								<div class="gimbal__card-image">
+									<img src="img/Rectangle 196 (3).jpg" alt="">
+								</div>
+								<h4 class="gimbal__card-title">Вал с карданным соединением</h4>
+								<div class="gimbal__card-content">
+									<p class="gimbal__card-description">
+										Передаточное число оборотов: 15 : 1<br>
+										Частота вращения входного сигнала: 540 об/мин<br>
+										Выходной оборот: 36 об/мин
+									</p>
+								</div>
+								<div class="gimbal__card-buttons">
+									<a href="#" class="gimbal__showmore">Узнать подробнее</a>
+									<a href="#" class="gimbal__consultation">Получить консультацию</a>
+								</div>
+							</div>
+							<div class="splide__slide gimbal__card">
+								<div class="gimbal__card-image">
+									<img src="img/Rectangle 196.jpg" alt="">
+								</div>
+								<h4 class="gimbal__card-title">Вал с карданным соединением</h4>
+								<div class="gimbal__card-content">
+									<p class="gimbal__card-description">
+										Передаточное число оборотов: 15 : 1<br>
+										Частота вращения входного сигнала: 540 об/мин<br>
+										Выходной оборот: 36 об/мин
+									</p>
+								</div>
+								<div class="gimbal__card-buttons">
+									<a href="#" class="gimbal__showmore">Узнать подробнее</a>
+									<a href="#" class="gimbal__consultation">Получить консультацию</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="gimbal__container gimbal__mobile-buttons"></div>
+			</section>
+			<section class="shesterni">
+				<div class="block-header shesterni__header shesterni__container">
+					<h2 class="block__title">Шестерни</h2>
+					<div class="block-btns shesterni__header-btns" data-da=".shesterni__mobile-buttons, 750">
+						<a href="#" class="btn primary">Смотреть все шестерни</a>
+						<a href="#" class="btn outline">Скачать каталог</a>
+					</div>
+				</div>
+				<div class="slider__stairs">
+					<div class="splide stairs_splide-nav shesterni_splide-nav">
+						<div class="splide__track">
+							<ul class="splide__list">
+								<li class="splide__slide">Сельскохозяйственная промышленность</li>
+								<li class="splide__slide">Автомобильная промышленность</li>
+								<li class="splide__slide">Различные шестерни</li>
+							</ul>
+						</div>
+					</div>
+					<div class="splide stairs_splide shesterni_splide" role="region">
+						<div class="splide__track">
+							<div class="splide__list">
+								<a href="#" class="splide__slide" style="background-image: url(img/sh1.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+								<a href="#" class="splide__slide" style="background-image: url(img/sh2.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+								<a href="#" class="splide__slide" style="background-image: url(img/sh1.png);">
+									<picture><source srcset="img/ce3b65320bd9dcd46512309025ed9292.webp" type="image/webp"><img src="img/ce3b65320bd9dcd46512309025ed9292.png" alt=""></picture>
+									<button class="btn outline arrow-btn">перейти К товарам</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="shesterni__container shesterni__mobile-buttons">
+
+				</div>
+			</section>
+			<section class="map map__container">
+				<div class="block-header map__header">
+					<h2 class="block__title">География продаж</h2>
+				</div>
+				<div class="map__content">
+					<div class="map__dot Krasnodar">
+						<div class="map__dot-content">
+							<button class="map__dot-close"></button>
+							<h5 class="map__dot-city">Краснодар</h5>
+							<a href="" class="map__dot-phone">+7 453 345 64 35</a>
+							<a href="" class="map__dot-phone">+7 654 634 43 62</a>
+							<a href="" class="map__dot-mail">irkutsk@mail.ru</a>
+						</div>
+					</div>
+					<div class="map__dot Moscow">
+						<div class="map__dot-content">
+							<button class="map__dot-close"></button>
+							<h5 class="map__dot-city">Москва</h5>
+							<a href="" class="map__dot-phone">+7 453 345 64 35</a>
+							<a href="" class="map__dot-phone">+7 654 634 43 62</a>
+							<a href="" class="map__dot-mail">irkutsk@mail.ru</a>
+						</div>
+					</div>
+					<div class="map__image">
+						<img src="img/map/map.svg" alt="">
+					</div>
+					<picture><source srcset="img/12.webp" type="image/webp"><img class="map__decor decor1" src="img/12.png" alt=""></picture>
+					<picture><source srcset="img/13.webp" type="image/webp"><img class="map__decor decor2" src="img/13.png" alt=""></picture>
+				</div>
+			</section>
+			<section class="feedback__container feedback">
+				<div class="block-header feedback__header">
+					<div class="feedback__header-text">
+						<h2 class="block__title">Есть вопросы? Ответим!</h2>
+						<p class="block__subtitle">Оставьте ваши контактные данные, и наш менеджер свяжется с вами в ближайшее время
+						</p>
+					</div>
+				</div>
+				<div class="feedback__header-content">
+					<div class="feedback__content">
+						<div class="edit_class3 form-item webform-component webform-component-select webform-component--region webform-container-inline">
+							<label for="edit-submitted-region">Выберите регион <span class="form-required" title="Это поле обязательно для заполнения.">*</span></label>
+							<select required="required" class="edit_class4 form-select required" id="edit-submitted-region" name="submitted[region]">
+								<option value="" selected="selected">Выберите регион</option>
+								<option value="0">Челябинск</option>
+								<option value="1">Москва</option>
+							</select>
+						</div>
+
+						<div class="edit_class1 form-item webform-component webform-component-textfield webform-component--name">
+							<input required="required" placeholder="Имя" class="edit_class2 form-text required" type="text" id="edit-submitted-name" name="submitted[name]" size="60" maxlength="128">
+							<label for="edit-submitted-name">Имя <span class="form-required" title="Это поле обязательно для заполнения.">*</span></label>
+						</div>
+						<div class="form-item webform-component webform-component-number webform-component--phone">
+							<input required="required" placeholder="+7 (900) 000 00-00" type="text" id="edit-submitted-phone" name="submitted[phone]" step="1" class="form-text form-number required">
+							<label for="edit-submitted-phone">Номер телефона <span class="form-required" title="Это поле обязательно для заполнения.">*</span></label>
+						</div>
+
+						<div class="form-item webform-component webform-component-email webform-component--mail webform-container-inline">
+							<input required="required" class="email form-text form-email required" type="email" id="edit-submitted-mail" name="submitted[mail]" placeholder="Электронная почта" value="backend2@ribbla.com" size="60">
+							<label for="edit-submitted-mail">Электронная почта <span class="form-required" title="Это поле обязательно для заполнения.">*</span></label>
+						</div>
+						<div class="form-item webform-component webform-component-textarea webform-component--message webform-container-inline">
+							<textarea placeholder="сообщение" required="required" id="edit-submitted-message" name="submitted[message]" cols="60" rows="1" class="form-textarea required"></textarea>
+							<label for="edit-submitted-message">Сообщение <span class="form-required" title="Это поле обязательно для заполнения.">*</span></label>
+						</div>
+
+						<div class="form-actions"><input class="webform-submit button-primary form-submit btn primary form-submit" type="submit" name="op" value="Отправить"></div>
+						<span>Нажимая на кнопку “Отправить”, я даю согласие на <a href="/agreement">обработку персональных
+								данных</a></s>
+					</div>
+				</div>
+				<div class="feedback__header-image">
+					<img src="img/Rectangle 204.jpg" alt="">
+				</div>
+			</section>
+			<section class="reviews reviews__container">
+				<div class="block-header reviews__header">
+					<h2 class="block__title">Отзывы</h2>
+				</div>
+				<div class="reviews__content">
+					<div class="splide reviews__splide" role="group">
+						<div class="splide__controls">
+							<div class="splide-nums"></div>
+						</div>
+						<div class="splide__track reviews__track">
+							<ul class="splide__list">
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+								<li class="splide__slide review__slide">
+									<div class="review__slide-content">
+										<div class="review__text">
+											Я пользуюсь редуктором от этой компании уже несколько месяцев и не могу найти слов для выражения
+											моего восторга. Качество конструкции и материалов выше всяких похвал, а производительность просто
+											поражает. Я также оценил высокую устойчивость к повреждениям и долговечность этого редуктора. Я
+											настоятельно рекомендую его всем, кто ищет надежное и высокопроизводительное решение.
+										</div>
+										<h5 class="review__author">Василий Семенов,</h5>
+										<p class="review__company">ООО Сельхозстрой</p>
+									</div>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer">
+			<!-- <div class="footer__container"> -->
+			<div class="footer__top">
+				<div class="footer__container">
+					<a href="/" class="footer__top-logo">
+						<img src="img/logo.svg" alt="">
+					</a>
+					<nav class="footer__top-nav">
+						<ul>
+							<li class="footer__top-title">Карданы</li>
+							<ul>
+								<li class="footer__top-link"><a href="#">Карданы
+										для сельхозтехники</a></li>
+							</ul>
+						</ul>
+						<ul>
+							<li class="footer__top-title">Редукторы</li>
+							<ul>
+								<li class="footer__top-link"><a href="#">Обработка почвы</a></li>
+								<li class="footer__top-link"><a href="#">Разбрасывание удобрений</a></li>
+								<li class="footer__top-link"><a href="#">Косильные машины</a></li>
+								<li class="footer__top-link"><a href="#">Уборочные машины</a></li>
+								<li class="footer__top-link"><a href="#">Подготовка почвы</a></li>
+								<li class="footer__top-link"><a href="#">Различные машины</a></li>
+							</ul>
+						</ul>
+						<ul>
+							<li class="footer__top-title">Шестерни</li>
+							<ul>
+								<li class="footer__top-link"><a href="#">Сельскохозяйственная промышленность</a></li>
+								<li class="footer__top-link"><a href="#">Автомобильная промышленность</a></li>
+								<li class="footer__top-link"><a href="#">Различные шестерни</a></li>
+							</ul>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="footer__middle">
+				<div class="footer__container">
+					<div class="footer__middle-contacts">
+						<span class="contact footer__middle-contact ">
+							<a href="mailto:di-san@di-san.com.tr" class="mail">
+								di-san@di-san.com.tr</a>
+						</span>
+						<span class="contact footer__middle-contact">
+							<a href="tel:+79782392244" class="phone">+7 978 239
+								22 44</a>
+						</span>
+					</div>
+					<div class="contact footer__middle-address">
+						<span>
+							Конья 3. O.S.B. "Эвренкей" Сд. 3 Ск. № 9
+							Сельджук / КОНЬЯ / ТУРЦИЯ
+						</span>
+					</div>
+					<div class="footer__socials">
+
+						<a href="#" class="social footer__middle-social youtube">
+							<span>
+								<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M20.7081 0.476364C21.691 0.741818 22.4636 1.51636 22.7248 2.49818C23.1999 4.28 23.1999 8 23.1999 8C23.1999 8 23.1999 11.72 22.7248 13.5018C22.46 14.4873 21.6874 15.2618 20.7081 15.5236C18.9308 16 11.7999 16 11.7999 16C11.7999 16 4.67264 16 2.89173 15.5236C1.90878 15.2582 1.13621 14.4836 0.875053 13.5018C0.399902 11.72 0.399902 8 0.399902 8C0.399902 8 0.399902 4.28 0.875053 2.49818C1.13983 1.51273 1.91241 0.738182 2.89173 0.476364C4.67264 0 11.7999 0 11.7999 0C11.7999 0 18.9308 0 20.7081 0.476364ZM15.4451 8L9.52208 11.4291V4.57091L15.4451 8Z" fill="#232176" />
+								</svg>
+							</span>
+
+						</a>
+						<a href="#" class="social footer__middle-social facebook">
+							<span>
+								<svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M10.4932 11.2493L11.0631 7.63143H7.55241V5.27982C7.55241 4.29056 8.04254 3.32391 9.60982 3.32391H11.2284V0.243075C10.2858 0.0929007 9.33338 0.0116567 8.37879 0C5.4893 0 3.60286 1.73544 3.60286 4.87281V7.63143H0.399902V11.2493H3.60286V20H7.55241V11.2493H10.4932Z" fill="#232176" />
+								</svg>
+							</span>
+						</a>
+						<a href="#" class="social footer__middle-social instagram">
+							<span>
+								<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M7.4862 11.1215C7.4862 9.111 9.11659 7.48072 11.1283 7.48072C13.1401 7.48072 14.7713 9.111 14.7713 11.1215C14.7713 13.1321 13.1401 14.7624 11.1283 14.7624C9.11659 14.7624 7.4862 13.1321 7.4862 11.1215ZM5.51687 11.1215C5.51687 14.2189 8.02911 16.7296 11.1283 16.7296C14.2276 16.7296 16.7398 14.2189 16.7398 11.1215C16.7398 8.02417 14.2276 5.51343 11.1283 5.51343C8.02911 5.51343 5.51687 8.02417 5.51687 11.1215ZM15.6506 5.29107C15.6505 5.55028 15.7273 5.8037 15.8713 6.01928C16.0153 6.23487 16.22 6.40293 16.4596 6.50222C16.6992 6.60151 16.9629 6.62757 17.2173 6.5771C17.4717 6.52664 17.7054 6.40191 17.8889 6.21869C18.0723 6.03547 18.1973 5.802 18.248 5.54779C18.2987 5.29358 18.2729 5.03006 18.1737 4.79054C18.0745 4.55102 17.9065 4.34626 17.6909 4.20217C17.4753 4.05807 17.2218 3.98111 16.9625 3.981H16.9619C16.6143 3.98117 16.2809 4.11923 16.035 4.36486C15.7891 4.6105 15.6509 4.94362 15.6506 5.29107ZM6.71337 20.0114C5.64792 19.9629 5.06881 19.7856 4.68397 19.6357C4.17375 19.4372 3.80972 19.2008 3.42697 18.8188C3.04422 18.4368 2.8073 18.0733 2.60954 17.5634C2.45952 17.179 2.28205 16.6001 2.23362 15.5353C2.18064 14.384 2.17006 14.0382 2.17006 11.1216C2.17006 8.20504 2.18151 7.86018 2.23362 6.70799C2.28214 5.64318 2.46092 5.06539 2.60954 4.67981C2.80817 4.1699 3.04475 3.80608 3.42697 3.42357C3.80919 3.04105 4.17288 2.80427 4.68397 2.60663C5.06864 2.4567 5.64792 2.27933 6.71337 2.23093C7.86528 2.17798 8.21131 2.16741 11.1283 2.16741C14.0454 2.16741 14.3917 2.17885 15.5446 2.23093C16.6101 2.27942 17.1882 2.4581 17.574 2.60663C18.0842 2.80427 18.4483 3.04157 18.831 3.42357C19.2138 3.80556 19.4498 4.1699 19.6484 4.67981C19.7985 5.06425 19.9759 5.64318 20.0244 6.70799C20.0773 7.86018 20.0879 8.20504 20.0879 11.1216C20.0879 14.0382 20.0773 14.3831 20.0244 15.5353C19.9758 16.6001 19.7975 17.1788 19.6484 17.5634C19.4498 18.0733 19.2132 18.4372 18.831 18.8188C18.4488 19.2004 18.0842 19.4372 17.574 19.6357C17.1893 19.7857 16.6101 19.963 15.5446 20.0114C14.3927 20.0644 14.0467 20.075 11.1283 20.075C8.21 20.075 7.86493 20.0644 6.71337 20.0114ZM6.62288 0.266092C5.45951 0.31904 4.66456 0.503396 3.97032 0.773378C3.25133 1.05218 2.64268 1.42623 2.03446 2.03312C1.42624 2.64001 1.05294 3.24926 0.773966 3.96781C0.503823 4.66207 0.319356 5.45612 0.266376 6.61878C0.212522 7.78329 0.200195 8.15558 0.200195 11.1215C0.200195 14.0875 0.212522 14.4598 0.266376 15.6243C0.319356 16.787 0.503823 17.581 0.773966 18.2753C1.05294 18.9934 1.42633 19.6033 2.03446 20.21C2.64259 20.8166 3.25133 21.1901 3.97032 21.4697C4.66587 21.7397 5.45951 21.924 6.62288 21.977C7.78869 22.0299 8.1606 22.0431 11.1283 22.0431C14.0961 22.0431 14.4686 22.0308 15.6338 21.977C16.7972 21.924 17.5917 21.7397 18.2864 21.4697C19.0049 21.1901 19.614 20.8168 20.2222 20.21C20.8304 19.6031 21.2029 18.9934 21.4827 18.2753C21.7528 17.581 21.9382 16.787 21.9903 15.6243C22.0433 14.4589 22.0556 14.0875 22.0556 11.1215C22.0556 8.15558 22.0433 7.78329 21.9903 6.61878C21.9373 5.45603 21.7528 4.66164 21.4827 3.96781C21.2029 3.24969 20.8295 2.64097 20.2222 2.03312C19.615 1.42527 19.0049 1.05218 18.2872 0.773378C17.5917 0.503396 16.7972 0.318166 15.6347 0.266092C14.4695 0.213144 14.0969 0.199951 11.1292 0.199951C8.16147 0.199951 7.78869 0.212271 6.62288 0.266092Z" fill="#232176" />
+								</svg>
+							</span>
+
+						</a>
+						<a href="#" class="social footer__middle-social twitter">
+							<span>
+								<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M19.4119 2.25114C18.8071 2.51139 18.1714 2.69262 17.5203 2.79034C17.8247 2.73816 18.2726 2.19026 18.4509 1.96849C18.7217 1.63398 18.9281 1.2521 19.0596 0.842264C19.0596 0.811825 19.0901 0.768341 19.0596 0.746599C19.0443 0.738226 19.0271 0.733839 19.0096 0.733839C18.9922 0.733839 18.975 0.738226 18.9596 0.746599C18.2527 1.12944 17.5003 1.42164 16.7202 1.61628C16.693 1.62458 16.6641 1.62533 16.6365 1.61843C16.6089 1.61154 16.5838 1.59726 16.5637 1.57714C16.503 1.50484 16.4376 1.43657 16.368 1.37277C16.0498 1.08771 15.6889 0.854399 15.2983 0.681374C14.7711 0.465075 14.2016 0.371401 13.6329 0.407426C13.081 0.442277 12.5423 0.590292 12.0501 0.842264C11.5654 1.10792 11.1394 1.46881 10.7977 1.90327C10.4383 2.35043 10.1789 2.86938 10.0368 3.4252C9.91959 3.9539 9.9063 4.50033 9.99762 5.0341C9.99762 5.12542 9.99762 5.13846 9.91935 5.12542C6.81896 4.66884 4.27516 3.5687 2.19663 1.20753C2.10532 1.10317 2.05748 1.10317 1.98356 1.20753C1.0791 2.58162 1.51829 4.75581 2.64886 5.82985C2.80106 5.97335 2.9576 6.1125 3.12284 6.24295C2.60447 6.20615 2.09877 6.06568 1.63569 5.82985C1.54872 5.77333 1.50089 5.80376 1.49654 5.90812C1.48422 6.05281 1.48422 6.19828 1.49654 6.34296C1.58728 7.03635 1.86054 7.69321 2.28838 8.24635C2.71623 8.7995 3.28331 9.22909 3.93164 9.49119C4.08968 9.55888 4.25436 9.60989 4.423 9.64338C3.94313 9.73786 3.45095 9.75255 2.9663 9.68687C2.86193 9.66512 2.8228 9.72165 2.86193 9.82167C3.50115 11.561 4.88828 12.0915 5.9058 12.3872C6.04495 12.409 6.1841 12.409 6.34064 12.4437C6.34064 12.4437 6.34064 12.4437 6.31455 12.4698C6.01451 13.0177 4.80131 13.3873 4.24472 13.5787C3.2288 13.9436 2.14563 14.0831 1.0704 13.9874C0.900816 13.9613 0.861681 13.9657 0.818197 13.9874C0.774713 14.0092 0.818197 14.057 0.866029 14.1005C1.08345 14.244 1.30087 14.3701 1.52698 14.4918C2.20013 14.859 2.91179 15.1506 3.64899 15.3615C7.46687 16.4138 11.7631 15.6398 14.6286 12.7916C16.8811 10.5565 17.6725 7.47354 17.6725 4.38619C17.6725 4.26879 17.816 4.19921 17.8986 4.13833C18.4685 3.69432 18.9709 3.16995 19.3901 2.58162C19.4627 2.49392 19.4999 2.38225 19.4945 2.26853C19.4945 2.20331 19.4945 2.21635 19.4119 2.25114Z" fill="#232176" />
+								</svg>
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="footer__bottom">
+				<div class="footer__container">
+					<div class="footer__bottom-copy">
+						Copyrights © 2017. All rights reserved to <span>Di-San Dişli San.Co.</span>
+					</div>
+					<div class="footer__bottom-dev">
+						Разработано в <a href="http://www.ribbla.com">Рыббла</a>
+					</div>
+				</div>
+			</div>
+			<!-- </div> -->
+		</footer>
+	</div>
+	<!-- 
+<div id="popup" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close">Закрыть</button>
+			<div class="popup__text">
+			</div>
+		</div>
+	</div>
+</div>
+ -->
+
+	<script src="js/app.min.js?_v=20230308020149"></script>
+</body>
+
+</html>
