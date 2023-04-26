@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20230422234655">
+	<link rel="stylesheet" href="css/style.min.css?_v=20230427035746">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -160,7 +160,7 @@
 						<path opacity="0.2" d="M126.478 112.5L123.478 127.5C123.978 133 126.978 146.5 131.978 156C125.978 137 127.978 122.833 126.478 112.5Z" fill="black" />
 						<defs>
 							<linearGradient id="paint0_linear_0_1594" x1="59.7352" y1="12.5756" x2="7.96428" y2="46.3947" gradientUnits="userSpaceOnUse">
-								<stop stop-color="#FFF8E1" />
+								<stop stop-color="var(--color-white)8E1" />
 								<stop offset="1" stop-color="#FFCC80" />
 							</linearGradient>
 							<linearGradient id="paint1_linear_0_1594" x1="85.9775" y1="29.2405" x2="85.9775" y2="106.5" gradientUnits="userSpaceOnUse">
@@ -172,11 +172,11 @@
 								<stop offset="1" stop-color="#872727" />
 							</linearGradient>
 							<linearGradient id="paint3_linear_0_1594" x1="75.7162" y1="19.1462" x2="57.5951" y2="26.7548" gradientUnits="userSpaceOnUse">
-								<stop stop-color="#FFF8E1" />
+								<stop stop-color="var(--color-white)8E1" />
 								<stop offset="1" stop-color="#FFCC80" />
 							</linearGradient>
 							<linearGradient id="paint4_linear_0_1594" x1="88.276" y1="79.0797" x2="76.5956" y2="100.359" gradientUnits="userSpaceOnUse">
-								<stop stop-color="#FFF8E1" />
+								<stop stop-color="var(--color-white)8E1" />
 								<stop offset="1" stop-color="#FFCC80" />
 							</linearGradient>
 						</defs>
@@ -351,7 +351,7 @@
 							dolore magna aliqua. Ut enim ad minim veniam.
 						</p>
 					</div>
-					<button class="open-modal button work__button" data-modal="modal-1">Let’s Talk</button>
+					<button class="open-modal button work__button" data-modal-btn="modal-1">Let’s Talk</button>
 				</div>
 			</section>
 			<!-- Кнопки "Открыть окно" -->
@@ -398,28 +398,29 @@
 
 		</footer>
 	</div>
-	<div id="modal-1" class="modal">
+	<div id="modal-1" data-modal class="modal">
 		<div class="modal-content">
-			<span class="close">&times;</span>
+			<span data-close class="close">&times;</span>
 			<h3 class="modal__title">SEND US MESSAGE</h3>
-			<form action="POST">
+			<form data-form>
 				<label for="name">Full Name</label>
-				<input id="name" type="text" placeholder="Your Name">
+				<input id="name" name="name" data-required="name" type="text" placeholder="Your Name">
 				<label for="email">Full Name</label>
-				<input type="email" name="email" id="email" placeholder="Your Email">
+				<input name="email" data-required="email" id="email" placeholder="Your Email">
 				<label for="textarea">Message</label>
-				<textarea name="textarea" id="textarea" cols="30" rows="10" placeholder="Your Message"></textarea>
+				<textarea name="textarea" data-required="message" id="textarea" placeholder="Your Message"></textarea>
 				<button class="button form__button" type="submit">SUBMIT</button>
 			</form>
 		</div>
 	</div>
-	<div id="modal-2" class="modal">
+
+	<div id="modal-2" data-modal class="modal">
 		<div class="modal-content">
-			<span class="close">&times;</span>
+			<span data-close class="close">&times;</span>
 			<h3 class="modal__title"></h3>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20230422234655"></script>
+	<script src="js/app.min.js?_v=20230427035746"></script>
 </body>
 
 </html>

@@ -1,4 +1,13 @@
 @charset "UTF-8";
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-main: #1F3F68;
+  --color-blue-klein: #3A75C4;
+  --color-blue-gray: #5A98D0;
+  --color-facebook: #316099;
+}
+
 @font-face {
   font-family: Galien;
   font-display: swap;
@@ -46,7 +55,7 @@ body {
 }
 
 body {
-  color: #1F3F68;
+  color: var(--color-main);
   line-height: 1;
   font-family: "Gilroy";
   font-size: 1rem;
@@ -131,31 +140,15 @@ h6 {
   padding: 0 0.625rem;
 }
 
-[class*=-ibg] {
-  position: relative;
-}
-[class*=-ibg] img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-}
-
-[class*=-ibg_contain] img {
-  object-fit: contain;
-}
-
 .button {
   padding: 15px 48px;
-  background: #5A98D0;
+  background: var(--color-blue-gray);
   border-radius: 10px;
   font-size: 16px;
   line-height: 26px;
   text-align: center;
   letter-spacing: 0.04em;
-  color: #FFFFFF;
+  color: var(--color-white);
 }
 .button:hover {
   box-shadow: inset 5px 10px 20px rgba(53, 110, 173, 0.2);
@@ -196,7 +189,7 @@ h6 {
   display: block;
   width: 100%;
   height: 3px;
-  background-color: #356EAD;
+  background-color: var(--color-blue-klein);
   transition: all ease 0.3s;
 }
 .header__menu::after, .header__menu::before {
@@ -205,7 +198,7 @@ h6 {
   height: 3px;
   position: absolute;
   left: 0;
-  background-color: #356EAD;
+  background-color: var(--color-blue-klein);
   transition: transform ease 0.3s;
 }
 .header__menu::before {
@@ -471,12 +464,12 @@ h6 {
   }
 }
 .about__title {
-  color: #316099;
+  color: var(--color-facebook);
 }
 .about__card {
   max-width: 380px;
   width: 100%;
-  background: #FFFFFF;
+  background: var(--color-white);
   box-shadow: 5px 20px 50px rgba(16, 112, 177, 0.2);
   border-radius: 10px;
   padding: 48px;
@@ -521,7 +514,7 @@ h6 {
   font-size: 14px;
   line-height: 30px;
   letter-spacing: 0.05em;
-  color: #5A98D0;
+  color: var(--color-blue-gray);
   display: flex;
   align-items: center;
 }
@@ -538,7 +531,7 @@ h6 {
 }
 
 .clients {
-  background: #5A98D0;
+  background: var(--color-blue-gray);
   border-radius: 200px 0px 0px 0px;
   padding: 96px 0 120px;
 }
@@ -550,7 +543,7 @@ h6 {
 .clients__header {
   display: flex;
   align-items: flex-start;
-  color: #FFFFFF;
+  color: var(--color-white);
   gap: 50px;
   margin-bottom: 110px;
 }
@@ -595,8 +588,8 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #FFFFFF;
-  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid var(--color-white);
+  border-right: 1px solid var(--color-white);
 }
 @media (min-width: 740px) {
   .clients__card:nth-child(4n+4) {
@@ -651,18 +644,18 @@ h6 {
   font-size: 20px;
   line-height: 46px;
   letter-spacing: 0.02em;
-  color: #FFFFFF;
+  color: var(--color-white);
 }
 
 .work {
-  background: #5A98D0;
+  background: var(--color-blue-gray);
   position: relative;
 }
 .work::before {
   content: "";
   width: 100%;
   height: 100%;
-  background: #316099;
+  background: var(--color-facebook);
   border-radius: 0px 200px 0px 0px;
   position: absolute;
   transform: translateX(-5%);
@@ -680,7 +673,7 @@ h6 {
 }
 .work__container {
   position: relative;
-  color: #FFFFFF;
+  color: var(--color-white);
   padding: 91px 10px 96px;
   display: flex;
   align-items: center;
@@ -709,14 +702,14 @@ h6 {
 }
 
 .footer {
-  background: #5A98D0;
+  background: var(--color-blue-gray);
   position: relative;
 }
 .footer::before {
   content: "";
   width: 100%;
   height: 100%;
-  background: #316099;
+  background: var(--color-facebook);
   position: absolute;
   transform: translateX(-5%);
 }
@@ -739,7 +732,7 @@ h6 {
 }
 .footer__container {
   position: relative;
-  color: #FFFFFF;
+  color: var(--color-white);
   margin: 97px auto 32px;
 }
 .footer__top {
@@ -839,12 +832,14 @@ h6 {
   font-size: 16px;
   line-height: 26px;
   letter-spacing: 0.05em;
-  color: #FFFFFF;
+  color: var(--color-white);
   opacity: 0.4;
 }
 
 .modal {
-  display: none;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
   position: fixed;
   z-index: 999;
   left: 0;
@@ -854,20 +849,39 @@ h6 {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
 }
+.modal.modal__open {
+  opacity: 1;
+  visibility: visible;
+}
+.modal.modal__open .modal-content {
+  width: 100%;
+  max-width: 540px;
+  opacity: 1;
+}
+.modal.modal__open .modal-content input,
+.modal.modal__open .modal-content textarea {
+  max-width: 100%;
+  padding: 21px 42px !important;
+}
 
 .modal-content {
-  background-color: #fff;
+  background-color: var(--color-white);
   margin: 5% auto;
   padding: 56px;
   border: 1px solid #888;
-  width: 100%;
-  max-width: 540px;
+  opacity: 0;
+  max-width: 10px;
   position: relative;
-  animation-name: modalopen;
-  animation-duration: 0.5s;
-  background: #FFFFFF;
+  transition: all 0.3s ease;
+  background: var(--color-white);
   box-shadow: 5px 10px 50px rgba(16, 112, 177, 0.2);
   border-radius: 10px;
+}
+.modal-content input,
+.modal-content textarea {
+  max-width: 0;
+  padding: 0 !important;
+  transition: all 0.3s ease;
 }
 
 .close {
@@ -887,20 +901,12 @@ h6 {
   cursor: pointer;
 }
 
-@keyframes modalopen {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 .modal__title {
   margin-bottom: 48px;
   font-size: 20px;
   line-height: 30px;
   letter-spacing: 0.04em;
-  color: #1F3F68;
+  color: var(--color-main);
   font-weight: 600;
 }
 .modal .modal-content {
@@ -911,7 +917,7 @@ h6 {
   font-size: 16px;
   line-height: 30px;
   letter-spacing: 0.04em;
-  color: #1F3F68;
+  color: var(--color-main);
   opacity: 0.8;
   margin-bottom: 8px;
 }
@@ -919,9 +925,10 @@ h6 {
 .modal .modal-content textarea {
   width: 100%;
   padding: 21px 42px;
-  border: 1px solid rgba(53, 110, 173, 0.4);
+  border: 1px solid rgba(31, 63, 104, 0.4);
   border-radius: 10px;
   margin-bottom: 32px;
+  display: block;
 }
 .modal .modal-content input::placeholder,
 .modal .modal-content textarea::placeholder {
@@ -932,9 +939,19 @@ h6 {
   /* Blue_01 */
   color: rgba(31, 63, 104, 0.2);
 }
+.modal .modal-content input.error,
+.modal .modal-content textarea.error {
+  border: 1px solid rgba(255, 0, 0, 0.4);
+}
 .modal .modal-content textarea {
   margin-bottom: 72px;
+  resize: vertical;
 }
 .modal .button {
   width: 100%;
+}
+
+#modal-2 .modal__title {
+  margin-bottom: 0;
+  text-align: center;
 }

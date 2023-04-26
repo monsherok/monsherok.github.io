@@ -1,128 +1,134 @@
 (() => {
   "use strict";
-  let e = !1;
-  setTimeout(() => {
-    if (e) {
-      let e = new Event("windowScroll");
-      window.addEventListener("scroll", function (t) {
-        document.dispatchEvent(e);
-      });
-    }
-  }, 0);
-  let t = document.querySelector(".header__menu");
-  if (
-    (t &&
-      t.addEventListener("click", () => {
-        t.classList.toggle("active");
+  const t = new (class {
+    constructor() {
+      (this.datas = {
+        modalWindow: "data-modal",
+        modalBtn: "data-modal-btn",
+        modalClose: "data-close",
       }),
-    document.getElementsByClassName("modal"))
-  ) {
-    for (
-      var o = document.getElementsByClassName("modal"),
-        n = document.getElementsByClassName("open-modal"),
-        l = document.getElementsByClassName("close"),
-        d = 0;
-      d < n.length;
-      d++
-    )
-      n[d].addEventListener("click", function () {
-        var e = this.getAttribute("data-modal");
-        (document.getElementById(e).style.display = "block"),
-          (document.body.style.overflow = "hidden");
-      });
-    for (d = 0; d < l.length; d++)
-      l[d].addEventListener("click", function () {
-        (this.parentElement.parentElement.style.display = "none"),
-          (document.body.style.overflow = "auto");
-      });
-    window.addEventListener("click", function (e) {
-      for (var t = 0; t < o.length; t++)
-        e.target == o[t] &&
-          ((o[t].style.display = "none"),
-          (document.body.style.overflow = "auto"));
-    }),
-      window.addEventListener("keydown", function (e) {
-        for (var t = 0; t < o.length; t++)
-          "Escape" === e.key &&
-            "block" === o[t].style.display &&
-            ((o[t].style.display = "none"),
-            (document.body.style.overflow = "auto"));
-      });
-    for (d = 0; d < o.length; d++)
-      o[d].addEventListener("animationend", function (e) {
-        "modalopen" === e.animationName &&
-          "block" === this.style.display &&
-          (this.style.animation = "");
-      });
-  }
-  function a(e, t) {
-    e.style.borderColor = "red";
-  }
-  function s(e) {
-    e.parentElement.style.borderColor = "rgba(53, 110, 173, 0.4)";
-  }
-  function c(e) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
-  }
-  const i = document.querySelector("form"),
-    m = document.querySelector("#name"),
-    r = document.querySelector("#email"),
-    y = document.querySelector("#textarea");
-  i.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const t = m.value.trim(),
-      o = r.value.trim(),
-      n = y.value.trim();
-    if (
-      ("" === t ? a(m) : s(m),
-      "" === o ? a(r) : c(o) ? s(r) : a(r),
-      "" === n ? a(y) : s(y),
-      "" != t && "" != o && "" != n && c(o))
-    ) {
-      fetch(
-        `https://api.telegram.org/bot${"6111024453:AAHnDkXdv7lgRyQD4vzyUiKwgW7MFsuerHQ"}/sendMessage?chat_id=${"@monshero"}&text=${`Новое сообщение от ${t} (${o}): ${n}`}`
-      )
-        .then((e) => e.json())
-        .then((e) => {
-          e.ok
-            ? (i.reset(),
-              (i.closest(".modal").style.display = "none"),
-              (document.body.style.overflow = "auto"),
-              (document
-                .getElementById("modal-2")
-                .querySelector(".modal__title").textContent =
-                "Ваше сообщение успешно отправлено"),
-              (document.getElementById("modal-2").style.display = "block"),
-              (document.body.style.overflow = "hidden"))
-            : ((document
-                .getElementById("modal-2")
-                .querySelector(".modal__title").textContent =
-                "Ошибка отправки сообщения"),
-              (document.getElementById("modal-2").style.display = "block"),
-              (document.body.style.overflow = "hidden"));
-        })
-        .catch((e) => {
-          (document
-            .getElementById("modal-2")
-            .querySelector(".modal__title").textContent =
-            "Ошибка отправки сообщения" + e),
-            (document.getElementById("modal-2").style.display = "block"),
-            (document.body.style.overflow = "hidden"),
-            console.error(e);
-        });
-    }
-  }),
-    (window.FLS = !0),
-    (function (e) {
-      let t = new Image();
-      (t.onload = t.onerror =
-        function () {
-          e(2 == t.height);
+        (this.classes = {
+          open: "modal__open",
+          content: "modal-content",
+          lock: "lock",
         }),
-        (t.src =
-          "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA");
-    })(function (e) {
-      let t = !0 === e ? "webp" : "no-webp";
-      document.documentElement.classList.add(t);
-    });
+        (this.open = !1),
+        (this.activeModalClass = ""),
+        this.init();
+    }
+    init() {
+      document.addEventListener("click", (t) => {
+        t.target.classList.contains("open-modal")
+          ? this.modalOpen(t)
+          : t.target.closest(`.${this.classes.open}`) &&
+            ((t.target.closest(`.${this.classes.content}`) &&
+              !t.target.hasAttribute(`${this.datas.modalClose}`)) ||
+              (t.preventDefault(),
+              this.toggleModal(
+                document.getElementById(`${this.activeModalClass}`)
+              )));
+      });
+    }
+    modalOpen(t) {
+      t.preventDefault();
+      const e = document.querySelector(`#${t.target.dataset.modalBtn}`);
+      (this.activeModalClass = t.target.dataset.modalBtn),
+        e && this.toggleModal(e);
+    }
+    toggleModal(t) {
+      t.classList.toggle("modal__open"),
+        document.documentElement.classList.toggle("lock");
+    }
+  })();
+  var e = "6111024453:AAHnDkXdv7lgRyQD4vzyUiKwgW7MFsuerHQ",
+    a = "@monshero";
+  document.body.addEventListener("focusout", function (t) {
+    const e = t.target;
+    ("INPUT" !== e.tagName && "TEXTAREA" !== e.tagName) ||
+      (e.hasAttribute("data-required") && o.checkValidate(e));
+  });
+  let o = {
+    checkValidate(t) {
+      let e = 0;
+      return "email" === t.dataset.required
+        ? (this.emailTest(t) ? (e++, this.addError(t)) : this.removeError(t), e)
+        : (t.value ? this.removeError(t) : (e++, this.addError(t)), e);
+    },
+    addError(t) {
+      t.classList.add("error");
+    },
+    removeError(t) {
+      t.classList.remove("error");
+    },
+    emailTest: (t) =>
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(t.value),
+  };
+  const s = document.querySelector(".header__menu");
+  s &&
+    s.addEventListener("click", () => {
+      s.classList.toggle("active");
+    }),
+    (function () {
+      const s = document.forms;
+      if (s.length)
+        for (const t of s)
+          t.addEventListener("submit", function (t) {
+            t.preventDefault();
+            n(t.target);
+          }),
+            t.addEventListener("reset", function (t) {
+              t.target.reset();
+            });
+      function n(s) {
+        const n = s.querySelectorAll("[data-required]");
+        let i = 0;
+        n.length &&
+          n.forEach((t) => {
+            console.log(t), (i += o.checkValidate(t));
+          }),
+          0 === i &&
+            (l(s),
+            (async function (o) {
+              var s = new FormData(o);
+              r(o, "SENDING..."),
+                fetch("https://api.telegram.org/bot" + e + "/sendMessage", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                  },
+                  body:
+                    "chat_id=" +
+                    a +
+                    "&text=" +
+                    JSON.stringify(Object.fromEntries(s.entries())),
+                })
+                  .then(function (e) {
+                    e.ok
+                      ? (o.reset(),
+                        t.toggleModal(o.closest("[data-modal]")),
+                        d("Успешная отправка формы"))
+                      : d("Ошибка отправки формы!");
+                  })
+                  .catch(function (t) {
+                    d("Ошибка: " + t.message);
+                  })
+                  .finally(() => {
+                    l(o), r(o, "SUBMIT");
+                  });
+            })(s));
+      }
+      function l(t) {
+        const e = t.querySelector('button[type="submit"]');
+        e.hasAttribute("disabled") ? (e.disabled = !1) : (e.disabled = !0);
+      }
+      function r(t, e) {
+        t.querySelector('button[type="submit"]').innerHTML = e;
+      }
+      function d(e) {
+        let a = document.getElementById("modal-2");
+        (t.activeModalClass = a.id),
+          (a.querySelector(".modal__title").innerHTML = e),
+          t.toggleModal(a);
+      }
+    })();
 })();
