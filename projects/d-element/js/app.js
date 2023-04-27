@@ -84,7 +84,7 @@
         let i = 0;
         n.length &&
           n.forEach((t) => {
-            console.log(t), (i += o.checkValidate(t));
+            i += o.checkValidate(t);
           }),
           0 === i &&
             (l(s),
