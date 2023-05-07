@@ -1426,6 +1426,7 @@ img.dev__office {
   position: relative;
   top: -149px;
   width: 100%;
+  z-index: -1;
 }
 @media (max-width: 880px) {
   .apartment-decoration__container .apartment-decoration-bg {
