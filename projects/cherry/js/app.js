@@ -9817,28 +9817,28 @@
       {
         coordinates: [61.261743, 55.128964],
         size: "28px",
-        icon: "/img/map/shop.svg",
+        icon: "./img/map/shop.svg",
         draggable: !0,
         element: b,
       },
       {
         coordinates: [61.264995, 55.126251],
         size: "28px",
-        icon: "/img/map/gum.svg",
+        icon: "./img/map/gum.svg",
         draggable: !0,
         element: b,
       },
       {
         coordinates: [61.264617, 55.12744],
         size: "28px",
-        icon: "/img/map/tooth.svg",
+        icon: "./img/map/tooth.svg",
         draggable: !0,
         element: b,
       },
       {
         coordinates: [61.263594, 55.12835],
         size: "28px",
-        icon: "/img/map/hockey.svg",
+        icon: "./img/map/hockey.svg",
         draggable: !0,
         element: b,
       },
@@ -10197,7 +10197,7 @@
             e.addChild(new r());
           const s = document.createElement("img");
           (s.className = "dev__office"),
-            (s.src = "/img/icon-mini-map.svg"),
+            (s.src = "./img/icon-mini-map.svg"),
             (s.onclick = () => e.update({ location: { ...t, duration: 400 } })),
             e.addChild(new o({ coordinates: t.center }, s));
         })(),
