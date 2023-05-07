@@ -10121,6 +10121,14 @@
             }).mount();
         }),
       (function () {
+        let e = document.querySelector(".cookie__btn");
+        e.addEventListener("click", (t) => {
+          t.preventDefault();
+          const n = e.closest(".cookie");
+          console.log(n), n.classList.add("hide");
+        });
+      })(),
+      (function () {
         let e = null;
         document.documentElement;
         const t = { center: [61.26236503573851, 55.12760847086355], zoom: 17 };
@@ -10194,14 +10202,6 @@
             e.addChild(new o({ coordinates: t.center }, s));
         })(),
           ymaps3.ready.then(() => {});
-      })(),
-      (function () {
-        let e = document.querySelector(".cookie__btn");
-        e.addEventListener("click", (t) => {
-          t.preventDefault();
-          const n = e.closest(".cookie");
-          console.log(n), n.classList.add("hide");
-        });
       })();
   })();
 })();
