@@ -11225,6 +11225,7 @@
               width: "50%",
               gap: 20,
               breakpoints: { 880: { width: "100%" } },
+              type: "loop",
             }).mount(),
             e = new Splide(".privileges__slider-image", {
               direction: "rtl",
@@ -11240,7 +11241,10 @@
       })(),
       (function () {
         if (document.querySelector(".privileges__slider-mini")) {
-          new Splide(".privileges__slider-mini", { pagination: !1 }).mount();
+          new Splide(".privileges__slider-mini", {
+            pagination: !1,
+            type: "loop",
+          }).mount();
         }
       })(),
       document

@@ -5,89 +5,209 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>My Portfolio</title>
-   <link rel="stylesheet" href="style.css">
-   <style>
-      body {
-         font-family: Arial, sans-serif;
-         margin: 0;
-         padding: 0;
-      }
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="css/null.css">
+   <link rel="stylesheet" href="css/style.css">
 
-      header {
-         background-color: #333;
-         color: white;
-         padding: 20px;
-      }
-
-      h1 {
-         margin: 0;
-      }
-
-      nav ul {
-         list-style: none;
-         margin: 0;
-         padding: 0;
-         display: flex;
-         justify-content: flex-end;
-      }
-
-      nav li {
-         margin-left: 20px;
-      }
-
-      nav a {
-         color: white;
-         text-decoration: none;
-      }
-
-      main {
-         padding: 20px;
-      }
-
-      h2 {
-         margin-top: 0;
-      }
-
-      ul {
-         list-style: none;
-         padding: 0;
-         margin: 0;
-      }
-
-      li {
-         margin-bottom: 10px;
-      }
-
-      a {
-         color: #333;
-         text-decoration: none;
-         border: 1px solid #333;
-         padding: 5px 10px;
-         border-radius: 5px;
-      }
-
-      a:hover {
-         background-color: #333;
-         color: white;
-      }
-   </style>
 </head>
 
 <body>
-   <header>
-      <h1>My Portfolio</h1>
+   <header class="header">
+      <div class="header__container">
+         <nav class="header__nav">
+            <ul>
+               <li><a href="#">Главная</a></li>
+               <li><a href="#">Обо мне</a></li>
+               <li><a href="#">Tech Stack</a></li>
+               <li><a href="#">Проекты</a></li>
+               <li><a href="#">Контакты</a></li>
+            </ul>
+         </nav>
+         <div class="header__links">
+            <ul>
+               <li>
+                  <a href="https://github.com/monsherok">
+                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                           d="M15 0C6.7125 0 0 6.7125 0 15C0 21.6375 4.29375 27.2438 10.2562 29.2313C11.0062 29.3625 11.2875 28.9125 11.2875 28.5188C11.2875 28.1625 11.2688 26.9812 11.2688 25.725C7.5 26.4187 6.525 24.8063 6.225 23.9625C6.05625 23.5313 5.325 22.2 4.6875 21.8438C4.1625 21.5625 3.4125 20.8688 4.66875 20.85C5.85 20.8313 6.69375 21.9375 6.975 22.3875C8.325 24.6562 10.4812 24.0187 11.3437 23.625C11.475 22.65 11.8688 21.9938 12.3 21.6188C8.9625 21.2438 5.475 19.95 5.475 14.2125C5.475 12.5812 6.05625 11.2313 7.0125 10.1813C6.8625 9.80625 6.3375 8.26875 7.1625 6.20625C7.1625 6.20625 8.41875 5.8125 11.2875 7.74375C12.4875 7.40625 13.7625 7.2375 15.0375 7.2375C16.3125 7.2375 17.5875 7.40625 18.7875 7.74375C21.6562 5.79375 22.9125 6.20625 22.9125 6.20625C23.7375 8.26875 23.2125 9.80625 23.0625 10.1813C24.0188 11.2313 24.6 12.5625 24.6 14.2125C24.6 19.9687 21.0938 21.2438 17.7562 21.6188C18.3 22.0875 18.7688 22.9875 18.7688 24.3937C18.7688 26.4 18.75 28.0125 18.75 28.5188C18.75 28.9125 19.0312 29.3813 19.7812 29.2313C22.759 28.2259 25.3465 26.3121 27.1796 23.7592C29.0127 21.2063 29.9991 18.1429 30 15C30 6.7125 23.2875 0 15 0Z"
+                           fill="#A7A7A7" />
+                     </svg>
+                  </a>
+               </li>
+               <li>
+                  <a href="https://t.me/vendoro">
+                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0,0,256,256" width="30" height="30" fill-rule="nonzero">
+                        <g fill="#a7a7a7" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                           stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                           font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                           style="mix-blend-mode: normal">
+                           <g transform="scale(5.12,5.12)">
+                              <path
+                                 d="M46.137,6.552c-0.75,-0.636 -1.928,-0.727 -3.146,-0.238h-0.002c-1.281,0.514 -36.261,15.518 -37.685,16.131c-0.259,0.09 -2.521,0.934 -2.288,2.814c0.208,1.695 2.026,2.397 2.248,2.478l8.893,3.045c0.59,1.964 2.765,9.21 3.246,10.758c0.3,0.965 0.789,2.233 1.646,2.494c0.752,0.29 1.5,0.025 1.984,-0.355l5.437,-5.043l8.777,6.845l0.209,0.125c0.596,0.264 1.167,0.396 1.712,0.396c0.421,0 0.825,-0.079 1.211,-0.237c1.315,-0.54 1.841,-1.793 1.896,-1.935l6.556,-34.077c0.4,-1.82 -0.156,-2.746 -0.694,-3.201zM22,32l-3,8l-3,-10l23,-17z">
+                              </path>
+                           </g>
+                        </g>
+                     </svg>
+                  </a>
+               </li>
+               <li>
+                  <a href="https://vk.com/cvxvr">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="30" height="30">
+                        <path fill="#a7a7a7"
+                           d="M25,2C12.318,2,2,12.318,2,25s10.318,23,23,23c12.683,0,23-10.318,23-23S37.683,2,25,2z M34.973,29.535 c2.237,1.986,2.702,2.695,2.778,2.816C38.678,33.821,36.723,34,36.723,34h-4.12c0,0-1.003,0.011-1.86-0.557 c-1.397-0.915-2.86-2.689-3.888-2.381C25.992,31.32,26,32.486,26,33.483C26,33.84,25.693,34,25,34s-0.981,0-1.288,0 c-2.257,0-4.706-0.76-7.149-3.313c-3.456-3.609-6.487-10.879-6.487-10.879s-0.179-0.366,0.016-0.589 c0.221-0.25,0.822-0.218,0.822-0.218L14.909,19c0,0,0.376,0.071,0.646,0.261c0.223,0.156,0.347,0.454,0.347,0.454 s0.671,2.216,1.526,3.629c1.67,2.758,2.447,2.828,3.014,2.531C21.27,25.445,21,22.513,21,22.513s0.037-1.259-0.395-1.82 c-0.333-0.434-0.97-0.665-1.248-0.701c-0.225-0.029,0.151-0.423,0.63-0.648C20.627,19.059,21.498,18.986,23,19 c1.169,0.011,1.506,0.081,1.962,0.186C26.341,19.504,26,20.343,26,23.289c0,0.944-0.13,2.271,0.582,2.711 c0.307,0.19,1.359,0.422,3.231-2.618c0.889-1.442,1.596-3.834,1.596-3.834s0.146-0.263,0.373-0.393 c0.232-0.133,0.225-0.13,0.543-0.13S35.832,19,36.532,19c0.699,0,1.355-0.008,1.468,0.402c0.162,0.589-0.516,2.607-2.234,4.797 C32.943,27.793,32.63,27.457,34.973,29.535z" />
+                     </svg>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </div>
    </header>
 
    <main>
-      <h2>My Work</h2>
-      <ul>
-         <li><a href="./projects/burexpress">Burexpress</a></li>
-         <li><a href="./projects/disan">disan</a></li>
-         <li><a href="./projects/globalteam">globalteam</a></li>
-         <li><a href="./projects/pan">pan</a></li>
-         <li><a href="./projects/travels">travels</a></li>
-         <li><a href="./projects/react-tabs">react-tabs</a></li>
-      </ul>
+      <section class="portfolio">
+         <div class="portfolio__container">
+            <h2>Проекты</h2>
+            <ul class="portfolio__items">
+               <li class="portfolio__item">
+                  <div class="portfolio__image">
+                     <img src="https://via.placeholder.com/250x200" alt="">
+                  </div>
+                  <div class="portfolio__content">
+                     <h3 class="portfolio__title">
+                        "БурЭкспресс"
+                     </h3>
+                     <p class="portfolio__descr">
+                        Проект для китайской компании, которая предоставляет доступ к различного типа оборудованию,
+                        запчастям и т.д.
+                     </p>
+                     <div class="portfolio__stack">
+                        <span class="portfolio__stack-title">
+                           Tech stack :
+                        </span>
+                        <span class="portfolio__stack-items">
+                           HTML, SCSS, JavaScript, Docker, GitHub, WebPack, GULP
+                        </span>
+                     </div>
+                     <a class="portfolio__link" href="./projects/burexpress">Live Preview</a>
+                  </div>
+               </li>
+               <li class="portfolio__item">
+                  <div class="portfolio__image">
+                     <img src="https://via.placeholder.com/250x200" alt="">
+                  </div>
+                  <div class="portfolio__content">
+                     <h3 class="portfolio__title">
+                        "Di-San"
+                     </h3>
+                     <p class="portfolio__descr">
+                        Проект для турецкой компании, которая предоставляет "качественные карданы и редукторы по
+                        доступным
+                        ценам"
+                     </p>
+                     <div class="portfolio__stack">
+                        <span class="portfolio__stack-title">
+                           Tech stack :
+                        </span>
+                        <span class="portfolio__stack-items">
+                           HTML, SCSS, JavaScript, WebPack, GULP, Drupal
+                        </span>
+                     </div>
+                     <a class="portfolio__link" href="./projects/disan">Live Preview</a>
+                  </div>
+               </li>
+               <li class="portfolio__item">
+                  <div class="portfolio__image">
+                     <img src="https://via.placeholder.com/250x200" alt="">
+                  </div>
+                  <div class="portfolio__content">
+                     <h3 class="portfolio__title">
+                        ГлобалТим
+                     </h3>
+                     <p class="portfolio__descr">
+                        Тестовый проект, верстка
+                     </p>
+                     <div class="portfolio__stack">
+                        <span class="portfolio__stack-title">
+                           Tech stack :
+                        </span>
+                        <span class="portfolio__stack-items">
+                           HTML, SCSS, JavaScript, WebPack, GULP
+                        </span>
+                     </div>
+                     <a class="portfolio__link" href="./projects/globalteam">Live Preview</a>
+                  </div>
+               </li>
+               <li class="portfolio__item">
+                  <div class="portfolio__image">
+                     <img src="https://via.placeholder.com/250x200" alt="">
+                  </div>
+                  <div class="portfolio__content">
+                     <h3 class="portfolio__title">
+                        ПАН
+                     </h3>
+                     <p class="portfolio__descr">
+                        Тестовое задание
+                     </p>
+                     <div class="portfolio__stack">
+                        <span class="portfolio__stack-title">
+                           Tech stack :
+                        </span>
+                        <span class="portfolio__stack-items">
+                           HTML, SCSS, JavaScript, WebPack, GULP
+                        </span>
+                     </div>
+                     <a class="portfolio__link" href="./projects/pan">Live Preview</a>
+                  </div>
+               </li>
+               <li class="portfolio__item">
+                  <div class="portfolio__image">
+                     <img src="https://via.placeholder.com/250x200" alt="">
+                  </div>
+                  <div class="portfolio__content">
+                     <h3 class="portfolio__title">
+                        Сервис путешествий
+                     </h3>
+                     <p class="portfolio__descr">
+                        Проба адаптивной верстки
+                     </p>
+                     <div class="portfolio__stack">
+                        <span class="portfolio__stack-title">
+                           Tech stack :
+                        </span>
+                        <span class="portfolio__stack-items">
+                           HTML, SCSS, JavaScript, WebPack, GULP
+                        </span>
+                     </div>
+                     <a class="portfolio__link" href="./projects/travels">Live Preview</a>
+                  </div>
+               </li>
+               <li class="portfolio__item">
+                  <div class="portfolio__image">
+                     <img src="https://via.placeholder.com/250x200" alt="">
+                  </div>
+                  <div class="portfolio__content">
+                     <h3 class="portfolio__title">
+                        Табы на реакт
+                     </h3>
+                     <p class="portfolio__descr">
+                        Тестовое задание на Реакт
+                     </p>
+                     <div class="portfolio__stack">
+                        <span class="portfolio__stack-title">
+                           Tech stack :
+                        </span>
+                        <span class="portfolio__stack-items">
+                           React
+                        </span>
+                     </div>
+                     <a class="portfolio__link" href="./projects/react-tabs">Live Preview</a>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </section>
+
    </main>
 
    <footer>
