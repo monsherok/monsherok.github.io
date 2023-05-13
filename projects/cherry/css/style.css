@@ -687,6 +687,7 @@ body.popup-show::after {
   height: 40px;
   border-radius: 100%;
   background-color: var(--light-gray-30);
+  z-index: 10;
 }
 
 .popup__form label {
@@ -3133,6 +3134,21 @@ button#filter-close {
 .similar-apartments__slider-container .splide__arrow--next {
   right: -4em;
 }
+.similar-apartments__slider-container .flat__card-top {
+  flex-direction: row-reverse;
+}
+.similar-apartments__slider-container .flat__card-top .flat__card-like {
+  width: 40px;
+  height: 40px;
+  background-color: var(--light-gray-20);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.similar-apartments__slider-container .flat__card-top .flat__card-like svg {
+  width: 23px;
+}
 .similar-apartments__button-container {
   display: flex;
   align-items: center;
@@ -3384,6 +3400,7 @@ button#filter-close {
   width: 100%;
   top: calc(50% + 4px);
   border-radius: 1px;
+  pointer-events: none;
 }
 .block-mortgage-selection .mortgage-selection__range input[type=range] {
   margin: 0px;
@@ -3394,6 +3411,7 @@ button#filter-close {
   padding: 0px;
   border: none;
   height: auto;
+  cursor: pointer;
 }
 .block-mortgage-selection .mortgage-selection__range input[type=range]::-webkit-slider-runnable-track {
   max-width: 100%;
@@ -3410,6 +3428,7 @@ button#filter-close {
   border-radius: 100%;
   background-color: var(--crimson-100);
   margin-top: -7px;
+  z-index: 20;
 }
 .block-mortgage-selection .range-text {
   position: relative;
