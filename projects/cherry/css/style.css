@@ -819,6 +819,17 @@ a.text-underline:hover {
   border-bottom: 1px solid rgba(52, 69, 79, 0.5);
 }
 
+.blocks-sign-up {
+  margin: 60px 0;
+  display: flex;
+  gap: 40px;
+}
+@media (max-width: 660px) {
+  .blocks-sign-up {
+    flex-direction: column;
+  }
+}
+
 .crimson-btn {
   display: inline-block;
   background-color: var(--crimson-100);
@@ -861,6 +872,67 @@ a.banner__button {
 a.banner__button:hover {
   text-decoration: underline solid rgba(52, 69, 79, 0.1);
   text-decoration-thickness: 2px;
+}
+
+.red-heart-btn {
+  width: 52px;
+  height: 52px;
+  background: var(--white);
+  border: 1px solid var(--light-gray-100);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.red-heart-btn svg {
+  transition: all 0.3s ease;
+}
+.red-heart-btn.active svg {
+  fill: var(--crimson-100);
+}
+.red-heart-btn:hover svg {
+  fill: var(--crimson-30);
+}
+.red-heart-btn svg {
+  width: 25px;
+  height: 25px;
+}
+
+.share-btn,
+.save-pdf-btn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  position: relative;
+  padding-bottom: 2px;
+  padding-left: 28px;
+  transition: all 0.5s ease;
+}
+.share-btn::after,
+.save-pdf-btn::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: calc(100% - 28px);
+  bottom: 0;
+  border-bottom: 1px solid var(--light-gray-100);
+}
+.share-btn::before,
+.save-pdf-btn::before {
+  position: absolute;
+  left: 0;
+}
+.share-btn:hover::before,
+.save-pdf-btn:hover::before {
+  transform: scale(1.2);
+}
+
+.save-pdf-btn::before {
+  content: url("data:image/svg+xml,%3Csvg width=%2722%27 height=%2723%27 viewBox=%270 0 22 23%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M18.2529 7.61498H16.7656V5.19875C16.7656 4.53668 16.2619 4 15.6406 4H6.35938C5.73804 4 5.23438 4.53668 5.23438 5.19875V7.61498H3.7471C2.78387 7.61498 2 8.45024 2 9.47662V17.3496C2 18.3759 2.78387 19.2112 3.7471 19.2112L5.08865 19.2112C5.2441 19.2112 5.3699 19.0772 5.3699 18.9115C5.3699 18.7459 5.2441 18.6118 5.08865 18.6118L3.7471 18.6118C3.09395 18.6118 2.5625 18.0455 2.5625 17.3496V9.47662C2.5625 8.78065 3.09395 8.21436 3.7471 8.21436H18.2529C18.906 8.21436 19.4375 8.78065 19.4375 9.47662V17.3496C19.4375 18.0455 18.906 18.6118 18.2529 18.6118L16.9129 18.6118C16.7574 18.6118 16.6316 18.7459 16.6316 18.9115C16.6316 19.0772 16.7574 19.2112 16.9129 19.2112L18.2529 19.2112C19.2161 19.2112 20 18.3759 20 17.3496V9.47662C20 8.45024 19.2161 7.61498 18.2529 7.61498ZM5.79688 5.19875C5.79688 4.86826 6.04921 4.59938 6.35938 4.59938H15.6406C15.9508 4.59938 16.2031 4.86826 16.2031 5.19875V7.59625H5.79688V5.19875Z%27 fill=%27%23D3163C%27 stroke=%27%23D3163C%27 stroke-width=%270.5%27/%3E%3Cpath d=%27M16.625 10.5542C16.9357 10.5542 17.1875 10.2859 17.1875 9.95484C17.1875 9.62382 16.9357 9.35547 16.625 9.35547C16.3143 9.35547 16.0625 9.62382 16.0625 9.95484C16.0625 10.2859 16.3143 10.5542 16.625 10.5542Z%27 fill=%27%23D3163C%27 stroke=%27%23D3163C%27 stroke-width=%270.5%27/%3E%3Cpath d=%27M5.09375 21.9989H16.9063V14.207H5.09375V21.9989ZM5.76979 14.9274H16.2302V21.2786H5.76979V14.9274Z%27 fill=%27%23D3163C%27 stroke=%27%23D3163C%27 stroke-width=%270.5%27/%3E%3C/svg%3E%0A");
+}
+
+.share-btn::before {
+  content: url("data:image/svg+xml,%3Csvg width=%2722%27 height=%2723%27 viewBox=%270 0 22 23%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M13.6667 18.3333C13.6667 19.8061 14.8606 21 16.3333 21C17.8061 21 19 19.8061 19 18.3333C19 16.8606 17.8061 15.6667 16.3333 15.6667C14.8606 15.6667 13.6667 16.8606 13.6667 18.3333Z%27 fill=%27%23D3163C%27/%3E%3Cpath d=%27M3 13C3 14.4728 4.19391 15.6667 5.66667 15.6667C7.13943 15.6667 8.33333 14.4728 8.33333 13C8.33333 11.5272 7.13943 10.3333 5.66667 10.3333C4.19391 10.3333 3 11.5272 3 13Z%27 fill=%27%23D3163C%27/%3E%3Cpath d=%27M13.6667 7.66667C13.6667 9.13943 14.8606 10.3333 16.3333 10.3333C17.8061 10.3333 19 9.13943 19 7.66667C19 6.19391 17.8061 5 16.3333 5C14.8606 5 13.6667 6.19391 13.6667 7.66667Z%27 fill=%27%23D3163C%27/%3E%3Cpath d=%27M8.33333 14.3333L13.6667 17M13.6667 9L8.33333 11.6667M16.3333 21C14.8606 21 13.6667 19.8061 13.6667 18.3333C13.6667 16.8606 14.8606 15.6667 16.3333 15.6667C17.8061 15.6667 19 16.8606 19 18.3333C19 19.8061 17.8061 21 16.3333 21ZM5.66667 15.6667C4.19391 15.6667 3 14.4728 3 13C3 11.5272 4.19391 10.3333 5.66667 10.3333C7.13943 10.3333 8.33333 11.5272 8.33333 13C8.33333 14.4728 7.13943 15.6667 5.66667 15.6667ZM16.3333 10.3333C14.8606 10.3333 13.6667 9.13943 13.6667 7.66667C13.6667 6.19391 14.8606 5 16.3333 5C17.8061 5 19 6.19391 19 7.66667C19 9.13943 17.8061 10.3333 16.3333 10.3333Z%27 stroke=%27%23D3163C%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E%0A");
 }
 
 .splide__arrow {
@@ -1930,13 +2002,15 @@ li.menu__phone {
   flex-direction: column;
   gap: 16px;
 }
-.map #map {
+
+#map {
   height: 650px;
   border-radius: 32px;
   overflow: hidden;
   position: relative;
+  margin: 40px 0;
 }
-.map #map.fullscreen {
+#map.fullscreen {
   position: fixed;
   top: 0;
   left: 0;
@@ -1947,22 +2021,22 @@ li.menu__phone {
   z-index: 999;
 }
 @media (max-width: 650px) {
-  .map #map {
+  #map {
     height: 400px;
   }
 }
-.map #map .map-icon {
+#map .map-icon {
   width: var(--size);
   height: var(--size);
   background-size: contain;
 }
 @media (max-width: 450px) {
-  .map #map .map-icon {
+  #map .map-icon {
     width: calc(var(--size) / 2);
     height: calc(var(--size) / 2);
   }
 }
-.map #map .map__history {
+#map .map__history {
   position: absolute;
   bottom: 24px;
   left: 24px;
@@ -1974,45 +2048,45 @@ li.menu__phone {
   column-count: 2;
   column-gap: 50px;
 }
-.map #map .map__history .map__history-item {
+#map .map__history .map__history-item {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
 }
-.map #map .map__history .map__history-item svg {
+#map .map__history .map__history-item svg {
   width: 28px;
   height: 28px;
 }
 @media (max-width: 680px) {
-  .map #map .map__history {
+  #map .map__history {
     padding: 16px;
     bottom: 0;
     left: 0;
     column-count: 1;
   }
-  .map #map .map__history .map__history-item {
+  #map .map__history .map__history-item {
     display: flex;
     align-items: center;
     gap: 6px;
     margin-bottom: 8px;
     font-size: 10px;
   }
-  .map #map .map__history .map__history-item svg {
+  #map .map__history .map__history-item svg {
     width: 14px;
     height: 14px;
   }
 }
-.map #map .ymaps3x0--control-button {
+#map .ymaps3x0--control-button {
   border-radius: 100%;
   margin-bottom: 20px;
   filter: drop-shadow(0px 2px 5px rgba(162, 181, 194, 0.35));
 }
-.map #map .ymaps3x0--control {
+#map .ymaps3x0--control {
   background-color: transparent;
   box-shadow: none;
 }
-.map #map [class*=-float-button] {
+#map [class*=-float-button] {
   filter: drop-shadow(0px 2px 5px rgba(162, 181, 194, 0.35));
   border-radius: 20px;
   /* width: 39px; */
@@ -2839,5 +2913,537 @@ button#filter-close {
   }
   .pagination {
     grid-column: 1;
+  }
+}
+.appartment {
+  background-color: var(--green-apple-10);
+  padding: 64px 0 104px;
+}
+.appartment__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+@media (max-width: 860px) {
+  .appartment__content {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+  }
+}
+.appartment__title {
+  margin-top: 5px;
+}
+@media (max-width: 550px) {
+  .appartment__title {
+    font-size: 36px;
+  }
+}
+.appartment__splides {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .appartment__splides {
+    grid-row: 1/span 2;
+    grid-column: 2;
+  }
+}
+.appartment__splide {
+  max-width: 544px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.appartment__splide-thumbs {
+  max-width: 390px;
+}
+@media (min-width: 550px) {
+  .appartment__splide-thumbs {
+    width: 100%;
+  }
+}
+.appartment__splide-thumbs .splide__track--nav > .splide__list > .splide__slide {
+  border-radius: 13px;
+  overflow: hidden;
+  max-width: 118px;
+  height: 67px;
+}
+.appartment__splide-thumbs .splide__track--nav > .splide__list > .splide__slide.is-active {
+  border: 2px solid var(--slate-gray-60);
+}
+.appartment__splide-thumbs .splide__arrow {
+  background: transparent;
+  box-shadow: none;
+}
+.appartment__splide-thumbs .splide__arrow--prev {
+  left: -3rem;
+  background-image: url("data:image/svg+xml,%3Csvg width=%2740%27 height=%2741%27 viewBox=%270 0 40 41%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg filter=%27url%28%23filter0_d_659_121685%29%27%3E%3Cpath d=%27M22 26.5L16 20.5L22 14.5%27 stroke=%27%2334454F%27 stroke-width=%271.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id=%27filter0_d_659_121685%27 x=%27-5%27 y=%27-2.5%27 width=%2750%27 height=%2750%27 filterUnits=%27userSpaceOnUse%27 color-interpolation-filters=%27sRGB%27%3E%3CfeFlood flood-opacity=%270%27 result=%27BackgroundImageFix%27/%3E%3CfeColorMatrix in=%27SourceAlpha%27 type=%27matrix%27 values=%270 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0%27 result=%27hardAlpha%27/%3E%3CfeOffset dy=%272%27/%3E%3CfeGaussianBlur stdDeviation=%272.5%27/%3E%3CfeComposite in2=%27hardAlpha%27 operator=%27out%27/%3E%3CfeColorMatrix type=%27matrix%27 values=%270 0 0 0 0.635417 0 0 0 0 0.709125 0 0 0 0 0.7625 0 0 0 0.35 0%27/%3E%3CfeBlend mode=%27normal%27 in2=%27BackgroundImageFix%27 result=%27effect1_dropShadow_659_121685%27/%3E%3CfeBlend mode=%27normal%27 in=%27SourceGraphic%27 in2=%27effect1_dropShadow_659_121685%27 result=%27shape%27/%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E");
+}
+.appartment__splide-thumbs .splide__arrow--next {
+  right: -3rem;
+  background-image: url("data:image/svg+xml,%3Csvg width=%2740%27 height=%2741%27 viewBox=%270 0 40 41%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg filter=%27url%28%23filter0_d_659_121691%29%27%3E%3Cpath d=%27M18 26.5L24 20.5L18 14.5%27 stroke=%27%2334454F%27 stroke-width=%271.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id=%27filter0_d_659_121691%27 x=%27-5%27 y=%27-2.5%27 width=%2750%27 height=%2750%27 filterUnits=%27userSpaceOnUse%27 color-interpolation-filters=%27sRGB%27%3E%3CfeFlood flood-opacity=%270%27 result=%27BackgroundImageFix%27/%3E%3CfeColorMatrix in=%27SourceAlpha%27 type=%27matrix%27 values=%270 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0%27 result=%27hardAlpha%27/%3E%3CfeOffset dy=%272%27/%3E%3CfeGaussianBlur stdDeviation=%272.5%27/%3E%3CfeComposite in2=%27hardAlpha%27 operator=%27out%27/%3E%3CfeColorMatrix type=%27matrix%27 values=%270 0 0 0 0.635417 0 0 0 0 0.709125 0 0 0 0 0.7625 0 0 0 0.35 0%27/%3E%3CfeBlend mode=%27normal%27 in2=%27BackgroundImageFix%27 result=%27effect1_dropShadow_659_121691%27/%3E%3CfeBlend mode=%27normal%27 in=%27SourceGraphic%27 in2=%27effect1_dropShadow_659_121691%27 result=%27shape%27/%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E%0A");
+}
+.appartment__info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+@media (min-width: 860px) {
+  .appartment__info {
+    grid-row: 2;
+    grid-column: 1;
+  }
+}
+.appartment__item-title {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--slate-gray-50);
+  display: block;
+}
+.appartment__item-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--slate-gray-100);
+  opacity: 0.9;
+}
+.appartment__item-text sup {
+  font-size: 8px;
+}
+.appartment__items {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.appartment__price-now {
+  display: inline-block;
+  margin-right: 13px;
+}
+.appartment__price-now::after {
+  content: " ₽";
+}
+.appartment__price-metr {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--slate-gray-50);
+}
+.appartment__buttons {
+  display: flex;
+  gap: 32px;
+}
+
+.appartment-about {
+  border-radius: 40px 40px 0px 0px;
+  padding: var(--margin-bottom) 0 0;
+  position: relative;
+  top: -40px;
+  background-color: var(--white);
+}
+.appartment-about__title {
+  margin-bottom: 32px;
+}
+.appartment-about__subtitle {
+  max-width: 734px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.appartment-about__subtitle:last-child {
+  margin-bottom: 30px;
+}
+
+.appartment-video {
+  margin-bottom: var(--margin-bottom);
+}
+.appartment-video__title {
+  margin-bottom: 32px;
+}
+.appartment-video__video {
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 736px;
+  width: 100%;
+  height: 414px;
+}
+@media (max-width: 660px) {
+  .appartment-video__video {
+    height: 320px;
+  }
+}
+.appartment-video__video iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.appartment-map {
+  margin-bottom: 100px;
+}
+.appartment-map .appartment__items {
+  justify-content: space-between;
+  margin-top: 24px;
+  margin-right: 120px;
+}
+@media (max-width: 920px) {
+  .appartment-map .appartment__items {
+    margin-right: 0;
+    gap: 20px;
+    justify-content: left;
+  }
+}
+.appartment-map .appartment__item {
+  max-width: 250px;
+}
+.appartment-mortgage {
+  margin-bottom: var(--margin-bottom);
+}
+.appartment-mortgage__title {
+  margin-bottom: 25px;
+}
+.appartment-mortgage__description {
+  margin-bottom: 25px;
+  max-width: 734px;
+  width: 100%;
+  line-height: 22px;
+}
+
+.similar-apartments {
+  margin-bottom: var(--margin-bottom);
+}
+.similar-apartments__title {
+  margin-bottom: 32px;
+}
+.similar-apartments__slider-container {
+  --arrows-width: 8rem;
+  max-width: calc(73.125rem + var(--arrows-width));
+  padding: 0 calc(15px + var(--arrows-width) / 2);
+  margin: 0 auto;
+}
+@media (max-width: 880px) {
+  .similar-apartments__slider-container {
+    --arrows-width: 1px;
+    max-width: 73.125rem;
+  }
+}
+.similar-apartments__slider-container .splide__arrow--prev {
+  left: -4em;
+}
+.similar-apartments__slider-container .splide__arrow--next {
+  right: -4em;
+}
+.similar-apartments__button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 64px;
+  max-width: 736px;
+  width: 100%;
+  padding: 15px;
+}
+.similar-apartments__button-container a.button {
+  padding: 16px;
+  border: 1px solid var(--light-gray-100);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: center;
+}
+.similar-apartments__button-container a.button:hover {
+  border: 1px solid var(--slate-gray-100);
+}
+
+.appartment-mortgage {
+  margin-bottom: var(--margin-bottom);
+}
+.appartment-mortgage__title {
+  margin-bottom: 25px;
+}
+.appartment-mortgage__description {
+  margin-bottom: 25px;
+  max-width: 734px;
+  width: 100%;
+  line-height: 22px;
+}
+
+.block__sign-up {
+  background: #D8EAB6;
+  border-radius: 32px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  flex: 2;
+}
+@media (max-width: 880px) {
+  .block__sign-up {
+    flex: 1;
+  }
+}
+.block__sign-up::after {
+  content: "";
+  background-image: url("../img/welcome-img.png");
+  width: 294px;
+  height: 297px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -66px;
+  right: 0;
+  background-size: contain;
+  transform: scale(-1, 1) rotate(340deg);
+}
+@media (max-width: 660px) {
+  .block__sign-up::after {
+    width: 190px;
+    top: -20px;
+  }
+}
+.block__sign-up-title {
+  max-width: 415px;
+  width: 100%;
+  margin-bottom: 24px;
+  z-index: 2;
+  position: relative;
+}
+.block__sign-up-phone {
+  max-width: 415px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  margin-bottom: 4px;
+}
+.block__sign-up-subtitle {
+  max-width: 415px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  margin-bottom: 50px;
+}
+.block__sign-up-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 880px) {
+  .block__sign-up-form {
+    grid-template-columns: repeat(auto-fill, 100%);
+  }
+}
+.block__sign-up-form .sign-up-form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.block__sign-up-form .sign-up-form-input .input {
+  padding: 15px 16px;
+  border: 1px solid var(--light-gray-100);
+  border-radius: 4px;
+}
+.block__sign-up-form .sign-up-form-input .input._form-error {
+  border-color: var(--crimson-70);
+}
+.block__sign-up-form .sign-up-form-input .input::placeholder {
+  opacity: 0.5;
+}
+.block__sign-up-form .form__error {
+  display: none;
+}
+.block__sign-up-form .checkbox {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.block__sign-up-form .checkbox__label {
+  font-size: 12px;
+  line-height: 20px;
+}
+.block__sign-up-form .checkbox__text a {
+  border-bottom: 1px solid rgba(52, 69, 79, 0.3);
+}
+.block__sign-up-form .checkbox._form-error .checkbox__label:before {
+  border: 1px solid var(--crimson-100);
+}
+.block__sign-up-form .button {
+  width: 100%;
+}
+.block__sign-up-form .button:disabled {
+  background-color: var(--crimson-70);
+  color: var(--white);
+  cursor: no-drop;
+}
+.block__sign-up-form .button:disabled:hover {
+  background-color: var(--crimson-70);
+  color: var(--white);
+}
+
+.block__trade-in {
+  background: #FFFFFF;
+  border-radius: 32px;
+  max-width: 348px;
+  width: 100%;
+  border: 1px solid var(--light-gray-100);
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 660px) {
+  .block__trade-in {
+    max-width: none;
+  }
+}
+.block__trade-in-text {
+  padding: 32px 40px;
+  flex: 1;
+}
+.block__trade-in-title {
+  max-width: 268px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.block__trade-in-subtitle {
+  max-width: 268px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+.block__trade-in-img {
+  margin-top: 20px;
+  position: relative;
+}
+@media (max-width: 880px) {
+  .block__trade-in-img {
+    height: 340px;
+  }
+}
+@media (max-width: 660px) {
+  .block__trade-in-img {
+    height: auto;
+  }
+}
+.block__trade-in-img .icon-bage {
+  position: absolute;
+  width: 112px;
+  height: 112px;
+  right: 15px;
+  top: -30px;
+}
+.block__trade-in-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 32px;
+}
+
+.block-mortgage-selection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  background: var(--green-apple-30);
+  border-radius: 32px;
+  padding: 32px;
+  align-items: center;
+}
+@media (max-width: 960px) {
+  .block-mortgage-selection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 550px) {
+  .block-mortgage-selection {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+}
+.block-mortgage-selection .mortgage-selection__range {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.block-mortgage-selection .mortgage-selection__range p {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+.block-mortgage-selection .mortgage-selection__range .range-slider {
+  margin-top: 24px;
+  position: relative;
+}
+.block-mortgage-selection .mortgage-selection__range .range-slider .range-progress {
+  background-color: var(--crimson-100);
+  height: 3px;
+  position: absolute;
+  width: 100%;
+  top: calc(50% + 4px);
+  border-radius: 1px;
+}
+.block-mortgage-selection .mortgage-selection__range input[type=range] {
+  margin: 0px;
+  -webkit-appearance: none;
+  max-width: 100%;
+  width: 100%;
+  background-color: transparent;
+  padding: 0px;
+  border: none;
+  height: auto;
+}
+.block-mortgage-selection .mortgage-selection__range input[type=range]::-webkit-slider-runnable-track {
+  max-width: 100%;
+  height: 2px;
+  border: none;
+  background-color: var(--white);
+  border-radius: 2px;
+}
+.block-mortgage-selection .mortgage-selection__range input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  background-color: var(--crimson-100);
+  margin-top: -7px;
+}
+.block-mortgage-selection .range-text {
+  position: relative;
+}
+.block-mortgage-selection .range-text::after {
+  position: absolute;
+  content: "₽";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--slate-gray-50);
+  right: 20px;
+  top: calc(50% - 10px);
+}
+.block-mortgage-selection .range-text .input {
+  border: 1px solid var(--light-gray-100);
+  border-radius: 4px;
+  padding: 16px 20px;
+  width: 100%;
+}
+.block-mortgage-selection .range-text input::-webkit-outer-spin-button,
+.block-mortgage-selection .range-text input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+.block-mortgage-selection .crimson-btn {
+  width: 100%;
+  height: fit-content;
+  margin-top: -10px;
+}
+@media (max-width: 550px) {
+  .block-mortgage-selection .crimson-btn {
+    margin-top: 0;
   }
 }
