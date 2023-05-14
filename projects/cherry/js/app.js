@@ -13018,11 +13018,12 @@
               document.documentElement.classList.toggle("lock");
           }),
           t.addEventListener("pointerdown", function (i) {
-            i.preventDefault();
+            i.preventDefault(), t.classList.add("move");
             const a = t.getBoundingClientRect();
             function o(i) {
               (t.style.left = i.clientX - e + "px"),
-                (t.style.top = i.clientY - n + "px");
+                (t.style.top = i.clientY - n + "px"),
+                document.documentElement.classList.add("lock");
             }
             (e = i.clientX - a.left),
               (n = i.clientY - a.top),
@@ -13030,7 +13031,9 @@
               (t.style.zIndex = 45),
               t.addEventListener("pointermove", o),
               t.addEventListener("pointerup", function () {
-                document.removeEventListener("pointermove", o);
+                document.removeEventListener("pointermove", o),
+                  t.classList.remove("move"),
+                  document.documentElement.classList.remove("lock");
               });
           }),
           t.addEventListener("dragstart", function (t) {
