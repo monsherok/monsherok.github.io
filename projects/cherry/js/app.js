@@ -13018,22 +13018,27 @@
               document.documentElement.classList.toggle("lock");
           }),
           t.addEventListener("pointerdown", function (i) {
-            i.preventDefault(), t.classList.add("move");
-            const a = t.getBoundingClientRect();
-            function o(i) {
+            i.preventDefault();
+            let a = i.currentTarget;
+            t.classList.add("move"),
+              document.documentElement.classList.add("lock");
+            const o = a.getBoundingClientRect();
+            function r(i) {
               (t.style.left = i.clientX - e + "px"),
                 (t.style.top = i.clientY - n + "px"),
-                document.documentElement.classList.add("lock");
+                (window.onselectstart = (t) => !1);
             }
-            (e = i.clientX - a.left),
-              (n = i.clientY - a.top),
+            console.log(o),
+              (e = i.clientX - o.left),
+              (n = i.clientY - o.top),
               (t.style.position = "fixed"),
               (t.style.zIndex = 45),
-              t.addEventListener("pointermove", o),
+              t.addEventListener("pointermove", r),
               t.addEventListener("pointerup", function () {
-                document.removeEventListener("pointermove", o),
+                document.removeEventListener("pointermove", r),
                   t.classList.remove("move"),
-                  document.documentElement.classList.remove("lock");
+                  document.documentElement.classList.remove("lock"),
+                  (window.onselectstart = null);
               });
           }),
           t.addEventListener("dragstart", function (t) {
