@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Главная</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20230531215042">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Merriweather:wght@700;900&display=swap&_v=20230531215042" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__container">
+				<a href="/" class="header__logo">
+					<img src="img/logo.svg" alt="Logo">
+					<span>BuhOne</span>
+				</a>
+				<div class="header__menu">
+					<div class="menu__body">
+						<div class="header__contacts">
+							<a class="contact header__contact header__phone" href="tel:+71112223344">8(111)222-33-44</a>
+							<span class="contact header__contact header__working-time">Пн-Пт 10:00-18:00</span>
+							<a class="contact header__contact header__mail" href="mailto:order@buhone.ru">order@buhone.ru</a>
+							<span class="contact header__contact header__geo">Невский пр. 130</span>
+						</div>
+						<nav class="header__nav">
+							<ul class="header__nav-list">
+								<li class="header__nav-item">
+									<a class="header__nav-link" href="#">Главная</a>
+								</li>
+								<li class="header__nav-item">
+									<a class="header__nav-link" href="#">Услуги</a>
+								</li>
+								<li class="header__nav-item">
+									<a class="header__nav-link" href="#">Кейсы</a>
+								</li>
+								<li class="header__nav-item">
+									<a class="header__nav-link" href="#">О компании</a>
+								</li>
+								<li class="header__nav-item">
+									<a class="header__nav-link" href="#">Контакты</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<button type="button" class="menu__icon icon-menu"><span></span></button>
+				</div>
+			</div>
+		</header>
+		<main class="page">
+			<div class="hero">
+				<div class="hero__container">
+					<div class="splide hero__splide" role="group" aria-label="Splide">
+						<div class="splide__arrows splide__arrows--ltr">
+							<button class="splide__arrow splide__arrow--prev" type="button" aria-label="Previous slide" aria-controls="splide01-track">
+								<img src="img/icons/arrow-l.svg" alt="Slider arrow left">
+							</button>
+							<button class="splide__arrow splide__arrow--next" type="button" aria-label="Next slide" aria-controls="splide01-track">
+								<img src="img/icons/arrow-r.svg" alt="Slider arrow right">
+							</button>
+						</div>
+						<div class="splide__track">
+							<ul class="splide__list">
+								<li class="splide__slide">
+									<h2 class="slider__title">Бухгалтерские услуги в Санкт-Петербурге</h2>
+									<a class="button slider__button" href="#">Наша презентация</a>
+								</li>
+								<li class="splide__slide">
+									<h2 class="slider__title">Бухгалтерские услуги в Москве</h2>
+									<a class="button slider__button" href="#">Наша презентация</a>
+								</li>
+								<li class="splide__slide">
+									<h2 class="slider__title">Бухгалтерские услуги в Токио</h2>
+									<a class="button slider__button" href="#">Наша презентация</a>
+								</li>
+								<li class="splide__slide">
+									<h2 class="slider__title">Бухгалтерские услуги в селе Зеленое</h2>
+									<a class="button slider__button" href="#">Наша презентация</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="feedback">
+				<div class="feedback__container">
+					<div class="feedback__inner">
+						<h2 class="title feedback__title">
+							Связь с нами
+						</h2>
+						<p class="subtitle feedback__subtitle">
+							У вас остались вопросы? Напишите нам - мы ответим в ближайшее время!
+						</p>
+						<div class="contacts feedback__contacts">
+							<a class="contact feedback__contact feedback__phone" href="tel:+71112223344">+7(111)222-33-44</a>
+							<a class="contact feedback__contact feedback__mail" href="mailto:order@buhone.ru">order@buhone.ru</a>
+						</div>
+					</div>
+					<form data-dev data-popup-message="#form-done" class="feedback__form">
+						<div class="feedback__form-input">
+							<label for="firstname">Имя</label>
+							<input data-required id="firstname" autocomplete="off" type="text" name="form[]" data-error="" placeholder="Иван" class="input">
+						</div>
+						<div class="feedback__form-input">
+							<label for="lastname">Фамилия</label>
+							<input data-required id="lastname" autocomplete="off" type="text" name="form[]" data-error="" placeholder="Иванов" class="input">
+						</div>
+						<div class="feedback__form-input feedback__form-textarea">
+							<label for="message">Сообщение</label>
+							<textarea data-required id="message" autocomplete="off" name="form[]" placeholder="Ваше сообщение" data-error="" class="input"></textarea>
+						</div>
+						<button type="submit" class="button feedback__form-button">Отправить сообщение</button>
+					</form>
+				</div>
+			</div>
+		</main>
+		<footer class="footer">
+			<div class="footer__container">
+				<p class="footer__copyright">2019 (с) Все права защищены. БухОне.ру</p>
+				<p class="footer__developer">Разработано: BuhOne</p>
+			</div>
+		</footer>
+	</div>
+
+	<div id="form-done" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close">Закрыть</button>
+				<div class="popup__text">
+					<p class="subtitle">Ваша заявка успешно отправлена!</p>
+					<p class="subtitle">Мы свяжемся с Вами в ближайшее время</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="js/app.min.js?_v=20230531215042"></script>
+</body>
+
+</html>
