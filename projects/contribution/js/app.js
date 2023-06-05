@@ -24,20 +24,20 @@
     )
   );
   const t = new Date(),
-    e = new Date(t.getTime() - 3024e7),
+    e = new Date(t.getTime() - 308448e5),
     n = document.createElement("table");
   let o = null,
     r = null;
   const c = document.createElement("tr");
-  for (let t = 0; t < 51; t++) {
+  for (let t = 0; t <= 51; t++) {
     const n = document.createElement("th"),
       a = new Date(e.getTime() + 7 * t * 24 * 60 * 60 * 1e3).toLocaleDateString(
         "ru-RU",
         { month: "short" }
       );
     0 == t && (o = a),
-      50 != t || o != a
-        ? (49 == t &&
+      51 != t || o != a
+        ? (50 == t &&
             o == a &&
             (c.querySelector(`[data-month=${a}]`).textContent = ""),
           a !== r &&
@@ -47,8 +47,10 @@
   }
   n.appendChild(c);
   for (let t = 0; t < 7; t++) {
-    const t = document.createElement("tr");
-    for (let e = 1; e < 51; e++) {
+    const t = document.createElement("tr"),
+      e = document.createElement("td");
+    t.appendChild(e);
+    for (let e = 1; e <= 51; e++) {
       const e = document.createElement("td");
       t.appendChild(e);
     }
@@ -58,10 +60,10 @@
     l = document.querySelector(".info");
   function i(t, n) {
     const o = new Date(t),
-      r = Math.floor((o.getTime() - e.getTime()) / 864e5),
-      c = Math.floor(r / 7);
-    let a = o.getDay();
-    0 === a && (a = 7);
+      r = Math.floor((o.getTime() - e.getTime()) / 864e5);
+    let c = Math.floor(r / 7),
+      a = o.getDay();
+    0 === a && (a = 7), 1 === a && (c += 1);
     const l = document.querySelector(
       "table tr:nth-child(" + (a + 1) + ") td:nth-child(" + (c + 1) + ")"
     );

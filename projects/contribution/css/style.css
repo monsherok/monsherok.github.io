@@ -142,17 +142,14 @@ table tr th {
 table tr td {
   width: var(--square-size);
   height: var(--square-size);
-  background-color: #EDEDED;
+  background-color: transparent;
   position: relative;
-  cursor: pointer;
   transition: all 0.3s ease;
-}
-table tr td:not([data-level]):hover {
-  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 [data-level] {
   position: relative;
+  cursor: pointer;
 }
 [data-level]:hover {
   border: 1px solid rgba(0, 0, 0, 0.9);
@@ -161,6 +158,11 @@ table tr td:not([data-level]):hover {
   opacity: 1;
   visibility: visible;
   bottom: 22px;
+}
+
+[data-level="0"]:hover {
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 /* Other styling */
