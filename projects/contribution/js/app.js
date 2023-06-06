@@ -58,21 +58,22 @@
   }
   const a = document.querySelector(".squares"),
     l = document.querySelector(".info");
-  function i(t, n) {
-    const o = new Date(t),
-      r = Math.floor((o.getTime() - e.getTime()) / 864e5);
-    let c = Math.floor(r / 7),
-      a = o.getDay();
-    0 === a && (a = 7), 1 === a && (c += 1);
-    const l = document.querySelector(
-      "table tr:nth-child(" + (a + 1) + ") td:nth-child(" + (c + 1) + ")"
+  function i(n, o) {
+    const r = new Date(n),
+      c = Math.floor((r.getTime() - e.getTime()) / 864e5);
+    let a = Math.floor(c / 7),
+      l = r.getDay(),
+      i = t.getDay();
+    0 === l && (l = 7), 0 === i && (i = 7), l <= i && (a += 1);
+    const u = document.querySelector(
+      "table tr:nth-child(" + (l + 1) + ") td:nth-child(" + (a + 1) + ")"
     );
-    if (!l) return;
-    l.querySelector(".tooltip") && l.querySelector(".tooltip").remove();
-    const i = document.createElement("div");
-    i.classList.add("tooltip"),
-      (i.innerHTML = `<div class='tooltip__text'>${
-        0 === n ? "No" : n
+    if (!u) return;
+    u.querySelector(".tooltip") && u.querySelector(".tooltip").remove();
+    const s = document.createElement("div");
+    s.classList.add("tooltip"),
+      (s.innerHTML = `<div class='tooltip__text'>${
+        0 === o ? "No" : o
       } contributions</div><div class='tooltip__date'>${(function (t) {
         const e = new Date(t),
           n = [
@@ -101,9 +102,9 @@
           r = e.getDate(),
           c = e.getFullYear();
         return `${n}, ${o} ${r}, ${c}`;
-      })(t)}</div>`),
-      l.appendChild(i),
-      l.setAttribute(
+      })(n)}</div>`),
+      u.appendChild(s),
+      u.setAttribute(
         "data-level",
         (function (t) {
           switch (!0) {
@@ -120,7 +121,7 @@
             default:
               return "0";
           }
-        })(n)
+        })(o)
       );
   }
   function u(t) {
@@ -128,20 +129,19 @@
   }
   a.insertBefore(n, l),
     u(
-      (function () {
-        const t = new Date(),
-          e = new Date(t.getFullYear() - 1, t.getMonth(), t.getDate()),
-          n = {};
-        for (let t = 0; t < 365; t++) {
-          const o = new Date(e.getTime() + 24 * t * 60 * 60 * 1e3);
-          n[
-            `${o.getFullYear()}-${String(o.getMonth() + 1).padStart(
+      (function (e = 0) {
+        const n = new Date(t.getFullYear() - 1, t.getMonth(), t.getDate()),
+          o = {};
+        for (let t = 0; t <= 365; t++) {
+          const e = new Date(n.getTime() + 24 * t * 60 * 60 * 1e3);
+          o[
+            `${e.getFullYear()}-${String(e.getMonth() + 1).padStart(
               2,
               "0"
-            )}-${String(o.getDate()).padStart(2, "0")}`
+            )}-${String(e.getDate()).padStart(2, "0")}`
           ] = 0;
         }
-        return n;
+        return o;
       })()
     );
 })();
