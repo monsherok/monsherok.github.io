@@ -5,11 +5,11 @@
 	<title>Главная</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300;400;500;600;700&display=swap&_v=20230607210046" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.min.css?_v=20230607210046">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300;400;500;600;700&display=swap&_v=20230608024953" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20230608024953">
 	<link rel="shortcut icon" href="favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="js/app.min.js?_v=20230607210046" defer></script>
+	<script src="js/app.min.js?_v=20230608024953" defer></script>
 </head>
 
 <body>
@@ -31,6 +31,9 @@
 							</li>
 							<li class="menu__item">
 								<a data-goto="#portfolio" href="" class="menu__link">Портфолио</a>
+							</li>
+							<li class="menu__item">
+								<a data-goto=".contact__text" href="" class="menu__link">Связаться</a>
 							</li>
 						</ul>
 					</nav>
@@ -435,25 +438,95 @@
 					</div>
 				</div>
 			</div>
+			<div class="contact">
+				<div class="contact__container">
+					<div class="contact__photo">
+						<picture><source srcset="img/me2.webp" type="image/webp"><img src="img/me2.jpg" alt="Мое фото"></picture>
+					</div>
+					<div class="contact__text">
+						<p class="subtitle _circle">Контакты</p>
+						<h2 class="title contact__title">
+							Свяжитесь со мной
+						</h2>
+						<p class="text-bold">
+							Любым удобным для вас способом:
+						</p>
+						<div class="contact__socials">
+							<ul>
+								<li>
+									<a href="https://github.com/monsherok">
+										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" clip-rule="evenodd" d="M15 0C6.7125 0 0 6.7125 0 15C0 21.6375 4.29375 27.2438 10.2562 29.2313C11.0062 29.3625 11.2875 28.9125 11.2875 28.5188C11.2875 28.1625 11.2688 26.9812 11.2688 25.725C7.5 26.4187 6.525 24.8063 6.225 23.9625C6.05625 23.5313 5.325 22.2 4.6875 21.8438C4.1625 21.5625 3.4125 20.8688 4.66875 20.85C5.85 20.8313 6.69375 21.9375 6.975 22.3875C8.325 24.6562 10.4812 24.0187 11.3437 23.625C11.475 22.65 11.8688 21.9938 12.3 21.6188C8.9625 21.2438 5.475 19.95 5.475 14.2125C5.475 12.5812 6.05625 11.2313 7.0125 10.1813C6.8625 9.80625 6.3375 8.26875 7.1625 6.20625C7.1625 6.20625 8.41875 5.8125 11.2875 7.74375C12.4875 7.40625 13.7625 7.2375 15.0375 7.2375C16.3125 7.2375 17.5875 7.40625 18.7875 7.74375C21.6562 5.79375 22.9125 6.20625 22.9125 6.20625C23.7375 8.26875 23.2125 9.80625 23.0625 10.1813C24.0188 11.2313 24.6 12.5625 24.6 14.2125C24.6 19.9687 21.0938 21.2438 17.7562 21.6188C18.3 22.0875 18.7688 22.9875 18.7688 24.3937C18.7688 26.4 18.75 28.0125 18.75 28.5188C18.75 28.9125 19.0312 29.3813 19.7812 29.2313C22.759 28.2259 25.3465 26.3121 27.1796 23.7592C29.0127 21.2063 29.9991 18.1429 30 15C30 6.7125 23.2875 0 15 0Z" fill="#A7A7A7" />
+										</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://t.me/vendoro">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="30" height="30" fill-rule="nonzero">
+											<g fill="#a7a7a7" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+												<g transform="scale(5.12,5.12)">
+													<path d="M46.137,6.552c-0.75,-0.636 -1.928,-0.727 -3.146,-0.238h-0.002c-1.281,0.514 -36.261,15.518 -37.685,16.131c-0.259,0.09 -2.521,0.934 -2.288,2.814c0.208,1.695 2.026,2.397 2.248,2.478l8.893,3.045c0.59,1.964 2.765,9.21 3.246,10.758c0.3,0.965 0.789,2.233 1.646,2.494c0.752,0.29 1.5,0.025 1.984,-0.355l5.437,-5.043l8.777,6.845l0.209,0.125c0.596,0.264 1.167,0.396 1.712,0.396c0.421,0 0.825,-0.079 1.211,-0.237c1.315,-0.54 1.841,-1.793 1.896,-1.935l6.556,-34.077c0.4,-1.82 -0.156,-2.746 -0.694,-3.201zM22,32l-3,8l-3,-10l23,-17z">
+													</path>
+												</g>
+											</g>
+										</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://vk.com/cvxvr">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="30" height="30">
+											<path fill="#a7a7a7" d="M25,2C12.318,2,2,12.318,2,25s10.318,23,23,23c12.683,0,23-10.318,23-23S37.683,2,25,2z M34.973,29.535 c2.237,1.986,2.702,2.695,2.778,2.816C38.678,33.821,36.723,34,36.723,34h-4.12c0,0-1.003,0.011-1.86-0.557 c-1.397-0.915-2.86-2.689-3.888-2.381C25.992,31.32,26,32.486,26,33.483C26,33.84,25.693,34,25,34s-0.981,0-1.288,0 c-2.257,0-4.706-0.76-7.149-3.313c-3.456-3.609-6.487-10.879-6.487-10.879s-0.179-0.366,0.016-0.589 c0.221-0.25,0.822-0.218,0.822-0.218L14.909,19c0,0,0.376,0.071,0.646,0.261c0.223,0.156,0.347,0.454,0.347,0.454 s0.671,2.216,1.526,3.629c1.67,2.758,2.447,2.828,3.014,2.531C21.27,25.445,21,22.513,21,22.513s0.037-1.259-0.395-1.82 c-0.333-0.434-0.97-0.665-1.248-0.701c-0.225-0.029,0.151-0.423,0.63-0.648C20.627,19.059,21.498,18.986,23,19 c1.169,0.011,1.506,0.081,1.962,0.186C26.341,19.504,26,20.343,26,23.289c0,0.944-0.13,2.271,0.582,2.711 c0.307,0.19,1.359,0.422,3.231-2.618c0.889-1.442,1.596-3.834,1.596-3.834s0.146-0.263,0.373-0.393 c0.232-0.133,0.225-0.13,0.543-0.13S35.832,19,36.532,19c0.699,0,1.355-0.008,1.468,0.402c0.162,0.589-0.516,2.607-2.234,4.797 C32.943,27.793,32.63,27.457,34.973,29.535z" />
+										</svg>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<p class="text-bold">
+							Или оставьте ваши данные и я сам вам напишу:
+						</p>
+						<form data-tg data-popup-message="#formdone" class="contact__form">
+							<div class="contact__input">
+								<label for="name">Ваше имя</label>
+								<input data-required data-validate id="name" autocomplete="off" type="text" name="name" data-error="" placeholder="Имя" class="input">
+							</div>
+							<div class="contact__input">
+								<label for="mail">Ваша почта</label>
+								<input data-required="email" data-validate id="mail" autocomplete="off" type="text" name="email" data-error="" placeholder="Почта" class="input">
+							</div>
+							<div class="contact__input">
+								<label for="message">Ваше сообщение</label>
+								<textarea data-required data-validate id="message" autocomplete="off" name="message" placeholder="Сообщение" data-error="" class="input"></textarea>
+							</div>
+							<button class="button button__fill">Отправить сообщение</button>
+						</form>
+					</div>
+				</div>
+			</div>
 		</main>
 		<footer class="footer">
 			<div class="footer__container">
 			</div>
 		</footer>
 	</div>
-	<!-- 
-<div id="popup" aria-hidden="true" class="popup">
-	<div class="popup__wrapper">
-		<div class="popup__content">
-			<button data-close type="button" class="popup__close">Закрыть</button>
-			<div class="popup__text">
+	<div id="formdone" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close">Закрыть</button>
+				<div class="popup__text text">
+					Ваше сообщение отправлено и скорее всего - доставлено.
+					<br>
+					<br>
+					Как только я его увижу - сразу же свяжусь с Вами.
+					<br>
+					<br>
+					Хорошего, Вам, времени суток =)
+					<br>
+					<br>
+					p.s: Если долго не буду отвечать - можете написать мне в любую соцсеть.
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
- -->
-
-
 </body>
 
 </html>
