@@ -13,7 +13,7 @@ export default class BulletController {
         this.y = 0;
         this.width = 2;
         this.height = 5;
-        this.shootSound = new Audio('../sounds/shoot.wav');
+        this.shootSound = new Audio('./sounds/shoot.wav');
         this.shootSound.volume = 0.01;
     }
 
