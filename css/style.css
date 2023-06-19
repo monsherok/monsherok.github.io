@@ -993,14 +993,16 @@ main::after {
   border: 1px solid rgb(194, 1, 1);
 }
 
-.wrapper {
+body {
   position: relative;
 }
 
-.wrapper::before {
+body::before {
   position: absolute;
   content: 'Зачем вверх тянешь?';
   top: -50px;
   left: 50%;
   transform: translateX(-50%);
+  font-size: 20px;
+  color: #000;
 }
