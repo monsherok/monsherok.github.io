@@ -30,11 +30,11 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle fw-medium fs-5 lh-1.2 letter-spacing-1 text-dark nav-link "
-                                href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Courses
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
                                 <li><a class="dropdown-item" href="#">Действие</a></li>
                                 <li><a class="dropdown-item" href="#">Другое действие</a></li>
                                 <li>
@@ -45,11 +45,11 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle fw-medium fs-5 lh-1.2 letter-spacing-1 text-dark nav-link "
-                                href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Universities
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
                                 <li><a class="dropdown-item" href="#">Действие</a></li>
                                 <li><a class="dropdown-item" href="#">Другое действие</a></li>
                                 <li>
@@ -144,10 +144,13 @@
                 </div>
                 <form class="modal-body">
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Email address</label>
+                        <input type="email" class="form-control" id="floatingName" placeholder="name@example.com">
+                        <label for="floatingName">Name Surname</label>
                     </div>
-
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+                        <label for="floatingEmail">Email address</label>
+                    </div>
                     <div class="form-floating">
                         <input type="tel" class="form-control" id="floatingPhone" placeholder="Phone">
                         <label for="floatingPhone">Phone</label>
@@ -177,15 +180,11 @@
                         <label for="floatingRepeatPassword">Confirm password</label>
                     </div>
                     <div class="checkbox">
-                        <input id="c_1" data-error="Ошибка" class="checkbox__input" type="checkbox" value="1" name="form[]">
-                        <label for="c_1" class="checkbox__label"><span class="checkbox__text">I agree with <a href="#">Terms and Conditions</a></span></label>
+                        <input id="c_1" data-error="Ошибка" class="checkbox__input" type="checkbox" value="1"
+                            name="form[]">
+                        <label for="c_1" class="checkbox__label"><span class="checkbox__text">I agree with <a
+                                    href="#">Terms and Conditions</a></span></label>
                     </div>
-                    <!-- <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            I agree with <a href="#">Terms and Conditions</a>
-                        </label>
-                    </div> -->
                     <button type="button" class="btn w-100 modal__button" data-bs-toggle="modal"
                         data-bs-target="#registerModal">
                         Register
