@@ -1,134 +1,94 @@
 (() => {
   "use strict";
-  const t = new (class {
-    constructor() {
-      (this.datas = {
-        modalWindow: "data-modal",
-        modalBtn: "data-modal-btn",
-        modalClose: "data-close",
+  function e() {
+    const e = document.querySelector(".popup.--isVisible");
+    e && "notification" === e.dataset.popup
+      ? e.remove()
+      : e &&
+        (t(!1),
+        e.classList.remove("--isVisible"),
+        e.querySelector("form") && e.querySelector("form").reset());
+  }
+  function t(e) {
+    document.documentElement.classList.toggle("lock", e);
+  }
+  function o(e) {
+    const t = e.querySelectorAll("[data-required]");
+    let o = 0;
+    return (
+      t.forEach((e) => {
+        const t = (function (e) {
+          if ("email" === e.dataset.required)
+            return (t = e.value), /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t);
+          return e.value.length >= 2;
+          var t;
+        })(e);
+        !(function (e, t) {
+          t ? e.classList.add("error") : e.classList.remove("error");
+        })(e, !t),
+          t || o++;
       }),
-        (this.classes = {
-          open: "modal__open",
-          content: "modal-content",
-          lock: "lock",
-        }),
-        (this.open = !1),
-        (this.activeModalClass = ""),
-        this.init();
-    }
-    init() {
-      document.addEventListener("click", (t) => {
-        t.target.classList.contains("open-modal")
-          ? this.modalOpen(t)
-          : t.target.closest(`.${this.classes.open}`) &&
-            ((t.target.closest(`.${this.classes.content}`) &&
-              !t.target.hasAttribute(`${this.datas.modalClose}`)) ||
-              (t.preventDefault(),
-              this.toggleModal(
-                document.getElementById(`${this.activeModalClass}`)
-              )));
-      });
-    }
-    modalOpen(t) {
-      t.preventDefault();
-      const e = document.querySelector(`#${t.target.dataset.modalBtn}`);
-      (this.activeModalClass = t.target.dataset.modalBtn),
-        e && this.toggleModal(e);
-    }
-    toggleModal(t) {
-      t.classList.toggle("modal__open"),
-        document.documentElement.classList.toggle("lock");
-    }
-  })();
-  var e = "6111024453:AAHnDkXdv7lgRyQD4vzyUiKwgW7MFsuerHQ",
-    a = "@monshero";
-  document.body.addEventListener("focusout", function (t) {
-    const e = t.target;
-    ("INPUT" !== e.tagName && "TEXTAREA" !== e.tagName) ||
-      (e.hasAttribute("data-required") && o.checkValidate(e));
-  });
-  let o = {
-    checkValidate(t) {
-      let e = 0;
-      return "email" === t.dataset.required
-        ? (this.emailTest(t) ? (e++, this.addError(t)) : this.removeError(t), e)
-        : (t.value ? this.removeError(t) : (e++, this.addError(t)), e);
-    },
-    addError(t) {
-      t.classList.add("error");
-    },
-    removeError(t) {
-      t.classList.remove("error");
-    },
-    emailTest: (t) =>
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(t.value),
-  };
-  const s = document.querySelector(".header__menu");
-  s &&
-    s.addEventListener("click", () => {
-      s.classList.toggle("active");
+      o
+    );
+  }
+  document.addEventListener("mousedown", (t) => {
+    const { target: o } = t;
+    "popup" === o.id && e();
+  }),
+    document.addEventListener("click", (o) => {
+      const { target: n } = o,
+        s = n.closest("[data-open-popup]"),
+        r = n.closest("[data-close]");
+      s
+        ? (function (e) {
+            const o = `[data-popup='${e}']`,
+              n = document.querySelector(o);
+            n && (t(!0), n.classList.add("--isVisible"));
+          })(s.dataset.openPopup)
+        : r && e();
     }),
-    (function () {
-      const s = document.forms;
-      if (s.length)
-        for (const t of s)
-          t.addEventListener("submit", function (t) {
-            t.preventDefault();
-            n(t.target);
+    document.addEventListener("DOMContentLoaded", () => {
+      Array.from(document.forms).forEach((e) => {
+        const t = e.querySelector('button[type="submit"]');
+        e.addEventListener("submit", (e) => n(e, t)),
+          e.addEventListener("reset", () => {
+            e.querySelectorAll(".error").forEach((e) => {
+              e.classList.remove("error");
+            }),
+              (t.disabled = !1);
           }),
-            t.addEventListener("reset", function (t) {
-              t.target.reset();
-            });
-      function n(s) {
-        const n = s.querySelectorAll("[data-required]");
-        let i = 0;
-        n.length &&
-          n.forEach((t) => {
-            i += o.checkValidate(t);
-          }),
-          0 === i &&
-            (l(s),
-            (async function (o) {
-              var s = new FormData(o);
-              r(o, "SENDING..."),
-                fetch("https://api.telegram.org/bot" + e + "/sendMessage", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                  },
-                  body:
-                    "chat_id=" +
-                    a +
-                    "&text=" +
-                    JSON.stringify(Object.fromEntries(s.entries())),
-                })
-                  .then(function (e) {
-                    e.ok
-                      ? (o.reset(),
-                        t.toggleModal(o.closest("[data-modal]")),
-                        d("Успешная отправка формы"))
-                      : d("Ошибка отправки формы!");
-                  })
-                  .catch(function (t) {
-                    d("Ошибка: " + t.message);
-                  })
-                  .finally(() => {
-                    l(o), r(o, "SUBMIT");
-                  });
-            })(s));
-      }
-      function l(t) {
-        const e = t.querySelector('button[type="submit"]');
-        e.hasAttribute("disabled") ? (e.disabled = !1) : (e.disabled = !0);
-      }
-      function r(t, e) {
-        t.querySelector('button[type="submit"]').innerHTML = e;
-      }
-      function d(e) {
-        let a = document.getElementById("modal-2");
-        (t.activeModalClass = a.id),
-          (a.querySelector(".modal__title").innerHTML = e),
-          t.toggleModal(a);
-      }
-    })();
+          [...e.elements].forEach((n) => {
+            ("INPUT" !== n.tagName && "TEXTAREA" !== n.tagName) ||
+              n.addEventListener("input", () =>
+                (function (e, t) {
+                  const n = o(e);
+                  t.disabled = 0 !== n;
+                })(e, t),
+              );
+          });
+      });
+    });
+  const n = (n, s) => {
+    n.preventDefault();
+    const r = o(n.target);
+    (s.disabled = 0 !== r),
+      0 === r &&
+        (e(),
+        (function (e) {
+          t(!0);
+          const o = document.createElement("div");
+          (o.id = "popup"),
+            (o.dataset.popup = "notification"),
+            (o.className = "popup --isVisible"),
+            (o.innerHTML =
+              '\n        <div class="popup__wrapper">\n            <div class="popup__content">\n                <button data-close type="button" class="popup__close">Закрыть</button>\n                <div class="contact-form">\n                    <h2 class="contact-form__title" style="text-align: center; margin: 0;"></h2>\n                </div>\n            </div>\n        </div>\n    '),
+            (o.querySelector(".contact-form__title").textContent = e),
+            o
+              .querySelector("[data-close]")
+              .addEventListener("click", function () {
+                o.remove(), t(!1);
+              }),
+            document.body.appendChild(o);
+        })("SUCCESS"));
+  };
 })();
